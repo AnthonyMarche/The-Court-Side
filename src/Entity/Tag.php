@@ -2,24 +2,21 @@
 
 namespace App\Entity;
 
-use App\Repository\LabelRepository;
+use App\Repository\TagRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: LabelRepository::class)]
-class Label
+#[ORM\Entity(repositoryClass: TagRepository::class)]
+class Tag
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 20)]
-    private ?string $type = null;
-
-    #[ORM\Column(length: 150)]
+    #[ORM\Column(length: 50)]
     private ?string $name = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
@@ -28,7 +25,7 @@ class Label
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $updatedAt = null;
 
-    #[ORM\ManyToMany(targetEntity: Video::class, mappedBy: 'label')]
+    #[ORM\ManyToMany(targetEntity: Video::class, mappedBy: 'tag')]
     private Collection $videos;
 
     public function __construct()
@@ -39,18 +36,6 @@ class Label
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getType(): ?string
-    {
-        return $this->type;
-    }
-
-    public function setType(string $type): self
-    {
-        $this->type = $type;
-
-        return $this;
     }
 
     public function getName(): ?string
@@ -101,7 +86,7 @@ class Label
     {
         if (!$this->videos->contains($video)) {
             $this->videos->add($video);
-            $video->addLabel($this);
+            $video->addTag($this);
         }
 
         return $this;
@@ -110,7 +95,7 @@ class Label
     public function removeVideo(Video $video): self
     {
         if ($this->videos->removeElement($video)) {
-            $video->removeLabel($this);
+            $video->removeTag($this);
         }
 
         return $this;
