@@ -40,12 +40,15 @@ class Video
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $updatedAt = null;
 
-    #[ORM\ManyToMany(targetEntity: Label::class, inversedBy: 'videos')]
-    private Collection $label;
+    #[ORM\ManyToOne(inversedBy: 'videos')]
+    private ?Category $category = null;
+
+    #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'videos')]
+    private Collection $tag;
 
     public function __construct()
     {
-        $this->label = new ArrayCollection();
+        $this->tag = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -149,26 +152,38 @@ class Video
         return $this;
     }
 
-    /**
-     * @return Collection<int, Label>
-     */
-    public function getLabel(): Collection
+    public function getCategory(): ?Category
     {
-        return $this->label;
+        return $this->category;
     }
 
-    public function addLabel(Label $label): self
+    public function setCategory(?Category $category): self
     {
-        if (!$this->label->contains($label)) {
-            $this->label->add($label);
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Tag>
+     */
+    public function getTag(): Collection
+    {
+        return $this->tag;
+    }
+
+    public function addTag(Tag $tag): self
+    {
+        if (!$this->tag->contains($tag)) {
+            $this->tag->add($tag);
         }
 
         return $this;
     }
 
-    public function removeLabel(Label $label): self
+    public function removeTag(Tag $tag): self
     {
-        $this->label->removeElement($label);
+        $this->tag->removeElement($tag);
 
         return $this;
     }
