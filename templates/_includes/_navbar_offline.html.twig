@@ -1,0 +1,40 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="{{ path('app_home') }}">The Court Side</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        {# -------NAV-LINKS------- #}
+        <ul class="navbar-nav mr-auto col">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('app_home') }}">Sports</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Mes favoris</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">A propos</a>
+            </li>
+        </ul>
+
+        {# -------SEARCHBAR------- #}
+        <div class="input-group col col-lg-3">
+            <input type="text" class="form-control" placeholder="Recherche...">
+            <div class="input-group-append">
+                <button class="btn btn-primary"><i class="bi bi-search"></i></button>
+            </div>
+        </div>
+
+        {# -------NAV-LOGIN------- #}
+        <div class="nav-links d-flex justify-content-lg-end col">
+            <a class="nav-link" href="#">
+                <button type="button" class="btn btn-outline-info">Inscription</button>
+            </a>
+            <a class="nav-link" href="#">
+                <button type="button" class="btn btn-info">Connexion</button>
+            </a>
+        </div>
+    </div>
+</nav>

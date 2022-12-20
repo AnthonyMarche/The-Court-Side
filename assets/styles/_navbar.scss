@@ -1,0 +1,19 @@
+nav .form-control {
+    border-radius: 7px;
+    border: 2px solid #E3E6ED;
+}
+
+nav input.form-control:focus {
+    box-shadow: none;
+    border: 2px solid teal;
+    background-color: #F7F8FD;
+    letter-spacing: 1px;
+}
+
+nav .btn-primary {
+    border-radius: 7px;
+}
+
+nav .btn-primary:focus {
+    box-shadow: none;
+}
