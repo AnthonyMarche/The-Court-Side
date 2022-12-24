@@ -28,6 +28,8 @@ class UserFixtures extends Fixture
         $admin->setCreatedAt($faker->dateTimeBetween('-6 month'));
         $admin->setRoles(['ROLE_ADMIN']);
         $manager->persist($admin);
+        $this->addReference('user_2', $admin);
+
 
         $superAdmin = new User();
         $superAdmin->setEmail('superadmin@me.fr');
@@ -36,6 +38,8 @@ class UserFixtures extends Fixture
         $superAdmin->setCreatedAt($faker->dateTimeBetween('-6 month'));
         $superAdmin->setRoles(['ROLE_SUPER_ADMIN']);
         $manager->persist($superAdmin);
+        $this->addReference('user_1', $superAdmin);
+
 
         for ($i = 0; $i <= 10; $i++) {
             $user = new User();
