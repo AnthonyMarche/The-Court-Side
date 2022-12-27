@@ -12,11 +12,27 @@
     margin-right: 12.5%;
 }
 
-.watch-video-description, .watch-private-video-message-container  {
+.watch-video-description, .watch-private-video-message-container {
     margin-left: 20%;
     margin-right: 20%;
 }
 
-.watch-private-video-message {
-    color: gray;
+.watch-private-video-image {
+    max-width: 60%;
+    max-height: 60%;
+    background-color: gray;
+}
+
+.watch-video-tags-container {
+    margin-left: 20%;
+}
+
+.watch-video-tag-name {
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+.watch-sponsor-image {
+    width: 100%;
+    max-height: 300px;
 }
