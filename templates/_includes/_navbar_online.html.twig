@@ -29,12 +29,12 @@
 
         {# -------NAV-LOGIN------- #}
         <div class="nav-links d-flex col">
-            {% if user.username %}
-                <p>Bonjour, {{ user.name }}</p>
+            {% if app.user.username %}
+                <p>Bonjour, {{ app.user.username }}</p>
             {% else %}
-                <p>{{ user.email }}</p>
+                <p>{{ app.user.email }}</p>
             {% endif %}
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="{{ path('app_user_logout') }}">
                 <button type="button" class="btn btn-info">Déconnexion</button>
             </a>
         </div>
