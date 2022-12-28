@@ -50,9 +50,13 @@ class Video
     #[ORM\JoinColumn(nullable: true)]
     private ?User $user = null;
 
+    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'likedVideos')]
+    private Collection $likedByUser;
+
     public function __construct()
     {
         $this->tag = new ArrayCollection();
+        $this->likedByUser = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -200,6 +204,30 @@ class Video
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getLikedByUser(): Collection
+    {
+        return $this->likedByUser;
+    }
+
+    public function addLikedByUser(User $likedByUser): self
+    {
+        if (!$this->likedByUser->contains($likedByUser)) {
+            $this->likedByUser->add($likedByUser);
+        }
+
+        return $this;
+    }
+
+    public function removeLikedByUser(User $likedByUser): self
+    {
+        $this->likedByUser->removeElement($likedByUser);
 
         return $this;
     }
