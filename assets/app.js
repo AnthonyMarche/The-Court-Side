@@ -10,5 +10,4 @@ import './styles/app.scss';
 
 // start the Stimulus application
 import './bootstrap';
-
-import './styles/watchVideo.scss'
+import './js/watchVideo';
