@@ -28,7 +28,7 @@ class UserFixtures extends Fixture
         $admin->setCreatedAt($faker->dateTimeBetween('-6 month'));
         $admin->setRoles(['ROLE_ADMIN']);
         $manager->persist($admin);
-        $this->addReference('user_2', $admin);
+        $this->addReference('admin', $admin);
 
 
         $superAdmin = new User();
@@ -38,7 +38,7 @@ class UserFixtures extends Fixture
         $superAdmin->setCreatedAt($faker->dateTimeBetween('-6 month'));
         $superAdmin->setRoles(['ROLE_SUPER_ADMIN']);
         $manager->persist($superAdmin);
-        $this->addReference('user_1', $superAdmin);
+        $this->addReference('superAdmin', $superAdmin);
 
 
         for ($i = 0; $i <= 10; $i++) {
@@ -48,6 +48,7 @@ class UserFixtures extends Fixture
             $user->setUsername('user' . $i);
             $user->setCreatedAt($faker->dateTimeBetween('-6 month'));
             $manager->persist($user);
+            $this->addReference('user_' . $i, $user);
         }
         $manager->flush();
     }
