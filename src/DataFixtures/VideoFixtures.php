@@ -23,6 +23,11 @@ class VideoFixtures extends Fixture implements DependentFixtureInterface
         'Boxe'
     ];
 
+    public const USER = [
+        'admin',
+        'superAdmin'
+    ];
+
     public function load(ObjectManager $manager): void
     {
         $faker = Factory::create();
@@ -37,7 +42,14 @@ class VideoFixtures extends Fixture implements DependentFixtureInterface
             $video->setTeaser($faker->url);
             $video->setCategory($this->getReference('category_' . self::CATEGORIES[$faker->numberBetween(0, 9)]));
             $video->setCreatedAt($faker->dateTimeBetween('-6 month'));
-            $video->setUser($this->getReference('user_' . $faker->numberBetween(1, 2)));
+
+            $randomUser = rand(0, 1);
+            $video->setUser($this->getReference(self::USER[$randomUser]));
+
+            $nbLike = rand(0, 10);
+            for ($j = 0; $j < $nbLike; $j++) {
+                $video->addLikedByUser($this->getReference('user_' . $j));
+            }
 
             $this->addReference('video_' . $i, $video);
 
