@@ -1,0 +1,68 @@
+.card-video {
+    .home-video-title {
+        font-size: 16px;
+        font-weight: bold;
+        color: #000;
+    }
+
+    .home-video-details {
+        color: gray;
+        font-size: 13px;
+        text-decoration: none;
+    }
+}
+
+.home-carousel-image {
+    max-height: 37rem;
+}
+
+.single-video:hover {
+    background-color: #e0e0e0;
+}
+
+.home-section-line {
+    height: 3px;
+    background: black;
+}
+
+.home-video-link:hover {
+    text-decoration: none;
+}
+
+.home-footer-links {
+    gap: 2rem;
+}
+
+.home-footer-social-links {
+    gap: 2rem;
+    font-size: 40px;
+}
+
+.footer-social-logo {
+    color: black;
+    text-decoration: none;
+}
+
+.footer-social-logo:hover {
+    color: gray;
+    text-decoration: none;
+}
+
+.home-footer-middle-line {
+    padding: 75px;
+}
+
+.home-footer-sponsor-logo-container {
+    background-color: black;
+    padding: 75px;
+}
+
+.home-middle-image {
+    width: 100%;
+    max-height: 300px;
+}
+
+.home-footer-website-logo {
+    width: 100px;
+    height: 100px;
+}
