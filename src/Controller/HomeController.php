@@ -39,7 +39,8 @@ class HomeController extends AbstractController
     #[Route('watch/{id}/like', name: 'app_watch_like', methods: ['POST', 'GET'])]
     public function addToLike(Video $video, UserRepository $userRepository): JsonResponse
     {
-        /** @var User $this */
+
+        /** @var \App\Entity\User */
         $user = $this->getUser();
         if ($user->isLiked($video)) {
             $user->removeLikedVideo($video);
@@ -50,7 +51,7 @@ class HomeController extends AbstractController
         $userRepository->save($user, true);
 
         return $this->json([
-            'isLiked' => $this->getUser()->isLiked($video)
+            'isLiked' => $user->isLiked($video)
         ]);
     }
 }
