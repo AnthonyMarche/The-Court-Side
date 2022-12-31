@@ -8,8 +8,8 @@
 }
 
 .watch-video-head {
-    margin-left: 12.5%;
-    margin-right: 12.5%;
+    margin-left: 20%;
+    margin-right: 20%;
 }
 
 .watch-video-description, .watch-private-video-message-container {
@@ -35,4 +35,29 @@
 .watch-sponsor-image {
     width: 100%;
     max-height: 300px;
+}
+
+.watch-like-icon {
+    font-size: 30px;
+    color: gray;
+    text-decoration: none;
+}
+
+.watch-like-container {
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+.watch-like-icon:hover {
+    //color: var(--element-color);
+    color: red;
+}
+
+.bi-heart-fill {
+    //color: var(--element-color);
+    color: red;
+}
+
+.add-like-text {
+    margin-top: 12px;
 }

@@ -5,10 +5,9 @@
 {% block body %}
     {#  video player section  #}
     <div class="watch-video-container text-center mt-5">
-        <div class="watch-video-head d-flex align-items-end justify-content-around p-2">
+        <div class="watch-video-head d-flex justify-content-between">
             <h2 class="watch-video-title">{{ video.title }}</h2>
-            <div></div>
-            <p class="watch-video-release">publiée le : {{ video.createdAt|date('d/m/Y') }}</p>
+            <p class="watch-video-release mt-2">publiée le : {{ video.createdAt|date('d/m/Y') }}</p>
         </div>
         {% if video.isPrivate and not app.user %}
             <div class="watch-private-video-image-container">
@@ -52,8 +51,15 @@
                 <i class="fa fa-lock watch-private-video-message"> Cette video est réservée aux inscrits
                     cliquez <a href="">ici</a> pour vous inscrire</i>
             </div>
+        {% elseif app.user %}
+            <div class="watch-like-container text-left d-flex">
+                <a id="watchLike" href="{{ path('app_watch_like', {id: video.id})}}">
+                    <i class="bi {{ app.user.isLiked(video) ? 'bi-heart-fill' : 'bi-heart' }} watch-like-icon"></i>
+                </a>
+                <p class="add-like-text ml-2">Ajouter à Mes favoris</p>
+            </div>
         {% endif %}
-        <div class="watch-video-description text-left mt-4">
+        <div class="watch-video-description text-left mt-2">
             <p><strong>Description :</strong><br>{{ video.description }}</p>
         </div>
         <div class="watch-video-tags-container">
@@ -71,12 +77,13 @@
 
     <div class="watch-see-more-container mt-5">
         <div class="container-fluid p-5 py-3 home-main-container">
-            <div class="home-section-head d-flex justify-content-between p-0 mb-0">
+            <div class="home-section-head d-flex justify-content-between">
                 <h3 class="section-name">Voir plus...</h3>
-                <div></div>
-                <a href="">
-                    <button type="button" class="btn btn-outline-primary">VOIR PLUS</button>
-                </a>
+                {% if video.category.videos|length > 4 %}
+                    <a href="">
+                        <button type="button" class="btn btn-outline-primary">VOIR PLUS</button>
+                    </a>
+                {% endif %}
             </div>
             <div class="row">
                 {% for video in video.category.videos[:4] %}
@@ -114,13 +121,13 @@
     </div>
 
     {#  sponsor image  #}
-    <div class="watch-sponsor-image">
+    <div class="watch-sponsor-image mb-5">
         <img src="{{ asset('build/images/home-middle-image.jpg') }}" class="shadow-lg img-fluid home-middle-image"
              alt="watch sponsor image">
     </div>
 
     {#  footer  #}
 
-    {#    {% include('_includes/_main_footer.html.twig') %} #}
+    {% include('_includes/_main_footer.html.twig') %}
 
 {% endblock %}

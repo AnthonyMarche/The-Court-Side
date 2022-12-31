@@ -54,6 +54,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private Collection $videos;
 
     #[ORM\ManyToMany(targetEntity: Video::class, mappedBy: 'likedByUser')]
+    #[ORM\JoinTable(name: 'likedVideos')]
     private Collection $likedVideos;
 
     public function __construct()
@@ -223,5 +224,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
 
         return $this;
+    }
+
+    public function isLiked(Video $video): bool
+    {
+        if ($this->getLikedVideos()->contains($video)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
