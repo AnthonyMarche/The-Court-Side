@@ -2,6 +2,8 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Video;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -41,7 +43,12 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
+
+        yield MenuItem::subMenu('Vidéo', 'fa fa-video')->setSubItems([
+            MenuItem::linkToCrud('Liste des vidéos', 'fa fa-eye', Video::class)->setAction(Crud::PAGE_INDEX),
+            MenuItem::linkToCrud('Nouvelle vidéo', 'fa fa-plus', Video::class)->setAction(Crud::PAGE_NEW),
+        ]);
+
         yield MenuItem::linkToUrl("Quitter l'administration", "fa-solid fa-arrow-right-from-bracket", '/');
-        // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
 }
