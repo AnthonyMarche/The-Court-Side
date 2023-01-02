@@ -3,7 +3,8 @@
 {% block title %}Sports{% endblock %}
 
 {% block body %}
-    <div class="chip-container">
+    <div class="chip-container d-flex align-items-center">
+        <strong class="ml-2 mr-2">|</strong>
         {% for category in categories %}
             <div class="chip">
                 <a class="category-link" href="#{{ category.name }}">{{ category.name }}</a>
@@ -25,7 +26,7 @@
             <div class="row">
                 {% for video in category.videos[:4] %}
                     <div class="col-12 col-md-6 col-lg-4 col-xl-3 single-video">
-                        <a href=""
+                        <a href="{{ path('app_watch', {id : video.id}) }}"
                            class="card card-video border-0 bg-transparent mb-4 category-video-link">
                             {% if video.isPrivate and not app.user %}
                                 <img src="{{ asset('build/images/image-private-video.jpg') }}" class="img-fluid mt-2"

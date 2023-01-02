@@ -1,5 +1,5 @@
 html {
-    scroll-behavior:smooth
+    scroll-behavior: smooth
 }
 
 .category-section-line {
@@ -35,11 +35,9 @@ html {
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     padding: 10px 15px;
     z-index: 99;
-    position: fixed;
     display: flex;
     justify-content: center;
     width: 100%;
-    top: 0;
 
     .chip {
         padding: 5px 10px;
@@ -49,6 +47,11 @@ html {
         white-space: nowrap;
         margin-right: 5px;
         border-radius: 25px;
+    }
+
+    &.chip-container--fixed {
+        position: fixed;
+        top: 0;
     }
 }
 
@@ -61,3 +64,46 @@ html {
     text-decoration: none;
 }
 
+.arrow {
+    border: solid black;
+    border-width: 0 5px 5px 0;
+    display: inline-block;
+    padding: 3px;
+}
+
+.right {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.left {
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.arrow-button-filter {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+}
+
+.arrow-button-filter:focus {
+    outline: 0;
+}
+
+.arrow-button-filter:hover {
+    .arrow {
+        border: solid gray;
+        border-width: 0 5px 5px 0;
+        display: inline-block;
+        padding: 3px;
+    }
+}
