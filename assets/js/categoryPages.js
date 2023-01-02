@@ -1,3 +1,6 @@
+//import $ alias for jquery
+const $ = window.$;
+
 //fixed nav bar js for the category page
 const RAF = requestAnimationFrame
 const $nav = document.querySelector('.chip-container')
