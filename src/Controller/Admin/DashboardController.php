@@ -3,6 +3,9 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Video;
+use App\Repository\UserRepository;
+use App\Repository\VideoRepository;
+use App\Services\Stats;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -12,6 +15,15 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DashboardController extends AbstractDashboardController
 {
+    private UserRepository $userRepository;
+    private VideoRepository $videoRepository;
+
+    public function __construct(UserRepository $userRepository, VideoRepository $videoRepository)
+    {
+        $this->userRepository = $userRepository;
+        $this->videoRepository = $videoRepository;
+    }
+
     #[Route('/admin', name: 'admin')]
     public function index(): Response
     {
@@ -31,7 +43,16 @@ class DashboardController extends AbstractDashboardController
         // Option 3. You can render some custom template to display a proper dashboard with widgets, etc.
         // (tip: it's easier if your template extends from @EasyAdmin/page/content.html.twig)
         //
-        return $this->render('admin/index.html.twig');
+        $users = $this->userRepository->findAll();
+        $videos = $this->videoRepository->findAll();
+        $likes = new Stats($this->videoRepository);
+        $likes = $likes->getAllLikes();
+
+        return $this->render('admin/index.html.twig', [
+            'users' => $users,
+            'videos' => $videos,
+            'likes' => $likes,
+        ]);
     }
 
     public function configureDashboard(): Dashboard
