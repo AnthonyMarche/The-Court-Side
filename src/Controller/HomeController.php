@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\CategoryRepository;
 use App\Repository\VideoRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,6 +22,14 @@ class HomeController extends AbstractController
             'popularVideos' => $popularVideos,
             'tennisVideos' => $tennisVideos,
             'registerVideos' => $registerVideos
+        ]);
+    }
+
+    #[Route('/category', name: 'app_category')]
+    public function showCategory(CategoryRepository $categoryRepository): response
+    {
+        return $this->render('home/category.html.twig', [
+            'categories' => $categoryRepository->findBy([], ['name' => 'ASC']),
         ]);
     }
 }

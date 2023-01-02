@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sports{% endblock %}
+
+{% block body %}
+    <div class="chip-container d-flex justify-content-center">
+        {% for category in categories %}
+            <div class="chip">
+                <a class="category-link" href="#{{ category.name }}">{{ category.name }}</a>
+            </div>
+        {% endfor %}
+    </div>
+    <h2 class="text-center mt-4 category-main-title">Sports</h2>
+    {% for category in categories %}
+        <div id="{{ category.name }}" class="container-fluid p-5 py-3">
+            <div class="d-flex justify-content-between p-0 mb-0">
+                <h3 class="section-name">{{ category.name }}</h3>
+                {% if category.videos|length > 4 %}
+                    <a href="">
+                        <button type="button" class="btn btn-outline-primary">VOIR PLUS</button>
+                    </a>
+                {% endif %}
+            </div>
+            <div class="category-section-line mb-2"></div>
+            <div class="row">
+                {% for video in category.videos[:4] %}
+                    <div class="col-12 col-md-6 col-lg-4 col-xl-3 single-video">
+                        <a href=""
+                           class="card card-video border-0 bg-transparent mb-4 category-video-link">
+                            {% if video.isPrivate and not app.user %}
+                                <img src="{{ asset('build/images/image-private-video.jpg') }}" class="img-fluid mt-2"
+                                     alt="image-private-video">
+                            {% else %}
+                                <video src="{{ asset('build/images/test-video-teaser.mp4') }}" type="video/mp4" loop
+                                       muted
+                                       class="hover-to-play w-100 mt-2">
+                                </video>
+                            {% endif %}
+                            <div class="card-video-details d-flex mt-2">
+                                <div>
+                                    <h4 class="category-video-title">{{ video.title }}</h4>
+                                    <div class="category-video-details">
+                                        {% if video.user.username %}
+                                            {{ video.user.username }}
+                                        {% else %}
+                                            {{ video.user.email }}
+                                        {% endif %}
+                                    </div>
+                                    <div class="category-video-details">{{ video.numberOfView }} vues • publiée
+                                        le {{ video.createdAt|date("d/m/Y") }}</div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endfor %}
+
+    {% include '_includes/_main_footer.html.twig' %}
+
+{% endblock %}
+

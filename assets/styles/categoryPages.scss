@@ -1,0 +1,57 @@
+html {
+    scroll-behavior:smooth
+}
+
+.category-section-line {
+    height: 3px;
+    background: black;
+}
+
+.category-main-title {
+    text-decoration: underline;
+}
+
+.category-video-link:hover {
+    text-decoration: none;
+}
+
+.card-video {
+    .category-video-title {
+        font-size: 16px;
+        font-weight: bold;
+        color: #000;
+    }
+
+    .category-video-details {
+        color: gray;
+        font-size: 13px;
+        text-decoration: none;
+    }
+}
+
+.chip-container {
+    background-color: #fff;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 10px 15px;
+    z-index: 99;
+
+    .chip {
+        padding: 5px 10px;
+        font-size: 12px;
+        background-color: rgba(0, 0, 0, 0.05);
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        white-space: nowrap;
+        margin-right: 5px;
+        border-radius: 25px;
+    }
+}
+
+.category-link {
+    text-decoration: none;
+    color: black;
+}
+
+.category-link:hover {
+    text-decoration: none;
+}
