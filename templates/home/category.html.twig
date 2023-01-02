@@ -3,7 +3,7 @@
 {% block title %}Sports{% endblock %}
 
 {% block body %}
-    <div class="chip-container d-flex justify-content-center">
+    <div class="chip-container">
         {% for category in categories %}
             <div class="chip">
                 <a class="category-link" href="#{{ category.name }}">{{ category.name }}</a>

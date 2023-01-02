@@ -35,6 +35,11 @@ html {
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     padding: 10px 15px;
     z-index: 99;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    top: 0;
 
     .chip {
         padding: 5px 10px;
@@ -55,3 +60,4 @@ html {
 .category-link:hover {
     text-decoration: none;
 }
+
