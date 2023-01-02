@@ -2,9 +2,12 @@
 
 namespace App\Controller;
 
-use App\Repository\CategoryRepository;
+use App\Entity\User;
+use App\Entity\Video;
+use App\Repository\UserRepository;
 use App\Repository\VideoRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -25,11 +28,30 @@ class HomeController extends AbstractController
         ]);
     }
 
-    #[Route('/category', name: 'app_category')]
-    public function showCategory(CategoryRepository $categoryRepository): response
+    #[Route('/watch/{id}', name: 'app_watch')]
+    public function watch(Video $video): Response
     {
-        return $this->render('home/category.html.twig', [
-            'categories' => $categoryRepository->findBy([], ['name' => 'ASC']),
+        return $this->render('home/watch.html.twig', [
+            'video' => $video
+        ]);
+    }
+
+    #[Route('watch/{id}/like', name: 'app_watch_like', methods: ['POST', 'GET'])]
+    public function addToLike(Video $video, UserRepository $userRepository): JsonResponse
+    {
+
+        /** @var \App\Entity\User */
+        $user = $this->getUser();
+        if ($user->isLiked($video)) {
+            $user->removeLikedVideo($video);
+        } else {
+            $user->addLikedVideo($video);
+        }
+
+        $userRepository->save($user, true);
+
+        return $this->json([
+            'isLiked' => $user->isLiked($video)
         ]);
     }
 }

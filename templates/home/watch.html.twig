@@ -1,0 +1,133 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ video.title }}{% endblock %}
+
+{% block body %}
+    {#  video player section  #}
+    <div class="watch-video-container text-center mt-5">
+        <div class="watch-video-head d-flex justify-content-between">
+            <h2 class="watch-video-title">{{ video.title }}</h2>
+            <p class="watch-video-release mt-2">publiée le : {{ video.createdAt|date('d/m/Y') }}</p>
+        </div>
+        {% if video.isPrivate and not app.user %}
+            <div class="watch-private-video-image-container">
+                <img class="watch-private-video-image img-fluid" data-toggle="modal" data-target="#exampleModalCenter"
+                     src="{{ asset('build/images/private-video-play-button.png') }}" alt="private video">
+            </div>
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                 aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Vidéo résérvées aux inscrits</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body text-left">
+                            Désolé ce contenu n'est disponible que pour les utilisateurs inscrits.<br>Vous
+                            pouvez vous inscrire gratuitement ou vous connectez si vous avez déjà un compte.
+                        </div>
+                        <div class="modal-footer">
+                            <a href="{{ path('app_user_login') }}">
+                                <button type="button" class="btn btn-secondary">Se connecter</button>
+                            </a>
+                            <a href="">
+                                <button type="button" class="btn btn-primary">S'inscrire</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="watch-video-player-container embed-responsive embed-responsive-16by9">
+                <video src="{{ asset('build/images/test-video-teaser.mp4') }}" controls
+                       class="watch-video-player embed-responsive-item"></video>
+            </div>
+        {% endif %}
+        {% if video.isPrivate and not app.user %}
+            <div class="watch-private-video-message-container text-left mt-2">
+                <i class="fa fa-lock watch-private-video-message"> Cette video est réservée aux inscrits
+                    cliquez <a href="">ici</a> pour vous inscrire</i>
+            </div>
+        {% elseif app.user %}
+            <div class="watch-like-container text-left d-flex">
+                <a id="watchLike" href="{{ path('app_watch_like', {id: video.id})}}">
+                    <i class="bi {{ app.user.isLiked(video) ? 'bi-heart-fill' : 'bi-heart' }} watch-like-icon"></i>
+                </a>
+                <p class="add-like-text ml-2">Ajouter à Mes favoris</p>
+            </div>
+        {% endif %}
+        <div class="watch-video-description text-left mt-2">
+            <p><strong>Description :</strong><br>{{ video.description }}</p>
+        </div>
+        <div class="watch-video-tags-container">
+            <div class="watch-video-tags d-flex">
+                {% for tag in video.tag %}
+                    <a href="">
+                        <button type="button" class="btn btn-outline-primary mr-2">#{{ tag.name }}</button>
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    {#  see more section  #}
+
+    <div class="watch-see-more-container mt-5">
+        <div class="container-fluid p-5 py-3 home-main-container">
+            <div class="home-section-head d-flex justify-content-between">
+                <h3 class="section-name">Voir plus...</h3>
+                {% if video.category.videos|length > 4 %}
+                    <a href="">
+                        <button type="button" class="btn btn-outline-primary">VOIR PLUS</button>
+                    </a>
+                {% endif %}
+            </div>
+            <div class="row">
+                {% for video in video.category.videos[:4] %}
+                    <div class="col-12 col-md-6 col-lg-4 col-xl-3 single-video">
+                        <a href=""
+                           class="card card-video border-0 bg-transparent mb-4 home-video-link">
+                            {% if video.isPrivate and not app.user %}
+                                <img src="{{ asset('build/images/image-private-video.jpg') }}" class="img-fluid mt-2"
+                                     alt="image-private-video">
+                            {% else %}
+                                <video src="{{ asset('build/images/test-video-teaser.mp4') }}" type="video/mp4" loop
+                                       muted
+                                       class="hover-to-play w-100 mt-2">
+                                </video>
+                            {% endif %}
+                            <div class="card-video-details d-flex mt-2">
+                                <div>
+                                    <h4 class="home-video-title">{{ video.title }}</h4>
+                                    <div class="home-video-details">
+                                        {% if video.user.username %}
+                                            {{ video.user.username }}
+                                        {% else %}
+                                            {{ video.user.email }}
+                                        {% endif %}
+                                    </div>
+                                    <div class="home-video-details">{{ video.numberOfView }} vues • publiée
+                                        le {{ video.createdAt|date("d/m/Y") }}</div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    {#  sponsor image  #}
+    <div class="watch-sponsor-image mb-5">
+        <img src="{{ asset('build/images/home-middle-image.jpg') }}" class="shadow-lg img-fluid home-middle-image"
+             alt="watch sponsor image">
+    </div>
+
+    {#  footer  #}
+
+    {% include('_includes/_main_footer.html.twig') %}
+
+{% endblock %}
