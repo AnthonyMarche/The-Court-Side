@@ -7,6 +7,7 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class VideoFixtures extends Fixture implements DependentFixtureInterface
 {
@@ -28,6 +29,13 @@ class VideoFixtures extends Fixture implements DependentFixtureInterface
         'superAdmin'
     ];
 
+    private SluggerInterface $slugger;
+
+    public function __construct(SluggerInterface $slugger)
+    {
+        $this->slugger = $slugger;
+    }
+
     public function load(ObjectManager $manager): void
     {
         $faker = Factory::create();
@@ -38,8 +46,8 @@ class VideoFixtures extends Fixture implements DependentFixtureInterface
             $video->setDescription($faker->paragraphs(1, true));
             $video->setIsPrivate($faker->boolean);
             $video->setNumberOfView($faker->numberBetween(8, 1052));
-            $video->setUrl($faker->url);
-            $video->setTeaser($faker->url);
+            $video->setUrl("build/fixturesVideos/RISE (ft. The Glitch Mob, Mako, and The Word Alive) Worlds 2018 - League of Legends.mp4");
+            $video->setTeaser("build/fixturesVideos/test-video-teaser.mp4");
             $video->setCategory($this->getReference('category_' . self::CATEGORIES[$faker->numberBetween(0, 9)]));
             $video->setCreatedAt($faker->dateTimeBetween('-6 month'));
 
@@ -50,6 +58,9 @@ class VideoFixtures extends Fixture implements DependentFixtureInterface
             for ($j = 0; $j < $nbLike; $j++) {
                 $video->addLikedByUser($this->getReference('user_' . $j));
             }
+
+            $slug = $this->slugger->slug($video->getTitle());
+            $video->setSlug($slug);
 
             $this->addReference('video_' . $i, $video);
 

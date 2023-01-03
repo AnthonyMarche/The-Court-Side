@@ -1,7 +1,10 @@
+###> IDE ###
 .idea/
 .vscode/
 .DS_Store
 db-data
+###< IDE ###
+
 ###> symfony/framework-bundle ###
 /.env.local
 /.env.local.php
@@ -33,3 +36,7 @@ yarn-error.log
 /phpunit.xml
 .phpunit.result.cache
 ###< phpunit/phpunit ###
+
+###> uploads files ###
+/public/uploads
+###< uploads files ###
