@@ -13,4 +13,5 @@ import './styles/app.scss';
 
 // start the Stimulus application
 import './bootstrap';
-import './homePage';
+import './js/homePage';
+import './js/categoryPages';
