@@ -43,15 +43,33 @@ class DashboardController extends AbstractDashboardController
         // Option 3. You can render some custom template to display a proper dashboard with widgets, etc.
         // (tip: it's easier if your template extends from @EasyAdmin/page/content.html.twig)
         //
+
+        // --- GENERATION DES STATISTIQUES -- //
+
+        // récupère tous les utilisateurs (via le UserRepository)
         $users = $this->userRepository->findAll();
+        // récupère toutes les videos (via le VideoRepository)
         $videos = $this->videoRepository->findAll();
+        // récupère le nombre de likes (via service Stats)
         $likes = new Stats($this->videoRepository);
         $likes = $likes->getAllLikes();
+        // récupère le nombre d'utilisateurs enregistrés dans les 7 derniers jours (via le UserRepository)
+        $usersFromPast7Days = $this->userRepository->getUsersRegisteredInPast7Days();
+        // récupère le nombre d'utilisateurs enregistrés dans les 30 derniers jours (via le UserRepository)
+        $usersFromPast30Days = $this->userRepository->getUsersRegisteredInPast30Days();
+        // récupère le nombre de videos ajoutées dans les 7 derniers jours (via le VideoRepository)
+        $videosFromPast7Days = $this->videoRepository->getVideosAddedInPast7Days();
+        // récupère le nombre de videos ajoutées dans les 30 derniers jours (via le VideoRepository)
+        $videosFromPast30Days = $this->videoRepository->getVideosAddedInPast30Days();
 
         return $this->render('admin/index.html.twig', [
             'users' => $users,
             'videos' => $videos,
             'likes' => $likes,
+            'users_from_past_seven_days' => $usersFromPast7Days,
+            'users_from_past_thirty_days' => $usersFromPast30Days,
+            'videos_from_past_seven_days' => $videosFromPast7Days,
+            'videos_from_past_thirty_days' => $videosFromPast30Days,
         ]);
     }
 
