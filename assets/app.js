@@ -9,7 +9,7 @@
 import './styles/app.scss';
 
 // likeIcon import
-import 'bootstrap-icons/font/bootstrap-icons.css';
+// import 'bootstrap-icons/font/bootstrap-icons.css';
 
 // start the Stimulus application
 import './bootstrap';
