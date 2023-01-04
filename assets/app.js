@@ -8,10 +8,10 @@
 // any CSS you import will output into a single css file (app.css in this case)
 import './styles/app.scss';
 
-// likeIcon import
-import 'bootstrap-icons/font/bootstrap-icons.css';
-
 // start the Stimulus application
 import './bootstrap';
+
+// js imports
 import './js/homePage';
+import './js/watchVideo';
 import './js/categoryPages';
