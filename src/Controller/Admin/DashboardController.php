@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Video;
+use App\Repository\CategoryRepository;
 use App\Repository\UserRepository;
 use App\Repository\VideoRepository;
 use App\Services\Stats;
@@ -17,11 +18,16 @@ class DashboardController extends AbstractDashboardController
 {
     private UserRepository $userRepository;
     private VideoRepository $videoRepository;
+    private CategoryRepository $categoryRepository;
 
-    public function __construct(UserRepository $userRepository, VideoRepository $videoRepository)
-    {
+    public function __construct(
+        UserRepository $userRepository,
+        VideoRepository $videoRepository,
+        CategoryRepository $categoryRepository
+    ) {
         $this->userRepository = $userRepository;
         $this->videoRepository = $videoRepository;
+        $this->categoryRepository = $categoryRepository;
     }
 
     #[Route('/admin', name: 'admin')]
