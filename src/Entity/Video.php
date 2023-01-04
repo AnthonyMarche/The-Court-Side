@@ -3,10 +3,13 @@
 namespace App\Entity;
 
 use App\Repository\VideoRepository;
+use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 #[ORM\Entity(repositoryClass: VideoRepository::class)]
 class Video
@@ -26,6 +29,11 @@ class Video
     private ?bool $isPrivate = null;
 
     #[ORM\Column(length: 255)]
+//    #[Assert\File(
+//        maxSize: '1024k',
+//        mimeTypes: ["video/mp4"],
+//        mimeTypesMessage: "Coucou c'est pas bon",
+//    )]
     private ?string $url = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -35,12 +43,15 @@ class Video
     private ?int $numberOfView = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $createdAt = null;
+    private ?DateTimeInterface $createdAt = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $updatedAt = null;
+    private ?DateTimeInterface $updatedAt = null;
 
     #[ORM\ManyToOne(inversedBy: 'videos')]
+    #[Assert\NotBlank(
+        message: "Le choix d'une catégorie est obligatoire"
+    )]
     private ?Category $category = null;
 
     #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'videos')]
@@ -52,6 +63,9 @@ class Video
 
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'likedVideos')]
     private Collection $likedByUser;
+
+    #[ORM\Column(length: 255)]
+    private ?string $slug = null;
 
     public function __construct()
     {
@@ -136,24 +150,24 @@ class Video
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getCreatedAt(): ?DateTimeInterface
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    public function setCreatedAt(DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
 
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTimeInterface
+    public function getUpdatedAt(): ?DateTimeInterface
     {
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
+    public function setUpdatedAt(?DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
 
@@ -228,6 +242,18 @@ class Video
     public function removeLikedByUser(User $likedByUser): self
     {
         $this->likedByUser->removeElement($likedByUser);
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }
