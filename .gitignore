@@ -36,8 +36,3 @@ yarn-error.log
 /phpunit.xml
 .phpunit.result.cache
 ###< phpunit/phpunit ###
-
-###> uploads files ###
-/public/uploads/videos/*
-/public/uploads/teasers/*
-###< uploads files ###
