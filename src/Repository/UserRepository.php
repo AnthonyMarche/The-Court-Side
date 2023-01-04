@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\User;
+use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
@@ -22,6 +23,38 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, User::class);
+    }
+
+    /**
+     *  Get all users who registered less than 7 days ago ('created_at')
+     * @return float|int|mixed[]|string
+     */
+    public function getUsersRegisteredInPast7Days()
+    {
+        $entityManager = $this->getEntityManager();
+        $query = $entityManager->createQuery(
+            'SELECT COUNT(u.id)
+            FROM App\Entity\User u
+            WHERE u.createdAt > :date'
+        )->setParameter('date', new DateTime('-7 days'));
+
+        return $query->getScalarResult();
+    }
+
+    /**
+     * Get all users who registered less than 30 days ago ('created_at')
+     * @return float|int|mixed[]|string
+     */
+    public function getUsersRegisteredInPast30Days()
+    {
+        $entityManager = $this->getEntityManager();
+        $query = $entityManager->createQuery(
+            'SELECT COUNT(u.id)
+            FROM App\Entity\User u
+            WHERE u.createdAt > :date'
+        )->setParameter('date', new DateTime('-30 days'));
+
+        return $query->getScalarResult();
     }
 
     public function save(User $entity, bool $flush = false): void
