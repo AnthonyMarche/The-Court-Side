@@ -1,7 +1,10 @@
+###> IDE ###
 .idea/
 .vscode/
 .DS_Store
 db-data
+###< IDE ###
+
 ###> symfony/framework-bundle ###
 /.env.local
 /.env.local.php
