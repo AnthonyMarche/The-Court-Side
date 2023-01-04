@@ -65,12 +65,12 @@ class HomeController extends AbstractController
     }
 
     #[Route('/likes', 'app_likes')]
-    public function showLikes(Request $request):Response
+    public function showLikes(Request $request): Response
     {
         $likedVideos = '';
         /** @var \App\Entity\User */
         $user = $this->getUser();
-        if ($user == !null) {
+        if ($user !== null) {
             $likedVideos = $user->getLikedVideos();
         }
         return $this->render('home/likes.html.twig', [
