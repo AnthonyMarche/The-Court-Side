@@ -9,7 +9,6 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 #[ORM\Entity(repositoryClass: VideoRepository::class)]
 class Video
@@ -29,11 +28,6 @@ class Video
     private ?bool $isPrivate = null;
 
     #[ORM\Column(length: 255)]
-//    #[Assert\File(
-//        maxSize: '1024k',
-//        mimeTypes: ["video/mp4"],
-//        mimeTypesMessage: "Coucou c'est pas bon",
-//    )]
     private ?string $url = null;
 
     #[ORM\Column(length: 255, nullable: true)]
