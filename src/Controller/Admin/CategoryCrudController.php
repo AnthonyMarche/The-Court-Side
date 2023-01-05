@@ -65,4 +65,18 @@ class CategoryCrudController extends AbstractCrudController
 
         return $category;
     }
+
+    public function updateEntity(EntityManagerInterface $entityManager, $entityInstance): void
+    {
+        if (!$entityInstance instanceof Category) {
+            return;
+        }
+
+        $slug = $this->slugger->slug($entityInstance->getName());
+        $entityInstance->setSlug($slug);
+        $entityInstance->setUpdatedAt(new DateTime());
+
+        $entityManager->persist($entityInstance);
+        $entityManager->flush();
+    }
 }
