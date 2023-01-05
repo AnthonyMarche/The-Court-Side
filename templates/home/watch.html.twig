@@ -42,7 +42,7 @@
             </div>
         {% else %}
             <div class="watch-video-player-container embed-responsive embed-responsive-16by9">
-                <video src="{{ asset('build/images/test-video-teaser.mp4') }}" controls
+                <video src="{{ asset(video.url) }}" controls
                        class="watch-video-player embed-responsive-item"></video>
             </div>
         {% endif %}
@@ -53,7 +53,7 @@
             </div>
         {% elseif app.user %}
             <div class="watch-like-container text-left d-flex">
-                <a id="watchLike" href="{{ path('app_watch_like', {id: video.id})}}">
+                <a id="watchLike" href="{{ path('app_watch_like', {id: video.id}) }}">
                     <i class="bi {{ app.user.isLiked(video) ? 'bi-heart-fill' : 'bi-heart' }} watch-like-icon"></i>
                 </a>
                 <p class="add-like-text ml-2">Ajouter à Mes favoris</p>
