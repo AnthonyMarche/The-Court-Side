@@ -19,6 +19,7 @@ class CategoryCrudController extends AbstractCrudController
     {
         $this->slugger = $slugger;
     }
+
     public static function getEntityFqcn(): string
     {
         return Category::class;
@@ -63,5 +64,19 @@ class CategoryCrudController extends AbstractCrudController
         $category->setCreatedAt(new DateTime());
 
         return $category;
+    }
+
+    public function updateEntity(EntityManagerInterface $entityManager, $entityInstance): void
+    {
+        if (!$entityInstance instanceof Category) {
+            return;
+        }
+
+        $slug = $this->slugger->slug($entityInstance->getName());
+        $entityInstance->setSlug($slug);
+        $entityInstance->setUpdatedAt(new DateTime());
+
+        $entityManager->persist($entityInstance);
+        $entityManager->flush();
     }
 }
