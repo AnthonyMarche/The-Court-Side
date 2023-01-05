@@ -19,7 +19,6 @@ class CategoryCrudController extends AbstractCrudController
     {
         $this->slugger = $slugger;
     }
-
     public static function getEntityFqcn(): string
     {
         return Category::class;
