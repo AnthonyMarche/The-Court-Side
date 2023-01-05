@@ -1,24 +1,30 @@
 //like system on videos
-document.getElementById('watchLike').addEventListener('click', addToLike);
+const like = document.getElementById('watchLike');
 
-function addToLike(event) {
-    event.preventDefault();
+if (like) {
+    like.addEventListener('click', addToLike);
 
-    let likeLink = event.currentTarget;
-    let link = likeLink.href;
+    // eslint-disable-next-line no-inner-declarations
+    function addToLike(event) {
+        event.preventDefault();
 
-    fetch(link)
+        let likeLink = event.currentTarget;
+        let link = likeLink.href;
 
-        .then(res => res.json())
+        fetch(link)
 
-        .then(function(res) {
-            let likeIcon = likeLink.firstElementChild;
-            if (res.isLiked) {
-                likeIcon.classList.remove('bi-heart');
-                likeIcon.classList.add('bi-heart-fill');
-            } else {
-                likeIcon.classList.remove('bi-heart-fill');
-                likeIcon.classList.add('bi-heart');
-            }
-        });
+            .then(res => res.json())
+
+            .then(function (res) {
+                let likeIcon = likeLink.firstElementChild;
+                if (res.isLiked) {
+                    likeIcon.classList.remove('bi-heart');
+                    likeIcon.classList.add('bi-heart-fill');
+                } else {
+                    likeIcon.classList.remove('bi-heart-fill');
+                    likeIcon.classList.add('bi-heart');
+                }
+            });
+
+    }
 }
