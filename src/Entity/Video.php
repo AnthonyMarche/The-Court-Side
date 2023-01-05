@@ -28,11 +28,6 @@ class Video
     private ?bool $isPrivate = null;
 
     #[ORM\Column(length: 255)]
-//    #[Assert\File(
-//        maxSize: '1024k',
-//        mimeTypes: ["video/mp4"],
-//        mimeTypesMessage: "Coucou c'est pas bon",
-//    )]
     private ?string $url = null;
 
     #[ORM\Column(length: 255, nullable: true)]
