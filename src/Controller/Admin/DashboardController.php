@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Category;
 use App\Entity\Tag;
 use App\Entity\Video;
 use App\Repository\UserRepository;
@@ -89,6 +90,11 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::subMenu('Vidéo', 'fa fa-video')->setSubItems([
             MenuItem::linkToCrud('Liste des vidéos', 'fa fa-eye', Video::class)->setAction(Crud::PAGE_INDEX),
             MenuItem::linkToCrud('Nouvelle vidéo', 'fa fa-plus', Video::class)->setAction(Crud::PAGE_NEW),
+        ]);
+
+        yield MenuItem::subMenu('Catégories', 'fa fa-list')->setSubItems([
+            MenuItem::linkToCrud('Liste des catégories', 'fa fa-eye', Category::class)->setAction(Crud::PAGE_INDEX),
+            MenuItem::linkToCrud('Nouvelle catégorie', 'fa fa-plus', Category::class)->setAction(Crud::PAGE_NEW),
         ]);
 
         yield MenuItem::subMenu('Tag', 'fa fa-tag')->setSubItems([
