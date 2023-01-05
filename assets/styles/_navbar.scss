@@ -5,7 +5,7 @@ nav .form-control {
 
 nav input.form-control:focus {
     box-shadow: none;
-    border: 2px solid teal;
+    border: 2px solid var(--element-color);
     background-color: #F7F8FD;
     letter-spacing: 1px;
 }
@@ -16,4 +16,14 @@ nav .btn-primary {
 
 nav .btn-primary:focus {
     box-shadow: none;
+}
+
+nav .bi-person-circle {
+    font-size: 1.5em;
+    color: var(--element-color);
+    padding-left: 0.5em;
+}
+
+nav .bi-person-circle:hover {
+    color: #1d736a;
 }

@@ -1,0 +1,11 @@
+.show-user {
+    height: 85vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.show-user-table {
+    border: 2px solid var(--element-color);
+    border-radius: 20px;
+}

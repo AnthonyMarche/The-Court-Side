@@ -23,17 +23,20 @@
         <div class="input-group mb-3 mt-auto mb-auto col">
             <input type="text" class="form-control" placeholder="Recherche...">
             <div class="input-group-append">
-                <button class="btn btn-primary"><i class="bi bi-search"></i></button>
+                <button class="btn btn-info"><i class="bi bi-search"></i></button>
             </div>
         </div>
 
         {# -------NAV-LOGIN------- #}
-        <div class="nav-links d-flex justify-content-around justify-content-lg-end col">
+        <div class="nav-links d-flex justify-content-around align-items-center justify-content-lg-end col">
             {% if app.user.username %}
                 <p class="mt-auto mb-auto">Bonjour, {{ app.user.username }}</p>
             {% else %}
                 <p  class="mt-auto mb-auto">{{ app.user.email }}</p>
             {% endif %}
+            <a href="{{ path('app_user_show', {'id':app.user.id}) }}">
+                <i class="bi bi-person-circle"></i>
+            </a>
             <a class="nav-link" href="{{ path('app_user_logout') }}">
                 <button type="button" class="btn btn-info">Déconnexion</button>
             </a>
