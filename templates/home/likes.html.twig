@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes favoris{% endblock %}
+
+{% block body %}
+    {% if app.user %}
+        <h2 class="text-center mt-4 category-main-title">Mes favoris</h2>
+        <div class="container-fluid p-5 py-3">
+            <div class="row">
+                {% for video in likedVideos %}
+                    <div class="col-12 col-md-6 col-lg-4 col-xl-3 single-video">
+                        <a href="{{ path('app_watch', {id : video.id}) }}"
+                           class="card card-video border-0 bg-transparent mb-4 category-video-link">
+                            <video src="{{ asset('build/images/test-video-teaser.mp4') }}" type="video/mp4" loop
+                                   muted
+                                   class="hover-to-play w-100 mt-2">
+                            </video>
+                            <div class="card-video-details d-flex mt-2">
+                                <div>
+                                    <h4 class="category-video-title">{{ video.title }}</h4>
+                                    <div class="category-video-details">
+                                        {% if video.user.username %}
+                                            {{ video.user.username }}
+                                        {% else %}
+                                            {{ video.user.email }}
+                                        {% endif %}
+                                    </div>
+                                    <div class="category-video-details">{{ video.numberOfView }} vues • publiée
+                                        le {{ video.createdAt|date("d/m/Y") }}</div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% else %}
+        <div class="not-register-top"></div>
+        <div class="not-register-card card">
+            <div class="not-register-card-body card-body text-center bg-light">
+                <h5 class="card-title mt-5">Mes favoris</h5>
+                <p class="card-text">Désolé cette page n'est disponible que pour les utilisateurs inscrits.<br>Vous
+                    pouvez vous inscrire gratuitement ou vous connectez si vous avez déjà un compte.</p>
+                <div class="not-register-card-buttons-container d-flex justify-content-center mt-5">
+                    <a href="#" class="btn btn-outline-info">S'inscrire</a>
+                    <a href="{{ path('app_user_login') }}" class="btn btn-primary">Se connecter</a>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
+
