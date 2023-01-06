@@ -2,7 +2,13 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Category;
+use App\Entity\Tag;
+use App\Entity\User;
 use App\Entity\Video;
+use App\Repository\UserRepository;
+use App\Repository\VideoRepository;
+use App\Services\Stats;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -12,26 +18,45 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DashboardController extends AbstractDashboardController
 {
+    private UserRepository $userRepository;
+    private VideoRepository $videoRepository;
+
+    public function __construct(UserRepository $userRepository, VideoRepository $videoRepository)
+    {
+        $this->userRepository = $userRepository;
+        $this->videoRepository = $videoRepository;
+    }
+
     #[Route('/admin', name: 'admin')]
     public function index(): Response
     {
-//        return parent::index();
+        // --- GENERATION DES STATISTIQUES -- //
 
-        // Option 1. You can make your dashboard redirect to some common page of your backend
-        //
-        // $adminUrlGenerator = $this->container->get(AdminUrlGenerator::class);
-        // return $this->redirect($adminUrlGenerator->setController(OneOfYourCrudController::class)->generateUrl());
+        // récupère tous les utilisateurs (via le UserRepository)
+        $users = $this->userRepository->findAll();
+        // récupère toutes les videos (via le VideoRepository)
+        $videos = $this->videoRepository->findAll();
+        // récupère le nombre de likes (via service Stats)
+        $likes = new Stats($this->videoRepository);
+        $likes = $likes->getAllLikes();
+        // récupère le nombre d'utilisateurs enregistrés dans les 7 derniers jours (via le UserRepository)
+        $usersFromPast7Days = $this->userRepository->getUsersRegisteredInPast7Days();
+        // récupère le nombre d'utilisateurs enregistrés dans les 30 derniers jours (via le UserRepository)
+        $usersFromPast30Days = $this->userRepository->getUsersRegisteredInPast30Days();
+        // récupère le nombre de videos ajoutées dans les 7 derniers jours (via le VideoRepository)
+        $videosFromPast7Days = $this->videoRepository->getVideosAddedInPast7Days();
+        // récupère le nombre de videos ajoutées dans les 30 derniers jours (via le VideoRepository)
+        $videosFromPast30Days = $this->videoRepository->getVideosAddedInPast30Days();
 
-        // Option 2. You can make your dashboard redirect to different pages depending on the user
-        //
-        // if ('jane' === $this->getUser()->getUsername()) {
-        //     return $this->redirect('...');
-        // }
-
-        // Option 3. You can render some custom template to display a proper dashboard with widgets, etc.
-        // (tip: it's easier if your template extends from @EasyAdmin/page/content.html.twig)
-        //
-        return $this->render('admin/index.html.twig');
+        return $this->render('admin/index.html.twig', [
+            'users' => $users,
+            'videos' => $videos,
+            'likes' => $likes,
+            'users_from_past_seven_days' => $usersFromPast7Days,
+            'users_from_past_thirty_days' => $usersFromPast30Days,
+            'videos_from_past_seven_days' => $videosFromPast7Days,
+            'videos_from_past_thirty_days' => $videosFromPast30Days,
+        ]);
     }
 
     public function configureDashboard(): Dashboard
@@ -44,9 +69,22 @@ class DashboardController extends AbstractDashboardController
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
 
+        yield MenuItem::linkToCrud('Utilisateur', 'fa fa-user', User::class)
+            ->setPermission('ROLE_SUPER_ADMIN');
+
         yield MenuItem::subMenu('Vidéo', 'fa fa-video')->setSubItems([
             MenuItem::linkToCrud('Liste des vidéos', 'fa fa-eye', Video::class)->setAction(Crud::PAGE_INDEX),
             MenuItem::linkToCrud('Nouvelle vidéo', 'fa fa-plus', Video::class)->setAction(Crud::PAGE_NEW),
+        ]);
+
+        yield MenuItem::subMenu('Catégorie', 'fa fa-list')->setSubItems([
+            MenuItem::linkToCrud('Liste des catégories', 'fa fa-eye', Category::class)->setAction(Crud::PAGE_INDEX),
+            MenuItem::linkToCrud('Nouvelle catégorie', 'fa fa-plus', Category::class)->setAction(Crud::PAGE_NEW),
+        ]);
+
+        yield MenuItem::subMenu('Tag', 'fa fa-tag')->setSubItems([
+            MenuItem::linkToCrud('Liste des tags', 'fa fa-eye', Tag::class)->setAction(Crud::PAGE_INDEX),
+            MenuItem::linkToCrud('Nouveau tag', 'fa fa-plus', Tag::class)->setAction(Crud::PAGE_NEW),
         ]);
 
         yield MenuItem::linkToUrl("Quitter l'administration", "fa-solid fa-arrow-right-from-bracket", '/');

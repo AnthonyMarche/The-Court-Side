@@ -41,7 +41,7 @@ class UserFixtures extends Fixture
         $this->addReference('superAdmin', $superAdmin);
 
 
-        for ($i = 0; $i <= 10; $i++) {
+        for ($i = 0; $i < 50; $i++) {
             $user = new User();
             $user->setEmail($faker->email());
             $user->setPassword($this->passwordHasher->hashPassword($user, 'user'));

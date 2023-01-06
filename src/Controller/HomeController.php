@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\User;
 use App\Entity\Video;
 use App\Repository\CategoryRepository;
 use App\Repository\UserRepository;
@@ -10,6 +9,7 @@ use App\Repository\VideoRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
@@ -61,6 +61,20 @@ class HomeController extends AbstractController
     {
         return $this->render('home/category.html.twig', [
             'categories' => $categoryRepository->findBy([], ['name' => 'ASC'])
+        ]);
+    }
+
+    #[Route('/likes', 'app_likes')]
+    public function showLikes(Request $request): Response
+    {
+        $likedVideos = '';
+        /** @var \App\Entity\User */
+        $user = $this->getUser();
+        if ($user !== null) {
+            $likedVideos = $user->getLikedVideos();
+        }
+        return $this->render('home/likes.html.twig', [
+            'likedVideos' => $likedVideos,
         ]);
     }
 }
