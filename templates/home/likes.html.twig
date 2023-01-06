@@ -5,32 +5,42 @@
 {% block body %}
     {% if app.user %}
         <h2 class="text-center mt-4 category-main-title">Mes favoris</h2>
+        <div class="filter-form-container d-flex align-items-center justify-content-end">
+            <div class="mt-2">
+                {{ form_start(form) }}
+                {{ form_widget(form.filter, {'id': 'videoFilter'}) }}
+            </div>
+            <button type="submit" class="btn btn-primary ml-2 filter-button" id="filter-button">Filtrer</button>
+            {{ form_end(form) }}
+        </div>
         <div class="container-fluid p-5 py-3">
             <div class="row">
                 {% for video in likedVideos %}
-                    <div class="col-12 col-md-6 col-lg-4 col-xl-3 single-video">
-                        <a href="{{ path('app_watch', {id : video.id}) }}"
-                           class="card card-video border-0 bg-transparent mb-4 category-video-link">
-                            <video src="{{ asset('build/images/test-video-teaser.mp4') }}" type="video/mp4" loop
-                                   muted
-                                   class="hover-to-play w-100 mt-2">
-                            </video>
-                            <div class="card-video-details d-flex mt-2">
-                                <div>
-                                    <h4 class="category-video-title">{{ video.title }}</h4>
-                                    <div class="category-video-details">
-                                        {% if video.user.username %}
-                                            {{ video.user.username }}
-                                        {% else %}
-                                            {{ video.user.email }}
-                                        {% endif %}
+                    {% if video.id == app.user.id %}
+                        <div class="col-12 col-md-6 col-lg-4 col-xl-3 single-video">
+                            <a href="{{ path('app_watch', {id : video.video_id}) }}"
+                               class="card card-video border-0 bg-transparent mb-4 category-video-link">
+                                <video src="{{ asset('build/images/test-video-teaser.mp4') }}" type="video/mp4" loop
+                                       muted
+                                       class="hover-to-play w-100 mt-2">
+                                </video>
+                                <div class="card-video-details d-flex mt-2">
+                                    <div>
+                                        <h4 class="category-video-title">{{ video.title }}</h4>
+                                        <div class="category-video-details">
+                                            {% if video.username %}
+                                                {{ video.username }}
+                                            {% else %}
+                                                {{ video.email }}
+                                            {% endif %}
+                                        </div>
+                                        <div class="category-video-details">{{ video.number_of_view }} vues • publiée
+                                            le {{ video.created_at|date("d/m/Y") }}</div>
                                     </div>
-                                    <div class="category-video-details">{{ video.numberOfView }} vues • publiée
-                                        le {{ video.createdAt|date("d/m/Y") }}</div>
                                 </div>
-                            </div>
-                        </a>
-                    </div>
+                            </a>
+                        </div>
+                    {% endif %}
                 {% endfor %}
             </div>
         </div>

@@ -3,9 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Video;
+use App\Form\FilterType;
 use App\Repository\CategoryRepository;
 use App\Repository\UserRepository;
 use App\Repository\VideoRepository;
+use App\Services\Filter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -65,16 +67,28 @@ class HomeController extends AbstractController
     }
 
     #[Route('/likes', 'app_likes')]
-    public function showLikes(Request $request): Response
+    public function showLikes(Request $request, Filter $filter): Response
     {
+        //get the videos liked by the current user
         $likedVideos = '';
         /** @var \App\Entity\User */
         $user = $this->getUser();
         if ($user !== null) {
-            $likedVideos = $user->getLikedVideos();
+            $likedVideos = $filter->getOrderedLikedVideos('views', $user->getId());
         }
-        return $this->render('home/likes.html.twig', [
+
+        //create the filter form
+        $form = $this->createForm(FilterType::class);
+
+        //handle the request
+        $form->handleRequest($request);
+        if ($form->isSubmitted()) {
+            $likedVideos = $filter->getOrderedLikedVideos($form->getData()['filter'], $user->getId());
+        }
+
+        return $this->renderForm('home/likes.html.twig', [
             'likedVideos' => $likedVideos,
+            'form' => $form,
         ]);
     }
 }

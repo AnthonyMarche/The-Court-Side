@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Video;
 use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\DBAL\Exception;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -72,28 +73,57 @@ class VideoRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Video[] Returns an array of Video objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('v')
-//            ->andWhere('v.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('v.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    /**
+     * @throws Exception
+     */
+    public function getVideosOrderByViews(): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
 
-//    public function findOneBySomeField($value): ?Video
-//    {
-//        return $this->createQueryBuilder('v')
-//            ->andWhere('v.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+        $sql = 'SELECT *
+        FROM video_user vu
+        JOIN video v on v.id = vu.video_id
+        JOIN user u on u.id = vu.user_id
+        ORDER BY v.number_of_view DESC';
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery();
+        return $resultSet->fetchAllAssociative();
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function getVideosOrderByLikes(): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = 'SELECT *
+        FROM video_user vu
+        JOIN video v on v.id = vu.video_id
+        JOIN user u on u.id = vu.user_id
+        GROUP BY vu.video_id
+        ORDER BY COUNT(vu.video_id) DESC';
+
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery();
+        return $resultSet->fetchAllAssociative();
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function getVideosOrderByDate(): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = 'SELECT *
+        FROM video_user vu
+        JOIN video v on v.id = vu.video_id
+        JOIN user u on u.id = vu.user_id
+        ORDER BY v.created_at DESC';
+
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery();
+        return $resultSet->fetchAllAssociative();
+    }
 }
