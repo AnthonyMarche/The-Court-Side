@@ -42,7 +42,7 @@
             </div>
         {% else %}
             <div class="watch-video-player-container embed-responsive embed-responsive-16by9">
-                <video src="{{ asset('build/images/test-video-teaser.mp4') }}" controls
+                <video src="{{ asset(video.url) }}" controls
                        class="watch-video-player embed-responsive-item"></video>
             </div>
         {% endif %}

@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil{% endblock %}
+
+{% block body %}
+    {% if user.id == app.user.id %}
+        <div class="container show-user">
+            <h1 class="text-center">Profil utilisateur</h1>
+            <div>
+                <div class="p-3 show-user-table">
+                    <table class="table">
+                        <tr>
+                            <th>Adresse email</th>
+                            <td>{{ app.user.email }}</td>
+                        </tr>
+                        <tr>
+                            <th>Mot de passe</th>
+                            <td>* * * * * * *</td>
+                        </tr>
+                        <tr>
+                            <th>Nom d'utilisateur</th>
+                            <td>
+                                {% if app.user.username %}
+                                    {{ app.user.username }}
+                                {% else %}
+                                    <p class="font-italic">
+                                        Vous pouvez ajouter un nom d'utilisateur en modifiant votre profil.
+                                    </p>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="container d-flex justify-content-around p-4">
+                    <a href="{{ path('app_user_edit', {'id': user.id}) }}" class="btn btn-warning">Modifier mon
+                        profil</a>
+                    <a href="{{ path('app_user_delete', {'id': user.id}) }}" class="btn btn-danger">Supprimer mon
+                        profil</a>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div class="container d-flex justify-content-center mt-4">
+            <div class="card">
+                <div class="card-body d-flex flex-column">
+                    <p class="card-text font-italic">Vous n'êtes pas autorisé à accéder à cette page.</p>
+                    <a href="{{ path('app_home') }}" class="btn btn-success">Retourner vers la page d'accueil</a>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

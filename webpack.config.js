@@ -25,6 +25,13 @@ Encore
         // only copy files matching this pattern
         // pattern: /\.(png|jpg|jpeg)$/
     })
+
+    .copyFiles(
+        {from: './assets/fixturesVideos',
+
+            to: 'fixturesVideos/[path][name].[hash:8].[ext]',
+        })
+
     /*
      * ENTRY CONFIG
      *
