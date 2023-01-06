@@ -96,9 +96,6 @@ class UserController extends AbstractController
                 if (empty($errors)) {
                     // s'il n'y a pas d'erreurs, on hash le MdP avant de l'entrer en base
                     $user->setPassword($this->passwordHasher->hashPassword($user, $newPassword));
-                    // sécurisation de l'email (pour éviter l'injection de code) : au cas où l'utilisateur
-                    // va dans l'inspecteur pour regarder l'input email qui est caché, on entre en BDD le vrai mail
-                    $user->setEmail($user->getEmail());
                     // MàJ auto de "updated_at"
                     $date = new DateTime('now');
                     $user->setUpdatedAt($date);

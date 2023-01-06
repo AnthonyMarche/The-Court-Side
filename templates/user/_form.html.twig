@@ -10,11 +10,6 @@
     {% endfor %}
 {% endif %}
 <div class="text-center"><p class="h5">Données personnelles</p></div>
-{#Il est nécessaire d'intégrer le champ email, même s'il est caché, pour ne pas qu'il apparaisse de manière random dans le formulaire#}
-<div class="user-form-hidden-field">
-    {{ form_label(form.email, 'Email :') }}
-    {{ form_widget(form.email, {'attr': {'class': 'form-control mb-3'}}) }}
-</div>
 <div>
     {{ form_label(form.username, 'Nom d\'utilisateur :') }}
     {{ form_widget(form.username, {'attr': {'class': 'form-control mb-3'}}) }}
