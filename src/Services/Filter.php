@@ -4,7 +4,6 @@ namespace App\Services;
 
 use App\Repository\VideoRepository;
 
-
 class Filter
 {
     private VideoRepository $videoRepository;
@@ -21,11 +20,11 @@ class Filter
     /**
      * @throws \Doctrine\DBAL\Exception
      */
-    public function getOrderedLikedVideos($filter, $user): array
+    public function getOrderedLikedVideos(string $filter): array
     {
         if ($filter == 'views') {
-            return $this->videoRepository->getVideosOrderByViews($user);
-        } else if ($filter == 'likes') {
+            return $this->videoRepository->getVideosOrderByViews();
+        } elseif ($filter == 'likes') {
             return $this->videoRepository->getVideosOrderByLikes();
         } else {
             return $this->videoRepository->getVideosOrderByDate();

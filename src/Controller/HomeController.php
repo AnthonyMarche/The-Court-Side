@@ -74,7 +74,7 @@ class HomeController extends AbstractController
         /** @var \App\Entity\User */
         $user = $this->getUser();
         if ($user !== null) {
-            $likedVideos = $filter->getOrderedLikedVideos('views', $user->getId());
+            $likedVideos = $filter->getOrderedLikedVideos('views');
         }
 
         //create the filter form
@@ -83,7 +83,7 @@ class HomeController extends AbstractController
         //handle the request
         $form->handleRequest($request);
         if ($form->isSubmitted()) {
-            $likedVideos = $filter->getOrderedLikedVideos($form->getData()['filter'], $user->getId());
+            $likedVideos = $filter->getOrderedLikedVideos($form->getData()['filter']);
         }
 
         return $this->renderForm('home/likes.html.twig', [
