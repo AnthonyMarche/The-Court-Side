@@ -6,6 +6,7 @@ use _PHPStan_5c71ab23c\Nette\Utils\DateTime;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\UserRepository;
+use App\Services\UserEditService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -58,8 +59,12 @@ class UserController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_user_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, User $user, UserRepository $userRepository): Response
-    {
+    public function edit(
+        Request $request,
+        User $user,
+        UserRepository $userRepository,
+        UserEditService $userEditService
+    ): Response {
         $errors = [];
 
         $form = $this->createForm(UserType::class, $user);
@@ -79,24 +84,15 @@ class UserController extends AbstractController
             // vérification du nouveau mot de passe
             $verifyPassword = $form->get('verify_password')->getData();
             $verifyPassword = htmlspecialchars($verifyPassword);
-
             // si l'utilisateur entre son mot de passe actuel pour en changer
             if ($userInputPassword) {
-                if (!$this->passwordHasher->isPasswordValid($user, $userInputPassword)) {
-                    $errors[] = "Le mot de passe entré est incorrect";
-                }
-                if (!$newPassword || empty(trim($newPassword))) {
-                    $errors[] = "Vous devez entrer un nouveau mot de passe";
-                }
-                if (!$verifyPassword || empty(trim($verifyPassword))) {
-                    $errors[] = "Vous devez vérifier votre mot de passe";
-                }
-                if ($newPassword != $verifyPassword) {
-                    $errors[] = "Le nouveau mot de passe et sa vérification doivent être identiques";
-                }
-                if ($userInputPassword == $newPassword) {
-                    $errors[] = "Votre mot de passe actuel et le nouveau ne doivent pas être identiques";
-                }
+                $errors = $userEditService->checkEditFields(
+                    $user,
+                    $errors,
+                    $userInputPassword,
+                    $newPassword,
+                    $verifyPassword
+                );
                 if (empty($errors)) {
                     // s'il n'y a pas d'erreurs, on hash le MdP avant de l'entrer en base
                     $user->setPassword($this->passwordHasher->hashPassword($user, $newPassword));
@@ -109,7 +105,6 @@ class UserController extends AbstractController
                     $userRepository->save($user, true);
                 }
             }
-
         }
 
         return $this->renderForm('user/edit.html.twig', [
