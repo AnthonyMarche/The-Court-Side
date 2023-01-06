@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Category;
 use App\Entity\Tag;
+use App\Entity\User;
 use App\Entity\Video;
 use App\Repository\UserRepository;
 use App\Repository\VideoRepository;
@@ -20,10 +21,8 @@ class DashboardController extends AbstractDashboardController
     private UserRepository $userRepository;
     private VideoRepository $videoRepository;
 
-    public function __construct(
-        UserRepository $userRepository,
-        VideoRepository $videoRepository,
-    ) {
+    public function __construct(UserRepository $userRepository, VideoRepository $videoRepository)
+    {
         $this->userRepository = $userRepository;
         $this->videoRepository = $videoRepository;
     }
@@ -31,23 +30,6 @@ class DashboardController extends AbstractDashboardController
     #[Route('/admin', name: 'admin')]
     public function index(): Response
     {
-//        return parent::index();
-
-        // Option 1. You can make your dashboard redirect to some common page of your backend
-        //
-        // $adminUrlGenerator = $this->container->get(AdminUrlGenerator::class);
-        // return $this->redirect($adminUrlGenerator->setController(OneOfYourCrudController::class)->generateUrl());
-
-        // Option 2. You can make your dashboard redirect to different pages depending on the user
-        //
-        // if ('jane' === $this->getUser()->getUsername()) {
-        //     return $this->redirect('...');
-        // }
-
-        // Option 3. You can render some custom template to display a proper dashboard with widgets, etc.
-        // (tip: it's easier if your template extends from @EasyAdmin/page/content.html.twig)
-        //
-
         // --- GENERATION DES STATISTIQUES -- //
 
         // récupère tous les utilisateurs (via le UserRepository)
@@ -87,12 +69,15 @@ class DashboardController extends AbstractDashboardController
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
 
+        yield MenuItem::linkToCrud('Utilisateur', 'fa fa-user', User::class)
+            ->setPermission('ROLE_SUPER_ADMIN');
+
         yield MenuItem::subMenu('Vidéo', 'fa fa-video')->setSubItems([
             MenuItem::linkToCrud('Liste des vidéos', 'fa fa-eye', Video::class)->setAction(Crud::PAGE_INDEX),
             MenuItem::linkToCrud('Nouvelle vidéo', 'fa fa-plus', Video::class)->setAction(Crud::PAGE_NEW),
         ]);
 
-        yield MenuItem::subMenu('Catégories', 'fa fa-list')->setSubItems([
+        yield MenuItem::subMenu('Catégorie', 'fa fa-list')->setSubItems([
             MenuItem::linkToCrud('Liste des catégories', 'fa fa-eye', Category::class)->setAction(Crud::PAGE_INDEX),
             MenuItem::linkToCrud('Nouvelle catégorie', 'fa fa-plus', Category::class)->setAction(Crud::PAGE_NEW),
         ]);
