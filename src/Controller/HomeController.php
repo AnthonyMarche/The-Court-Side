@@ -64,17 +64,12 @@ class HomeController extends AbstractController
         ]);
     }
 
-    #[Route('/likes', 'app_likes')]
-    public function showLikes(Request $request): Response
-    {
-        $likedVideos = '';
-        /** @var \App\Entity\User */
-        $user = $this->getUser();
-        if ($user !== null) {
-            $likedVideos = $user->getLikedVideos();
-        }
-        return $this->render('home/likes.html.twig', [
-            'likedVideos' => $likedVideos,
-        ]);
-    }
+//    #[Route('/Language/{language}/{route}', 'change_language')]
+//    public function showLikes(Request $request, $language, $route): Response
+//    {
+//        dd($route);
+//        $request->setLocale($language);
+//
+//        return $this->redirectToRoute();
+//    }
 }

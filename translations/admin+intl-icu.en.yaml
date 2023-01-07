@@ -1,0 +1,35 @@
+dashboard:
+    dashboard: Dashboard
+    videosList: List of videos
+    newVideo: New Video
+    categoriesList: List of categories
+    newCategory: New Category
+    tagsList: List of tags
+    newTag: New Tag
+    leaveAdministration: Leave Administration
+
+entity:
+    category: Category
+    categories: Categories
+    tag: Tag
+    tags: Tags
+    user: User
+    users: Users
+    video: Video
+    videos: Videos
+    listOfVideos: Liste of videos
+    listOfCategories: Liste of categories
+    listOfTags: Liste of tags
+    listOfUsers: Liste of users
+
+    title: Title
+    description: Description
+    visibility: Visibility
+    file: File
+    teaser: Teaser
+    name: Name
+    username: Username
+    role: Role
+    createdAt: Created at
+
+

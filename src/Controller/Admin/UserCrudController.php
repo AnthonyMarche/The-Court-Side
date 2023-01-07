@@ -12,6 +12,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use function Symfony\Component\Translation\t;
 
 class UserCrudController extends AbstractCrudController
 {
@@ -23,9 +24,9 @@ class UserCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setEntityLabelInSingular('utilisateur')
-            ->setEntityLabelInPlural('utilisateurs')
-            ->setPageTitle('index', ' Liste des %entity_label_plural%')
+            ->setEntityLabelInSingular(t('entity.user', ['parameter' => 'value'], 'admin'))
+            ->setEntityLabelInPlural(t('entity.users', ['parameter' => 'value'], 'admin'))
+            ->setPageTitle('index', t('entity.listOfUsers', ['parameter' => 'value'], 'admin'))
             ->setDefaultSort(['createdAt' => 'DESC'])
             ->setEntityPermission('ROLE_SUPER_ADMIN');
     }
@@ -33,19 +34,19 @@ class UserCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id')
+            IdField::new('id', 'ID')
                 ->hideOnForm(),
-            TextField::new('username')
+            TextField::new('username', t('entity.username', ['parameter' => 'value'], 'admin'))
                 ->setDisabled(),
-            EmailField::new('email')
+            EmailField::new('email', 'Email')
                 ->setDisabled(),
-            ChoiceField::new('roles', 'Role')
+            ChoiceField::new('roles', t('entity.role', ['parameter' => 'value'], 'admin'))
                 ->setChoices([
-                    'Administrateur' => 'ROLE_ADMIN',
+                    'Admin' => 'ROLE_ADMIN',
                 ])
                 ->renderExpanded()
                 ->allowMultipleChoices(),
-            DateTimeField::new('createdAt', 'Créé le')
+            DateTimeField::new('createdAt', t('entity.createdAt', ['parameter' => 'value'], 'admin'))
                 ->setFormat('dd/MM/YYYY')
                 ->onlyOnIndex(),
         ];
