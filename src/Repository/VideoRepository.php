@@ -76,13 +76,32 @@ class VideoRepository extends ServiceEntityRepository
     /**
      * @throws Exception
      */
-    public function getVideosOrderByViews(): array
+    public function getLikedVideos($userId): array
     {
         $conn = $this->getEntityManager()->getConnection();
 
         $sql = 'SELECT *
-        FROM video_user vu
-        JOIN video v on v.id = vu.video_id
+        FROM video v
+         JOIN video_user vu on v.id = vu.video_id
+        JOIN user u on u.id = vu.user_id
+        WHERE vu.user_id = :userId
+        ORDER BY v.created_at DESC';
+
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery(['userId' => $userId]);
+        return $resultSet->fetchAllAssociative();
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function getLikedVideosOrderByViews(): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = 'SELECT *
+        FROM video v
+         JOIN video_user vu on v.id = vu.video_id
         JOIN user u on u.id = vu.user_id
         ORDER BY v.number_of_view DESC';
         $stmt = $conn->prepare($sql);
@@ -93,13 +112,13 @@ class VideoRepository extends ServiceEntityRepository
     /**
      * @throws Exception
      */
-    public function getVideosOrderByLikes(): array
+    public function getLikedVideosOrderByLikes(): array
     {
         $conn = $this->getEntityManager()->getConnection();
 
         $sql = 'SELECT *
-        FROM video_user vu
-        JOIN video v on v.id = vu.video_id
+        FROM video v
+         JOIN video_user vu on v.id = vu.video_id
         JOIN user u on u.id = vu.user_id
         GROUP BY vu.video_id
         ORDER BY COUNT(vu.video_id) DESC';
@@ -112,13 +131,13 @@ class VideoRepository extends ServiceEntityRepository
     /**
      * @throws Exception
      */
-    public function getVideosOrderByDate(): array
+    public function getLikedVideosOrderByDate(): array
     {
         $conn = $this->getEntityManager()->getConnection();
 
         $sql = 'SELECT *
-        FROM video_user vu
-        JOIN video v on v.id = vu.video_id
+        FROM video v
+         JOIN video_user vu on v.id = vu.video_id
         JOIN user u on u.id = vu.user_id
         ORDER BY v.created_at DESC';
 

@@ -23,11 +23,11 @@ class Filter
     public function getOrderedLikedVideos(string $filter): array
     {
         if ($filter == 'views') {
-            return $this->videoRepository->getVideosOrderByViews();
+            return $this->videoRepository->getLikedVideosOrderByViews();
         } elseif ($filter == 'likes') {
-            return $this->videoRepository->getVideosOrderByLikes();
+            return $this->videoRepository->getLikedVideosOrderByLikes();
         } else {
-            return $this->videoRepository->getVideosOrderByDate();
+            return $this->videoRepository->getLikedVideosOrderByDate();
         }
     }
 }

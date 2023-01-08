@@ -3,11 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Video;
-use App\Form\FilterType;
 use App\Repository\CategoryRepository;
 use App\Repository\UserRepository;
 use App\Repository\VideoRepository;
 use App\Services\Filter;
+use Doctrine\DBAL\Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -66,29 +66,38 @@ class HomeController extends AbstractController
         ]);
     }
 
-    #[Route('/likes', 'app_likes')]
-    public function showLikes(Request $request, Filter $filter): Response
+    /**
+     * @throws Exception
+     */
+    #[Route('/filter', name: 'app_filter')]
+
+    /**
+     * @throws Exception
+     */
+    #[Route('/likes/{sort}', name: 'app_likes')]
+    public function showLikes(Filter $filter, VideoRepository $videoRepository, Request $request, $sort = 'recent'): Response
     {
-        //get the videos liked by the current user
+        //injection security
         $likedVideos = '';
-        /** @var \App\Entity\User */
-        $user = $this->getUser();
-        if ($user !== null) {
-            $likedVideos = $filter->getOrderedLikedVideos('views');
+        $allowedSorts = ['recent', 'likes', 'views'];
+        (in_array($sort, $allowedSorts) ?: throw $this->createNotFoundException('filtre invalide'));
+
+        //get the videos liked by the current user
+        if ($this->getUser()) {
+            $likedVideos = $videoRepository->getLikedVideos($this->getUser()->getId());
         }
 
-        //create the filter form
-        $form = $this->createForm(FilterType::class);
-
-        //handle the request
-        $form->handleRequest($request);
-        if ($form->isSubmitted()) {
-            $likedVideos = $filter->getOrderedLikedVideos($form->getData()['filter']);
+        //handle ajax request
+        if ($request->isXmlHttpRequest()) {
+            return new JsonResponse([
+                'content' => $this->renderView('_includes/_liked_videos.html.twig', [
+                    'likedVideos' => $filter->getOrderedLikedVideos($sort),
+                ])
+            ]);
         }
 
-        return $this->renderForm('home/likes.html.twig', [
-            'likedVideos' => $likedVideos,
-            'form' => $form,
+        return $this->render('home/likes.html.twig', [
+            'likedVideos' => $likedVideos
         ]);
     }
 }
