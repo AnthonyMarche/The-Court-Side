@@ -75,8 +75,12 @@ class HomeController extends AbstractController
      * @throws Exception
      */
     #[Route('/likes/{sort}', name: 'app_likes')]
-    public function showLikes(Filter $filter, VideoRepository $videoRepository, Request $request, $sort = 'recent'): Response
-    {
+    public function showLikes(
+        Filter $filter,
+        VideoRepository $videoRepository,
+        Request $request,
+        string $sort = 'recent'
+    ): Response {
         //injection security
         $likedVideos = '';
         $allowedSorts = ['recent', 'likes', 'views'];
@@ -84,7 +88,9 @@ class HomeController extends AbstractController
 
         //get the videos liked by the current user
         if ($this->getUser()) {
-            $likedVideos = $videoRepository->getLikedVideos($this->getUser()->getId());
+            /** @var \App\Entity\User */
+            $user = $this->getUser();
+            $likedVideos = $videoRepository->getLikedVideos($user->getId());
         }
 
         //handle ajax request

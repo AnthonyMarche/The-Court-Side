@@ -76,7 +76,7 @@ class VideoRepository extends ServiceEntityRepository
     /**
      * @throws Exception
      */
-    public function getLikedVideos($userId): array
+    public function getLikedVideos(int $userId): array
     {
         $conn = $this->getEntityManager()->getConnection();
 
