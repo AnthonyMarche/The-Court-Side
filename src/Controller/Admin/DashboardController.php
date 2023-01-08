@@ -69,26 +69,68 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linkToDashboard(t('dashboard.dashboard', ['parameter' => 'value'], 'admin'), 'fa fa-home');
+        yield MenuItem::linkToDashboard(
+            t('dashboard.dashboard', ['parameter' => 'value'], 'admin'),
+            'fa fa-home'
+        );
 
         yield MenuItem::linkToCrud(t('entity.user', ['parameter' => 'value'], 'admin'), 'fa fa-user', User::class)
             ->setPermission('ROLE_SUPER_ADMIN');
 
         yield MenuItem::subMenu(t('entity.video', ['parameter' => 'value'], 'admin'), 'fa fa-video')->setSubItems([
-            MenuItem::linkToCrud(t('dashboard.videosList', ['parameter' => 'value'], 'admin'), 'fa fa-eye', Video::class)->setAction(Crud::PAGE_INDEX),
-            MenuItem::linkToCrud(t('dashboard.newVideo', ['parameter' => 'value'], 'admin'), 'fa fa-plus', Video::class)->setAction(Crud::PAGE_NEW),
+            MenuItem::linkToCrud(
+                t(
+                    'dashboard.videosList',
+                    ['parameter' => 'value'],
+                    'admin'
+                ),
+                'fa fa-eye',
+                Video::class
+            )
+                ->setAction(Crud::PAGE_INDEX),
+            MenuItem::linkToCrud(t('dashboard.newVideo', ['parameter' => 'value'], 'admin'), 'fa fa-plus', Video::class)
+                ->setAction(Crud::PAGE_NEW),
         ]);
 
         yield MenuItem::subMenu(t('entity.category', ['parameter' => 'value'], 'admin'), 'fa fa-list')->setSubItems([
-            MenuItem::linkToCrud(t('dashboard.categoriesList', ['parameter' => 'value'], 'admin'), 'fa fa-eye', Category::class)->setAction(Crud::PAGE_INDEX),
-            MenuItem::linkToCrud(t('dashboard.newCategory', ['parameter' => 'value'], 'admin'), 'fa fa-plus', Category::class)->setAction(Crud::PAGE_NEW),
+            MenuItem::linkToCrud(
+                t(
+                    'dashboard.categoriesList',
+                    ['parameter' => 'value'],
+                    'admin'
+                ),
+                'fa fa-eye',
+                Category::class
+            )
+                ->setAction(Crud::PAGE_INDEX),
+            MenuItem::linkToCrud(
+                t(
+                    'dashboard.newCategory',
+                    ['parameter' => 'value'],
+                    'admin'
+                ),
+                'fa fa-plus',
+                Category::class
+            )
+                ->setAction(Crud::PAGE_NEW),
         ]);
 
-        yield MenuItem::subMenu(t('entity.tag', ['parameter' => 'value'], 'admin'), 'fa fa-tag')->setSubItems([
-            MenuItem::linkToCrud(t('dashboard.tagsList', ['parameter' => 'value'], 'admin'), 'fa fa-eye', Tag::class)->setAction(Crud::PAGE_INDEX),
-            MenuItem::linkToCrud(t('dashboard.newTag', ['parameter' => 'value'], 'admin'), 'fa fa-plus', Tag::class)->setAction(Crud::PAGE_NEW),
+        yield MenuItem::subMenu(t('entity.tag', ['parameter' => 'value'], 'admin'), 'fa fa-tag')
+            ->setSubItems([
+            MenuItem::linkToCrud(t('dashboard.tagsList', ['parameter' => 'value'], 'admin'), 'fa fa-eye', Tag::class)
+                ->setAction(Crud::PAGE_INDEX),
+            MenuItem::linkToCrud(t('dashboard.newTag', ['parameter' => 'value'], 'admin'), 'fa fa-plus', Tag::class)
+                ->setAction(Crud::PAGE_NEW),
         ]);
 
-        yield MenuItem::linkToUrl(t('dashboard.leaveAdministration', ['parameter' => 'value'], 'admin'), "fa-solid fa-arrow-right-from-bracket", '/');
+        yield MenuItem::linkToRoute(
+            t(
+                'dashboard.leaveAdministration',
+                ['parameter' => 'value'],
+                'admin'
+            ),
+            "fa-solid fa-arrow-right-from-bracket",
+            'app_home'
+        );
     }
 }
