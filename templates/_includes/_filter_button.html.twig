@@ -12,10 +12,12 @@
     <div class="btn-group">
         <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
-            Filtre
+            <span class="sorted-by-likes disappearance">Les plus aimées</span>
+            <span class="sorted-by-recent">Les plus récentes</span>
+            <span class="sorted-by-views disappearance">Les plus vues</span>
         </button>
         <div class="dropdown-menu dropdown-menu-right">
-            <a href="{{ path(route, { sort : 'likes'}) }}" id="dateFilter">
+            <a href="{{ path(route, { sort : 'recent'}) }}" id="dateFilter">
                 <button class="dropdown-item" type="button">Les plus récentes</button>
             </a>
             <a href="{{ path(route, { sort : 'likes'}) }}" id="likesFilter">
