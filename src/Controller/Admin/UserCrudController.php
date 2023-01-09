@@ -50,7 +50,7 @@ class UserCrudController extends AbstractCrudController
                     ['parameter' => 'value'],
                     'admin'
                 )
-            )
+            ),
             EmailField::new('email', 'Email')
                 ->setDisabled(),
             ChoiceField::new(
