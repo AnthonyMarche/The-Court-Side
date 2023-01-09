@@ -88,7 +88,7 @@
             <div class="row">
                 {% for video in video.category.videos[:4] %}
                     <div class="col-12 col-md-6 col-lg-4 col-xl-3 single-video">
-                        <a href=""
+                        <a href="{{ path('app_watch', {id : video.id}) }}"
                            class="card card-video border-0 bg-transparent mb-4 home-video-link">
                             {% if video.isPrivate and not app.user %}
                                 <img src="{{ asset('build/images/image-private-video.jpg') }}" class="img-fluid mt-2"
