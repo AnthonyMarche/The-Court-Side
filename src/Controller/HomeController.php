@@ -77,4 +77,10 @@ class HomeController extends AbstractController
             'likedVideos' => $likedVideos,
         ]);
     }
+
+    #[Route('/Language/{language}/{route}', name: 'app_language')]
+    public function changeLanguage($language, $route): Response
+    {
+        return $this->redirectToRoute($route, ['_locale' => $language]);
+    }
 }

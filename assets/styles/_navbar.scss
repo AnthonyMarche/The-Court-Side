@@ -27,3 +27,22 @@ nav .bi-person-circle {
 nav .bi-person-circle:hover {
     color: #1d736a;
 }
+
+/* --------------------------------------------- Change language -------------------------------------------- */
+.flag-current-language {
+    width: 50px;
+    height: 38.5px;
+}
+
+.language-list {
+    min-width: initial;
+}
+
+.flag-item {
+    padding: .25rem 1rem;
+}
+
+.flag-size {
+    width: 50px;
+    height: 30px;
+}
