@@ -59,6 +59,19 @@
                 <p class="add-like-text ml-2">Ajouter à Mes favoris</p>
             </div>
         {% endif %}
+
+        <a class="twitter-share-button"
+           href="https://twitter.com/intent/tweet"
+           data-size="large"
+           data-text="🤯 Cette vidéo est incroyable ! 🤯
+"
+           data-url="{{ app.request.attributes.get('_url') }}"
+           data-hashtags="{% for tag in video.tag %}{{ tag.name }},{% endfor %}{{ video.category.name }}"
+           data-via="TheCourtSide"
+           data-related="twitterapi,twitter">
+            Tweet
+        </a>
+
         <div class="watch-video-description text-left mt-2">
             <p><strong>Description :</strong><br>{{ video.description }}</p>
         </div>

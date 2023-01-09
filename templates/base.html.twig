@@ -30,8 +30,10 @@
 
 {# -------HEADER / NAVBAR------- #}
 <header>
-    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-        {% include '_includes/_navbar_online.html.twig' %}
+    {% if app.user %}
+        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+            {% include '_includes/_navbar_online.html.twig' %}
+        {% endif %}
     {% else %}
         {% include '_includes/_navbar_offline.html.twig' %}
     {% endif %}
@@ -58,5 +60,8 @@
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+{# -------SOCIAL NETWORK SCRIPTS------- #}
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
 </body>
 </html>
