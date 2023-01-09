@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ category.name }}{% endblock %}
+
+{% block body %}
+    {{ dump(category) }}
+    <h2 class="text-center mt-4 category-main-title">{{ category.name }}</h2>
+    <div class="container-fluid p-5 py-3">
+        <div class="row">
+            {% for video in category.videos %}
+                <div class="col-12 col-md-6 col-lg-4 col-xl-3 single-video">
+                    <a href="{{ path('app_watch', {id : video.id}) }}"
+                       class="card card-video border-0 bg-transparent mb-4 home-video-link">
+                        {% if video.isPrivate and not app.user %}
+                            <img src="{{ asset('build/images/image-private-video.jpg') }}" class="img-fluid mt-2"
+                                 alt="image-private-video">
+                        {% else %}
+                            <video src="{{ asset(video.teaser) }}" type="video/mp4" loop muted
+                                   class="hover-to-play w-100 mt-2">
+                            </video>
+                        {% endif %}
+                        <div class="card-video-details d-flex mt-2">
+                            <div>
+                                <h4 class="home-video-title">{{ video.title }}</h4>
+                                <div class="home-video-details">
+                                    {% if video.user.username %}
+                                        {{ video.user.username }}
+                                    {% else %}
+                                        {{ video.user.email }}
+                                    {% endif %}
+                                </div>
+                                <div class="home-video-details">{{ video.numberOfView }} vues • publiée
+                                    le {{ video.createdAt|date("d/m/Y") }}</div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

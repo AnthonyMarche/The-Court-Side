@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Category;
 use App\Entity\Video;
 use App\Repository\CategoryRepository;
 use App\Repository\UserRepository;
@@ -12,9 +13,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
+#[Route(name: 'app_')]
 class HomeController extends AbstractController
 {
-    #[Route('/', name: 'app_home')]
+    #[Route('/', name: 'home')]
     public function index(VideoRepository $videoRepository): Response
     {
         $latestVideos = $videoRepository->findBy([], ['createdAt' => 'DESC'], 4);
@@ -29,7 +31,7 @@ class HomeController extends AbstractController
         ]);
     }
 
-    #[Route('/watch/{id}', name: 'app_watch')]
+    #[Route('/watch/{id}', name: 'watch')]
     public function watch(Video $video): Response
     {
         return $this->render('home/watch.html.twig', [
@@ -37,7 +39,7 @@ class HomeController extends AbstractController
         ]);
     }
 
-    #[Route('watch/{id}/like', name: 'app_watch_like', methods: ['POST', 'GET'])]
+    #[Route('watch/{id}/like', name: 'watch_like', methods: ['POST', 'GET'])]
     public function addToLike(Video $video, UserRepository $userRepository): JsonResponse
     {
 
@@ -56,7 +58,7 @@ class HomeController extends AbstractController
         ]);
     }
 
-    #[Route('/category', name: 'app_category')]
+    #[Route('/category', name: 'category')]
     public function showCategory(CategoryRepository $categoryRepository): Response
     {
         return $this->render('home/category.html.twig', [
@@ -64,7 +66,7 @@ class HomeController extends AbstractController
         ]);
     }
 
-    #[Route('/likes', 'app_likes')]
+    #[Route('/likes', 'likes')]
     public function showLikes(Request $request): Response
     {
         $likedVideos = '';
@@ -75,6 +77,14 @@ class HomeController extends AbstractController
         }
         return $this->render('home/likes.html.twig', [
             'likedVideos' => $likedVideos,
+        ]);
+    }
+
+    #[Route('/category/{slug}/{sort}', name: 'single_category', methods: ['GET'])]
+    public function showSingleCategory(Category $category, string $sort = 'recent'): Response
+    {
+        return $this->render('home/singleCategory.html.twig', [
+            'category' => $category,
         ]);
     }
 }
