@@ -6,6 +6,8 @@ use App\Entity\Video;
 use App\Repository\CategoryRepository;
 use App\Repository\UserRepository;
 use App\Repository\VideoRepository;
+use App\Services\Filter;
+use Doctrine\DBAL\Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -64,17 +66,44 @@ class HomeController extends AbstractController
         ]);
     }
 
-    #[Route('/likes', 'app_likes')]
-    public function showLikes(Request $request): Response
-    {
+    /**
+     * @throws Exception
+     */
+    #[Route('/filter', name: 'app_filter')]
+
+    /**
+     * @throws Exception
+     */
+    #[Route('/likes/{sort}', name: 'app_likes')]
+    public function showLikes(
+        Filter $filter,
+        VideoRepository $videoRepository,
+        Request $request,
+        string $sort = 'recent'
+    ): Response {
+        //injection security
         $likedVideos = '';
-        /** @var \App\Entity\User */
-        $user = $this->getUser();
-        if ($user !== null) {
-            $likedVideos = $user->getLikedVideos();
+        $allowedSorts = ['recent', 'likes', 'views'];
+        (in_array($sort, $allowedSorts) ?: throw $this->createNotFoundException('filtre invalide'));
+
+        //get the videos liked by the current user
+        if ($this->getUser()) {
+            /** @var \App\Entity\User */
+            $user = $this->getUser();
+            $likedVideos = $videoRepository->getLikedVideos($user->getId());
         }
+
+        //handle ajax request
+        if ($request->isXmlHttpRequest()) {
+            return new JsonResponse([
+                'content' => $this->renderView('_includes/_liked_videos.html.twig', [
+                    'likedVideos' => $filter->getOrderedLikedVideos($sort),
+                ])
+            ]);
+        }
+
         return $this->render('home/likes.html.twig', [
-            'likedVideos' => $likedVideos,
+            'likedVideos' => $likedVideos
         ]);
     }
 
