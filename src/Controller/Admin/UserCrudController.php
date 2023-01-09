@@ -26,7 +26,14 @@ class UserCrudController extends AbstractCrudController
         return $crud
             ->setEntityLabelInSingular(t('entity.user', ['parameter' => 'value'], 'admin'))
             ->setEntityLabelInPlural(t('entity.users', ['parameter' => 'value'], 'admin'))
-            ->setPageTitle('index', t('entity.listOfUsers', ['parameter' => 'value'], 'admin'))
+            ->setPageTitle(
+                'index',
+                t(
+                    'entity.listOfUsers',
+                    ['parameter' => 'value'],
+                    'admin'
+                )
+            )
             ->setDefaultSort(['createdAt' => 'DESC'])
             ->setEntityPermission('ROLE_SUPER_ADMIN');
     }
@@ -36,17 +43,38 @@ class UserCrudController extends AbstractCrudController
         return [
             IdField::new('id', 'ID')
                 ->hideOnForm(),
-            TextField::new('username', t('entity.username', ['parameter' => 'value'], 'admin'))
+            TextField::new(
+                'username',
+                t(
+                    'entity.username',
+                    ['parameter' => 'value'],
+                    'admin'
+                )
+            )
                 ->setDisabled(),
             EmailField::new('email', 'Email')
                 ->setDisabled(),
-            ChoiceField::new('roles', t('entity.role', ['parameter' => 'value'], 'admin'))
+            ChoiceField::new(
+                'roles',
+                t(
+                    'entity.role',
+                    ['parameter' => 'value'],
+                    'admin'
+                )
+            )
                 ->setChoices([
                     'Admin' => 'ROLE_ADMIN',
                 ])
                 ->renderExpanded()
                 ->allowMultipleChoices(),
-            DateTimeField::new('createdAt', t('entity.createdAt', ['parameter' => 'value'], 'admin'))
+            DateTimeField::new(
+                'createdAt',
+                t(
+                    'entity.createdAt',
+                    ['parameter' => 'value'],
+                    'admin'
+                )
+            )
                 ->setFormat('dd/MM/YYYY')
                 ->onlyOnIndex(),
         ];

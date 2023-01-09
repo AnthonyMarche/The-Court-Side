@@ -31,7 +31,14 @@ class TagCrudController extends AbstractCrudController
         return $crud
             ->setEntityLabelInSingular(t('entity.tag', ['parameter' => 'value'], 'admin'))
             ->setEntityLabelInPlural(t('entity.tags', ['parameter' => 'value'], 'admin'))
-            ->setPageTitle('index', t('entity.listOfTags', ['parameter' => 'value'], 'admin'))
+            ->setPageTitle(
+                'index',
+                t(
+                    'entity.listOfTags',
+                    ['parameter' => 'value'],
+                    'admin'
+                )
+            )
             ->setDefaultSort(['createdAt' => 'DESC']);
     }
 
@@ -40,7 +47,14 @@ class TagCrudController extends AbstractCrudController
         return [
             TextField::new('name', t('entity.name', ['parameter' => 'value'], 'admin')),
 
-            DateTimeField::new('createdAt', t('entity.createdAt', ['parameter' => 'value'], 'admin'))
+            DateTimeField::new(
+                'createdAt',
+                t(
+                    'entity.createdAt',
+                    ['parameter' => 'value'],
+                    'admin'
+                )
+            )
                 ->setFormat('dd/MM/YYYY')
                 ->onlyOnIndex(),
         ];

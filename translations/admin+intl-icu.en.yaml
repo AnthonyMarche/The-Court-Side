@@ -7,7 +7,6 @@ dashboard:
     tagsList: List of tags
     newTag: New Tag
     leaveAdministration: Leave Administration
-
 entity:
     category: Category
     categories: Categories
@@ -21,7 +20,6 @@ entity:
     listOfCategories: Liste of categories
     listOfTags: Liste of tags
     listOfUsers: Liste of users
-
     title: Title
     description: Description
     visibility: Visibility

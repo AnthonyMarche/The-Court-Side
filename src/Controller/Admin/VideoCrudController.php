@@ -38,7 +38,14 @@ class VideoCrudController extends AbstractCrudController
         return $crud
             ->setEntityLabelInSingular(t('entity.video', ['parameter' => 'value'], 'admin'))
             ->setEntityLabelInPlural(t('entity.videos', ['parameter' => 'value'], 'admin'))
-            ->setPageTitle('index', t('entity.listOfVideos', ['parameter' => 'value'], 'admin'))
+            ->setPageTitle(
+                'index',
+                t(
+                    'entity.listOfVideos',
+                    ['parameter' => 'value'],
+                    'admin'
+                )
+            )
             ->setSearchFields(['title', 'description', 'category.name'])
             ->setDefaultSort(['createdAt' => 'DESC']);
     }
@@ -46,16 +53,51 @@ class VideoCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            TextField::new('title', t('entity.title', ['parameter' => 'value'], 'admin')),
+            TextField::new(
+                'title',
+                t(
+                    'entity.title',
+                    ['parameter' => 'value'],
+                    'admin'
+                )
+            ),
 
-            TextareaField::new('description', t('entity.description', ['parameter' => 'value'], 'admin'))
+            TextareaField::new(
+                'description',
+                t(
+                    'entity.description',
+                    ['parameter' => 'value'],
+                    'admin'
+                )
+            )
                 ->setMaxLength(115),
 
-            BooleanField::new('isPrivate', t('entity.visibility', ['parameter' => 'value'], 'admin')),
+            BooleanField::new(
+                'isPrivate',
+                t(
+                    'entity.visibility',
+                    ['parameter' => 'value'],
+                    'admin'
+                )
+            ),
 
-            AssociationField::new('category', t('entity.category', ['parameter' => 'value'], 'admin')),
+            AssociationField::new(
+                'category',
+                t(
+                    'entity.category',
+                    ['parameter' => 'value'],
+                    'admin'
+                )
+            ),
 
-            AssociationField::new('tag', t('entity.tag', ['parameter' => 'value'], 'admin'))
+            AssociationField::new(
+                'tag',
+                t(
+                    'entity.tag',
+                    ['parameter' => 'value'],
+                    'admin'
+                )
+            )
                 ->onlyOnForms(),
 
             ImageField::new('url', t('entity.file', ['parameter' => 'value'], 'admin'))
@@ -71,7 +113,14 @@ class VideoCrudController extends AbstractCrudController
                 ->setUploadDir('public/uploads/teasers')
                 ->setUploadedFileNamePattern(self::PATHTEASER . '/teaser-[slug]-[timestamp].[extension]'),
 
-            DateTimeField::new('createdAt', t('entity.createdAt', ['parameter' => 'value'], 'admin'))
+            DateTimeField::new(
+                'createdAt',
+                t(
+                    'entity.createdAt',
+                    ['parameter' => 'value'],
+                    'admin'
+                )
+            )
                 ->onlyOnIndex()
                 ->setFormat('dd/MM/YYYY'),
         ];
