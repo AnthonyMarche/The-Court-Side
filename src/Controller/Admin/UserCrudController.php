@@ -51,7 +51,6 @@ class UserCrudController extends AbstractCrudController
                     'admin'
                 )
             )
-                ->setDisabled(),
             EmailField::new('email', 'Email')
                 ->setDisabled(),
             ChoiceField::new(
