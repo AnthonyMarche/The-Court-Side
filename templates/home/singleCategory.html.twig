@@ -3,7 +3,7 @@
 {% block title %}{{ category.name }}{% endblock %}
 
 {% block body %}
-    {{ dump(category) }}
+
     <h2 class="text-center mt-4 category-main-title">{{ category.name }}</h2>
     <div class="container-fluid p-5 py-3">
         <div class="row">
@@ -22,13 +22,6 @@
                         <div class="card-video-details d-flex mt-2">
                             <div>
                                 <h4 class="home-video-title">{{ video.title }}</h4>
-                                <div class="home-video-details">
-                                    {% if video.user.username %}
-                                        {{ video.user.username }}
-                                    {% else %}
-                                        {{ video.user.email }}
-                                    {% endif %}
-                                </div>
                                 <div class="home-video-details">{{ video.numberOfView }} vues • publiée
                                     le {{ video.createdAt|date("d/m/Y") }}</div>
                             </div>

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Category;
 use App\Entity\Video;
 use App\Repository\CategoryRepository;
 use App\Repository\UserRepository;
@@ -69,11 +70,6 @@ class HomeController extends AbstractController
     /**
      * @throws Exception
      */
-    #[Route('/filter', name: 'app_filter')]
-
-    /**
-     * @throws Exception
-     */
     #[Route('/likes/{sort}', name: 'app_likes')]
     public function showLikes(
         Filter $filter,
@@ -111,5 +107,13 @@ class HomeController extends AbstractController
     public function changeLanguage($language, $route): Response
     {
         return $this->redirectToRoute($route, ['_locale' => $language]);
+    }
+
+    #[Route('/category/{slug}/{sort}', name: 'single_category', methods: ['GET'])]
+    public function showSingleCategory(Category $category, string $sort = 'recent'): Response
+    {
+        return $this->render('home/singleCategory.html.twig', [
+            'category' => $category,
+        ]);
     }
 }
