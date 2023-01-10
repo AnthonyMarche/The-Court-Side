@@ -116,8 +116,13 @@ class UserController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {
             $userRepository->remove($user, true);
+            // on récupère la session utilisateur et on l'invalide,
+            // puis on supprime le token, avant de rafraîchir la page
+            $request->getSession()->invalidate();
+            $this->container->get('security.token_storage')->setToken(null);
         }
 
-        return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+
+        return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
     }
 }
