@@ -54,11 +54,6 @@ class VideoFixtures extends Fixture implements DependentFixtureInterface
             $randomUser = rand(0, 1);
             $video->setUser($this->getReference(self::USER[$randomUser]));
 
-            $nbLike = rand(0, 10);
-            for ($j = 0; $j < $nbLike; $j++) {
-                $video->addLikedByUser($this->getReference('user_' . $j));
-            }
-
             $slug = $this->slugger->slug($video->getTitle());
             $video->setSlug($slug);
 
