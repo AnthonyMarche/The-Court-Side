@@ -59,6 +59,25 @@
                 <p class="add-like-text ml-2">Ajouter à Mes favoris</p>
             </div>
         {% endif %}
+
+        {# SHARE VIDEO #}
+        {% set url = app.request.uri %}
+        <a class="twitter-share-button twitter"
+           href="https://twitter.com/intent/tweet"
+           data-size="large"
+           data-text="🤯 Cette vidéo est incroyable ! 🤯
+"
+           data-url="{{ url }}"
+           data-hashtags="{% for tag in video.tag %}{{ tag.name }},{% endfor %}{{ video.category.name }}"
+           data-via="TheCourtSide"
+           data-related="twitterapi,twitter">
+            Tweet
+        </a>
+
+        <a href="mailto:?subject=🤯 Cette vidéo est incroyable ! 🤯&body=Regarde cette vidéo !%0A{{ url }}" class="btn btn-secondary btn-sm rounded-pill">
+            <i class="bi bi-envelope">  </i>Mail
+        </a>
+
         <div class="watch-video-description text-left mt-2">
             <p><strong>Description :</strong><br>{{ video.description }}</p>
         </div>
