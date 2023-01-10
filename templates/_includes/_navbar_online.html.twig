@@ -29,10 +29,37 @@
 
         {# -------NAV-LOGIN------- #}
         <div class="nav-links d-flex justify-content-around align-items-center justify-content-lg-end col">
+            {# -------LANGUAGE CHOICE------- #}
+            <div class="dropdown">
+                <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img class="flag-current-language"
+                         src="{{ asset('build/images/' ~ app.request.locale ~ '-flag.png') }}" alt="flag language">
+                </button>
+                <ul class="dropdown-menu language-list">
+                    <li><a class="dropdown-item flag-item"
+                           href="{{ path('app_language', {'language': 'fr', 'route': app.request.attributes.get('_route')}) }}">
+                            <img class="flag-size" src="{{ asset('build/images/fr-flag.png') }}" alt="french flag"></a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item flag-item"
+                           href="{{ path('app_language', {'language': 'en', 'route': app.request.attributes.get('_route')}) }}">
+                            <img class="flag-size" src="{{ asset('build/images/en-flag.png') }}" alt="english flag"></a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item flag-item"
+                           href="{{ path('app_language', {'language': 'es', 'route': app.request.attributes.get('_route')}) }}">
+                            <img class="flag-size" src="{{ asset('build/images/es-flag.png') }}" alt="spanish flag"></a>
+                    </li>
+                </ul>
+            </div>
             {% if app.user.username %}
                 <p class="mt-auto mb-auto">Bonjour, {{ app.user.username }}</p>
             {% else %}
-                <p  class="mt-auto mb-auto">{{ app.user.email }}</p>
+                <p class="mt-auto mb-auto">{{ app.user.email }}</p>
             {% endif %}
             <a href="{{ path('app_user_show', {'id':app.user.id}) }}">
                 <i class="bi bi-person-circle"></i>

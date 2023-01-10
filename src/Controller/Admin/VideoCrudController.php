@@ -14,6 +14,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use function Symfony\Component\Translation\t;
 
 class VideoCrudController extends AbstractCrudController
 {
@@ -35,9 +36,16 @@ class VideoCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setEntityLabelInSingular('vidéo')
-            ->setEntityLabelInPlural('vidéos')
-            ->setPageTitle('index', ' Liste des %entity_label_plural%')
+            ->setEntityLabelInSingular(t('entity.video', ['parameter' => 'value'], 'admin'))
+            ->setEntityLabelInPlural(t('entity.videos', ['parameter' => 'value'], 'admin'))
+            ->setPageTitle(
+                'index',
+                t(
+                    'entity.listOfVideos',
+                    ['parameter' => 'value'],
+                    'admin'
+                )
+            )
             ->setSearchFields(['title', 'description', 'category.name'])
             ->setDefaultSort(['createdAt' => 'DESC']);
     }
@@ -45,32 +53,74 @@ class VideoCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            TextField::new('title', 'Titre'),
+            TextField::new(
+                'title',
+                t(
+                    'entity.title',
+                    ['parameter' => 'value'],
+                    'admin'
+                )
+            ),
 
-            TextareaField::new('description', 'Description')
+            TextareaField::new(
+                'description',
+                t(
+                    'entity.description',
+                    ['parameter' => 'value'],
+                    'admin'
+                )
+            )
                 ->setMaxLength(115),
 
-            BooleanField::new('isPrivate', 'Visibilité'),
+            BooleanField::new(
+                'isPrivate',
+                t(
+                    'entity.visibility',
+                    ['parameter' => 'value'],
+                    'admin'
+                )
+            ),
 
-            AssociationField::new('category', 'Catégorie'),
+            AssociationField::new(
+                'category',
+                t(
+                    'entity.category',
+                    ['parameter' => 'value'],
+                    'admin'
+                )
+            ),
 
-            AssociationField::new('tag', 'Tag')
+            AssociationField::new(
+                'tag',
+                t(
+                    'entity.tag',
+                    ['parameter' => 'value'],
+                    'admin'
+                )
+            )
                 ->onlyOnForms(),
 
-            ImageField::new('url', 'Fichier vidéo')
+            ImageField::new('url', t('entity.file', ['parameter' => 'value'], 'admin'))
                 ->onlyWhenCreating()
                 ->setBasePath(self::PATHVIDEO)
                 ->setUploadDir('public/uploads/videos')
                 ->setUploadedFileNamePattern(self::PATHVIDEO . '/[slug]-[timestamp].[extension]')
                 ->setHelp('Fichiers .avi, .mp4, .ogg and .wbm'),
 
-            ImageField::new('teaser', 'Ajouter un teaser')
+            ImageField::new('teaser', t('entity.teaser', ['parameter' => 'value'], 'admin'))
                 ->onlyWhenCreating()
                 ->setBasePath(self::PATHTEASER)
                 ->setUploadDir('public/uploads/teasers')
                 ->setUploadedFileNamePattern(self::PATHTEASER . '/teaser-[slug]-[timestamp].[extension]'),
 
-            DateTimeField::new('createdAt', 'Créé le')
+            DateTimeField::new(
+                'createdAt',
+                t(
+                    'entity.createdAt',
+                    ['parameter' => 'value'],
+                    'admin'
+                )
+            )
                 ->onlyOnIndex()
                 ->setFormat('dd/MM/YYYY'),
         ];

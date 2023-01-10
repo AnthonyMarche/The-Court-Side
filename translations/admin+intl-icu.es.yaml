@@ -1,0 +1,33 @@
+dashboard:
+    dashboard: Salpicadero
+    videosList: Lista de videos
+    newVideo: Nuevo Video
+    categoriesList: Lista de categorías
+    newCategory: Nueva Categoría
+    tagsList: Lista de etiquetas
+    newTag: Nueva etiqueta
+    leaveAdministration: Salir de administrador
+entity:
+    category: Categoría
+    categories: Categorías
+    tag: Etiqueta
+    tags: Etiquetas
+    user: Usuario
+    users: Usuarios
+    video: Vídeo
+    videos: Vídeos
+    listOfVideos: Lista de vídeos
+    listOfCategories: Lista de categorías
+    listOfTags: Lista de etiquetas
+    listOfUsers: Lista de usuarios
+    title: Titulo
+    description: Descripción
+    visibility: Visibilidad
+    file: Archivo de vídeo
+    teaser: Teaser
+    name: Nombre
+    username: Nombre de usuario
+    role: Rol
+    createdAt: Creado el
+
+

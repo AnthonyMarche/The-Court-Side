@@ -5,48 +5,41 @@
 {% block body %}
     {% if app.user %}
         <h2 class="text-center mt-4 category-main-title">Mes favoris</h2>
-        <div class="container-fluid p-5 py-3">
-            <div class="row">
-                {% for video in likedVideos %}
-                    <div class="col-12 col-md-6 col-lg-4 col-xl-3 single-video">
-                        <a href="{{ path('app_watch', {id : video.id}) }}"
-                           class="card card-video border-0 bg-transparent mb-4 category-video-link">
-                            <video src="{{ asset(video.teaser) }}" type="video/mp4" loop
-                                   muted
-                                   class="hover-to-play w-100 mt-2">
-                            </video>
-                            <div class="card-video-details d-flex mt-2">
-                                <div>
-                                    <h4 class="category-video-title">{{ video.title }}</h4>
-                                    <div class="category-video-details">
-                                        {% if video.user.username %}
-                                            {{ video.user.username }}
-                                        {% else %}
-                                            {{ video.user.email }}
-                                        {% endif %}
-                                    </div>
-                                    <div class="category-video-details">{{ video.numberOfView }} vues • publiée
-                                        le {{ video.createdAt|date("d/m/Y") }}</div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                {% endfor %}
-            </div>
-        </div>
-    {% else %}
-        <div class="not-register-top"></div>
-        <div class="not-register-card card">
-            <div class="not-register-card-body card-body text-center bg-light">
-                <h5 class="card-title mt-5">Mes favoris</h5>
-                <p class="card-text">Désolé cette page n'est disponible que pour les utilisateurs inscrits.<br>Vous
-                    pouvez vous inscrire gratuitement ou vous connectez si vous avez déjà un compte.</p>
-                <div class="not-register-card-buttons-container d-flex justify-content-center mt-5">
-                    <a href="#" class="btn btn-outline-info">S'inscrire</a>
-                    <a href="{{ path('app_user_login') }}" class="btn btn-primary">Se connecter</a>
+
+        {#    message in case the user has no video liked    #}
+        {% if likedVideos is empty %}
+            {% include '_includes/_info_card.html.twig' with {
+                'text' : 'Vous n\'avez aucune vidéo dans vos favoris pour l\'instant.
+                Pour en ajouter vous pouvez cliquer sur le bouton \'coeur\' en dessous de chaque vidéo',
+                'title' : 'Mes favoris',
+                'buttons' : 'false'} %}
+        {% else %}
+
+            {% if likedVideos|length > 1 %}
+                {#    filter button include only if liked videos length is > 1   #}
+                {% include '_includes/_filter_button.html.twig' with {'route' : 'app_likes'} %}
+            {% endif %}
+
+
+            {#    video grid include    #}
+            <div class="container-fluid p-5 py-3">
+                <div class="row js-content">
+                    {% include '_includes/_liked_videos.html.twig' %}
                 </div>
             </div>
-        </div>
+        {% endif %}
+    {% else %}
+
+        {# message in case the user is not connected #}
+        {% include '_includes/_info_card.html.twig' with {
+            'text' : 'Désolé cette page n\'est disponible que pour les utilisateurs inscrits.
+            Vous pouvez vous inscrire gratuitement ou vous connectez si vous avez déjà un compte.',
+            'title' : 'Mes favoris',
+            'buttons' : 'true'} %}
     {% endif %}
+
+    {#  footer  #}
+    {% include '_includes/_main_footer.html.twig' %}
 {% endblock %}
+
 

@@ -13,3 +13,4 @@ import './bootstrap';
 import './js/homePage';
 import './js/watchVideo';
 import './js/categoryPages';
+import './js/filter'

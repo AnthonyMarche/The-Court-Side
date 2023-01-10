@@ -10,6 +10,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use function Symfony\Component\Translation\t;
 
 class TagCrudController extends AbstractCrudController
 {
@@ -28,18 +29,32 @@ class TagCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setEntityLabelInSingular('tag')
-            ->setEntityLabelInPlural('tags')
-            ->setPageTitle('index', ' Liste des %entity_label_plural%')
+            ->setEntityLabelInSingular(t('entity.tag', ['parameter' => 'value'], 'admin'))
+            ->setEntityLabelInPlural(t('entity.tags', ['parameter' => 'value'], 'admin'))
+            ->setPageTitle(
+                'index',
+                t(
+                    'entity.listOfTags',
+                    ['parameter' => 'value'],
+                    'admin'
+                )
+            )
             ->setDefaultSort(['createdAt' => 'DESC']);
     }
 
     public function configureFields(string $pageName): iterable
     {
         return [
-            TextField::new('name', 'Nom'),
+            TextField::new('name', t('entity.name', ['parameter' => 'value'], 'admin')),
 
-            DateTimeField::new('createdAt', 'Créé le')
+            DateTimeField::new(
+                'createdAt',
+                t(
+                    'entity.createdAt',
+                    ['parameter' => 'value'],
+                    'admin'
+                )
+            )
                 ->setFormat('dd/MM/YYYY')
                 ->onlyOnIndex(),
         ];
