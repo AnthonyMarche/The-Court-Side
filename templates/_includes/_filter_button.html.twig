@@ -17,13 +17,13 @@
             <span class="sorted-by-views disappearance">Les plus vues</span>
         </button>
         <div class="dropdown-menu dropdown-menu-right">
-            <a href="{{ path(route, { sort : 'recent'}) }}" id="dateFilter">
+            <a href="{{ recent }}" id="dateFilter">
                 <button class="dropdown-item" type="button">Les plus récentes</button>
             </a>
-            <a href="{{ path(route, { sort : 'likes'}) }}" id="likesFilter">
+            <a href="{{ likes }}" id="likesFilter">
                 <button class="dropdown-item" type="button">Les plus aimées</button>
             </a>
-            <a href="{{ path(route, { sort : 'views'}) }}" id="viewsFilter">
+            <a href="{{ views }}" id="viewsFilter">
                 <button class="dropdown-item" type="button">Les plus vues</button>
             </a>
         </div>

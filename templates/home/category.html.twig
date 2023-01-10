@@ -17,7 +17,7 @@
             <div class="d-flex justify-content-between p-0 mb-0">
                 <h3 class="section-name">{{ category.name }}</h3>
                 {% if category.videos|length > 4 %}
-                    <a href="">
+                    <a href="{{ path('app_single_category', {slug : category.slug}) }}">
                         <button type="button" class="btn btn-outline-primary">VOIR PLUS</button>
                     </a>
                 {% endif %}

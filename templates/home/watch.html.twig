@@ -97,9 +97,9 @@
     <div class="watch-see-more-container mt-5">
         <div class="container-fluid p-5 py-3 home-main-container">
             <div class="home-section-head d-flex justify-content-between">
-                <h3 class="section-name">Voir plus...</h3>
+                <h3 class="section-name">Voir plus de {{ video.category }}</h3>
                 {% if video.category.videos|length > 4 %}
-                    <a href="">
+                    <a href="{{ path('app_single_category', {slug : video.category.slug}) }}">
                         <button type="button" class="btn btn-outline-primary">VOIR PLUS</button>
                     </a>
                 {% endif %}
