@@ -6,6 +6,7 @@ use App\Entity\User;
 use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
@@ -68,6 +69,13 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 
     public function remove(User $entity, bool $flush = false): void
     {
+        $userVideos = $entity->getVideos();
+        foreach ($userVideos as $video) {
+            $video->setUser(null);
+        }
+
+
+
         $this->getEntityManager()->remove($entity);
 
         if ($flush) {
