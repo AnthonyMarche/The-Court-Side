@@ -1,34 +1,27 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ category.name }}{% endblock %}
+ {% block title %}{{ videos[0].name }}{% endblock %}
 
 {% block body %}
+        <h2 class="text-center mt-4 category-main-title">{{ videos[0].name }}</h2>
 
-    <h2 class="text-center mt-4 category-main-title">{{ category.name }}</h2>
+        {% if videos|length > 1 %}
+{#                    filter button include only if liked videos length is > 1 #}
+            {% include '_includes/_filter_button.html.twig' with  {
+                recent : path('app_single_category', { slug : videos[0].name, sort : 'recent'}),
+                likes : path('app_single_category', { slug : videos[0].name, sort : 'likes'}),
+                views : path('app_single_category', { slug : videos[0].name, sort : 'views'})
+            } %}
+        {% endif %}
+
+    {# include the videos grid #}
     <div class="container-fluid p-5 py-3">
-        <div class="row">
-            {% for video in category.videos %}
-                <div class="col-12 col-md-6 col-lg-4 col-xl-3 single-video">
-                    <a href="{{ path('app_watch', {id : video.id}) }}"
-                       class="card card-video border-0 bg-transparent mb-4 home-video-link">
-                        {% if video.isPrivate and not app.user %}
-                            <img src="{{ asset('build/images/image-private-video.jpg') }}" class="img-fluid mt-2"
-                                 alt="image-private-video">
-                        {% else %}
-                            <video src="{{ asset(video.teaser) }}" type="video/mp4" loop muted
-                                   class="hover-to-play w-100 mt-2">
-                            </video>
-                        {% endif %}
-                        <div class="card-video-details d-flex mt-2">
-                            <div>
-                                <h4 class="home-video-title">{{ video.title }}</h4>
-                                <div class="home-video-details">{{ video.numberOfView }} vues • publiée
-                                    le {{ video.createdAt|date("d/m/Y") }}</div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            {% endfor %}
+        <div class="row js-content">
+            {% include '_includes/_videos_grid.html.twig' %}
         </div>
     </div>
+
+    {# footer #}
+
+    {% include '_includes/_main_footer.html.twig' %}
 {% endblock %}

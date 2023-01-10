@@ -57,10 +57,5 @@ if (document.querySelector('.js-content')) {
             history.replaceState({}, '', link)
         }
     }
-
-    // eslint-disable-next-line no-inner-declarations
-    function sortingInfo() {
-
-    }
 }
 

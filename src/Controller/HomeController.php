@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Category;
 use App\Entity\Video;
 use App\Repository\CategoryRepository;
 use App\Repository\UserRepository;
@@ -15,9 +14,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
+#[Route(name: 'app_')]
 class HomeController extends AbstractController
 {
-    #[Route('/', name: 'app_home')]
+    #[Route('/', name: 'home')]
     public function index(VideoRepository $videoRepository): Response
     {
         $latestVideos = $videoRepository->findBy([], ['createdAt' => 'DESC'], 4);
@@ -32,7 +32,7 @@ class HomeController extends AbstractController
         ]);
     }
 
-    #[Route('/watch/{id}', name: 'app_watch')]
+    #[Route('/watch/{id}', name: 'watch')]
     public function watch(Video $video): Response
     {
         return $this->render('home/watch.html.twig', [
@@ -40,7 +40,7 @@ class HomeController extends AbstractController
         ]);
     }
 
-    #[Route('watch/{id}/like', name: 'app_watch_like', methods: ['POST', 'GET'])]
+    #[Route('watch/{id}/like', name: 'watch_like', methods: ['POST', 'GET'])]
     public function addToLike(Video $video, UserRepository $userRepository): JsonResponse
     {
 
@@ -59,7 +59,7 @@ class HomeController extends AbstractController
         ]);
     }
 
-    #[Route('/category', name: 'app_category')]
+    #[Route('/category', name: 'category')]
     public function showCategory(CategoryRepository $categoryRepository): Response
     {
         return $this->render('home/category.html.twig', [
@@ -70,17 +70,20 @@ class HomeController extends AbstractController
     /**
      * @throws Exception
      */
-    #[Route('/likes/{sort}', name: 'app_likes')]
+    #[Route('/likes/{sort}', name: 'likes')]
     public function showLikes(
         Filter $filter,
         VideoRepository $videoRepository,
         Request $request,
         string $sort = 'recent'
     ): Response {
-        //injection security
+
         $likedVideos = '';
-        $allowedSorts = ['recent', 'likes', 'views'];
-        (in_array($sort, $allowedSorts) ?: throw $this->createNotFoundException('filtre invalide'));
+
+        //injection security
+        if (!$filter->preventInjection($sort)) {
+            throw $this->createNotFoundException('filtre invalide');
+        }
 
         //get the videos liked by the current user
         if ($this->getUser()) {
@@ -103,17 +106,39 @@ class HomeController extends AbstractController
         ]);
     }
 
-    #[Route('/Language/{language}/{route}', name: 'app_language')]
-    public function changeLanguage($language, $route): Response
+    #[Route('/Language/{language}/{route}', name: 'language')]
+    public function changeLanguage(string $language, string $route): Response
     {
         return $this->redirectToRoute($route, ['_locale' => $language]);
     }
 
+    /**
+     * @throws Exception
+     */
     #[Route('/category/{slug}/{sort}', name: 'single_category', methods: ['GET'])]
-    public function showSingleCategory(Category $category, string $sort = 'recent'): Response
-    {
+    public function showSingleCategory(
+        Request $request,
+        Filter $filter,
+        string $slug,
+        string $sort = 'recent'
+    ): Response {
+
+        //injection security
+        if (!$filter->preventInjection($sort)) {
+            throw $this->createNotFoundException('filtre invalide');
+        }
+
+        //handle ajax request
+        if ($request->isXmlHttpRequest()) {
+            return new JsonResponse([
+                'content' => $this->renderView('_includes/_videos_grid.html.twig', [
+                    'videos' => $filter->getOrderedCategoryVideos($sort, $slug),
+                ])
+            ]);
+        }
+
         return $this->render('home/singleCategory.html.twig', [
-            'category' => $category,
+            'videos' => $filter->getOrderedCategoryVideos($sort, $slug),
         ]);
     }
 }

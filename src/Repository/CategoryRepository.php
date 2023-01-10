@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Category;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\DBAL\Exception;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -39,28 +40,59 @@ class CategoryRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Category[] Returns an array of Category objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('c.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    /**
+     * @throws Exception
+     */
+    public function getCategoryVideosOrderByViews(string $slug): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
 
-//    public function findOneBySomeField($value): ?Category
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+        $sql = 'SELECT *
+                FROM category c
+                JOIN video v on c.id = v.category_id
+                WHERE c.slug = :slug
+                ORDER BY v.number_of_view DESC';
+
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery(['slug' => $slug]);
+        return $resultSet->fetchAllAssociative();
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function getCategoryVideosOrderByLikes(string $slug): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = 'SELECT *
+                FROM category c
+                JOIN video v on c.id = v.category_id
+                JOIN video_user vu on v.id = vu.video_id
+                WHERE c.slug = :slug
+                GROUP BY vu.video_id
+                ORDER BY COUNT(vu.video_id) DESC';
+
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery(['slug' => $slug]);
+        return $resultSet->fetchAllAssociative();
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function getCategoryVideosOrderByDate(string $slug): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = 'SELECT *
+                FROM category c
+                JOIN video v on c.id = v.category_id
+                WHERE c.slug = :slug
+                ORDER BY v.created_at DESC';
+
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery(['slug' => $slug]);
+        return $resultSet->fetchAllAssociative();
+    }
 }
