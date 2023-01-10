@@ -27,6 +27,7 @@ class UserFixtures extends Fixture
         $admin->setUsername('admin');
         $admin->setCreatedAt($faker->dateTimeBetween('-6 month'));
         $admin->setRoles(['ROLE_ADMIN']);
+        $admin->setIsVerified(true);
         $manager->persist($admin);
         $this->addReference('admin', $admin);
 
@@ -37,6 +38,7 @@ class UserFixtures extends Fixture
         $superAdmin->setUsername('superadmin');
         $superAdmin->setCreatedAt($faker->dateTimeBetween('-6 month'));
         $superAdmin->setRoles(['ROLE_SUPER_ADMIN']);
+        $superAdmin->setIsVerified(true);
         $manager->persist($superAdmin);
         $this->addReference('superAdmin', $superAdmin);
 
