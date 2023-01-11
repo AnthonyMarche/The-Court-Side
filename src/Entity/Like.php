@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\LikeRepository;
-use DateTime;
 use DateTimeInterface;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -28,10 +27,7 @@ class Like
     #[ORM\JoinColumn(nullable: false)]
     private ?Video $video = null;
 
-    public function __construct()
-    {
-        $this->setCreatedAt(new DateTime());
-    }
+    // TODO : Construct to add createdAt(now) at the end
 
     public function getId(): ?int
     {
