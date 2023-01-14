@@ -55,18 +55,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Video::class)]
     private Collection $videos;
 
-    #[ORM\ManyToMany(targetEntity: Video::class, mappedBy: 'likedByUser')]
-    #[ORM\JoinTable(name: 'likedVideos')]
-    private Collection $likedVideos;
-
     #[ORM\Column(type: 'boolean')]
     private bool $isVerified = false;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Like::class, orphanRemoval: true)]
+    private Collection $likes;
 
     public function __construct()
     {
         $this->videos = new ArrayCollection();
-        $this->likedVideos = new ArrayCollection();
         $this->createdAt = new DateTime();
+        $this->likes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -205,42 +204,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @return Collection<int, Video>
-     */
-    public function getLikedVideos(): Collection
-    {
-        return $this->likedVideos;
-    }
-
-    public function addLikedVideo(Video $likedVideo): self
-    {
-        if (!$this->likedVideos->contains($likedVideo)) {
-            $this->likedVideos->add($likedVideo);
-            $likedVideo->addLikedByUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeLikedVideo(Video $likedVideo): self
-    {
-        if ($this->likedVideos->removeElement($likedVideo)) {
-            $likedVideo->removeLikedByUser($this);
-        }
-
-        return $this;
-    }
-
-    public function isLiked(Video $video): bool
-    {
-        if ($this->getLikedVideos()->contains($video)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     public function isVerified(): bool
     {
         return $this->isVerified;
@@ -249,6 +212,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsVerified(bool $isVerified): self
     {
         $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Like>
+     */
+    public function getLikes(): Collection
+    {
+        return $this->likes;
+    }
+
+    public function addLike(Like $like): self
+    {
+        if (!$this->likes->contains($like)) {
+            $this->likes->add($like);
+            $like->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLike(Like $like): self
+    {
+        if ($this->likes->removeElement($like)) {
+            // set the owning side to null (unless already changed)
+            if ($like->getUser() === $this) {
+                $like->setUser(null);
+            }
+        }
 
         return $this;
     }

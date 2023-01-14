@@ -55,16 +55,16 @@ class Video
     #[ORM\JoinColumn(nullable: true)]
     private ?User $user = null;
 
-    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'likedVideos')]
-    private Collection $likedByUser;
-
     #[ORM\Column(length: 255)]
     private ?string $slug = null;
+
+    #[ORM\OneToMany(mappedBy: 'video', targetEntity: Like::class, orphanRemoval: true)]
+    private Collection $likes;
 
     public function __construct()
     {
         $this->tag = new ArrayCollection();
-        $this->likedByUser = new ArrayCollection();
+        $this->likes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -216,30 +216,6 @@ class Video
         return $this;
     }
 
-    /**
-     * @return Collection<int, User>
-     */
-    public function getLikedByUser(): Collection
-    {
-        return $this->likedByUser;
-    }
-
-    public function addLikedByUser(User $likedByUser): self
-    {
-        if (!$this->likedByUser->contains($likedByUser)) {
-            $this->likedByUser->add($likedByUser);
-        }
-
-        return $this;
-    }
-
-    public function removeLikedByUser(User $likedByUser): self
-    {
-        $this->likedByUser->removeElement($likedByUser);
-
-        return $this;
-    }
-
     public function getSlug(): ?string
     {
         return $this->slug;
@@ -248,6 +224,36 @@ class Video
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Like>
+     */
+    public function getLikes(): Collection
+    {
+        return $this->likes;
+    }
+
+    public function addLike(Like $like): self
+    {
+        if (!$this->likes->contains($like)) {
+            $this->likes->add($like);
+            $like->setVideo($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLike(Like $like): self
+    {
+        if ($this->likes->removeElement($like)) {
+            // set the owning side to null (unless already changed)
+            if ($like->getVideo() === $this) {
+                $like->setVideo(null);
+            }
+        }
 
         return $this;
     }
