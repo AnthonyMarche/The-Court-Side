@@ -28,9 +28,6 @@ class Filter
         }
     }
 
-    /**
-     * @throws Exception
-     */
     public function getOrderedLikedVideos(string $filter, int $currentUserId): array
     {
         if ($filter == 'recent') {

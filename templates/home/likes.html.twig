@@ -16,13 +16,13 @@
         {% else %}
 
             {# filter button include only if liked videos length is > 1 #}
-            {% if likedVideos|length > 1 %}
-                {% include '_includes/_filter_button.html.twig' with {
-                    recent : path('app_likes', { sort : 'recent'}),
-                    likes : path('app_likes', { sort : 'likes'}),
-                    views : path('app_likes', {sort : 'views'})
-                } %}
-            {% endif %}
+{#            {% if likedVideos|length > 1 %}#}
+{#                {% include '_includes/_filter_button.html.twig' with {#}
+{#                    recent : path('app_likes', { sort : 'recent'}),#}
+{#                    likes : path('app_likes', { sort : 'likes'}),#}
+{#                    views : path('app_likes', {sort : 'views'})#}
+{#                } %}#}
+{#            {% endif %}#}
 
 
             {#    video grid include    #}
