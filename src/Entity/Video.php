@@ -61,6 +61,9 @@ class Video
     #[ORM\OneToMany(mappedBy: 'video', targetEntity: Like::class, orphanRemoval: true)]
     private Collection $likes;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $numberOfLike = null;
+
     public function __construct()
     {
         $this->tag = new ArrayCollection();
@@ -254,6 +257,18 @@ class Video
                 $like->setVideo(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getNumberOfLike(): ?int
+    {
+        return $this->numberOfLike;
+    }
+
+    public function setNumberOfLike(?int $numberOfLike): self
+    {
+        $this->numberOfLike = $numberOfLike;
 
         return $this;
     }
