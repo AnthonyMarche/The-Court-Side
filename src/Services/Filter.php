@@ -9,15 +9,13 @@ use Doctrine\DBAL\Exception;
 class Filter
 {
     private VideoRepository $videoRepository;
-    private CategoryRepository $categoryRepository;
 
     /**
      * @param VideoRepository $videoRepository
      */
-    public function __construct(VideoRepository $videoRepository, CategoryRepository $categoryRepository)
+    public function __construct(VideoRepository $videoRepository)
     {
         $this->videoRepository = $videoRepository;
-        $this->categoryRepository = $categoryRepository;
     }
 
     public function preventInjection(string $sort): bool
@@ -45,17 +43,14 @@ class Filter
         }
     }
 
-    /**
-     * @throws Exception
-     */
     public function getOrderedCategoryVideos(string $filter, string $slug): array
     {
         if ($filter == 'views') {
-            return $this->categoryRepository->getCategoryVideosOrderByViews($slug);
+            return $this->videoRepository->findCategoryVideosOrderByViews($slug);
         } elseif ($filter == 'likes') {
-            return $this->categoryRepository->getCategoryVideosOrderByLikes($slug);
+            return $this->videoRepository->findCategoryVideosOrderByLikes($slug);
         } else {
-            return $this->categoryRepository->getCategoryVideosOrderByDate($slug);
+            return $this->videoRepository->findCategoryVideosOrderByDate($slug);
         }
     }
 }

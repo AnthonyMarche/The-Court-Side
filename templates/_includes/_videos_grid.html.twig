@@ -2,7 +2,7 @@
     <div class="col-12 col-md-6 col-lg-4 col-xl-3 single-video">
         <a href="{{ path('app_watch', {id : video.id}) }}"
            class="card card-video border-0 bg-transparent mb-4 home-video-link">
-            {% if video.is_private and not app.user %}
+            {% if video.isPrivate and not app.user %}
                 <img src="{{ asset('build/images/image-private-video.jpg') }}" class="img-fluid mt-2"
                      alt="image-private-video">
             {% else %}
@@ -13,8 +13,8 @@
             <div class="card-video-details d-flex mt-2">
                 <div>
                     <h4 class="home-video-title">{{ video.title }}</h4>
-                    <div class="home-video-details">{{ video.number_of_view }} vues • publiée
-                        le {{ video.created_at|date("d/m/Y") }}</div>
+                    <div class="home-video-details">{{ video.numberOfView }} vues • publiée
+                        le {{ video.createdAt|date("d/m/Y") }}</div>
                 </div>
             </div>
         </a>
