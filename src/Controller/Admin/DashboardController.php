@@ -74,7 +74,26 @@ class DashboardController extends AbstractDashboardController
             'fa fa-home'
         );
 
-        yield MenuItem::linkToCrud(t('entity.user', ['parameter' => 'value'], 'admin'), 'fa fa-user', User::class)
+        yield MenuItem::subMenu(t('entity.user', ['parameter' => 'value'], 'admin'), 'fa fa-user')->setSubItems([
+            MenuItem::linkToCrud(
+                t(
+                    'dashboard.usersList',
+                    ['parameter' => 'value'],
+                    'admin'
+                ),
+                'fa fa-eye',
+                User::class
+            ),
+            MenuItem::linkToRoute(
+                t(
+                    'dashboard.export',
+                    ['parameter' => 'value'],
+                    'admin'
+                ),
+                'fa fa-file-export',
+                'download_users'
+            )
+        ])
             ->setPermission('ROLE_SUPER_ADMIN');
 
         yield MenuItem::subMenu(t('entity.video', ['parameter' => 'value'], 'admin'), 'fa fa-video')->setSubItems([
@@ -117,11 +136,19 @@ class DashboardController extends AbstractDashboardController
 
         yield MenuItem::subMenu(t('entity.tag', ['parameter' => 'value'], 'admin'), 'fa fa-tag')
             ->setSubItems([
-            MenuItem::linkToCrud(t('dashboard.tagsList', ['parameter' => 'value'], 'admin'), 'fa fa-eye', Tag::class)
-                ->setAction(Crud::PAGE_INDEX),
-            MenuItem::linkToCrud(t('dashboard.newTag', ['parameter' => 'value'], 'admin'), 'fa fa-plus', Tag::class)
-                ->setAction(Crud::PAGE_NEW),
-        ]);
+                MenuItem::linkToCrud(
+                    t(
+                        'dashboard.tagsList',
+                        ['parameter' => 'value'],
+                        'admin'
+                    ),
+                    'fa fa-eye',
+                    Tag::class
+                )
+                    ->setAction(Crud::PAGE_INDEX),
+                MenuItem::linkToCrud(t('dashboard.newTag', ['parameter' => 'value'], 'admin'), 'fa fa-plus', Tag::class)
+                    ->setAction(Crud::PAGE_NEW),
+            ]);
 
         yield MenuItem::linkToRoute(
             t(
