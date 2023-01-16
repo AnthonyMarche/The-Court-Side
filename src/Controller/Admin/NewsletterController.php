@@ -12,9 +12,10 @@ class NewsletterController extends AbstractController
     #[Route('/newsletter', name: 'app_newsletter')]
     public function index(Newsletter $newsletter): Response
     {
-        $apiClient = $newsletter->connectToAPI();
-        $newsletter->addEmailToAudience('test@mail.com');
+        $contactsStatus = $newsletter->checkContactsStatus('test@mail.com');
 
-        return $this->render('newsletter/index.html.twig');
+        return $this->render('newsletter/index.html.twig', [
+            'contact_status' => $contactsStatus,
+        ]);
     }
 }
