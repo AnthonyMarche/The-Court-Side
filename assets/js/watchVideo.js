@@ -1,30 +1,23 @@
-//like system on videos
-const like = document.getElementById('watchLike');
-
-if (like) {
-    like.addEventListener('click', addToLike);
-
+if (document.getElementsByClassName('.js-like')) {
+    const LIKE_ICON = 'watch-like-icon bi bi-heart-fill';
+    const UNLIKE_ICON = 'watch-like-icon bi bi-heart';
+    Array.from(document.querySelectorAll('a.js-like')).forEach(function (link) {
+        link.addEventListener('click', onClickLink);
+    });
+    const axios = window.axios;
     // eslint-disable-next-line no-inner-declarations
-    function addToLike(event) {
+    async function onClickLink(event) {
         event.preventDefault();
-
-        let likeLink = event.currentTarget;
-        let link = likeLink.href;
-
-        fetch(link)
-
-            .then(res => res.json())
-
-            .then(function (res) {
-                let likeIcon = likeLink.firstElementChild;
-                if (res.isLiked) {
-                    likeIcon.classList.remove('bi-heart');
-                    likeIcon.classList.add('bi-heart-fill');
-                } else {
-                    likeIcon.classList.remove('bi-heart-fill');
-                    likeIcon.classList.add('bi-heart');
-                }
-            });
-
+        const url = this.href;
+        const icone = this.querySelector('i');
+        try {
+            const result = await axios.post(url);
+            const data = result.data;
+            icone.className = icone.className === LIKE_ICON ? UNLIKE_ICON : LIKE_ICON;
+        } catch (error) {
+            if (error.response.status === 403) {
+                window.location = '/login'
+            }
+        }
     }
 }

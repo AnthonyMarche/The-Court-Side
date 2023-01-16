@@ -2,12 +2,15 @@
 
 namespace App\Controller;
 
+use App\Entity\Like;
 use App\Entity\Video;
 use App\Repository\CategoryRepository;
-use App\Repository\UserRepository;
+use App\Repository\LikeRepository;
 use App\Repository\VideoRepository;
 use App\Services\Filter;
+use DateTime;
 use Doctrine\DBAL\Exception;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -40,23 +43,33 @@ class HomeController extends AbstractController
         ]);
     }
 
-    #[Route('watch/{id}/like', name: 'watch_like', methods: ['POST', 'GET'])]
-    public function addToLike(Video $video, UserRepository $userRepository): JsonResponse
-    {
-
+    #[Route('watch/{id}/like', name: 'watch_like', methods: ['GET','POST'])]
+    public function addToLike(
+        Video $video,
+        EntityManagerInterface $manager,
+        LikeRepository $likeRepository
+    ): JsonResponse {
         /** @var \App\Entity\User */
         $user = $this->getUser();
-        if ($user->isLiked($video)) {
-            $user->removeLikedVideo($video);
-        } else {
-            $user->addLikedVideo($video);
+
+        if ($video->isLikedByUser($user)) {
+            $like = $likeRepository->findOneBy(['video' => $video, 'user' => $user]);
+            $video->setNumberOfLike($video->getNumberOfLike() - 1);
+            $manager->remove($like);
+            $manager->flush();
+
+            return $this->json(['code' => 200], 200);
         }
 
-        $userRepository->save($user, true);
+        $like = new Like();
+        $like->setVideo($video)
+            ->setUser($user)
+            ->setCreatedAt(new DateTime('now'));
+        $video->setNumberOfLike($video->getNumberOfLike() + 1);
+        $manager->persist($like);
+        $manager->flush();
 
-        return $this->json([
-            'isLiked' => $user->isLiked($video)
-        ]);
+        return $this->json(['code' => 200], 200);
     }
 
     #[Route('/category', name: 'category')]
