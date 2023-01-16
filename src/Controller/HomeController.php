@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Like;
 use App\Entity\Video;
 use App\Repository\CategoryRepository;
+use App\Repository\LikeRepository;
 use App\Repository\UserRepository;
 use App\Repository\VideoRepository;
 use App\Services\Filter;
@@ -73,32 +75,30 @@ class HomeController extends AbstractController
     #[Route('/likes/{sort}', name: 'likes')]
     public function showLikes(
         Filter $filter,
-        VideoRepository $videoRepository,
         Request $request,
         string $sort = 'recent'
     ): Response {
 
-        $likedVideos = '';
+        $likedVideos = "";
 
         //injection security
         if (!$filter->preventInjection($sort)) {
             throw $this->createNotFoundException('filtre invalide');
         }
 
-        //get the videos liked by the current user
+        //get videos liked by the current user
         if ($this->getUser()) {
-            /** @var \App\Entity\User */
-            $user = $this->getUser();
-            $likedVideos = $videoRepository->getLikedVideos($user->getId());
-        }
+            $currentUserId = $this->getUser()->getId();
+            $likedVideos = $filter->getOrderedLikedVideos($sort, $currentUserId);
 
-        //handle ajax request
-        if ($request->isXmlHttpRequest()) {
-            return new JsonResponse([
-                'content' => $this->renderView('_includes/_liked_videos.html.twig', [
-                    'likedVideos' => $filter->getOrderedLikedVideos($sort),
-                ])
-            ]);
+            //handle ajax request
+            if ($request->isXmlHttpRequest()) {
+                return new JsonResponse([
+                    'content' => $this->renderView('_includes/_liked_videos.html.twig', [
+                        'likedVideos' => $filter->getOrderedLikedVideos($sort, $currentUserId),
+                    ])
+                ]);
+            }
         }
 
         return $this->render('home/likes.html.twig', [

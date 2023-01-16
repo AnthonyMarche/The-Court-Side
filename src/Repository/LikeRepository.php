@@ -3,8 +3,11 @@
 namespace App\Repository;
 
 use App\Entity\Like;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\DBAL\Exception;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @extends ServiceEntityRepository<Like>
@@ -39,28 +42,45 @@ class LikeRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Like[] Returns an array of Like objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('l')
-//            ->andWhere('l.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('l.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    /**
+     * @return Like[] Returns an array of Like objects
+     */
+    public function findVideosLikedByCurrentUserOrderByDate(int $currentUserId): array
+    {
+        return $this->createQueryBuilder('l')
+            ->andWhere('l.user = :user')
+            ->setParameter('user', $currentUserId)
+            ->join('l.video', 'v')
+            ->orderBy('v.createdAt', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
 
-//    public function findOneBySomeField($value): ?Like
-//    {
-//        return $this->createQueryBuilder('l')
-//            ->andWhere('l.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    /**
+     * @return Like[] Returns an array of Like objects
+     */
+    public function findVideosLikedByCurrentUserOrderByViews(int $currentUserId): array
+    {
+        return $this->createQueryBuilder('l')
+            ->andWhere('l.user = :user')
+            ->setParameter('user', $currentUserId)
+            ->join('l.video', 'v')
+            ->orderBy('v.numberOfView', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * @return Like[] Returns an array of Like objects
+     */
+    public function findVideosLikedByCurrentUserOrderByLikes(int $currentUserId): array
+    {
+        return $this->createQueryBuilder('l')
+            ->andWhere('l.user = :user')
+            ->setParameter('user', $currentUserId)
+            ->join('l.video', 'v')
+            ->orderBy('v.numberOfLike', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
 }

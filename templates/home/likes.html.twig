@@ -15,8 +15,8 @@
                 'buttons' : 'false'} %}
         {% else %}
 
+            {# filter button include only if liked videos length is > 1 #}
             {% if likedVideos|length > 1 %}
-                {#    filter button include only if liked videos length is > 1   #}
                 {% include '_includes/_filter_button.html.twig' with {
                     recent : path('app_likes', { sort : 'recent'}),
                     likes : path('app_likes', { sort : 'likes'}),
@@ -42,7 +42,7 @@
             'buttons' : 'true'} %}
     {% endif %}
 
-    {#  footer  #}
+    {# footer #}
     {% include '_includes/_main_footer.html.twig' %}
 {% endblock %}
 
