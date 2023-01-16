@@ -6,6 +6,7 @@ use App\Entity\Category;
 use App\Entity\Tag;
 use App\Entity\User;
 use App\Entity\Video;
+use App\Repository\LikeRepository;
 use App\Repository\UserRepository;
 use App\Repository\VideoRepository;
 use App\Services\Stats;
@@ -21,11 +22,16 @@ class DashboardController extends AbstractDashboardController
 {
     private UserRepository $userRepository;
     private VideoRepository $videoRepository;
+    private LikeRepository $likeRepository;
 
-    public function __construct(UserRepository $userRepository, VideoRepository $videoRepository)
-    {
+    public function __construct(
+        UserRepository $userRepository,
+        VideoRepository $videoRepository,
+        LikeRepository $likeRepository
+    ) {
         $this->userRepository = $userRepository;
         $this->videoRepository = $videoRepository;
+        $this->likeRepository = $likeRepository;
     }
 
     #[Route('/admin', name: 'admin')]
@@ -37,10 +43,9 @@ class DashboardController extends AbstractDashboardController
         $users = $this->userRepository->findAll();
         // récupère toutes les videos (via le VideoRepository)
         $videos = $this->videoRepository->findAll();
-        // récupère le nombre de likes (via service Stats)
-        $likes = new Stats($this->videoRepository);
-        $likes = $likes->getAllLikes();
-        // récupère le nombre d'utilisateurs enregistrés dans les 7 derniers jours (via le UserRepository)
+        // récupère le nombre de likes
+        $likes = $this->likeRepository->findAll();
+            // récupère le nombre d'utilisateurs enregistrés dans les 7 derniers jours (via le UserRepository)
         $usersFromPast7Days = $this->userRepository->getUsersRegisteredInPast7Days();
         // récupère le nombre d'utilisateurs enregistrés dans les 30 derniers jours (via le UserRepository)
         $usersFromPast30Days = $this->userRepository->getUsersRegisteredInPast30Days();
@@ -117,11 +122,11 @@ class DashboardController extends AbstractDashboardController
 
         yield MenuItem::subMenu(t('entity.tag', ['parameter' => 'value'], 'admin'), 'fa fa-tag')
             ->setSubItems([
-            MenuItem::linkToCrud(t('dashboard.tagsList', ['parameter' => 'value'], 'admin'), 'fa fa-eye', Tag::class)
-                ->setAction(Crud::PAGE_INDEX),
-            MenuItem::linkToCrud(t('dashboard.newTag', ['parameter' => 'value'], 'admin'), 'fa fa-plus', Tag::class)
-                ->setAction(Crud::PAGE_NEW),
-        ]);
+                MenuItem::linkToCrud(t('dashboard.tagsList', ['parameter' => 'value'], 'admin'), 'fa fa-eye', Tag::class)
+                    ->setAction(Crud::PAGE_INDEX),
+                MenuItem::linkToCrud(t('dashboard.newTag', ['parameter' => 'value'], 'admin'), 'fa fa-plus', Tag::class)
+                    ->setAction(Crud::PAGE_NEW),
+            ]);
 
         yield MenuItem::linkToRoute(
             t(
