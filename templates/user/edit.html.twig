@@ -10,12 +10,6 @@
                 <div class="p-3 show-user-table">
 
                     {{ include('user/_form.html.twig', {'button_label': 'Valider'}) }}
-                    <div class="d-flex justify-content-center">
-                        <a href="{{ path('app_user_show', {'id':app.user.id}) }}"
-                           class="btn btn-outline-info">
-                            Retour à mon profil
-                        </a>
-                    </div>
                 </div>
             </div>
         </div>

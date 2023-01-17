@@ -75,6 +75,8 @@ class UserController extends AbstractController
         // ToDo: mettre un flash message quand ils seront implémentés
         // ex. "Vos modifications ont bien été prises en compte"
         if ($form->isSubmitted() && $form->isValid()) {
+            $user->setUsername($form->get('username')->getData());
+            $user->setNewsletter($form->get('newsletter')->getData());
             // mot de passe entré par l'utilisateur dans le formulaire
             $userInputPassword = $form->get('current_password')->getData();
             $userInputPassword = htmlspecialchars($userInputPassword);
@@ -102,6 +104,10 @@ class UserController extends AbstractController
                     $userRepository->save($user, true);
                 }
             }
+            // MàJ auto de "updated_at"
+            $date = new DateTime('now');
+            $user->setUpdatedAt($date);
+            $userRepository->save($user, true);
         }
 
         return $this->renderForm('user/edit.html.twig', [
