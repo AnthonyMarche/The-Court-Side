@@ -116,7 +116,7 @@
 
 
         <div class="home-section-head d-flex justify-content-between">
-            <h3 class="section-name">Tennis</h3>
+            <h3 class="section-name">Les plus likées</h3>
             <div></div>
             <a href="">
                 <button type="button" class="btn btn-outline-primary">VOIR PLUS</button>
@@ -124,7 +124,7 @@
         </div>
         <div class="home-section-line mb-2"></div>
         <div class="row">
-            {% for video in tennisVideos %}
+            {% for video in moreLikedVideos %}
                 <div class="col-12 col-md-6 col-lg-4 col-xl-3 single-video">
                     <a href="{{ path('app_watch', {id : video.id}) }}"
                        class="card card-video border-0 bg-transparent mb-4 home-video-link">
