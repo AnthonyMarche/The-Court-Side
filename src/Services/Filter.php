@@ -2,20 +2,18 @@
 
 namespace App\Services;
 
-use App\Repository\CategoryRepository;
 use App\Repository\LikeRepository;
-use Doctrine\DBAL\Exception;
+use App\Repository\VideoRepository;
 
 class Filter
 {
     private VideoRepository $videoRepository;
+    private LikeRepository $likeRepository;
 
-    /**
-     * @param VideoRepository $videoRepository
-     */
-    public function __construct(VideoRepository $videoRepository)
+    public function __construct(VideoRepository $videoRepository, LikeRepository $likeRepository)
     {
         $this->videoRepository = $videoRepository;
+        $this->likeRepository = $likeRepository;
     }
 
     public function preventInjection(string $sort): bool
