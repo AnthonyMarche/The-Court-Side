@@ -1,6 +1,6 @@
 {% for video in likedVideos %}
     <div class="col-12 col-md-6 col-lg-4 col-xl-3 single-video">
-        <a href="{{ path('app_watch', {id : video.video.id}) }}"
+        <a href="{{ path('app_watch', {slug : video.video.slug}) }}"
            class="card card-video border-0 bg-transparent mb-4 category-video-link">
             <video src="{{ asset(video.video.teaser) }}" type="video/mp4" loop
                    muted
