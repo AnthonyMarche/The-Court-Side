@@ -3,25 +3,42 @@
 namespace App\Controller;
 
 use App\Form\NewsletterType;
+use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 
 class NewsletterController extends AbstractController
 {
     #[Route('/newsletter', name: 'app_newsletter')]
-    public function index(Request $request): Response
+    public function index(Request $request, MailerInterface $mailer, UserRepository $userRepository): Response
     {
 
         $form = $this->createForm(NewsletterType::class);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            // $form->getData() holds the submitted values
-            // but, the original `$task` variable has also been updated
-            $newsletter = $form->getData();
-            dd($newsletter);
+            // récupère le contenu de la newsletter
+            $newsletterTitle = $form->get('title')->getData();
+            $newsletterContent = $form->get('content')->getData();
+            // récupère tous les Users qui ont souscrit à la newsletter
+            $users = $userRepository->findBy(['newsletter' => true]);
+            // envoie un mail par User qui a souscrit
+            foreach ($users as $user) {
+                $userEmail = $user->getEmail();
+                $email = (new Email())
+                    ->from('do-not-reply@thecourtside.com')
+                    ->to($userEmail)
+                    ->subject($newsletterTitle)
+                    ->html($this->renderView('newsletter/NewsletterMailTemplate.html.twig', [
+                            'newsletter_title' => $newsletterTitle,
+                            'newsletter_content' => $newsletterContent,
+                        ]));
+                $mailer->send($email);
+            }
         }
 
         return $this->render('/newsletter/index.html.twig', [
