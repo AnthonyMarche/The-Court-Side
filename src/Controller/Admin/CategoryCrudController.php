@@ -34,7 +34,7 @@ class CategoryCrudController extends AbstractCrudController
             ->setPageTitle(
                 'index',
                 t(
-                    'listOfCategories',
+                    'entity.listOfCategories',
                     ['parameter' => 'value'],
                     'admin'
                 )
