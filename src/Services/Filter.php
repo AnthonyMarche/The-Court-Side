@@ -8,14 +8,14 @@ use Doctrine\DBAL\Exception;
 
 class Filter
 {
-    private CategoryRepository $categoryRepository;
-    private LikeRepository $likeRepository;
+    private VideoRepository $videoRepository;
 
-
-    public function __construct(CategoryRepository $categoryRepository, LikeRepository $likeRepository)
+    /**
+     * @param VideoRepository $videoRepository
+     */
+    public function __construct(VideoRepository $videoRepository)
     {
-        $this->categoryRepository = $categoryRepository;
-        $this->likeRepository = $likeRepository;
+        $this->videoRepository = $videoRepository;
     }
 
     public function preventInjection(string $sort): bool
@@ -39,17 +39,14 @@ class Filter
         }
     }
 
-    /**
-     * @throws Exception
-     */
     public function getOrderedCategoryVideos(string $filter, string $slug): array
     {
         if ($filter == 'views') {
-            return $this->categoryRepository->getCategoryVideosOrderByViews($slug);
+            return $this->videoRepository->findCategoryVideosOrderByViews($slug);
         } elseif ($filter == 'likes') {
-            return $this->categoryRepository->getCategoryVideosOrderByLikes($slug);
+            return $this->videoRepository->findCategoryVideosOrderByLikes($slug);
         } else {
-            return $this->categoryRepository->getCategoryVideosOrderByDate($slug);
+            return $this->videoRepository->findCategoryVideosOrderByDate($slug);
         }
     }
 }

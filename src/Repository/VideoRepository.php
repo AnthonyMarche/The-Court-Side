@@ -72,4 +72,40 @@ class VideoRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+
+    public function findCategoryVideosOrderByViews(string $slug): array
+    {
+        return $this->createQueryBuilder('v')
+            ->join('v.category', 'c')
+            ->andWhere('c.slug = :slug')
+            ->setParameter('slug', $slug)
+            ->orderBy('v.numberOfView', 'DESC')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    public function findCategoryVideosOrderByLikes(string $slug): array
+    {
+        return $this->createQueryBuilder('v')
+            ->join('v.category', 'c')
+            ->andWhere('c.slug = :slug')
+            ->setParameter('slug', $slug)
+            ->orderBy('v.numberOfLike', 'DESC')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    public function findCategoryVideosOrderByDate(string $slug): array
+    {
+        return $this->createQueryBuilder('v')
+            ->join('v.category', 'c')
+            ->andWhere('c.slug = :slug')
+            ->setParameter('slug', $slug)
+            ->orderBy('v.createdAt', 'DESC')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 }

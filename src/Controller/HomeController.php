@@ -112,9 +112,6 @@ class HomeController extends AbstractController
         return $this->redirectToRoute($route, ['_locale' => $language]);
     }
 
-    /**
-     * @throws Exception
-     */
     #[Route('/category/{slug}/{sort}', name: 'single_category', methods: ['GET'])]
     public function showSingleCategory(
         Request $request,
