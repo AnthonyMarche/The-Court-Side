@@ -59,6 +59,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private bool $isVerified = false;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Like::class, orphanRemoval: true)]
+    #[ORM\JoinTable(name:'like')]
     private Collection $likes;
 
     #[ORM\Column(nullable: true)]
