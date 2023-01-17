@@ -72,8 +72,6 @@ class UserController extends AbstractController
 
         // lorsque l'utilisateur effectue sa modif, elle est enregistrée
         // il reste sur la même page (pas de redirect)
-        // ToDo: mettre un flash message quand ils seront implémentés
-        // ex. "Vos modifications ont bien été prises en compte"
         if ($form->isSubmitted() && $form->isValid()) {
             $user->setUsername($form->get('username')->getData());
             $user->setNewsletter($form->get('newsletter')->getData());
@@ -102,12 +100,14 @@ class UserController extends AbstractController
                     $date = new DateTime('now');
                     $user->setUpdatedAt($date);
                     $userRepository->save($user, true);
+                    $this->addFlash('success', 'Votre profil à bien été mis à jour.');
                 }
             }
             // MàJ auto de "updated_at"
             $date = new DateTime('now');
             $user->setUpdatedAt($date);
             $userRepository->save($user, true);
+            $this->addFlash('success', 'Votre profil à bien été mis à jour.');
         }
 
         return $this->renderForm('user/edit.html.twig', [
