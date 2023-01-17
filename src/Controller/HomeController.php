@@ -24,12 +24,12 @@ class HomeController extends AbstractController
     {
         $latestVideos = $videoRepository->findBy([], ['createdAt' => 'DESC'], 4);
         $popularVideos = $videoRepository->findBy([], ['numberOfView' => 'DESC'], 4);
-        $tennisVideos = $videoRepository->findBy(['category' => 3], [], 4);
-        $registerVideos = $videoRepository->findBy(['isPrivate' => true], [], 4);
+        $moreLikedVideos = $videoRepository->findBy([], ['numberOfLike' => 'DESC'], 4);
+        $registerVideos = $videoRepository->findBy(['isPrivate' => true], ['createdAt' => 'DESC'], 4);
         return $this->render('home/index.html.twig', [
             'latestVideos' => $latestVideos,
             'popularVideos' => $popularVideos,
-            'tennisVideos' => $tennisVideos,
+            'moreLikedVideos' => $moreLikedVideos,
             'registerVideos' => $registerVideos
         ]);
     }
@@ -39,25 +39,6 @@ class HomeController extends AbstractController
     {
         return $this->render('home/watch.html.twig', [
             'video' => $video
-        ]);
-    }
-
-    #[Route('watch/{id}/like', name: 'watch_like', methods: ['POST', 'GET'])]
-    public function addToLike(Video $video, UserRepository $userRepository): JsonResponse
-    {
-
-        /** @var \App\Entity\User */
-        $user = $this->getUser();
-        if ($user->isLiked($video)) {
-            $user->removeLikedVideo($video);
-        } else {
-            $user->addLikedVideo($video);
-        }
-
-        $userRepository->save($user, true);
-
-        return $this->json([
-            'isLiked' => $user->isLiked($video)
         ]);
     }
 
@@ -87,8 +68,10 @@ class HomeController extends AbstractController
         }
 
         //get videos liked by the current user
+        /** @var \App\Entity\User */
+        $user = $this->getUser();
         if ($this->getUser()) {
-            $currentUserId = $this->getUser()->getId();
+            $currentUserId = $user->getId();
             $likedVideos = $filter->getOrderedLikedVideos($sort, $currentUserId);
 
             //handle ajax request
