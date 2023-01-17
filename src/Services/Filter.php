@@ -3,7 +3,7 @@
 namespace App\Services;
 
 use App\Repository\CategoryRepository;
-use App\Repository\VideoRepository;
+use App\Repository\LikeRepository;
 use Doctrine\DBAL\Exception;
 
 class Filter
@@ -28,18 +28,14 @@ class Filter
         }
     }
 
-
-    /**
-     * @throws \Doctrine\DBAL\Exception
-     */
-    public function getOrderedLikedVideos(string $filter): array
+    public function getOrderedLikedVideos(string $filter, int $currentUserId): array
     {
-        if ($filter == 'views') {
-            return $this->videoRepository->getLikedVideosOrderByViews();
-        } elseif ($filter == 'likes') {
-            return $this->videoRepository->getLikedVideosOrderByLikes();
+        if ($filter == 'recent') {
+            return $this->likeRepository->findVideosLikedByCurrentUserOrderByDate($currentUserId);
+        } elseif ($filter == 'views') {
+            return $this->likeRepository->findVideosLikedByCurrentUserOrderByViews($currentUserId);
         } else {
-            return $this->videoRepository->getLikedVideosOrderByDate();
+            return $this->likeRepository->findVideosLikedByCurrentUserOrderByLikes($currentUserId);
         }
     }
 

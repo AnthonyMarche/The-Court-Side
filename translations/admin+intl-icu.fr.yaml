@@ -1,33 +1,31 @@
-dashboard:
-    dashboard: Tableau de bord
-    videosList: Liste des vidéos
-    newVideo: Nouvelle vidéo
-    categoriesList: Liste des catégories
-    newCategory: Nouvelle catégorie
-    tagsList: Liste des tags
-    newTag: Nouveau tag
-    leaveAdministration: Quitter l'administration
-entity:
-    category: Catégorie
-    categories: Catégories
-    tag: Tag
-    tags: Tags
-    user: Utilisateur
-    users: Utilisateurs
-    video: Video
-    videos: Videos
-    listOfVideos: Liste des vidéos
-    listOfCategories: Liste des catégories
-    listOfTags: Liste des tags
-    listOfUsers: Liste des utilisateurs
-    title: Titre
-    description: Description
-    visibility: Visibilité
-    file: Fichier vidéo
-    teaser: Teaser
-    name: Nom
-    username: Nom d'utilisateur
-    role: Role
-    createdAt: Créé le
-
-
+dashboard.dashboard: 'Tableau de bord'
+dashboard.usersList: Liste des utilisateurs
+dashboard.export: Exporter la liste des utilisateurs
+dashboard.videosList: 'Liste des vidéos'
+dashboard.newVideo: 'Nouvelle vidéo'
+dashboard.categoriesList: 'Liste des catégories'
+dashboard.newCategory: 'Nouvelle catégorie'
+dashboard.tagsList: 'Liste des tags'
+dashboard.newTag: 'Nouveau tag'
+dashboard.leaveAdministration: "Quitter l'administration"
+entity.category: Catégorie
+entity.categories: Catégories
+entity.tag: Tag
+entity.tags: Tags
+entity.user: Utilisateur
+entity.users: Utilisateurs
+entity.video: Video
+entity.videos: Videos
+entity.listOfVideos: 'Liste des vidéos'
+entity.listOfCategories: 'Liste des catégories'
+entity.listOfTags: 'Liste des tags'
+entity.listOfUsers: 'Liste des utilisateurs'
+entity.title: Titre
+entity.description: Description
+entity.visibility: Visibilité
+entity.file: 'Fichier vidéo'
+entity.teaser: Teaser
+entity.name: Nom
+entity.username: "Nom d'utilisateur"
+entity.role: Role
+entity.createdAt: 'Créé le'
