@@ -2,22 +2,18 @@
 
 namespace App\Services;
 
-use App\Repository\CategoryRepository;
+use App\Repository\LikeRepository;
 use App\Repository\VideoRepository;
-use Doctrine\DBAL\Exception;
 
 class Filter
 {
     private VideoRepository $videoRepository;
-    private CategoryRepository $categoryRepository;
+    private LikeRepository $likeRepository;
 
-    /**
-     * @param VideoRepository $videoRepository
-     */
-    public function __construct(VideoRepository $videoRepository, CategoryRepository $categoryRepository)
+    public function __construct(VideoRepository $videoRepository, LikeRepository $likeRepository)
     {
         $this->videoRepository = $videoRepository;
-        $this->categoryRepository = $categoryRepository;
+        $this->likeRepository = $likeRepository;
     }
 
     public function preventInjection(string $sort): bool
@@ -30,32 +26,25 @@ class Filter
         }
     }
 
-
-    /**
-     * @throws \Doctrine\DBAL\Exception
-     */
-    public function getOrderedLikedVideos(string $filter): array
+    public function getOrderedLikedVideos(string $filter, int $currentUserId): array
     {
-        if ($filter == 'views') {
-            return $this->videoRepository->getLikedVideosOrderByViews();
-        } elseif ($filter == 'likes') {
-            return $this->videoRepository->getLikedVideosOrderByLikes();
+        if ($filter == 'recent') {
+            return $this->likeRepository->findVideosLikedByCurrentUserOrderByDate($currentUserId);
+        } elseif ($filter == 'views') {
+            return $this->likeRepository->findVideosLikedByCurrentUserOrderByViews($currentUserId);
         } else {
-            return $this->videoRepository->getLikedVideosOrderByDate();
+            return $this->likeRepository->findVideosLikedByCurrentUserOrderByLikes($currentUserId);
         }
     }
 
-    /**
-     * @throws Exception
-     */
     public function getOrderedCategoryVideos(string $filter, string $slug): array
     {
         if ($filter == 'views') {
-            return $this->categoryRepository->getCategoryVideosOrderByViews($slug);
+            return $this->videoRepository->findCategoryVideosOrderByViews($slug);
         } elseif ($filter == 'likes') {
-            return $this->categoryRepository->getCategoryVideosOrderByLikes($slug);
+            return $this->videoRepository->findCategoryVideosOrderByLikes($slug);
         } else {
-            return $this->categoryRepository->getCategoryVideosOrderByDate($slug);
+            return $this->videoRepository->findCategoryVideosOrderByDate($slug);
         }
     }
 }

@@ -26,17 +26,17 @@ class HomeController extends AbstractController
     {
         $latestVideos = $videoRepository->findBy([], ['createdAt' => 'DESC'], 4);
         $popularVideos = $videoRepository->findBy([], ['numberOfView' => 'DESC'], 4);
-        $tennisVideos = $videoRepository->findBy(['category' => 3], [], 4);
-        $registerVideos = $videoRepository->findBy(['isPrivate' => true], [], 4);
+        $moreLikedVideos = $videoRepository->findBy([], ['numberOfLike' => 'DESC'], 4);
+        $registerVideos = $videoRepository->findBy(['isPrivate' => true], ['createdAt' => 'DESC'], 4);
         return $this->render('home/index.html.twig', [
             'latestVideos' => $latestVideos,
             'popularVideos' => $popularVideos,
-            'tennisVideos' => $tennisVideos,
+            'moreLikedVideos' => $moreLikedVideos,
             'registerVideos' => $registerVideos
         ]);
     }
 
-    #[Route('/watch/{id}', name: 'watch')]
+    #[Route('/watch/{slug}', name: 'watch')]
     public function watch(Video $video): Response
     {
         return $this->render('home/watch.html.twig', [
@@ -93,32 +93,32 @@ class HomeController extends AbstractController
     #[Route('/likes/{sort}', name: 'likes')]
     public function showLikes(
         Filter $filter,
-        VideoRepository $videoRepository,
         Request $request,
         string $sort = 'recent'
     ): Response {
 
-        $likedVideos = '';
+        $likedVideos = "";
 
         //injection security
         if (!$filter->preventInjection($sort)) {
             throw $this->createNotFoundException('filtre invalide');
         }
 
-        //get the videos liked by the current user
+        //get videos liked by the current user
+        /** @var \App\Entity\User */
+        $user = $this->getUser();
         if ($this->getUser()) {
-            /** @var \App\Entity\User */
-            $user = $this->getUser();
-            $likedVideos = $videoRepository->getLikedVideos($user->getId());
-        }
+            $currentUserId = $user->getId();
+            $likedVideos = $filter->getOrderedLikedVideos($sort, $currentUserId);
 
-        //handle ajax request
-        if ($request->isXmlHttpRequest()) {
-            return new JsonResponse([
-                'content' => $this->renderView('_includes/_liked_videos.html.twig', [
-                    'likedVideos' => $filter->getOrderedLikedVideos($sort),
-                ])
-            ]);
+            //handle ajax request
+            if ($request->isXmlHttpRequest()) {
+                return new JsonResponse([
+                    'content' => $this->renderView('_includes/_liked_videos.html.twig', [
+                        'likedVideos' => $filter->getOrderedLikedVideos($sort, $currentUserId),
+                    ])
+                ]);
+            }
         }
 
         return $this->render('home/likes.html.twig', [
@@ -132,9 +132,6 @@ class HomeController extends AbstractController
         return $this->redirectToRoute($route, ['_locale' => $language]);
     }
 
-    /**
-     * @throws Exception
-     */
     #[Route('/category/{slug}/{sort}', name: 'single_category', methods: ['GET'])]
     public function showSingleCategory(
         Request $request,

@@ -73,76 +73,39 @@ class VideoRepository extends ServiceEntityRepository
         }
     }
 
-    /**
-     * @throws Exception
-     */
-    public function getLikedVideos(int $userId): array
+    public function findCategoryVideosOrderByViews(string $slug): array
     {
-        $conn = $this->getEntityManager()->getConnection();
-
-        $sql = 'SELECT *
-        FROM video v
-         JOIN video_user vu on v.id = vu.video_id
-        JOIN user u on u.id = vu.user_id
-        WHERE vu.user_id = :userId
-        ORDER BY v.created_at DESC';
-
-        $stmt = $conn->prepare($sql);
-        $resultSet = $stmt->executeQuery(['userId' => $userId]);
-        return $resultSet->fetchAllAssociative();
+        return $this->createQueryBuilder('v')
+            ->join('v.category', 'c')
+            ->andWhere('c.slug = :slug')
+            ->setParameter('slug', $slug)
+            ->orderBy('v.numberOfView', 'DESC')
+            ->getQuery()
+            ->getResult()
+            ;
     }
 
-    /**
-     * @throws Exception
-     */
-    public function getLikedVideosOrderByViews(): array
+    public function findCategoryVideosOrderByLikes(string $slug): array
     {
-        $conn = $this->getEntityManager()->getConnection();
-
-        $sql = 'SELECT *
-        FROM video v
-         JOIN video_user vu on v.id = vu.video_id
-        JOIN user u on u.id = vu.user_id
-        ORDER BY v.number_of_view DESC';
-        $stmt = $conn->prepare($sql);
-        $resultSet = $stmt->executeQuery();
-        return $resultSet->fetchAllAssociative();
+        return $this->createQueryBuilder('v')
+            ->join('v.category', 'c')
+            ->andWhere('c.slug = :slug')
+            ->setParameter('slug', $slug)
+            ->orderBy('v.numberOfLike', 'DESC')
+            ->getQuery()
+            ->getResult()
+            ;
     }
 
-    /**
-     * @throws Exception
-     */
-    public function getLikedVideosOrderByLikes(): array
+    public function findCategoryVideosOrderByDate(string $slug): array
     {
-        $conn = $this->getEntityManager()->getConnection();
-
-        $sql = 'SELECT *
-        FROM video v
-         JOIN video_user vu on v.id = vu.video_id
-        JOIN user u on u.id = vu.user_id
-        GROUP BY vu.video_id
-        ORDER BY COUNT(vu.video_id) DESC';
-
-        $stmt = $conn->prepare($sql);
-        $resultSet = $stmt->executeQuery();
-        return $resultSet->fetchAllAssociative();
-    }
-
-    /**
-     * @throws Exception
-     */
-    public function getLikedVideosOrderByDate(): array
-    {
-        $conn = $this->getEntityManager()->getConnection();
-
-        $sql = 'SELECT *
-        FROM video v
-         JOIN video_user vu on v.id = vu.video_id
-        JOIN user u on u.id = vu.user_id
-        ORDER BY v.created_at DESC';
-
-        $stmt = $conn->prepare($sql);
-        $resultSet = $stmt->executeQuery();
-        return $resultSet->fetchAllAssociative();
+        return $this->createQueryBuilder('v')
+            ->join('v.category', 'c')
+            ->andWhere('c.slug = :slug')
+            ->setParameter('slug', $slug)
+            ->orderBy('v.createdAt', 'DESC')
+            ->getQuery()
+            ->getResult()
+            ;
     }
 }

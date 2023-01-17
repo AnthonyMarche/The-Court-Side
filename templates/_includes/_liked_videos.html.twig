@@ -1,28 +1,18 @@
 {% for video in likedVideos %}
-    {% if video.user_id == app.user.id %}
-        <div class="col-12 col-md-6 col-lg-4 col-xl-3 single-video">
-            <a href="{{ path('app_watch', {id : video.video_id}) }}"
-               class="card card-video border-0 bg-transparent mb-4 category-video-link">
-                <video src="{{ asset(video.teaser) }}" type="video/mp4" loop
-                       muted
-                       class="hover-to-play w-100 mt-2">
-                </video>
-                <div class="card-video-details d-flex mt-2">
-                    <div>
-                        <h4 class="category-video-title">{{ video.title }}</h4>
-                        <div class="category-video-details">
-                            {% if video.username %}
-                                {{ video.username }}
-                            {% else %}
-                                {{ video.email }}
-                            {% endif %}
-                        </div>
-                        <div class="category-video-details">{{ video.number_of_view }} vues • publiée
-                            le {{ video.created_at|date("d/m/Y") }}</div>
-                    </div>
+    <div class="col-12 col-md-6 col-lg-4 col-xl-3 single-video">
+        <a href="{{ path('app_watch', {id : video.video.id}) }}"
+           class="card card-video border-0 bg-transparent mb-4 category-video-link">
+            <video src="{{ asset(video.video.teaser) }}" type="video/mp4" loop
+                   muted
+                   class="hover-to-play w-100 mt-2">
+            </video>
+            <div class="card-video-details d-flex mt-2">
+                <div>
+                    <h4 class="category-video-title">{{ video.video.title }}</h4>
+                    <div class="category-video-details">{{ video.video.numberOfView }} vues • publiée
+                        le {{ video.video.createdAt|date("d/m/Y") }}</div>
                 </div>
-            </a>
-        </div>
-    {% endif %}
+            </div>
+        </a>
+    </div>
 {% endfor %}
-
