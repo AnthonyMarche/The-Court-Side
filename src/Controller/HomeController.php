@@ -13,6 +13,7 @@ use Doctrine\DBAL\Exception;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -48,9 +49,15 @@ class HomeController extends AbstractController
         Video $video,
         EntityManagerInterface $manager,
         LikeRepository $likeRepository
-    ): JsonResponse {
+    ): JsonResponse|RedirectResponse {
+
         /** @var \App\Entity\User */
         $user = $this->getUser();
+
+        if ($this->getUser() === null) {
+            $this->addFlash('warning', 'vous devez être connectez pour accéder a cette page');
+            return $this->redirectToRoute('app_user_login');
+        }
 
         if ($video->isLikedByUser($user)) {
             $like = $likeRepository->findOneBy(['video' => $video, 'user' => $user]);

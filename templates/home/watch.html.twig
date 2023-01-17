@@ -54,9 +54,10 @@
         {% elseif app.user %}
             <div class="watch-like-container text-left d-flex">
                 <a class="js-like" href="{{ path('app_watch_like', {id: video.id}) }}">
-                    <i class="watch-like-icon bi {{ video.isLikedByUser(app.user) ? 'bi-heart-fill' : 'bi-heart' }}"></i>
+                    <button type="button" class="btn btn-light btn-lg mt-2 like-button">
+                        <i class="bi {{ video.isLikedByUser(app.user) ? 'bi-heart-fill' : 'bi-heart' }} js-class-icon"></i> Like
+                    </button>
                 </a>
-                <p class="add-like-text ml-2">{{ video.isLikedByUser(app.user) ? 'Retirer de ' : 'Ajouter à ' }}Mes favoris</p>
             </div>
         {% endif %}
 

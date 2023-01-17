@@ -37,20 +37,14 @@
     max-height: 300px;
 }
 
-.watch-like-icon {
-    font-size: 30px;
-    color: gray;
+.watch-like-icon, .like-button, .like-link {
     text-decoration: none;
+    color: black;
 }
 
 .watch-like-container {
     margin-left: 20%;
     margin-right: 20%;
-}
-
-.watch-like-icon:hover {
-    //color: var(--element-color);
-    color: red;
 }
 
 .bi-heart-fill {
@@ -60,4 +54,19 @@
 
 .add-like-text {
     margin-top: 12px;
+}
+
+.like-button:hover {
+    .watch-like-icon {
+        color: red;
+    }
+
+    .bi-heart-fill {
+        //color: var(--element-color);
+        color: red;
+    }
+
+    .watch-like-icon, .like-button, .like-link {
+        text-decoration: none;
+    }
 }
