@@ -51,7 +51,7 @@
         <div class="row">
             {% for video in latestVideos %}
                 <div class="col-12 col-md-6 col-lg-4 col-xl-3 single-video">
-                    <a href="{{ path('app_watch', {id : video.id}) }}"
+                    <a href="{{ path('app_watch', {slug : video.slug}) }}"
                        class="card card-video border-0 bg-transparent mb-4 home-video-link">
                         {% if video.isPrivate and not app.user %}
                             <img src="{{ asset('build/images/image-private-video.jpg') }}" class="img-fluid mt-2"
@@ -83,7 +83,7 @@
         <div class="row">
             {% for video in popularVideos %}
                 <div class="col-12 col-md-6 col-lg-4 col-xl-3 single-video">
-                    <a href="{{ path('app_watch', {id : video.id}) }}"
+                    <a href="{{ path('app_watch', {slug : video.slug}) }}"
                        class="card card-video border-0 bg-transparent mb-4 home-video-link">
                         {% if video.isPrivate and not app.user %}
                             <img src="{{ asset('build/images/image-private-video.jpg') }}" class="img-fluid mt-2"
@@ -126,7 +126,7 @@
         <div class="row">
             {% for video in tennisVideos %}
                 <div class="col-12 col-md-6 col-lg-4 col-xl-3 single-video">
-                    <a href="{{ path('app_watch', {id : video.id}) }}"
+                    <a href="{{ path('app_watch', {slug : video.slug}) }}"
                        class="card card-video border-0 bg-transparent mb-4 home-video-link">
                         {% if video.isPrivate and not app.user %}
                             <img src="{{ asset('build/images/image-private-video.jpg') }}" class="img-fluid mt-2"
@@ -158,7 +158,7 @@
         <div class="row">
             {% for video in registerVideos %}
                 <div class="col-12 col-md-6 col-lg-4 col-xl-3 single-video">
-                    <a href="{{ path('app_watch', {id : video.id}) }}"
+                    <a href="{{ path('app_watch', {slug : video.slug}) }}"
                        class="card card-video border-0 bg-transparent mb-4 home-video-link">
                         {% if video.isPrivate and not app.user %}
                             <img src="{{ asset('build/images/image-private-video.jpg') }}" class="img-fluid mt-2"

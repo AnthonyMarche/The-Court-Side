@@ -34,7 +34,7 @@ class HomeController extends AbstractController
         ]);
     }
 
-    #[Route('/watch/{id}', name: 'watch')]
+    #[Route('/watch/{slug}', name: 'watch')]
     public function watch(Video $video): Response
     {
         return $this->render('home/watch.html.twig', [
