@@ -6,12 +6,14 @@ use App\Entity\Like;
 use App\Entity\Video;
 use App\Repository\CategoryRepository;
 use App\Repository\LikeRepository;
-use App\Repository\UserRepository;
 use App\Repository\VideoRepository;
 use App\Services\Filter;
+use DateTime;
 use Doctrine\DBAL\Exception;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -40,6 +42,41 @@ class HomeController extends AbstractController
         return $this->render('home/watch.html.twig', [
             'video' => $video
         ]);
+    }
+
+    #[Route('watch/{id}/like', name: 'watch_like', methods: ['GET','POST'])]
+    public function addToLike(
+        Video $video,
+        EntityManagerInterface $manager,
+        LikeRepository $likeRepository
+    ): JsonResponse|RedirectResponse {
+
+        /** @var \App\Entity\User */
+        $user = $this->getUser();
+
+        if ($this->getUser() === null) {
+            $this->addFlash('warning', 'vous devez être connectez pour accéder a cette page');
+            return $this->redirectToRoute('app_user_login');
+        }
+
+        if ($video->isLikedByUser($user)) {
+            $like = $likeRepository->findOneBy(['video' => $video, 'user' => $user]);
+            $video->setNumberOfLike($video->getNumberOfLike() - 1);
+            $manager->remove($like);
+            $manager->flush();
+
+            return $this->json(['code' => 200], 200);
+        }
+
+        $like = new Like();
+        $like->setVideo($video)
+            ->setUser($user)
+            ->setCreatedAt(new DateTime('now'));
+        $video->setNumberOfLike($video->getNumberOfLike() + 1);
+        $manager->persist($like);
+        $manager->flush();
+
+        return $this->json(['code' => 200], 200);
     }
 
     #[Route('/category', name: 'category')]

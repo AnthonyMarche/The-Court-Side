@@ -54,6 +54,20 @@
                                 {% endif %}
                             </td>
                         </tr>
+                        <tr>
+                            <th>Abonnement newsletter</th>
+                            <td>
+                                {% if not app.user.newsletter %}
+                                    <p class="font-italic">
+                                        Vous n'êtes pas encore abonné à la newsletter. Vous pouvez vous y abonner en modifiant votre profil.
+                                    </p>
+                                {% else %}
+                                    <p class="font-italic">
+                                        Vous êtes abonné à la newsletter. Vous pouvez vous désabonner en modifiant votre profil.
+                                    </p>
+                                {% endif %}
+                            </td>
+                        </tr>
                     </table>
                 </div>
                 <div class="container d-flex justify-content-around p-4">

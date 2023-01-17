@@ -156,6 +156,12 @@ class DashboardController extends AbstractDashboardController
             ]);
 
         yield MenuItem::linkToRoute(
+            "Newsletter",
+            "fa-regular fa-envelope",
+            'app_newsletter'
+        );
+
+        yield MenuItem::linkToRoute(
             t(
                 'dashboard.leaveAdministration',
                 ['parameter' => 'value'],

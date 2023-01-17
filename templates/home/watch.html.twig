@@ -49,14 +49,15 @@
         {% if video.isPrivate and not app.user %}
             <div class="watch-private-video-message-container text-left mt-2">
                 <i class="fa fa-lock watch-private-video-message"> Cette video est réservée aux inscrits
-                    cliquez <a href="">ici</a> pour vous inscrire</i>
+                    cliquez <a href="{{ path('app_register') }}">ici</a> pour vous inscrire</i>
             </div>
         {% elseif app.user %}
             <div class="watch-like-container text-left d-flex">
-                <a id="watchLike" href="{{ path('app_watch_like', {id: video.id}) }}">
-                    <i class="bi {{ app.user.isLiked(video) ? 'bi-heart-fill' : 'bi-heart' }} watch-like-icon"></i>
+                <a class="js-like" href="{{ path('app_watch_like', {id: video.id}) }}">
+                    <button type="button" class="btn btn-light btn-lg mt-2 like-button">
+                        <i class="bi {{ video.isLikedByUser(app.user) ? 'bi-heart-fill' : 'bi-heart' }} js-class-icon"></i> Like
+                    </button>
                 </a>
-                <p class="add-like-text ml-2">Ajouter à Mes favoris</p>
             </div>
         {% endif %}
 
@@ -74,8 +75,9 @@
             Tweet
         </a>
 
-        <a href="mailto:?subject=🤯 Cette vidéo est incroyable ! 🤯&body=Regarde cette vidéo !%0A{{ url }}" class="btn btn-secondary btn-sm rounded-pill">
-            <i class="bi bi-envelope">  </i>Mail
+        <a href="mailto:?subject=🤯 Cette vidéo est incroyable ! 🤯&body=Regarde cette vidéo !%0A{{ url }}"
+           class="btn btn-secondary btn-sm rounded-pill">
+            <i class="bi bi-envelope"> </i>Mail
         </a>
 
         <div class="watch-video-description text-left mt-2">
@@ -107,7 +109,7 @@
             <div class="row">
                 {% for video in video.category.videos[:4] %}
                     <div class="col-12 col-md-6 col-lg-4 col-xl-3 single-video">
-                        <a href="{{ path('app_watch', {id : video.id}) }}"
+                        <a href="{{ path('app_watch', {slug : video.slug}) }}"
                            class="card card-video border-0 bg-transparent mb-4 home-video-link">
                             {% if video.isPrivate and not app.user %}
                                 <img src="{{ asset('build/images/image-private-video.jpg') }}" class="img-fluid mt-2"
@@ -141,5 +143,4 @@
     {#  footer  #}
 
     {% include('_includes/_main_footer.html.twig') %}
-
 {% endblock %}
