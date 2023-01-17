@@ -84,7 +84,7 @@
         <div class="watch-video-tags-container">
             <div class="watch-video-tags d-flex">
                 {% for tag in video.tag %}
-                    <a href="">
+                    <a href="{{ path('app_tag', {slug : video.slug}) }}">
                         <button type="button" class="btn btn-outline-primary mr-2">#{{ tag.name }}</button>
                     </a>
                 {% endfor %}

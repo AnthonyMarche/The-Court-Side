@@ -47,4 +47,15 @@ class Filter
             return $this->videoRepository->findCategoryVideosOrderByDate($slug);
         }
     }
+
+    public function getOrderedTagVideos(string $filter, string $slug): array
+    {
+        if ($filter == 'views') {
+            return $this->videoRepository->findTagVideosOrderByViews($slug);
+        } elseif ($filter == 'likes') {
+            return $this->videoRepository->findTagVideosOrderByLikes($slug);
+        } else {
+            return $this->videoRepository->findTagVideosOrderByDate($slug);
+        }
+    }
 }
