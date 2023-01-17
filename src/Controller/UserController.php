@@ -101,13 +101,16 @@ class UserController extends AbstractController
                     $user->setUpdatedAt($date);
                     $userRepository->save($user, true);
                     $this->addFlash('success', 'Votre profil à bien été mis à jour.');
+                    return $this->redirectToRoute('app_user_show', ['id' => $user->getId()]);
                 }
+            } else {
+                // MàJ auto de "updated_at"
+                $date = new DateTime('now');
+                $user->setUpdatedAt($date);
+                $userRepository->save($user, true);
+                $this->addFlash('success', 'Votre profil à bien été mis à jour.');
+                return $this->redirectToRoute('app_user_show', ['id' => $user->getId()]);
             }
-            // MàJ auto de "updated_at"
-            $date = new DateTime('now');
-            $user->setUpdatedAt($date);
-            $userRepository->save($user, true);
-            $this->addFlash('success', 'Votre profil à bien été mis à jour.');
         }
 
         return $this->renderForm('user/edit.html.twig', [
