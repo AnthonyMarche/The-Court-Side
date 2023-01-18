@@ -21,7 +21,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use function Symfony\Component\Translation\t;
+use Symfony\Component\Translation\TranslatableMessage;
 
 class UserCrudController extends AbstractCrudController
 {
@@ -41,11 +41,11 @@ class UserCrudController extends AbstractCrudController
     {
         return $crud
 //            ->overrideTemplate('crud/index', 'admin/index.html.twig')
-            ->setEntityLabelInSingular(t('entity.user', ['parameter' => 'value'], 'admin'))
-            ->setEntityLabelInPlural(t('entity.users', ['parameter' => 'value'], 'admin'))
+            ->setEntityLabelInSingular(new TranslatableMessage('entity.user', ['parameter' => 'value'], 'admin'))
+            ->setEntityLabelInPlural(new TranslatableMessage('entity.users', ['parameter' => 'value'], 'admin'))
             ->setPageTitle(
                 'index',
-                t(
+                new TranslatableMessage(
                     'entity.listOfUsers',
                     ['parameter' => 'value'],
                     'admin'
@@ -62,7 +62,7 @@ class UserCrudController extends AbstractCrudController
                 ->hideOnForm(),
             TextField::new(
                 'username',
-                t(
+                new TranslatableMessage(
                     'entity.username',
                     ['parameter' => 'value'],
                     'admin'
@@ -72,7 +72,7 @@ class UserCrudController extends AbstractCrudController
                 ->setDisabled(),
             ChoiceField::new(
                 'roles',
-                t(
+                new TranslatableMessage(
                     'entity.role',
                     ['parameter' => 'value'],
                     'admin'
@@ -85,7 +85,7 @@ class UserCrudController extends AbstractCrudController
                 ->allowMultipleChoices(),
             DateTimeField::new(
                 'createdAt',
-                t(
+                new TranslatableMessage(
                     'entity.createdAt',
                     ['parameter' => 'value'],
                     'admin'

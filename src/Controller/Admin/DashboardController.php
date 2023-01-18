@@ -9,14 +9,13 @@ use App\Entity\Video;
 use App\Repository\LikeRepository;
 use App\Repository\UserRepository;
 use App\Repository\VideoRepository;
-use App\Services\Stats;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use function Symfony\Component\Translation\t;
+use Symfony\Component\Translation\TranslatableMessage;
 
 class DashboardController extends AbstractDashboardController
 {
@@ -75,13 +74,21 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard(
-            t('dashboard.dashboard', ['parameter' => 'value'], 'admin'),
+            new TranslatableMessage('dashboard.dashboard', ['parameter' => 'value'], 'admin'),
             'fa fa-home'
         );
 
-        yield MenuItem::subMenu(t('entity.user', ['parameter' => 'value'], 'admin'), 'fa fa-user')->setSubItems([
+        yield MenuItem::subMenu(
+            new TranslatableMessage(
+                'entity.user',
+                ['parameter' => 'value'],
+                'admin'
+            ),
+            'fa fa-user'
+        )
+            ->setSubItems([
             MenuItem::linkToCrud(
-                t(
+                new TranslatableMessage(
                     'dashboard.usersList',
                     ['parameter' => 'value'],
                     'admin'
@@ -90,7 +97,7 @@ class DashboardController extends AbstractDashboardController
                 User::class
             ),
             MenuItem::linkToRoute(
-                t(
+                new TranslatableMessage(
                     'dashboard.export',
                     ['parameter' => 'value'],
                     'admin'
@@ -101,9 +108,17 @@ class DashboardController extends AbstractDashboardController
         ])
             ->setPermission('ROLE_SUPER_ADMIN');
 
-        yield MenuItem::subMenu(t('entity.video', ['parameter' => 'value'], 'admin'), 'fa fa-video')->setSubItems([
+        yield MenuItem::subMenu(
+            new TranslatableMessage(
+                'entity.video',
+                ['parameter' => 'value'],
+                'admin'
+            ),
+            'fa fa-video'
+        )
+            ->setSubItems([
             MenuItem::linkToCrud(
-                t(
+                new TranslatableMessage(
                     'dashboard.videosList',
                     ['parameter' => 'value'],
                     'admin'
@@ -112,13 +127,29 @@ class DashboardController extends AbstractDashboardController
                 Video::class
             )
                 ->setAction(Crud::PAGE_INDEX),
-            MenuItem::linkToCrud(t('dashboard.newVideo', ['parameter' => 'value'], 'admin'), 'fa fa-plus', Video::class)
+            MenuItem::linkToCrud(
+                new TranslatableMessage(
+                    'dashboard.newVideo',
+                    ['parameter' => 'value'],
+                    'admin'
+                ),
+                'fa fa-plus',
+                Video::class
+            )
                 ->setAction(Crud::PAGE_NEW),
         ]);
 
-        yield MenuItem::subMenu(t('entity.category', ['parameter' => 'value'], 'admin'), 'fa fa-list')->setSubItems([
+        yield MenuItem::subMenu(
+            new TranslatableMessage(
+                'entity.category',
+                ['parameter' => 'value'],
+                'admin'
+            ),
+            'fa fa-list'
+        )
+            ->setSubItems([
             MenuItem::linkToCrud(
-                t(
+                new TranslatableMessage(
                     'dashboard.categoriesList',
                     ['parameter' => 'value'],
                     'admin'
@@ -128,7 +159,7 @@ class DashboardController extends AbstractDashboardController
             )
                 ->setAction(Crud::PAGE_INDEX),
             MenuItem::linkToCrud(
-                t(
+                new TranslatableMessage(
                     'dashboard.newCategory',
                     ['parameter' => 'value'],
                     'admin'
@@ -139,10 +170,10 @@ class DashboardController extends AbstractDashboardController
                 ->setAction(Crud::PAGE_NEW),
         ]);
 
-        yield MenuItem::subMenu(t('entity.tag', ['parameter' => 'value'], 'admin'), 'fa fa-tag')
+        yield MenuItem::subMenu(new TranslatableMessage('entity.tag', ['parameter' => 'value'], 'admin'), 'fa fa-tag')
             ->setSubItems([
                 MenuItem::linkToCrud(
-                    t(
+                    new TranslatableMessage(
                         'dashboard.tagsList',
                         ['parameter' => 'value'],
                         'admin'
@@ -151,7 +182,15 @@ class DashboardController extends AbstractDashboardController
                     Tag::class
                 )
                     ->setAction(Crud::PAGE_INDEX),
-                MenuItem::linkToCrud(t('dashboard.newTag', ['parameter' => 'value'], 'admin'), 'fa fa-plus', Tag::class)
+                MenuItem::linkToCrud(
+                    new TranslatableMessage(
+                        'dashboard.newTag',
+                        ['parameter' => 'value'],
+                        'admin'
+                    ),
+                    'fa fa-plus',
+                    Tag::class
+                )
                     ->setAction(Crud::PAGE_NEW),
             ]);
 
@@ -162,7 +201,7 @@ class DashboardController extends AbstractDashboardController
         );
 
         yield MenuItem::linkToRoute(
-            t(
+            new TranslatableMessage(
                 'dashboard.leaveAdministration',
                 ['parameter' => 'value'],
                 'admin'

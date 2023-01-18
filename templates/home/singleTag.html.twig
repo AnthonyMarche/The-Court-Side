@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ tagName }}{% endblock %}
+
+{% block body %}
+    <h2 class="text-center mt-4 category-main-title">{{ tagName }}</h2>
+
+    {# filter button include only if liked videos length is > 1 #}
+    {% if videos|length > 1 %}
+        {% include '_includes/_filter_button.html.twig' with  {
+            recent : path('app_tag', { slug : tagSlug, sort : 'recent'}),
+            likes : path('app_tag', { slug : tagSlug, sort : 'likes'}),
+            views : path('app_tag', { slug : tagSlug, sort : 'views'})
+        } %}
+    {% endif %}
+
+    {# include the videos grid #}
+    <div class="container-fluid p-5 py-3">
+        <div class="row js-content">
+            {% include '_includes/_videos_grid.html.twig' %}
+        </div>
+    </div>
+{% endblock %}

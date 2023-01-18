@@ -33,7 +33,7 @@
                             <a href="{{ path('app_user_login') }}">
                                 <button type="button" class="btn btn-secondary">Se connecter</button>
                             </a>
-                            <a href="">
+                            <a href="{{ path('app_register') }}">
                                 <button type="button" class="btn btn-primary">S'inscrire</button>
                             </a>
                         </div>
@@ -86,7 +86,7 @@
         <div class="watch-video-tags-container">
             <div class="watch-video-tags d-flex">
                 {% for tag in video.tag %}
-                    <a href="">
+                    <a href="{{ path('app_tag', {slug : tag.slug}) }}">
                         <button type="button" class="btn btn-outline-primary mr-2">#{{ tag.name }}</button>
                     </a>
                 {% endfor %}

@@ -39,7 +39,7 @@
 }
 
 .footer-social-logo {
-    color: black;
+    color: var(--background-color);
     text-decoration: none;
 }
 
@@ -53,8 +53,7 @@
 }
 
 .home-footer-sponsor-logo-container {
-    background-color: black;
-    padding: 75px;
+    background-color: var(--background-color);
 }
 
 .home-middle-image {
@@ -65,4 +64,16 @@
 .home-footer-website-logo {
     width: 100px;
     height: 100px;
+}
+
+.home-footer-sponsor-logo-nike {
+    height: 50px;
+}
+
+.home-footer-sponsor-logo-netflix {
+    height: 200px;
+}
+
+.home-footer-sponsor-logo-visa {
+    height: 60px;
 }
