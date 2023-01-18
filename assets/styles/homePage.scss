@@ -2,11 +2,11 @@
     .home-video-title {
         font-size: 16px;
         font-weight: bold;
-        color: var(--mainFont-color);
+        color: #000;
     }
 
     .home-video-details {
-        color: var(--subFont-color);
+        color: gray;
         font-size: 13px;
         text-decoration: none;
     }
@@ -16,22 +16,13 @@
     max-height: 37rem;
 }
 
-.home-main-container {
-    background-color: var(--mainBg-color);
-}
-
-.single-video {
-    border-radius: 10px;
-}
-
 .single-video:hover {
-    background-color: var(--subBg-color);
+    background-color: #e0e0e0;
 }
 
 .home-section-line {
-    height: 1px;
-    border-radius: 10px;
-    background: var(--mainFont-color);
+    height: 3px;
+    background: black;
 }
 
 .home-video-link:hover {
@@ -48,12 +39,12 @@
 }
 
 .footer-social-logo {
-    color: var(--mainBg-color);
+    color: var(--background-color);
     text-decoration: none;
 }
 
 .footer-social-logo:hover {
-    color: var(--subFont-color);
+    color: gray;
     text-decoration: none;
 }
 
@@ -62,8 +53,7 @@
 }
 
 .home-footer-sponsor-logo-container {
-    background-color: var(--subBg-color);
-    padding: 75px;
+    background-color: var(--background-color);
 }
 
 .home-middle-image {
@@ -76,8 +66,16 @@
     height: 100px;
 }
 
-.section-name {
-    color: var(--mainFont-color);
+.home-footer-sponsor-logo-nike {
+    height: 50px;
+}
+
+.home-footer-sponsor-logo-netflix {
+    height: 200px;
+}
+
+.home-footer-sponsor-logo-visa {
+    height: 60px;
 }
 
 .main-footer-container {
