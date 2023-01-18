@@ -2,11 +2,11 @@
     .home-video-title {
         font-size: 16px;
         font-weight: bold;
-        color: #000;
+        color: var(--mainFont-color);
     }
 
     .home-video-details {
-        color: gray;
+        color: var(--subFont-color);
         font-size: 13px;
         text-decoration: none;
     }
@@ -16,13 +16,22 @@
     max-height: 37rem;
 }
 
+.home-main-container {
+    background-color: var(--mainBg-color);
+}
+
+.single-video {
+    border-radius: 10px;
+}
+
 .single-video:hover {
-    background-color: #e0e0e0;
+    background-color: var(--subBg-color);
 }
 
 .home-section-line {
-    height: 3px;
-    background: black;
+    height: 1px;
+    border-radius: 10px;
+    background: var(--mainFont-color);
 }
 
 .home-video-link:hover {
@@ -39,12 +48,12 @@
 }
 
 .footer-social-logo {
-    color: black;
+    color: var(--mainBg-color);
     text-decoration: none;
 }
 
 .footer-social-logo:hover {
-    color: gray;
+    color: var(--subFont-color);
     text-decoration: none;
 }
 
@@ -53,7 +62,7 @@
 }
 
 .home-footer-sponsor-logo-container {
-    background-color: black;
+    background-color: var(--subBg-color);
     padding: 75px;
 }
 
@@ -65,4 +74,12 @@
 .home-footer-website-logo {
     width: 100px;
     height: 100px;
+}
+
+.section-name {
+    color: var(--mainFont-color);
+}
+
+.main-footer-container {
+    background-color: var(--mainBg-color);
 }
