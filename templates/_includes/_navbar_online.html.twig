@@ -1,8 +1,8 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg">
     <a class="navbar-brand" href="{{ path('app_home') }}">The Court Side</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+        <span class="navbar-toggler-icon"><i class="fa fa-bars"></i></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -21,10 +21,7 @@
 
         {# -------SEARCHBAR------- #}
         <div class="input-group mb-3 mt-auto mb-auto col">
-            <input type="text" class="form-control" placeholder="Recherche...">
-            <div class="input-group-append">
-                <button class="btn btn-info"><i class="bi bi-search"></i></button>
-            </div>
+
         </div>
 
         {# -------NAV-LOGIN------- #}
@@ -56,17 +53,36 @@
                     </li>
                 </ul>
             </div>
-            {% if app.user.username %}
-                <p class="mt-auto mb-auto">Bonjour, {{ app.user.username }}</p>
-            {% else %}
-                <p class="mt-auto mb-auto">{{ app.user.email }}</p>
-            {% endif %}
-            <a href="{{ path('app_user_show', {'id':app.user.id}) }}">
-                <i class="bi bi-person-circle"></i>
-            </a>
-            <a class="nav-link" href="{{ path('app_user_logout') }}">
-                <button type="button" class="btn btn-info">Déconnexion</button>
-            </a>
+            {# -------USER GREETINGS------- #}
+            <div class="user-greetings">
+                {% if app.user.username %}
+                    <p class="mt-auto mb-auto">Bonjour, {{ app.user.username }}</p>
+                {% else %}
+                    <p class="mt-auto mb-auto">{{ app.user.email }}</p>
+                {% endif %}
+            </div>
+            {# -------OPTIONS DROPDOWN------- #}
+            <div class="dropdown show">
+                <a class="btn dropdown-toggle user-options" href="#" role="button" id="dropdownMenuLink"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Voir plus
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+                    <div class="d-flex flex-column">
+                        {% if 'ROLE_ADMIN' in app.user.getroles() %}
+                            <a href="{{ path('admin') }}">
+                                <i class="bi bi-person-fill-gear"></i> Admin
+                            </a>
+                        {% endif %}
+                        <a href="{{ path('app_user_show', {'id':app.user.id}) }}">
+                            <i class="bi bi-person-lines-fill"></i> Profil
+                        </a>
+                        <a class="nav-link" href="{{ path('app_user_logout') }}">
+                            <button type="button" class="btn btn-custom">Déconnexion</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </nav>
