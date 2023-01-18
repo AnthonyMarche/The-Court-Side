@@ -2,11 +2,11 @@
 
 namespace App\Controller;
 
-use _PHPStan_5c71ab23c\Nette\Utils\DateTime;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\UserRepository;
 use App\Services\UserEditService;
+use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -101,13 +101,16 @@ class UserController extends AbstractController
                     $user->setUpdatedAt($date);
                     $userRepository->save($user, true);
                     $this->addFlash('success', 'Votre profil à bien été mis à jour.');
+                    return $this->redirectToRoute('app_user_show', ['id' => $user->getId()]);
                 }
+            } else {
+                // MàJ auto de "updated_at"
+                $date = new DateTime('now');
+                $user->setUpdatedAt($date);
+                $userRepository->save($user, true);
+                $this->addFlash('success', 'Votre profil à bien été mis à jour.');
+                return $this->redirectToRoute('app_user_show', ['id' => $user->getId()]);
             }
-            // MàJ auto de "updated_at"
-            $date = new DateTime('now');
-            $user->setUpdatedAt($date);
-            $userRepository->save($user, true);
-            $this->addFlash('success', 'Votre profil à bien été mis à jour.');
         }
 
         return $this->renderForm('user/edit.html.twig', [
