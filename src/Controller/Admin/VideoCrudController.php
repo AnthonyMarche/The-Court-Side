@@ -14,7 +14,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Symfony\Component\String\Slugger\SluggerInterface;
-use function Symfony\Component\Translation\t;
+use Symfony\Component\Translation\TranslatableMessage;
 
 class VideoCrudController extends AbstractCrudController
 {
@@ -36,11 +36,11 @@ class VideoCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setEntityLabelInSingular(t('entity.video', ['parameter' => 'value'], 'admin'))
-            ->setEntityLabelInPlural(t('entity.videos', ['parameter' => 'value'], 'admin'))
+            ->setEntityLabelInSingular(new TranslatableMessage('entity.video', ['parameter' => 'value'], 'admin'))
+            ->setEntityLabelInPlural(new TranslatableMessage('entity.videos', ['parameter' => 'value'], 'admin'))
             ->setPageTitle(
                 'index',
-                t(
+                new TranslatableMessage(
                     'entity.listOfVideos',
                     ['parameter' => 'value'],
                     'admin'
@@ -55,7 +55,7 @@ class VideoCrudController extends AbstractCrudController
         return [
             TextField::new(
                 'title',
-                t(
+                new TranslatableMessage(
                     'entity.title',
                     ['parameter' => 'value'],
                     'admin'
@@ -64,7 +64,7 @@ class VideoCrudController extends AbstractCrudController
 
             TextareaField::new(
                 'description',
-                t(
+                new TranslatableMessage(
                     'entity.description',
                     ['parameter' => 'value'],
                     'admin'
@@ -74,7 +74,7 @@ class VideoCrudController extends AbstractCrudController
 
             BooleanField::new(
                 'isPrivate',
-                t(
+                new TranslatableMessage(
                     'entity.visibility',
                     ['parameter' => 'value'],
                     'admin'
@@ -83,7 +83,7 @@ class VideoCrudController extends AbstractCrudController
 
             AssociationField::new(
                 'category',
-                t(
+                new TranslatableMessage(
                     'entity.category',
                     ['parameter' => 'value'],
                     'admin'
@@ -92,7 +92,7 @@ class VideoCrudController extends AbstractCrudController
 
             AssociationField::new(
                 'tag',
-                t(
+                new TranslatableMessage(
                     'entity.tag',
                     ['parameter' => 'value'],
                     'admin'
@@ -100,14 +100,14 @@ class VideoCrudController extends AbstractCrudController
             )
                 ->onlyOnForms(),
 
-            ImageField::new('url', t('entity.file', ['parameter' => 'value'], 'admin'))
+            ImageField::new('url', new TranslatableMessage('entity.file', ['parameter' => 'value'], 'admin'))
                 ->onlyWhenCreating()
                 ->setBasePath(self::PATHVIDEO)
                 ->setUploadDir('public/uploads/videos')
                 ->setUploadedFileNamePattern(self::PATHVIDEO . '/[slug]-[timestamp].[extension]')
                 ->setHelp('Fichiers .avi, .mp4, .ogg and .wbm'),
 
-            ImageField::new('teaser', t('entity.teaser', ['parameter' => 'value'], 'admin'))
+            ImageField::new('teaser', new TranslatableMessage('entity.teaser', ['parameter' => 'value'], 'admin'))
                 ->onlyWhenCreating()
                 ->setBasePath(self::PATHTEASER)
                 ->setUploadDir('public/uploads/teasers')
@@ -115,7 +115,7 @@ class VideoCrudController extends AbstractCrudController
 
             DateTimeField::new(
                 'createdAt',
-                t(
+                new TranslatableMessage(
                     'entity.createdAt',
                     ['parameter' => 'value'],
                     'admin'

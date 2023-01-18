@@ -10,7 +10,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Symfony\Component\String\Slugger\SluggerInterface;
-use function Symfony\Component\Translation\t;
+use Symfony\Component\Translation\TranslatableMessage;
 
 class CategoryCrudController extends AbstractCrudController
 {
@@ -29,11 +29,11 @@ class CategoryCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setEntityLabelInSingular(t('entity.category', ['parameter' => 'value'], 'admin'))
-            ->setEntityLabelInPlural(t('entity.categories', ['parameter' => 'value'], 'admin'))
+            ->setEntityLabelInSingular(new TranslatableMessage('entity.category', ['parameter' => 'value'], 'admin'))
+            ->setEntityLabelInPlural(new TranslatableMessage('entity.categories', ['parameter' => 'value'], 'admin'))
             ->setPageTitle(
                 'index',
-                t(
+                new TranslatableMessage(
                     'entity.listOfCategories',
                     ['parameter' => 'value'],
                     'admin'
@@ -45,11 +45,11 @@ class CategoryCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            TextField::new('name', t('entity.name', ['parameter' => 'value'], 'admin')),
+            TextField::new('name', new TranslatableMessage('entity.name', ['parameter' => 'value'], 'admin')),
 
             DateTimeField::new(
                 'createdAt',
-                t(
+                new TranslatableMessage(
                     'entity.createdAt',
                     ['parameter' => 'value'],
                     'admin'
