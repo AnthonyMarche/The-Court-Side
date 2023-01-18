@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg">
     <a class="navbar-brand" href="{{ path('app_home') }}">The Court Side</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -20,15 +20,15 @@
         </ul>
 
         {# -------SEARCHBAR------- #}
-        <div class="input-group col col-lg-3">
-            <input type="text" class="form-control" placeholder="Recherche...">
-            <div class="input-group-append">
-                <button class="btn btn-primary"><i class="bi bi-search"></i></button>
-            </div>
-        </div>
+{#        <div class="input-group col col-lg-3">#}
+{#            <input type="text" class="form-control" placeholder="Recherche...">#}
+{#            <div class="input-group-append">#}
+{#                <button class="btn btn-primary"><i class="bi bi-search"></i></button>#}
+{#            </div>#}
+{#        </div>#}
 
         {# -------NAV-LOGIN------- #}
-        <div class="nav-links d-flex justify-content-lg-end col">
+        <div class="nav-links d-flex justify-content-lg-end align-items-center col">
             {# -------LANGUAGE CHOICE------- #}
             <div class="dropdown">
                 <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -36,31 +36,31 @@
                          src="{{ asset('build/images/' ~ app.request.locale ~ '-flag.png') }}" alt="flag language">
                 </button>
                 <ul class="dropdown-menu language-list">
-                    <li><a class="dropdown-item flag-item"
+                    <li><a class="dropdown-item flag-item flag-custom"
                            href="{{ path('app_language', {'language': 'fr', 'route': app.request.attributes.get('_route')}) }}">
                             <img class="flag-size" src="{{ asset('build/images/fr-flag.png') }}" alt="french flag"></a>
                     </li>
                     <li>
                         <hr class="dropdown-divider">
                     </li>
-                    <li><a class="dropdown-item flag-item"
+                    <li><a class="dropdown-item flag-item flag-custom"
                            href="{{ path('app_language', {'language': 'en', 'route': app.request.attributes.get('_route')}) }}">
                             <img class="flag-size" src="{{ asset('build/images/en-flag.png') }}" alt="english flag"></a>
                     </li>
                     <li>
                         <hr class="dropdown-divider">
                     </li>
-                    <li><a class="dropdown-item flag-item"
+                    <li><a class="dropdown-item flag-item flag-custom"
                            href="{{ path('app_language', {'language': 'es', 'route': app.request.attributes.get('_route')}) }}">
                             <img class="flag-size" src="{{ asset('build/images/es-flag.png') }}" alt="spanish flag"></a>
                     </li>
                 </ul>
             </div>
             <a class="nav-link" href="{{ path('app_register') }}">
-                <button type="button" class="btn btn-outline-info">Inscription</button>
+                <button type="button" class="btn btn-outline-custom">Inscription</button>
             </a>
             <a class="nav-link" href="{{ path('app_user_login') }}">
-                <button type="button" class="btn btn-info">Connexion</button>
+                <button type="button" class="btn btn-custom">Connexion</button>
             </a>
         </div>
     </div>
