@@ -158,4 +158,34 @@ class HomeController extends AbstractController
             'videos' => $filter->getOrderedCategoryVideos($sort, $slug),
         ]);
     }
+
+    #[Route('/tag/{slug}/{sort}', name: 'tag', methods: ['GET'])]
+    public function showSingleTag(
+        Request $request,
+        Filter $filter,
+        string $slug,
+        string $sort = 'recent'
+    ): Response {
+
+        //injection security
+        if (!$filter->preventInjection($sort)) {
+            throw $this->createNotFoundException('filtre invalide');
+        }
+
+        //handle ajax request
+        if ($request->isXmlHttpRequest()) {
+            return new JsonResponse([
+                'content' => $this->renderView('_includes/_videos_grid.html.twig', [
+                    'videos' => $filter->getOrderedTagVideos($sort, $slug),
+                    'tagSlug' => $slug,
+                    'tagName' => str_replace('-', ' ', $slug)
+                ])
+            ]);
+        }
+        return $this->render('home/singleTag.html.twig', [
+            'videos' => $filter->getOrderedTagVideos($sort, $slug),
+            'tagSlug' => $slug,
+            'tagName' => str_replace('-', ' ', $slug)
+        ]);
+    }
 }
