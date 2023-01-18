@@ -177,12 +177,15 @@ class HomeController extends AbstractController
             return new JsonResponse([
                 'content' => $this->renderView('_includes/_videos_grid.html.twig', [
                     'videos' => $filter->getOrderedTagVideos($sort, $slug),
+                    'tagSlug' => $slug,
+                    'tagName' => str_replace('-', ' ', $slug)
                 ])
             ]);
         }
-
         return $this->render('home/singleTag.html.twig', [
             'videos' => $filter->getOrderedTagVideos($sort, $slug),
+            'tagSlug' => $slug,
+            'tagName' => str_replace('-', ' ', $slug)
         ]);
     }
 }

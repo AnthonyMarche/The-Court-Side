@@ -1,16 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ videos[0].tag[0].name }}{% endblock %}
+{% block title %}{{ tagName }}{% endblock %}
 
 {% block body %}
-    <h2 class="text-center mt-4 category-main-title">tag: {{ videos[0].tag[0].name }}</h2>
+    <h2 class="text-center mt-4 category-main-title">{{ tagName }}</h2>
 
     {# filter button include only if liked videos length is > 1 #}
     {% if videos|length > 1 %}
         {% include '_includes/_filter_button.html.twig' with  {
-            recent : path('app_tag', { slug : videos[0].tag[0].slug, sort : 'recent'}),
-            likes : path('app_tag', { slug : videos[0].tag[0].slug, sort : 'likes'}),
-            views : path('app_tag', { slug : videos[0].tag[0].slug, sort : 'views'})
+            recent : path('app_tag', { slug : tagSlug, sort : 'recent'}),
+            likes : path('app_tag', { slug : tagSlug, sort : 'likes'}),
+            views : path('app_tag', { slug : tagSlug, sort : 'views'})
         } %}
     {% endif %}
 
