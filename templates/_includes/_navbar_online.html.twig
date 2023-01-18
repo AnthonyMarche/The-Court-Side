@@ -53,19 +53,36 @@
                     </li>
                 </ul>
             </div>
+            {# -------USER GREETINGS------- #}
             <div class="user-greetings">
-            {% if app.user.username %}
-                <p class="mt-auto mb-auto">Bonjour, {{ app.user.username }}</p>
-            {% else %}
-                <p class="mt-auto mb-auto">{{ app.user.email }}</p>
-            {% endif %}
+                {% if app.user.username %}
+                    <p class="mt-auto mb-auto">Bonjour, {{ app.user.username }}</p>
+                {% else %}
+                    <p class="mt-auto mb-auto">{{ app.user.email }}</p>
+                {% endif %}
             </div>
-            <a href="{{ path('app_user_show', {'id':app.user.id}) }}">
-                <i class="bi bi-person-circle"></i>
-            </a>
-            <a class="nav-link" href="{{ path('app_user_logout') }}">
-                <button type="button" class="btn btn-info">Déconnexion</button>
-            </a>
+            {# -------OPTIONS DROPDOWN------- #}
+            <div class="dropdown show">
+                <a class="btn dropdown-toggle user-options" href="#" role="button" id="dropdownMenuLink"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Voir plus
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+                    <div class="d-flex flex-column">
+                        {% if 'ROLE_ADMIN' in app.user.getroles() %}
+                            <a href="{{ path('admin') }}">
+                                <i class="bi bi-person-fill-gear"></i> Admin
+                            </a>
+                        {% endif %}
+                        <a href="{{ path('app_user_show', {'id':app.user.id}) }}">
+                            <i class="bi bi-person-lines-fill"></i> Profil
+                        </a>
+                        <a class="nav-link" href="{{ path('app_user_logout') }}">
+                            <button type="button" class="btn btn-custom">Déconnexion</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </nav>
