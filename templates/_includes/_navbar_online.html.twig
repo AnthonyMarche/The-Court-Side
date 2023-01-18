@@ -1,8 +1,8 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg">
     <a class="navbar-brand" href="{{ path('app_home') }}">The Court Side</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+        <span class="navbar-toggler-icon"><i class="fa fa-bars"></i></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -21,10 +21,7 @@
 
         {# -------SEARCHBAR------- #}
         <div class="input-group mb-3 mt-auto mb-auto col">
-            <input type="text" class="form-control" placeholder="Recherche...">
-            <div class="input-group-append">
-                <button class="btn btn-info"><i class="bi bi-search"></i></button>
-            </div>
+
         </div>
 
         {# -------NAV-LOGIN------- #}
@@ -56,11 +53,13 @@
                     </li>
                 </ul>
             </div>
+            <div class="user-greetings">
             {% if app.user.username %}
                 <p class="mt-auto mb-auto">Bonjour, {{ app.user.username }}</p>
             {% else %}
                 <p class="mt-auto mb-auto">{{ app.user.email }}</p>
             {% endif %}
+            </div>
             <a href="{{ path('app_user_show', {'id':app.user.id}) }}">
                 <i class="bi bi-person-circle"></i>
             </a>
