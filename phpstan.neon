@@ -9,3 +9,4 @@ parameters:
     reportUnmatchedIgnoredErrors: false
     checkGenericClassInNonGenericObjectType: false
     checkMissingIterableValueType: false
+    src/Controller/Admin
