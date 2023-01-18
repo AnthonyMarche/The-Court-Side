@@ -1,14 +1,20 @@
+.home-main-container {
+    background-color: var(--mainBg-color);
+}
+
 .card-video {
     .home-video-title {
         font-size: 16px;
         font-weight: bold;
-        color: #000;
+        color: var(--mainFont-color);
+        font-family: var(--text-font);
     }
 
     .home-video-details {
-        color: gray;
+        color: var(--subFont-color);
         font-size: 13px;
         text-decoration: none;
+        font-family: var(--text-font);
     }
 }
 
@@ -17,12 +23,17 @@
 }
 
 .single-video:hover {
-    background-color: #e0e0e0;
+    background-color: var(--subBg-color);
+}
+
+.single-video {
+    border-radius: 10px;
 }
 
 .home-section-line {
-    height: 3px;
-    background: black;
+    height: 1px;
+    background: var(--mainFont-color);
+    border-radius: 10px;
 }
 
 .home-video-link:hover {
@@ -39,21 +50,22 @@
 }
 
 .footer-social-logo {
-    color: var(--background-color);
+    color: var(--mainFont-color);
     text-decoration: none;
 }
 
 .footer-social-logo:hover {
-    color: gray;
+    color: var(--subFont-color);
     text-decoration: none;
 }
 
 .home-footer-middle-line {
     padding: 75px;
+    width: 100%;
 }
 
 .home-footer-sponsor-logo-container {
-    background-color: var(--background-color);
+    background-color: var(--subBg-color);
 }
 
 .home-middle-image {
@@ -64,6 +76,7 @@
 .home-footer-website-logo {
     width: 100px;
     height: 100px;
+    background-color: transparent;
 }
 
 .home-footer-sponsor-logo-nike {
@@ -80,4 +93,59 @@
 
 .main-footer-container {
     background-color: var(--mainBg-color);
+}
+
+.footer-link {
+    color: var(--mainFont-color);
+}
+
+.footer-link:hover {
+    text-decoration: none;
+    color: var(--subFont-color);
+}
+
+.team-link:hover {
+    text-decoration: none;
+    color: var(--subFont-color);
+}
+
+.text-description {
+    color: var(--mainFont-color);
+    margin-bottom: 0;
+}
+
+.section-name {
+    color: var(--mainFont-color);
+    font-family: var(--text-font);
+    font-size: 2rem;
+}
+
+.video-row {
+    margin-bottom: 7rem;
+}
+
+.see-more-button {
+    color: var(--element-color);
+    border-color: var(--element-color);
+}
+
+.see-more-button:hover {
+    background-color: var(--element-color);
+    border-color: var(--element-color);
+    color: var(--mainBg-color);
+}
+
+.lock-image-container {
+    position: relative;
+}
+
+.lock-image {
+    max-height: 7rem;
+    max-width: 7rem;
+    position: absolute;
+    z-index: 99;
+}
+
+.private-video {
+    position: relative;
 }
