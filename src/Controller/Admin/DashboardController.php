@@ -17,6 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Translation\TranslatableMessage;
 
+/** @suppressWarnings(PHP.ExcessiveMethodLength) */
 class DashboardController extends AbstractDashboardController
 {
     private UserRepository $userRepository;
@@ -71,6 +72,9 @@ class DashboardController extends AbstractDashboardController
             ->setTitle('THE COURT SIDE | Admin');
     }
 
+    /**
+     * @SuppressWarnings(PHPMD)
+     */
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard(

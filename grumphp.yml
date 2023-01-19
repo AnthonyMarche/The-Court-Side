@@ -13,8 +13,6 @@ grumphp:
                 - '\src\Controller\Admin'
         phpcs:
             standard: ~
-            exclude:
-                - '\src\Controller\Admin'
         phpstan:
             configuration: ./phpstan.neon
             level: 6
