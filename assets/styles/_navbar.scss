@@ -11,7 +11,7 @@ nav .navbar-brand {
 }
 
 nav a {
-    color: var(--subFont-color);
+    color: var(--mainFont-color);
 }
 
 nav a:hover {
@@ -44,6 +44,7 @@ nav .btn-outline-custom:hover {
 
 nav .btn-custom {
     background-color: var(--element-color);
+    color: var(--mainFont-color);
 }
 
 nav .btn-custom:hover {
@@ -78,6 +79,10 @@ nav .user-options:hover {
     color: var(--mainFont-color);
     background-color: var(--element-color);
     text-decoration: none;
+}
+
+header {
+    border-bottom: 1px solid var(--mainFont-color);
 }
 
 /* --------------------------------------------- Change language -------------------------------------------- */

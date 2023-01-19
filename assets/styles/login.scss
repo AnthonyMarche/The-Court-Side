@@ -1,0 +1,19 @@
+.login-form {
+    label {
+        color: var(--mainFont-color);
+    }
+
+    p {
+        color: var(--mainFont-color);
+    }
+
+    .custom-login-connect {
+        background-color: var(--element-color);
+        color: var(--mainFont-color);
+
+    }
+
+    .custom-login-connect:hover {
+        background-color: #166665;
+    }
+}

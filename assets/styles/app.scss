@@ -21,3 +21,8 @@
 @import "categoryPages";
 @import "userViews";
 @import "likedVideosPage";
+@import "login";
+
+body {
+    background-color: var(--mainBg-color);
+}
