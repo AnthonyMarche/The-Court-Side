@@ -140,12 +140,16 @@
 }
 
 .lock-image {
-    max-height: 7rem;
-    max-width: 7rem;
+    max-height: 6rem;
+    max-width: 6rem;
     position: absolute;
     z-index: 99;
 }
 
 .private-video {
     position: relative;
+}
+
+.video-private-message {
+    color: var(--element-color);
 }
