@@ -3,6 +3,33 @@
 {% block title %}Home{% endblock %}
 
 {% block body %}
+    {#  modal priavte video #}
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Vidéo résérvées aux inscrits</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <i class="fa fa-lock"></i> Désolé ce contenu n'est disponible que pour les utilisateurs
+                    inscrits.<br>
+                    Vous pouvez vous inscrire gratuitement ou vous connectez si vous avez déjà un compte.
+                </div>
+                <div class="modal-footer">
+                    <a href="{{ path('app_user_login') }}">
+                        <button type="button" class="btn btn-secondary">Se connecter</button>
+                    </a>
+                    <a href="{{ path('app_register') }}">
+                        <button type="button" class="btn btn-primary">S'inscrire</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- home carousel -->
 
@@ -41,28 +68,31 @@
 
     <div class="container-fluid p-5 py-3 home-main-container">
         <div class="home-section-head d-flex justify-content-between p-0 mb-0">
-            <h3 class="section-name">Les videos publiées récemment</h3>
+            <h3 class="section-name">Publiées récemment</h3>
             <div></div>
             <a href="">
-                <button type="button" class="btn btn-outline-primary">VOIR PLUS</button>
+                <button type="button" class="btn btn-outline-light see-more-button">VOIR PLUS</button>
             </a>
         </div>
         <div class="home-section-line mb-2"></div>
-        <div class="row">
+        <div class="row video-row">
             {% for video in latestVideos %}
                 <div class="col-12 col-md-6 col-lg-4 col-xl-3 single-video">
                     <a href="{{ path('app_watch', {slug : video.slug}) }}"
-                       class="card card-video border-0 bg-transparent mb-4 home-video-link">
                         {% if video.isPrivate and not app.user %}
-                            <img src="{{ asset('build/images/image-private-video.jpg') }}" class="img-fluid mt-2"
-                                 alt="image-private-video">
-                        {% else %}
-                            <video src="{{ asset(video.teaser) }}" type="video/mp4" loop muted
-                                   class="hover-to-play w-100 mt-2">
-                            </video>
+                            data-toggle="modal" data-target="#exampleModal"
                         {% endif %}
+                       class="card card-video border-0 bg-transparent mb-4 home-video-link">
+                        <div class="lock-image-container">
+                            <video src="{{ asset(video.teaser) }}" type="video/mp4" loop muted
+                                   class="w-100 mt-2 private-video d-flex align-self-center hover-to-play">
+                            </video>
+                        </div>
                         <div class="card-video-details d-flex mt-2">
                             <div>
+                                {% if video.isPrivate and not app.user %}
+                                    <i class="fa fa-lock video-private-message"> Réservée aux inscrits</i>
+                                {% endif %}
                                 <h4 class="home-video-title">{{ video.title }}</h4>
                                 <div class="home-video-details">{{ video.numberOfView }} vues • publiée
                                     le {{ video.createdAt|date("d/m/Y") }}</div>
@@ -73,10 +103,10 @@
             {% endfor %}
         </div>
         <div class="home-section-head d-flex justify-content-between mt-5">
-            <h3 class="section-name">Les vidéos les plus vues</h3>
+            <h3 class="section-name">Les plus vues</h3>
             <div></div>
             <a href="">
-                <button type="button" class="btn btn-outline-primary">VOIR PLUS</button>
+                <button type="button" class="btn btn-outline-light see-more-button">VOIR PLUS</button>
             </a>
         </div>
         <div class="home-section-line mb-2"></div>
@@ -84,17 +114,20 @@
             {% for video in popularVideos %}
                 <div class="col-12 col-md-6 col-lg-4 col-xl-3 single-video">
                     <a href="{{ path('app_watch', {slug : video.slug}) }}"
-                       class="card card-video border-0 bg-transparent mb-4 home-video-link">
                         {% if video.isPrivate and not app.user %}
-                            <img src="{{ asset('build/images/image-private-video.jpg') }}" class="img-fluid mt-2"
-                                 alt="image-private-video">
-                        {% else %}
-                            <video src="{{ asset(video.teaser) }}" type="video/mp4" loop muted
-                                   class="hover-to-play w-100 mt-2">
-                            </video>
+                            data-toggle="modal" data-target="#exampleModal"
                         {% endif %}
+                       class="card card-video border-0 bg-transparent mb-4 home-video-link">
+                        <div class="lock-image-container">
+                            <video src="{{ asset(video.teaser) }}" type="video/mp4" loop muted
+                                   class="w-100 mt-2 private-video d-flex align-self-center hover-to-play">
+                            </video>
+                        </div>
                         <div class="card-video-details d-flex mt-2">
                             <div>
+                                {% if video.isPrivate and not app.user %}
+                                    <i class="fa fa-lock video-private-message"> Réservée aux inscrits</i>
+                                {% endif %}
                                 <h4 class="home-video-title">{{ video.title }}</h4>
                                 <div class="home-video-details">{{ video.numberOfView }} vues • publiée
                                     le {{ video.createdAt|date("d/m/Y") }}</div>
@@ -108,7 +141,7 @@
 
     <!-- middle image-->
 
-    <div class="home-middle-image">
+    <div class="home-middle-image-container">
         <img src="{{ asset('build/images/home-middle-image.jpg') }}" class="shadow-lg img-fluid home-middle-image"
              alt="home middle image">
     </div>
@@ -119,25 +152,28 @@
             <h3 class="section-name">Les plus likées</h3>
             <div></div>
             <a href="">
-                <button type="button" class="btn btn-outline-primary">VOIR PLUS</button>
+                <button type="button" class="btn btn-outline-light see-more-button">VOIR PLUS</button>
             </a>
         </div>
         <div class="home-section-line mb-2"></div>
-        <div class="row">
+        <div class="row video-row">
             {% for video in moreLikedVideos %}
                 <div class="col-12 col-md-6 col-lg-4 col-xl-3 single-video">
                     <a href="{{ path('app_watch', {slug : video.slug}) }}"
-                       class="card card-video border-0 bg-transparent mb-4 home-video-link">
                         {% if video.isPrivate and not app.user %}
-                            <img src="{{ asset('build/images/image-private-video.jpg') }}" class="img-fluid mt-2"
-                                 alt="image-private-video">
-                        {% else %}
-                            <video src="{{ asset(video.teaser) }}" type="video/mp4" loop muted
-                                   class="hover-to-play w-100 mt-2">
-                            </video>
+                            data-toggle="modal" data-target="#exampleModal"
                         {% endif %}
+                       class="card card-video border-0 bg-transparent mb-4 home-video-link">
+                        <div class="lock-image-container">
+                            <video src="{{ asset(video.teaser) }}" type="video/mp4" loop muted
+                                   class="w-100 mt-2 private-video d-flex align-self-center hover-to-play">
+                            </video>
+                        </div>
                         <div class="card-video-details d-flex mt-2">
                             <div>
+                                {% if video.isPrivate and not app.user %}
+                                    <i class="fa fa-lock video-private-message"> Réservée aux inscrits</i>
+                                {% endif %}
                                 <h4 class="home-video-title">{{ video.title }}</h4>
                                 <div class="home-video-details">{{ video.numberOfView }} vues • publiée
                                     le {{ video.createdAt|date("d/m/Y") }}</div>
@@ -148,28 +184,31 @@
             {% endfor %}
         </div>
         <div class="home-section-head d-flex justify-content-between mt-5">
-            <h3 class="section-name">Les vidéos réservées aux inscrits</h3>
+            <h3 class="section-name">Réservées aux inscrits</h3>
             <div></div>
             <a href="">
-                <button type="button" class="btn btn-outline-primary">VOIR PLUS</button>
+                <button type="button" class="btn btn-outline-light see-more-button">VOIR PLUS</button>
             </a>
         </div>
         <div class="home-section-line mb-2"></div>
-        <div class="row">
+        <div class="row video-row">
             {% for video in registerVideos %}
                 <div class="col-12 col-md-6 col-lg-4 col-xl-3 single-video">
                     <a href="{{ path('app_watch', {slug : video.slug}) }}"
-                       class="card card-video border-0 bg-transparent mb-4 home-video-link">
                         {% if video.isPrivate and not app.user %}
-                            <img src="{{ asset('build/images/image-private-video.jpg') }}" class="img-fluid mt-2"
-                                 alt="image-private-video">
-                        {% else %}
-                            <video src="{{ asset(video.teaser) }}" type="video/mp4" loop muted
-                                   class="hover-to-play w-100 mt-2">
-                            </video>
+                            data-toggle="modal" data-target="#exampleModal"
                         {% endif %}
+                       class="card card-video border-0 bg-transparent mb-4 home-video-link">
+                        <div class="lock-image-container">
+                            <video src="{{ asset(video.teaser) }}" type="video/mp4" loop muted
+                                   class="w-100 mt-2 private-video d-flex align-self-center hover-to-play">
+                            </video>
+                        </div>
                         <div class="card-video-details d-flex mt-2">
                             <div>
+                                {% if video.isPrivate and not app.user %}
+                                    <i class="fa fa-lock video-private-message"> Réservée aux inscrits</i>
+                                {% endif %}
                                 <h4 class="home-video-title">{{ video.title }}</h4>
                                 <div class="home-video-details">{{ video.numberOfView }} vues • publiée
                                     le {{ video.createdAt|date("d/m/Y") }}</div>
@@ -180,5 +219,4 @@
             {% endfor %}
         </div>
     </div>
-
 {% endblock %}
