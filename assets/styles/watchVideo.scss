@@ -37,9 +37,10 @@
     max-height: 300px;
 }
 
-.watch-like-icon, .like-button, .like-link {
-    text-decoration: none;
-    color: black;
+.like-button {
+    background-color: var(--subBg-color);
+    border-color: var(--element-color);
+    color: var(--element-color);
 }
 
 .watch-like-container {
@@ -62,11 +63,36 @@
     }
 
     .bi-heart-fill {
-        //color: var(--element-color);
         color: red;
     }
 
     .watch-like-icon, .like-button, .like-link {
         text-decoration: none;
     }
+}
+
+.watch-video-container {
+    background-color: var(--subBg-color);
+}
+
+.share-buttons-container {
+    margin-right: 20%;
+}
+
+.share-mail-button {
+    width: 5rem;
+    line-height: 1.2rem;
+    text-align: center;
+    background-color: var(--mainFont-color);
+    color: var(--mainBg-color);
+    border-color: var(--mainBg-color);
+    font-weight: 600;
+}
+
+.share-mail-button:hover {
+    background-color: var(--mainBg-color);
+}
+
+.mail-icon {
+    font-size: 15px;
 }
