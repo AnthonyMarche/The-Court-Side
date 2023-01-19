@@ -5,6 +5,7 @@
 {% block body %}
     <h2 class="text-center mt-4 category-main-title">Recherche : {{ search }}</h2>
 
+    <h4>Nombre de résultats : {{ videos|length }}</h4>
     {# include the videos grid #}
     <div class="container-fluid p-5 py-3">
         <div class="row js-content">
