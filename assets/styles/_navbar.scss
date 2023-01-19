@@ -85,6 +85,39 @@ header {
     border-bottom: 1px solid var(--mainFont-color);
 }
 
+nav .submit-searchBar {
+    margin: 0 0 3px 0;
+}
+
+nav .custom-searchBar {
+    border-radius: 20px 0 0 20px;
+    background-color: var(--subBg-color);
+
+}
+
+nav .custom-searchBar:focus {
+    outline: solid 2px var(--element-color);
+    box-shadow: none;
+    background-color: var(--subBg-color);
+    color: var(--mainFont-color);
+}
+
+nav .btn-searchBar {
+    border-radius: 0 20px 20px 0;
+    background-color: var(--element-color);
+    border-color: var(--title-font);
+}
+
+nav .btn-searchBar:hover {
+    border-radius: 0 20px 20px 0;
+    background-color: var(--subBg-color);
+    border-color: var(--title-font);
+}
+
+nav .searchForm {
+    min-width: 35%;
+}
+
 /* --------------------------------------------- Change language -------------------------------------------- */
 .flag-current-language, .flag-size {
     width: 2.5em;

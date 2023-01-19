@@ -144,4 +144,19 @@ class VideoRepository extends ServiceEntityRepository
             ->getResult()
             ;
     }
+
+    public function findVideosBySearch(string $search): array
+    {
+        return $this->createQueryBuilder('v')
+            ->join('v.tag', 't')
+            ->join('v.category', 'c')
+            ->where('v.title LIKE :search')
+            ->orWhere('t.name LIKE :search')
+            ->orWhere('c.name LIKE :search')
+            ->setParameter('search', '%' . $search . '%')
+            ->orderBy('v.createdAt', 'DESC')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 }
