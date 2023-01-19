@@ -1,13 +1,16 @@
 <nav class="navbar navbar-expand-lg">
-    <a class="navbar-brand" href="{{ path('app_home') }}">The Court Side</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"><i class="fa fa-bars"></i></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
         {# -------NAV-LINKS------- #}
         <ul class="navbar-nav mr-auto col">
+            <li class="nav-item">
+                <a class="navbar-brand" href="{{ path('app_home') }}">The Court Side</a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ path('app_category') }}">Sports</a>
             </li>
@@ -20,12 +23,10 @@
         </ul>
 
         {# -------SEARCHBAR------- #}
-        <div class="input-group col col-lg-3">
-
-        </div>
+        {{ render(controller('App\\Controller\\SearchController::search')) }}
 
         {# -------NAV-LOGIN------- #}
-        <div class="nav-links d-flex justify-content-lg-end align-items-center col">
+        <div class="nav-links d-flex justify-content-around justify-content-lg-end align-items-center col">
             {# -------LANGUAGE CHOICE------- #}
             <div class="dropdown">
                 <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">

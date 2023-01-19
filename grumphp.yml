@@ -9,12 +9,8 @@ grumphp:
             project: '8.0'
         phpcpd:
             directory: [ 'src' ]
-            exclude:
-                - '\src\Controller\Admin'
         phpcs:
             standard: ~
-            exclude:
-                - '\src\Controller\Admin'
         phpstan:
             configuration: ./phpstan.neon
             level: 6
@@ -23,6 +19,5 @@ grumphp:
                 - 'src'
             exclude:
                 - '\src\Kernel.php'
-                - '\src\Controller\Admin'
             ruleset:
                 - 'phpmd.xml'
