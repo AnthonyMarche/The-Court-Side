@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Recherche : {{ search }}{% endblock %}
+
+{% block body %}
+    <h2 class="text-center mt-4 category-main-title">Recherche : {{ search }}</h2>
+
+    {# include the videos grid #}
+    <div class="container-fluid p-5 py-3">
+        <div class="row js-content">
+            {% include '_includes/_videos_grid.html.twig' %}
+        </div>
+    </div>
+{% endblock %}

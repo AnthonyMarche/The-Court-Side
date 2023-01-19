@@ -20,12 +20,7 @@
         </ul>
 
         {# -------SEARCHBAR------- #}
-        <div class="input-group mb-3 mt-auto mb-auto col">
-            <input type="text" class="form-control" placeholder="Recherche...">
-            <div class="input-group-append">
-                <button class="btn btn-info"><i class="bi bi-search"></i></button>
-            </div>
-        </div>
+        {{ render(controller('App\\Controller\\SearchController::search')) }}
 
         {# -------NAV-LOGIN------- #}
         <div class="nav-links d-flex justify-content-around align-items-center justify-content-lg-end col">
