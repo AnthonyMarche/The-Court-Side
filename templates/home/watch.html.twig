@@ -5,33 +5,30 @@
 {% block body %}
     {#  video player section  #}
     <div class="watch-video-container text-center">
-        <div class="watch-video-head d-flex justify-content-between">
-            <h2 class="watch-video-title">{{ video.title }}</h2>
-            <p class="watch-video-release mt-2">publiée le : {{ video.createdAt|date('d/m/Y') }}</p>
-        </div>
         <div class="watch-video-player-container embed-responsive embed-responsive-16by9">
             <video src="{{ asset(video.url) }}" controls
                    class="watch-video-player embed-responsive-item"></video>
         </div>
-
-        <div class="d-flex justify-content-between">
+        <div class="watch-video-head d-flex justify-content-between">
+            <h2 class="watch-video-title text-left">{{ video.title }}</h2>
+            <p class="watch-video-release">publiée le : {{ video.createdAt|date('d/m/Y') }}</p>
+        </div>
+        <div class="d-flex justify-content-between pb-3">
             <div class="watch-like-container text-left d-flex">
                 {% if video.isPrivate and not app.user %}
+                    <button type="button" class="btn btn-sm mt-2 like-button" data-toggle="modal"
+                            data-target="#featureModal">
+                        <i class="bi bi-heart"></i> Like
+                    </button>
+                {% else %}
                     <a class="js-like" href="{{ path('app_watch_like', {id: video.id}) }}">
-                        <button type="button" class="btn btn-light btn-sm mt-2 like-button">
+                        <button type="button" class="btn btn-sm mt-2 like-button">
                             <i class="bi {{ video.isLikedByUser(app.user) ? 'bi-heart-fill' : 'bi-heart' }} js-class-icon"></i>
                             Like
                         </button>
                     </a>
-                {% else %}
-                    <button type="button" class="btn btn-light btn-sm mt-2 like-button" data-toggle="modal"
-                            data-target="#featureModal">
-                        <i class="bi bi-heart"></i> Like
-                    </button>
                 {% endif %}
             </div>
-
-
             <div class=" mt-2 share-buttons-container d-flex">
                 {# SHARE VIDEO #}
                 <div class="tweet-button-container">
@@ -48,28 +45,24 @@
                         Tweet
                     </a>
                 </div>
-
-
                 <div class="mail-button-container ml-2">
                     <a href="mailto:?subject=🤯 Cette vidéo est incroyable ! 🤯&body=Regarde cette vidéo !%0A{{ url }}"
                        class="btn btn-secondary btn-sm rounded-pill share-mail-button">
                         <i class="bi bi-envelope mail-icon"> </i>Mail
                     </a>
                 </div>
-
-
             </div>
         </div>
-
-
         <div class="watch-video-description text-left mt-2">
-            <p><strong>Description :</strong><br>{{ video.description }}</p>
+            <p class="video-description-head">Description :</p>
+            <p class="video-description">{{ video.description }}</p>
         </div>
         <div class="watch-video-tags-container">
-            <div class="watch-video-tags d-flex">
+            <div class="watch-video-tags d-flex pb-5">
                 {% for tag in video.tag %}
                     <a href="{{ path('app_tag', {slug : tag.slug}) }}">
-                        <button type="button" class="btn btn-outline-primary mr-2">#{{ tag.name }}</button>
+                        <button type="button" class="btn btn-outline-primary tag-button btn-sm mr-2">
+                            #{{ tag.name }}</button>
                     </a>
                 {% endfor %}
             </div>
