@@ -71,6 +71,9 @@ class DashboardController extends AbstractDashboardController
             ->setTitle('THE COURT SIDE | Admin');
     }
 
+    /**
+     * @SuppressWarnings(PHPMD)
+     */
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard(
