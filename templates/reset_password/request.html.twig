@@ -7,19 +7,30 @@
     {% for flash_error in app.flashes('reset_password_error') %}
         <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
     {% endfor %}
-    <h1>Reset your password</h1>
 
-    {{ form_start(requestForm) }}
-        {{ form_row(requestForm.email, {'attr':{'class':'form form-control'}}) }}
-        <div>
-            <small>
+        <div class="container mt-3 p-4">
+            <div class="row d-flex justify-content-center">
+                <div class="mb-3 img-fluid col-lg-12 d-flex justify-content-center">
+                    <img src="{{ asset('build/images/TCS_white_logo.png') }}"
+                         alt="Logo The Court Side">
+                </div>
+
+        <div class="mb-3 col-12 col-md-10 col-lg-8">
+            <label for="inputEmail"><h1>Votre adresse email</h1></label>
+            <input type="email"  name="email" id="inputEmail" class="form-control"
+                   autocomplete="email" required autofocus>
+        </div>
+
+        <div class="mb-3 col-12 col-md-10 col-lg-8">
+            <small style="color: white; text-align: center">
                 Enter your email address and we will send you a
                 link to reset your password.
             </small>
         </div>
 
-        <button class="btn btn-primary btn-block">Send password reset email</button>
-    {{ form_end(requestForm) }}
-    </div>
-{% endblock %}
+            <button class="btn btn-lg col-sm-11 col-md-9 col-lg-7 custom-login-connect" type="submit" style="text-align: center">
+                Reset your password
+            </button>
 
+
+{% endblock %}
