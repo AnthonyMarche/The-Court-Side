@@ -4,7 +4,18 @@
 }
 
 .watch-video-player-container {
-    margin: auto;
+    padding-top: 6rem;
+    margin: auto auto 1rem;
+}
+
+.watch-video-release {
+    color: var(--subFont-color);
+    font-family: var(--text-font);
+    font-size: .9rem;
+    font-style: italic;
+    word-break: keep-all;
+    width: 40%;
+    text-align: right;
 }
 
 .watch-video-head {
@@ -37,9 +48,28 @@
     max-height: 300px;
 }
 
-.watch-like-icon, .like-button, .like-link {
-    text-decoration: none;
-    color: black;
+.like-button {
+    background-color: var(--subBg-color);
+    border-color: var(--element-color);
+    color: var(--element-color);
+}
+
+.like-button:hover {
+    background-color: var(--element-color);
+    color: var(--mainFont-color);
+    border: var(--element-color);
+
+    .bi-heart-fill {
+        color: var(--mainFont-color);
+    }
+}
+
+.like-button:focus {
+    box-shadow: none;
+}
+
+.bi-heart-fill {
+    color: var(--element-color);
 }
 
 .watch-like-container {
@@ -47,26 +77,57 @@
     margin-right: 20%;
 }
 
-.bi-heart-fill {
-    //color: var(--element-color);
-    color: red;
+.watch-video-container {
+    background-color: var(--subBg-color);
 }
 
-.add-like-text {
-    margin-top: 12px;
+.share-buttons-container {
+    margin-right: 20%;
 }
 
-.like-button:hover {
-    .watch-like-icon {
-        color: red;
-    }
+.share-mail-button {
+    width: 5rem;
+    line-height: 1.2rem;
+    text-align: center;
+    background-color: var(--mainFont-color);
+    color: var(--mainBg-color);
+    border-color: var(--mainBg-color);
+    font-weight: 600;
+}
 
-    .bi-heart-fill {
-        //color: var(--element-color);
-        color: red;
-    }
+.share-mail-button:hover {
+    background-color: var(--mainBg-color);
+}
 
-    .watch-like-icon, .like-button, .like-link {
-        text-decoration: none;
-    }
+.mail-icon {
+    font-size: 15px;
+}
+
+.video-description-head {
+    font-weight: bold;
+    color: var(--mainFont-color);
+    margin-bottom: 0;
+}
+
+.video-description {
+    color: var(--subFont-color);
+}
+
+.watch-video-title {
+    color: var(--mainFont-color);
+    font-family: var(--title-font);
+    font-size: 1.5rem;
+}
+
+.tag-button {
+    background-color: var(--subBg-color);
+    border-color: var(--element-color);
+    color: var(--element-color);
+    border-radius: 1rem;
+}
+
+.tag-button:hover {
+    background-color: var(--element-color);
+    border-color: var(--subBg-color);
+    color: var(--mainFont-color);
 }

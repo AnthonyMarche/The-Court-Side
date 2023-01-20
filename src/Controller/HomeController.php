@@ -39,6 +39,11 @@ class HomeController extends AbstractController
     #[Route('/watch/{slug}', name: 'watch')]
     public function watch(Video $video): Response
     {
+        //prevent the video to be seen by an unsubscribed user
+        if ($video->isIsPrivate() === true && $this->getUser() === null) {
+            throw $this->createNotFoundException('access denied');
+        }
+
         return $this->render('home/watch.html.twig', [
             'video' => $video
         ]);

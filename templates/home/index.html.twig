@@ -4,35 +4,11 @@
 
 {% block body %}
     {#  modal priavte video #}
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Vidéo résérvées aux inscrits</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <i class="fa fa-lock"></i> Désolé ce contenu n'est disponible que pour les utilisateurs
-                    inscrits.<br>
-                    Vous pouvez vous inscrire gratuitement ou vous connectez si vous avez déjà un compte.
-                </div>
-                <div class="modal-footer">
-                    <a href="{{ path('app_user_login') }}">
-                        <button type="button" class="btn btn-secondary">Se connecter</button>
-                    </a>
-                    <a href="{{ path('app_register') }}">
-                        <button type="button" class="btn btn-primary">S'inscrire</button>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
+    {% include '_includes/_modal.html.twig' with {
+        buttons : true
+    } %}
 
-    <!-- home carousel -->
-
+    {# home carousel #}
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -64,7 +40,7 @@
         </a>
     </div>
 
-    <!-- videos -->
+    {# videos #}
 
     <div class="container-fluid p-5 py-3 home-main-container">
         <div class="home-section-head d-flex justify-content-between p-0 mb-0">
@@ -80,7 +56,7 @@
                 <div class="col-12 col-md-6 col-lg-4 col-xl-3 single-video">
                     <a href="{{ path('app_watch', {slug : video.slug}) }}"
                         {% if video.isPrivate and not app.user %}
-                            data-toggle="modal" data-target="#exampleModal"
+                            data-toggle="modal" data-target="#contentModal"
                         {% endif %}
                        class="card card-video border-0 bg-transparent mb-4 home-video-link">
                         <div class="lock-image-container">
@@ -115,7 +91,7 @@
                 <div class="col-12 col-md-6 col-lg-4 col-xl-3 single-video">
                     <a href="{{ path('app_watch', {slug : video.slug}) }}"
                         {% if video.isPrivate and not app.user %}
-                            data-toggle="modal" data-target="#exampleModal"
+                            data-toggle="modal" data-target="#contentModal"
                         {% endif %}
                        class="card card-video border-0 bg-transparent mb-4 home-video-link">
                         <div class="lock-image-container">
@@ -139,8 +115,7 @@
         </div>
     </div>
 
-    <!-- middle image-->
-
+    {#  middle image  #}
     <div class="home-middle-image-container">
         <img src="{{ asset('build/images/home-middle-image.jpg') }}" class="shadow-lg img-fluid home-middle-image"
              alt="home middle image">
@@ -161,7 +136,7 @@
                 <div class="col-12 col-md-6 col-lg-4 col-xl-3 single-video">
                     <a href="{{ path('app_watch', {slug : video.slug}) }}"
                         {% if video.isPrivate and not app.user %}
-                            data-toggle="modal" data-target="#exampleModal"
+                            data-toggle="modal" data-target="#contentModal"
                         {% endif %}
                        class="card card-video border-0 bg-transparent mb-4 home-video-link">
                         <div class="lock-image-container">
@@ -196,7 +171,7 @@
                 <div class="col-12 col-md-6 col-lg-4 col-xl-3 single-video">
                     <a href="{{ path('app_watch', {slug : video.slug}) }}"
                         {% if video.isPrivate and not app.user %}
-                            data-toggle="modal" data-target="#exampleModal"
+                            data-toggle="modal" data-target="#contentModal"
                         {% endif %}
                        class="card card-video border-0 bg-transparent mb-4 home-video-link">
                         <div class="lock-image-container">
