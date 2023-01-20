@@ -138,3 +138,27 @@
 .video-private-message {
     color: var(--element-color);
 }
+
+.modal-body {
+    font-family: var(--text-font);
+}
+
+.modal-title {
+    font-family: var(--title-font);
+}
+
+.title-font {
+    font-family: var(--title-font);
+}
+
+.text-font {
+    font-family: var(--text-font);
+}
+
+.text-white {
+    color: var(--mainFont-color);
+}
+
+.text-gray {
+    color: var(--subFont-color);
+}
