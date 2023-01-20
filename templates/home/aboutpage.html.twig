@@ -1,37 +1,56 @@
-{% block title %}About{% endblock %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+        <link rel="stylesheet" href="/assets/styles/aboutpage.css">
+    {% block stylesheets %}
+    {{ encore_entry_link_tags('app') }}
+    {% endblock %}
 
-{% block body %}
+</head>
+<body>
 
-    <div class="allbody">
-        <div class="about-section">
-            <div class="inner-container">
-                <h1>About Us Section</h1>
-                <p class="text">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua. Ut enim ad minim veniam,
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                    pariatur.
-                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-                    est laborum.
-                </p>
-                <div class="skills">
-                    <span>Exclu</span>
-                    <span>Insolite</span>
-                    <span>Moments forts</span>
-                </div>
+<div class="leftBlock"></div>
+<div class="rightBlock"></div>
+
+
+
+    <div class="about-section">
+        <div class="inner-container">
+            <h1>About Us Section</h1>
+            <p class="text">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                et dolore magna aliqua. Ut enim ad minim veniam,
+                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                pariatur.
+                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
+                est laborum.
+            </p>
+            <div class="skills">
+                <span>Exclu</span>
+                <span>Insolite</span>
+                <span>Moments forts</span>
             </div>
         </div>
     </div>
 
+</body>
+</html>
 
 
-    {% block stylesheets %}
-        <link href="{{ asset('styles/aboutpage.scss') }}" type="text/css" rel="stylesheet" />
-    {% endblock %}
 
 
-{% endblock %}
+
+       {#  <link href="{{ asset('styles/aboutpage.scss') }}" type="text/css" rel="stylesheet" /> #}
+
+
+
+
 
 
 

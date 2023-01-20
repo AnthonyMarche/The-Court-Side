@@ -7,33 +7,46 @@
 
 body{
     display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color :#f1f1f1;
+    flex-direction: row;
 }
 
-.about-section{
-    background-size:55%;
-    background: #fdfdfd;
+.leftBlock {
+    position: relative;
+    width: 50vw;
+    height: 100vh;
+    background-image: url('/assets/images/aboutpage.png');
+}
+.rightBlock {
+    position: relative;
+    width: 50vw;
+    height: 100vh;
+    background-color: white;
+}
+
+.about-section {
+    position: absolute;
+    right: 5vw;
+    top: 15vh;
+    height: 70vh;
+    width: 45vw;
+    background-color: lightgrey;
     overflow: hidden;
-    padding: 100px ;
-    background-image: url('../images/aboutpage.png') no-repeat left;;
 }
 
-.inner-container{
-    width:55%;
-    float:right;
+.inner-container {
+    width: 55%;
+    float: right;
     background-color: #fdfdfd;
     padding: 150px;
 }
 
-.inner-container h1{
+.inner-container h1 {
     margin-bottom: 30px;
     font-size: 30px;
     font-weight: 900;
 }
 
-.text{
+.text {
     font-size: 13px;
     color: #545454;
     line-height: 30px;
@@ -42,31 +55,42 @@ body{
 }
 
 .skills {
-    display:flex;
+    display: flex;
     justify-content: space-between;
     font-weight: 700;
     font-size: 13px;
 }
 
-@media screen and (max-width:1200px){
-    .inner-container{
+@media screen and (max-width: 1200px) {
+    .inner-container {
         padding: 80px;
+    }
+    .about-section {
+        background-color: lightgrey;
+
     }
 }
 
-@media screen and (max-width: 1000px){
-    .about-selection{
+@media screen and (max-width: 1000px) {
+    .about-section {
         background-size: 100%;
         padding: 100px 40px;
-    }
-}.inner-container{
-     width: 100%;
- }
+        background-color: lightgrey;
 
-@media screen and (max-width: 600px){
-    .about-section{
-        padding:100px 40px;
     }
-}.inner-container{
-     width: 100%
- }
+}
+
+.inner-container {
+    width: 100%;
+}
+
+@media screen and (max-width: 600px) {
+    .about-section {
+        padding: 100px 40px;
+        background-color: lightgrey;
+    }
+}
+
+.inner-container {
+    width: 100%
+}
