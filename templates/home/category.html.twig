@@ -4,9 +4,8 @@
 
 {% block body %}
     {#  modal  #}
-    {#    {% include '_i' %} #}
-    <div class="chip-container d-flex align-items-center">
-        <strong class="ml-2 mr-2">|</strong>
+    <div class="{% if categories|length > 10 %}js-slick{% endif %} chip-container d-flex align-items-center">
+        <strong class="ml-2 mr-2 distinct-pipe">|</strong>
         {% for category in categories %}
             <div class="chip">
                 <a class="category-link" href="#{{ category.name }}">{{ category.name }}</a>
@@ -16,11 +15,9 @@
     <h2 class="text-center mt-4 category-main-title">Sports</h2>
     {% for category in categories %}
         <div class="category-video-row-container">
-            <div id="{{ category.name }}" class="container-fluid p-5 py-3">
-                <div class="category-section-line mb-2"></div>
+            <div id="{{ category.name }}" class="container-fluid pl-5 pr-5 py-3 mt-5">
                 <div class="d-flex justify-content-between p-0 mb-0">
-                    <div class="category-section-line mb-2"></div>
-                    <h3 class="section-name text-center">{{ category.name }}</h3>
+                    <h3 class="section-name">{{ category.name }}</h3>
                     {% if category.videos|length > 4 %}
                         <a href="{{ path('app_single_category', {slug : category.slug}) }}">
                             <button type="button" class="btn btn-outline-primary see-more-button">VOIR PLUS</button>
