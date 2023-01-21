@@ -3,7 +3,7 @@
  {% block title %}{{ videos[0].category.name }}{% endblock %}
 
 {% block body %}
-    <h2 class="text-center mt-4 category-main-title">{{ videos[0].category.name }}</h2>
+    <h2 class="text-center mt-4 category-main-title text-white">{{ videos[0].category.name }}</h2>
 
     {#        filter button include only if liked videos length is > 1#}
     {% if videos|length > 1 %}
@@ -20,8 +20,4 @@
             {% include '_includes/_videos_grid.html.twig' %}
         </div>
     </div>
-
-{#    footer#}
-
-    {% include '_includes/_main_footer.html.twig' %}
 {% endblock %}
