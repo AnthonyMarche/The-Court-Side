@@ -1,0 +1,59 @@
+{# modal for restricted content #}
+<div class="modal fade" id="contentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="message-modal-title" id="exampleModalLabel"><i class="fa fa-lock"></i> Vidéo résérvées aux inscrits
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="message-modal-body text-center">
+                Désolé ce contenu n'est disponible que pour les utilisateurs inscrits.
+                Vous pouvez vous inscrire gratuitement ou vous connectez si vous avez déjà un compte.
+            </div>
+            <div class="modal-footer">
+                {% if buttons == true %}
+                    <a href="{{ path('app_user_login') }}">
+                        <button type="button" class="btn btn-secondary">Se connecter</button>
+                    </a>
+                    <a href="{{ path('app_register') }}">
+                        <button type="button" class="btn btn-primary">S'inscrire</button>
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{# modal for restricted feature #}
+<div class="modal fade" id="featureModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="message-modal-title" id="exampleModalLabel"><i class="fa fa-lock"></i> Fonctioanlité résérvées aux
+                    inscrits</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="message-modal-body">
+                Désolé cette fonctionalité n'est disponible que pour les utilisateurs inscrits.
+                Vous pouvez vous inscrire gratuitement ou vous connectez si vous avez déjà un compte.
+            </div>
+            <div class="modal-footer">
+                {% if buttons == true %}
+                    <a href="{{ path('app_user_login') }}">
+                        <button type="button" class="btn btn-secondary">Se connecter</button>
+                    </a>
+                    <a href="{{ path('app_register') }}">
+                        <button type="button" class="btn btn-primary">S'inscrire</button>
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>

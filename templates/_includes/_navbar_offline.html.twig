@@ -12,13 +12,13 @@
                 <a class="navbar-brand" href="{{ path('app_home') }}">The Court Side</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ path('app_category') }}">Sports</a>
+                <a class="nav-link" href="{{ path('app_category') }}">{{ 'navbar.categories'|trans }}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ path('app_likes') }}">Mes favoris</a>
+                <a class="nav-link" href="{{ path('app_likes') }}">{{ 'navbar.favorite'|trans }}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">A propos</a>
+                <a class="nav-link" href="#">{{ 'navbar.about'|trans }}</a>
             </li>
         </ul>
 
@@ -55,10 +55,10 @@
                 </ul>
             </div>
             <a class="nav-link" href="{{ path('app_register') }}">
-                <button type="button" class="btn btn-outline-custom">Inscription</button>
+                <button type="button" class="btn btn-outline-custom">{{ 'navbar.register'|trans }}</button>
             </a>
             <a class="nav-link" href="{{ path('app_user_login') }}">
-                <button type="button" class="btn btn-custom">Connexion</button>
+                <button type="button" class="btn btn-custom">{{ 'navbar.login'|trans }}</button>
             </a>
         </div>
     </div>
