@@ -3,12 +3,14 @@ html {
 }
 
 .category-section-line {
-    height: 3px;
-    background: black;
+    height: 1px;
+    background: var(--mainFont-color);
+    border-radius: 10px;
 }
 
 .category-main-title {
     text-decoration: underline;
+    color: var(--mainFont-color);
 }
 
 .category-video-link:hover {
@@ -30,9 +32,8 @@ html {
 }
 
 .chip-container {
-    background-color: #fff;
+    background-color: var(--subBg-color);
     border-top: 1px solid rgba(0, 0, 0, 0.05);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     padding: 10px 15px;
     z-index: 99;
     display: flex;
@@ -42,8 +43,8 @@ html {
     .chip {
         padding: 5px 10px;
         font-size: 12px;
-        background-color: rgba(0, 0, 0, 0.05);
-        border: 1px solid rgba(0, 0, 0, 0.1);
+        background-color: var(--mainBg-color);
+        border: 1px solid var(--mainFont-color);
         white-space: nowrap;
         margin-right: 5px;
         border-radius: 25px;
@@ -57,11 +58,12 @@ html {
 
 .category-link {
     text-decoration: none;
-    color: black;
+    color: var(--mainFont-color);
 }
 
 .category-link:hover {
     text-decoration: none;
+    color: var(--subFont-color);
 }
 
 .arrow {
@@ -107,3 +109,4 @@ html {
         padding: 3px;
     }
 }
+
