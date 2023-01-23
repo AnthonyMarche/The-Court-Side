@@ -1,6 +1,8 @@
 .info-card {
     max-width: 60%;
     margin: 4rem auto;
+    background-color: var(--subBg-color);
+    border-color: var(--mainFont-color);
 }
 
 .info-card-body {
@@ -36,7 +38,7 @@
     justify-content: center;
     position: absolute;
     z-index: 99;
-    background-color: white;
+    background-color: var(--mainBg-color);
 }
 
 .loading-spinner {

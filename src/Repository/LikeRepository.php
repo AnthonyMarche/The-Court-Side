@@ -38,46 +38,4 @@ class LikeRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
-
-    /**
-     * @return Like[] Returns an array of Like objects
-     */
-    public function findVideosLikedByCurrentUserOrderByDate(int $currentUserId): array
-    {
-        return $this->createQueryBuilder('l')
-            ->andWhere('l.user = :user')
-            ->setParameter('user', $currentUserId)
-            ->join('l.video', 'v')
-            ->orderBy('v.createdAt', 'DESC')
-            ->getQuery()
-            ->getResult();
-    }
-
-    /**
-     * @return Like[] Returns an array of Like objects
-     */
-    public function findVideosLikedByCurrentUserOrderByViews(int $currentUserId): array
-    {
-        return $this->createQueryBuilder('l')
-            ->andWhere('l.user = :user')
-            ->setParameter('user', $currentUserId)
-            ->join('l.video', 'v')
-            ->orderBy('v.numberOfView', 'DESC')
-            ->getQuery()
-            ->getResult();
-    }
-
-    /**
-     * @return Like[] Returns an array of Like objects
-     */
-    public function findVideosLikedByCurrentUserOrderByLikes(int $currentUserId): array
-    {
-        return $this->createQueryBuilder('l')
-            ->andWhere('l.user = :user')
-            ->setParameter('user', $currentUserId)
-            ->join('l.video', 'v')
-            ->orderBy('v.numberOfLike', 'DESC')
-            ->getQuery()
-            ->getResult();
-    }
 }
