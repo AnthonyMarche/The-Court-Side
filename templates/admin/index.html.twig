@@ -18,6 +18,7 @@
                     <h5 class="card-title text-center mb-2">7 derniers jours</h5>
                     <p class="card-text">Nouveaux inscrits : {{ users_from_past_seven_days[0][1] }}</p>
                     <p class="card-text">Vidéos ajoutées : {{ videos_from_past_seven_days[0][1] }}</p>
+                    <p class="card-text">Derniers likes : {{ likes_from_past_seven_days[0][1] }}</p>
                 </div>
             </div>
             <div class="card col-12 col-sm-6 col-lg-3">
@@ -25,18 +26,19 @@
                     <h5 class="card-title text-center mb-2">30 derniers jours</h5>
                     <p class="card-text">Nouveaux inscrits : {{ users_from_past_thirty_days[0][1] }}</p>
                     <p class="card-text">Vidéos ajoutées : {{ videos_from_past_thirty_days[0][1] }}</p>
+                    <p class="card-text">Derniers likes : {{ likes_from_past_thirty_days[0][1] }}</p>
                 </div>
             </div>
             <div class="card col-12 col-sm-6 col-lg-3">
                 <div class="card-body">
                     <h5 class="card-title text-center mb-2">Catégories avec le plus de likes</h5>
-                    <p class="card-text">Basketball : </p>
-                    <p class="card-text">Football : </p>
-                    <p class="card-text">Tennis : </p>
-                    <p class="card-text">Hockey sur glace : </p>
+                    {% for top_category in most_liked_categories %}
+                    <p class="card-text">{{ top_category.name }} : {{ top_category.totalLikes }}</p>
+                    {% endfor %}
                 </div>
             </div>
         </div>
+        {# --- GRAPHS ---#}
         <div class="row pt-4">
             <div class="card col-12 col-sm-6">
                 <div class="card-body">
