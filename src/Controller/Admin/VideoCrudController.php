@@ -36,6 +36,7 @@ class VideoCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
+            ->overrideTemplate('crud/new', 'admin/new.html.twig')
             ->setEntityLabelInSingular(new TranslatableMessage('entity.video', ['parameter' => 'value'], 'admin'))
             ->setEntityLabelInPlural(new TranslatableMessage('entity.videos', ['parameter' => 'value'], 'admin'))
             ->setPageTitle(
@@ -185,7 +186,7 @@ class VideoCrudController extends AbstractCrudController
 
         unlink($video);
         if ($teaser != null) {
-            unlink($video);
+            unlink($teaser);
         }
 
         $entityManager->remove($entityInstance);
