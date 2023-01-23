@@ -54,7 +54,9 @@
 
 {# -------FOOTER------- #}
 <footer>
-    {% include '_includes/_main_footer.html.twig' %}
+    {% block footer %}
+        {% include '_includes/_main_footer.html.twig' %}
+    {% endblock %}
 </footer>
 
 {# -------SCRIPTS------- #}

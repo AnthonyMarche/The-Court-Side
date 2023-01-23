@@ -4,10 +4,10 @@
 
 {% block body %}
     {% if app.user %}
-        <h2 class="text-center mt-4 category-main-title">Mes favoris</h2>
+        <h2 class="text-center mt-4 category-main-title text-white title-font">Mes favoris</h2>
 
         {#    message in case the user has no video liked    #}
-        {% if likedVideos is empty %}
+        {% if videos is empty %}
             {% include '_includes/_info_card.html.twig' with {
                 'text' : 'Vous n\'avez aucune vidéo dans vos favoris pour l\'instant.
                 Pour en ajouter vous pouvez cliquer sur le bouton \'coeur\' en dessous de chaque vidéo',
@@ -16,7 +16,7 @@
         {% else %}
 
             {# filter button include only if liked videos length is > 1 #}
-            {% if likedVideos|length > 1 %}
+            {% if videos|length > 1 %}
                 {% include '_includes/_filter_button.html.twig' with {
                     recent : path('app_likes', { sort : 'recent'}),
                     likes : path('app_likes', { sort : 'likes'}),
@@ -28,7 +28,7 @@
             {#    video grid include    #}
             <div class="container-fluid p-5 py-3">
                 <div class="row js-content">
-                    {% include '_includes/_liked_videos.html.twig' %}
+                    {% include '_includes/_videos_grid.html.twig' %}
                 </div>
             </div>
         {% endif %}
@@ -41,9 +41,6 @@
             'title' : 'Mes favoris',
             'buttons' : 'true'} %}
     {% endif %}
-
-    {# footer #}
-    {% include '_includes/_main_footer.html.twig' %}
 {% endblock %}
 
 
