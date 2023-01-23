@@ -14,8 +14,8 @@ entity.tag: Tag
 entity.tags: Tags
 entity.user: Utilisateur
 entity.users: Utilisateurs
-entity.video: Video
-entity.videos: Videos
+entity.video: Vidéo
+entity.videos: Vidéos
 entity.listOfVideos: 'Liste des vidéos'
 entity.listOfCategories: 'Liste des catégories'
 entity.listOfTags: 'Liste des tags'
