@@ -136,6 +136,10 @@ class VideoCrudController extends AbstractCrudController
         $user = $this->getUser();
         $entityInstance->setUser($user);
 
+        if (!$entityInstance->getTeaser()) {
+            $entityInstance->setTeaser($entityInstance->getUrl());
+        }
+
         $slug = $this->slugger->slug($entityInstance->getTitle());
         $entityInstance->setSlug($slug);
 
@@ -148,6 +152,7 @@ class VideoCrudController extends AbstractCrudController
         $video = new Video();
 
         $video->setNumberOfView(0);
+        $video->setNumberOfLike(0);
         $video->setCreatedAt(new DateTime());
 
         return $video;

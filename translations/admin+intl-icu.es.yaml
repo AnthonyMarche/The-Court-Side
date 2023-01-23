@@ -27,5 +27,5 @@ entity.name: Nombre
 entity.username: 'Nombre de usuario'
 entity.role: Rol
 entity.createdAt: 'Creado el'
-dashboard.usersList: lista de usuarios
-dashboard.export: Exportar lista de usuarios
+dashboard.usersList: 'lista de usuarios'
+dashboard.export: 'Exportar lista de usuarios'

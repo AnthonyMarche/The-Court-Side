@@ -1,10 +1,10 @@
 <div class="input-group col col-lg-3 d-flex justify-content-center searchForm">
     <div>
-        {{ form_start(form, {'action': path('app_search')}) }}
-        {{ form_widget(form, {'attr': {'class': 'form-control custom-searchBar pr-lg-5', 'placeholder': 'Recherche...'}}) }}
+        {{ form_start(searchForm, {'action': path('app_search')}) }}
+        {{ form_widget(searchForm, {'attr': {'class': 'form-control custom-searchBar pr-lg-5', 'placeholder': 'Recherche...'}}) }}
     </div>
     <div class="input-group-append submit-searchBar">
         <button class="btn btn-primary btn-searchBar"><i class="bi bi-search"></i></button>
     </div>
-    {{ form_end(form) }}
+    {{ form_end(searchForm) }}
 </div>

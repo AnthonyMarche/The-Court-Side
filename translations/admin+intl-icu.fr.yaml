@@ -1,6 +1,6 @@
 dashboard.dashboard: 'Tableau de bord'
-dashboard.usersList: Liste des utilisateurs
-dashboard.export: Exporter la liste des utilisateurs
+dashboard.usersList: 'Liste des utilisateurs'
+dashboard.export: 'Exporter la liste des utilisateurs'
 dashboard.videosList: 'Liste des vidéos'
 dashboard.newVideo: 'Nouvelle vidéo'
 dashboard.categoriesList: 'Liste des catégories'
