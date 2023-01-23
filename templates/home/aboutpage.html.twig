@@ -1,55 +1,60 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-        <link rel="stylesheet" href="/assets/styles/aboutpage.css">
-    {% block stylesheets %}
+    <!-- link to css -->
+    <link rel ="stylesheet" href="aboutpage.scss" >
+
+{% block stylesheets %}
     {{ encore_entry_link_tags('app') }}
     {% endblock %}
-
 </head>
 <body>
 
-<div class="leftBlock"></div>
-<div class="rightBlock"></div>
 
+<section class="about-us">
+    <div class="images">
+        <div class="main-img">
+            <img src="{{ asset('build/images/swimming.png') }}">
+        </div>
+        <div class="second-img">
+            <img src="{{ asset('build/images/TCS_white_logo.png') }}">
+        </div>
+    </div>
 
+    <div class="text">
+        <h4>ABOUT US</h4>
+        <h1>We Guarantee Your Business <br> Success- Love to Help you</h1>
+        <hr>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </p>
 
-    <div class="about-section">
-        <div class="inner-container">
-            <h1>About Us Section</h1>
-            <p class="text">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                et dolore magna aliqua. Ut enim ad minim veniam,
-                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                pariatur.
-                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-                est laborum.
-            </p>
-            <div class="skills">
-                <span>Exclu</span>
-                <span>Insolite</span>
-                <span>Moments forts</span>
+        <div class  ="last-text">
+            <div class="text1">
+                <h3>500+</h3>
+                <h5>Projects Done</h5>
+            </div>
+
+            <div class="text2">
+                <h3>20K</h3>
+                <h5>Happy Clients</h5>
             </div>
         </div>
     </div>
 
+</section>
+
+
+
 </body>
 </html>
-
-
-
-
-
-       {#  <link href="{{ asset('styles/aboutpage.scss') }}" type="text/css" rel="stylesheet" /> #}
-
-
-
 
 
 
