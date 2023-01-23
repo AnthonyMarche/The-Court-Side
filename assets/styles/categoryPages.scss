@@ -3,12 +3,14 @@ html {
 }
 
 .category-section-line {
-    height: 3px;
-    background: black;
+    height: 1px;
+    background: var(--mainFont-color);
+    border-radius: 10px;
 }
 
 .category-main-title {
     text-decoration: underline;
+    color: var(--mainFont-color);
 }
 
 .category-video-link:hover {
@@ -30,20 +32,24 @@ html {
 }
 
 .chip-container {
-    background-color: #fff;
-    border-top: 1px solid rgba(0, 0, 0, 0.05);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    background-color: var(--subBg-color);
+    border-bottom: 1px solid var(--mainFont-color);
+    border-right: 1px solid var(--mainFont-color);
+    border-left: 1px solid var(--mainFont-color);
     padding: 10px 15px;
     z-index: 99;
     display: flex;
     justify-content: center;
-    width: 100%;
+    width: 60%;
+    margin: auto;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
 
     .chip {
         padding: 5px 10px;
         font-size: 12px;
-        background-color: rgba(0, 0, 0, 0.05);
-        border: 1px solid rgba(0, 0, 0, 0.1);
+        background-color: var(--mainBg-color);
+        border: 1px solid black;
         white-space: nowrap;
         margin-right: 5px;
         border-radius: 25px;
@@ -52,20 +58,26 @@ html {
     &.chip-container--fixed {
         position: fixed;
         top: 0;
+        left: 20%;
+    }
+
+    .distinct-pipe {
+        color: var(--mainFont-color);
     }
 }
 
 .category-link {
     text-decoration: none;
-    color: black;
+    color: var(--mainFont-color);
 }
 
 .category-link:hover {
     text-decoration: none;
+    color: var(--element-color);
 }
 
 .arrow {
-    border: solid black;
+    border: solid var(--mainFont-color);
     border-width: 0 5px 5px 0;
     display: inline-block;
     padding: 3px;
@@ -107,3 +119,4 @@ html {
         padding: 3px;
     }
 }
+
