@@ -71,7 +71,7 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
                     <div class="d-flex flex-column">
-                        {% if 'ROLE_ADMIN' in app.user.getroles() %}
+                        {% if is_granted('ROLE_ADMIN') %}
                             <a href="{{ path('admin') }}">
                                 <i class="bi bi-person-fill-gear"></i> {{ 'navbar.admin'|trans }}
                             </a>
