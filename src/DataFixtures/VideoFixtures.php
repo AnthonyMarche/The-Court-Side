@@ -46,7 +46,7 @@ class VideoFixtures extends Fixture implements DependentFixtureInterface
             $video->setDescription($faker->paragraphs(1, true));
             $video->setIsPrivate($faker->boolean);
             $video->setNumberOfView($faker->numberBetween(8, 1052));
-            $video->setNumberOfLike(0);
+            $video->setNumberOfLike($faker->numberBetween(0, 100));
             $video->setUrl("build/fixturesVideos/Recreated memes ( Then vs Now ) Part 3.mp4");
             $video->setTeaser("build/fixturesVideos/test-video-teaser.mp4");
             $video->setCategory($this->getReference('category_' . self::CATEGORIES[$faker->numberBetween(0, 9)]));
