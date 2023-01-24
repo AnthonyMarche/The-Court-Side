@@ -13,9 +13,11 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\Translation\TranslatableMessage;
 
+#[IsGranted('ROLE_ADMIN')]
 class VideoCrudController extends AbstractCrudController
 {
     private const PATHVIDEO = 'uploads/videos';
