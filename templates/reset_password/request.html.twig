@@ -8,6 +8,7 @@
             <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
         {% endfor %}
 
+
         <div class = "container">
             <div class="mb-3 img-fluid col-lg-12 d-flex justify-content-center">
                 <img src="{{ asset('build/images/TCS_white_logo.png') }}"
@@ -18,17 +19,20 @@
 
             <div class="text-center"><p class="h5"></p></div>
             {{ form_row(requestForm.email, {'attr':{'class':'form form-control'}}) }}
+            
             <small style="color: white; text-align: center">
                 Enter your email address and we will send you a
                 link to reset your password.
             </small>
         </div>
+
         <hr>
         <div class="d-flex justify-content-around mb-3">
             <button class="btn btn-info">{{ button_label|default('Reset your password') }}</button>
             <a href="{{ path('app_forgot_password_request')}}"></a>
 
         </div>
+
     </div>
     {{ form_end(requestForm) }}
 {% endblock %}
