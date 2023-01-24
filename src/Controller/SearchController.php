@@ -14,21 +14,21 @@ class SearchController extends AbstractController
     #[Route('/search', name: 'app_search')]
     public function search(Request $request, VideoRepository $videoRepository): Response
     {
-        $form = $this->createForm(SearchType::class);
+        $searchForm = $this->createForm(SearchType::class);
 
-        $form->handleRequest($request);
+        $searchForm->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $videos = $videoRepository->findVideosBySearch($form->getData());
+        if ($searchForm->isSubmitted() && $searchForm->isValid()) {
+            $videos = $videoRepository->findVideosBySearch($searchForm->getData());
 
             return $this->render('home/search_results.html.twig', [
                 'videos' => $videos,
-                'search' => $form->getData()
+                'search' => $searchForm->getData()
             ]);
         }
 
         return $this->render('_includes/_searchForm.html.twig', [
-            'form' => $form->createView()
+            'searchForm' => $searchForm->createView()
         ]);
     }
 }

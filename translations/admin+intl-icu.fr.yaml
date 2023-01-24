@@ -1,6 +1,6 @@
 dashboard.dashboard: 'Tableau de bord'
-dashboard.usersList: Liste des utilisateurs
-dashboard.export: Exporter la liste des utilisateurs
+dashboard.usersList: 'Liste des utilisateurs'
+dashboard.export: 'Exporter la liste des utilisateurs'
 dashboard.videosList: 'Liste des vidéos'
 dashboard.newVideo: 'Nouvelle vidéo'
 dashboard.categoriesList: 'Liste des catégories'
@@ -14,8 +14,8 @@ entity.tag: Tag
 entity.tags: Tags
 entity.user: Utilisateur
 entity.users: Utilisateurs
-entity.video: Video
-entity.videos: Videos
+entity.video: Vidéo
+entity.videos: Vidéos
 entity.listOfVideos: 'Liste des vidéos'
 entity.listOfCategories: 'Liste des catégories'
 entity.listOfTags: 'Liste des tags'
