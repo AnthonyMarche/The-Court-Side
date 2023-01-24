@@ -27,7 +27,7 @@ if (document.querySelector('.chip-container')){
 }
 
 // slideshow navbar
-$('.chip-container').slick({
+$('.js-slick').slick({
     sideToShow: 12,
     slideToScroll: 5,
     arrows: true,

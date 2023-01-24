@@ -81,8 +81,7 @@ class VideoRepository extends ServiceEntityRepository
             ->setParameter('slug', $slug)
             ->orderBy('v.numberOfView', 'DESC')
             ->getQuery()
-            ->getResult()
-            ;
+            ->getResult();
     }
 
     public function findCategoryVideosOrderByLikes(string $slug): array
@@ -93,8 +92,7 @@ class VideoRepository extends ServiceEntityRepository
             ->setParameter('slug', $slug)
             ->orderBy('v.numberOfLike', 'DESC')
             ->getQuery()
-            ->getResult()
-            ;
+            ->getResult();
     }
 
     public function findCategoryVideosOrderByDate(string $slug): array
@@ -105,44 +103,36 @@ class VideoRepository extends ServiceEntityRepository
             ->setParameter('slug', $slug)
             ->orderBy('v.createdAt', 'DESC')
             ->getQuery()
-            ->getResult()
-            ;
+            ->getResult();
     }
 
-    public function findTagVideosOrderByViews(string $slug): array
+    public function findOrderedTagVideos(string $sort, string $slug): array
     {
-        return $this->createQueryBuilder('v')
-            ->join('v.tag', 't')
-            ->andWhere('t.slug = :slug')
-            ->setParameter('slug', $slug)
-            ->orderBy('v.numberOfView', 'DESC')
-            ->getQuery()
-            ->getResult()
-            ;
-    }
-
-    public function findTagVideosOrderByLikes(string $slug): array
-    {
-        return $this->createQueryBuilder('v')
-            ->join('v.tag', 't')
-            ->andWhere('t.slug = :slug')
-            ->setParameter('slug', $slug)
-            ->orderBy('v.numberOfLike', 'DESC')
-            ->getQuery()
-            ->getResult()
-            ;
-    }
-
-    public function findTagVideosOrderByDate(string $slug): array
-    {
-        return $this->createQueryBuilder('v')
-            ->join('v.tag', 't')
-            ->andWhere('t.slug = :slug')
-            ->setParameter('slug', $slug)
-            ->orderBy('v.createdAt', 'DESC')
-            ->getQuery()
-            ->getResult()
-            ;
+        if ($sort === 'recent') {
+            return $this->createQueryBuilder('v')
+                ->join('v.tag', 't')
+                ->andWhere('t.slug = :slug')
+                ->setParameter('slug', $slug)
+                ->orderBy('v.createdAt', 'DESC')
+                ->getQuery()
+                ->getResult();
+        } elseif ($sort === 'views') {
+            return $this->createQueryBuilder('v')
+                ->join('v.tag', 't')
+                ->andWhere('t.slug = :slug')
+                ->setParameter('slug', $slug)
+                ->orderBy('v.numberOfView', 'DESC')
+                ->getQuery()
+                ->getResult();
+        } else {
+            return $this->createQueryBuilder('v')
+                ->join('v.tag', 't')
+                ->andWhere('t.slug = :slug')
+                ->setParameter('slug', $slug)
+                ->orderBy('v.numberOfLike', 'DESC')
+                ->getQuery()
+                ->getResult();
+        }
     }
 
     public function findVideosBySearch(string $search): array
@@ -156,7 +146,38 @@ class VideoRepository extends ServiceEntityRepository
             ->setParameter('search', '%' . $search . '%')
             ->orderBy('v.createdAt', 'DESC')
             ->getQuery()
-            ->getResult()
-            ;
+            ->getResult();
+    }
+
+    /**
+     * @return Video[] Returns an array of Like objects
+     */
+    public function findOrderedVideosLikedByCurrentUser(string $sort, int $currentUserId): array
+    {
+        if ($sort === 'recent') {
+            return $this->createQueryBuilder('v')
+                ->join('v.likes', 'l')
+                ->andWhere('l.user = :user')
+                ->setParameter('user', $currentUserId)
+                ->orderBy('v.createdAt', 'DESC')
+                ->getQuery()
+                ->getResult();
+        } elseif ($sort === 'views') {
+            return $this->createQueryBuilder('v')
+                ->join('v.likes', 'l')
+                ->andWhere('l.user = :user')
+                ->setParameter('user', $currentUserId)
+                ->orderBy('v.numberOfView', 'DESC')
+                ->getQuery()
+                ->getResult();
+        } else {
+            return $this->createQueryBuilder('v')
+                ->join('v.likes', 'l')
+                ->andWhere('l.user = :user')
+                ->setParameter('user', $currentUserId)
+                ->orderBy('v.numberOfLike', 'DESC')
+                ->getQuery()
+                ->getResult();
+        }
     }
 }

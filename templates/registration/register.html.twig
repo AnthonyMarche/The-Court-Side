@@ -1,21 +1,63 @@
 {% extends 'base.html.twig' %}
 
+
 {% block title %}Register{% endblock %}
 
 {% block body %}
+    <form class="login-form" method="post">
     {% for flash_error in app.flashes('verify_email_error') %}
         <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
     {% endfor %}
 
-    <h1>Register</h1>
+
+    <div class="mb-3 img-fluid col-lg-12 d-flex justify-content-center">
+        <img src="{{ asset('build/images/TCS_white_logo.png') }}"
+             alt="Logo The Court Side">
+    </div>
 
     {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
 
-        <button type="submit" class="btn">Register</button>
+    <div class="text-center"><p class="h5"></p></div>
+    <div>
+        {{ form_label(registrationForm.username, 'Nom d\'utilisateur :') }}
+        {{ form_widget(registrationForm.username, {'attr': {'class': 'form-control mb-3'}}) }}
+
+    </div>
+    <hr>
+
+    <div class="text-center"><p class="h5"></p></div>
+    <div>
+        {{ form_errors(registrationForm) }}
+
+        {{ form_label(registrationForm.email, 'Adresse email :') }}
+        {{ form_widget(registrationForm.email, {'attr': {'class': 'form-control mb-3'}}) }}
+    </div>
+
+
+    <div class="text-center"><p class="h5"></p></div>
+    <div>
+        {{ form_label(registrationForm.plainPassword, 'Mot de passe :') }}
+        {{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'form-control mb-3'}}) }}
+
+    </div>
+
+
+    <div class="text-center"><p class="h5"></p></div>
+    <div class="mb-3">
+        {{ form_label(registrationForm.agreeTerms, 'Agree terms & conditions:') }}
+        {{ form_widget(registrationForm.agreeTerms, {'attr': {'class': 'form-check-input ml-2 mb-3'}}) }}
+    </div>
+
+
+    <div class="d-flex justify-content-around mb-3">
+        <button class="btn btn-info">{{ button_label|default('Inscrivez-vous') }}</button>
+        <a href="{{ path('app_register') }}"></a>
+    </div>
+
+
+
     {{ form_end(registrationForm) }}
+
+
+
 {% endblock %}

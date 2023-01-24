@@ -119,15 +119,15 @@ class HomeController extends AbstractController
             //handle ajax request
             if ($request->isXmlHttpRequest()) {
                 return new JsonResponse([
-                    'content' => $this->renderView('_includes/_liked_videos.html.twig', [
-                        'likedVideos' => $filter->getOrderedLikedVideos($sort, $currentUserId),
+                    'content' => $this->renderView('_includes/_videos_grid.html.twig', [
+                        'videos' => $filter->getOrderedLikedVideos($sort, $currentUserId),
                     ])
                 ]);
             }
         }
 
         return $this->render('home/likes.html.twig', [
-            'likedVideos' => $likedVideos
+            'videos' => $likedVideos
         ]);
     }
 
