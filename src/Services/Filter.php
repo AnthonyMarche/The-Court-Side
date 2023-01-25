@@ -43,4 +43,9 @@ class Filter
     {
         return $this->videoRepository->findOrderedTagVideos($filter, $slug);
     }
+
+    public function getOrderedVideosBySearch(string $filter, string $search): array
+    {
+        return $this->videoRepository->findOrderedVideosBySearch($filter, $search);
+    }
 }

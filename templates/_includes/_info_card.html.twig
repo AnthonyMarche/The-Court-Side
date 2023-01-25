@@ -1,9 +1,9 @@
 <div class="info-card card">
     <div class="info-card-body card-body text-center info-card-body">
         <h5 class="card-title mt-5 text-white title-font">{{ title }}</h5>
-        <p class="card-text text-gray text-font">{{ text }}</p>
+        <p class="card-text text-gray text-font mb-5">{{ text }}</p>
         {% if buttons == 'true' %}
-            <div class="info-card-buttons-container d-flex justify-content-center mt-5">
+            <div class="info-card-buttons-container d-flex justify-content-center mb-5">
                 <a href="#" class="btn btn-outline-info">S'inscrire</a>
                 <a href="{{ path('app_user_login') }}" class="btn btn-primary">Se connecter</a>
             </div>
