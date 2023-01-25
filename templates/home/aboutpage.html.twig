@@ -1,25 +1,21 @@
 
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+
 
     <!-- link to css -->
-    <link rel="stylesheet" href="aboutpage.scss">
+    {% block head %}
+    <link rel="stylesheet" href="{{ asset('styles/aboutpage.scss') }}"/>
+    {% endblock %}
+
     {% block stylesheets %}
         {{ encore_entry_link_tags('app') }}
     {% endblock %}
 
 
-</head>
-<body>
 
+{% block body %}
 
-<div class="allform">
+    <div class="allform">
     <section class="about-us">
         <div class="images">
             <div class="main-img">
@@ -60,9 +56,9 @@
     </section>
 </div>
 
+    {% endblock %}
 
-</body>
-</html>
+
 
 
 
