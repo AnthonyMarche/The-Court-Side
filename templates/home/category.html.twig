@@ -7,7 +7,6 @@
     {% include '_includes/_modal.html.twig' with {
         buttons : true
     } %}
-
     <div class="{% if categories|length > 10 %}js-slick{% endif %} chip-container d-flex align-items-center">
         <strong class="ml-2 mr-2 distinct-pipe">|</strong>
         {% for category in categories %}
@@ -19,7 +18,7 @@
     <h2 class="text-center mt-4 category-main-title">Sports</h2>
     {% for category in categories %}
         <div class="category-video-row-container">
-            <div id="{{ category.name }}" class="container-fluid pl-5 pr-5 py-3 mt-5">
+            <div id="{{ category.name }}" class="container-fluid p-5 py-3 home-main-container">
                 <div class="d-flex justify-content-between p-0 mb-0">
                     <h3 class="section-name">{{ category.name }}</h3>
                     {% if category.videos|length > 4 %}
@@ -29,9 +28,9 @@
                     {% endif %}
                 </div>
                 <div class="category-section-line mb-2"></div>
-                <div class="row">
-                    {% for video in category.videos[:4] %}
-                        <div class="col-12 col-md-6 col-lg-4 col-xl-3 single-video">
+                <div class="row d-flex flex-nowrap {% if category.videos|length > 4 %}js-video-slick{% endif %}">
+                    {% for video in category.videos[:8] %}
+                        <div class="col-12 col-md-6 col-lg-4 col-xl-3 single-video grow">
                             <a href="{{ path('app_watch', {slug : video.slug}) }}"
                                 {% if video.isPrivate and not app.user %}
                                     data-toggle="modal" data-target="#contentModal"
