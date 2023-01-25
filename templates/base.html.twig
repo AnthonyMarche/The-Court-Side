@@ -54,8 +54,11 @@
 
 {# -------FOOTER------- #}
 <footer>
-    {% include '_includes/_main_footer.html.twig' %}
+    {% block footer %}
+        {% include '_includes/_main_footer.html.twig' %}
+    {% endblock %}
 </footer>
+
 
 {# -------SCRIPTS------- #}
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
