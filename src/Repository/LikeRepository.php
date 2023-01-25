@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Like;
+use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -79,5 +80,37 @@ class LikeRepository extends ServiceEntityRepository
             ->orderBy('v.numberOfLike', 'DESC')
             ->getQuery()
             ->getResult();
+    }
+
+    /**
+     *  Get all videos added less than 7 days ago ('created_at')
+     * @return float|int|mixed[]|string
+     */
+    public function getLikesAddedInPast7Days()
+    {
+        $entityManager = $this->getEntityManager();
+        $query = $entityManager->createQuery(
+            'SELECT COUNT(l.id)
+            FROM App\Entity\Like l
+            WHERE l.createdAt > :date'
+        )->setParameter('date', new DateTime('-7 days'));
+
+        return $query->getScalarResult();
+    }
+
+    /**
+     * Get all videos added less than 30 days ago ('created_at')
+     * @return float|int|mixed[]|string
+     */
+    public function getLikesAddedInPast30Days()
+    {
+        $entityManager = $this->getEntityManager();
+        $query = $entityManager->createQuery(
+            'SELECT COUNT(l.id)
+            FROM App\Entity\Like l
+            WHERE l.createdAt > :date'
+        )->setParameter('date', new DateTime('-30 days'));
+
+        return $query->getScalarResult();
     }
 }

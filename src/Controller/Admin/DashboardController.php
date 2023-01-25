@@ -6,6 +6,7 @@ use App\Entity\Category;
 use App\Entity\Tag;
 use App\Entity\User;
 use App\Entity\Video;
+use App\Repository\CategoryRepository;
 use App\Repository\LikeRepository;
 use App\Repository\UserRepository;
 use App\Repository\VideoRepository;
@@ -13,24 +14,29 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Translation\TranslatableMessage;
 
+#[IsGranted('ROLE_ADMIN')]
 class DashboardController extends AbstractDashboardController
 {
     private UserRepository $userRepository;
     private VideoRepository $videoRepository;
     private LikeRepository $likeRepository;
+    private CategoryRepository $categoryRepository;
 
     public function __construct(
         UserRepository $userRepository,
         VideoRepository $videoRepository,
-        LikeRepository $likeRepository
+        LikeRepository $likeRepository,
+        CategoryRepository $categoryRepository,
     ) {
         $this->userRepository = $userRepository;
         $this->videoRepository = $videoRepository;
         $this->likeRepository = $likeRepository;
+        $this->categoryRepository = $categoryRepository;
     }
 
     #[Route('/admin', name: 'admin')]
@@ -44,7 +50,7 @@ class DashboardController extends AbstractDashboardController
         $videos = $this->videoRepository->findAll();
         // récupère le nombre de likes
         $likes = $this->likeRepository->findAll();
-            // récupère le nombre d'utilisateurs enregistrés dans les 7 derniers jours (via le UserRepository)
+        // récupère le nombre d'utilisateurs enregistrés dans les 7 derniers jours (via le UserRepository)
         $usersFromPast7Days = $this->userRepository->getUsersRegisteredInPast7Days();
         // récupère le nombre d'utilisateurs enregistrés dans les 30 derniers jours (via le UserRepository)
         $usersFromPast30Days = $this->userRepository->getUsersRegisteredInPast30Days();
@@ -52,6 +58,12 @@ class DashboardController extends AbstractDashboardController
         $videosFromPast7Days = $this->videoRepository->getVideosAddedInPast7Days();
         // récupère le nombre de videos ajoutées dans les 30 derniers jours (via le VideoRepository)
         $videosFromPast30Days = $this->videoRepository->getVideosAddedInPast30Days();
+        // récupère le nombre de likes enregistrés dans les 7 derniers jours (via le LikeRepository)
+        $likesFromPast7Days = $this->likeRepository->getLikesAddedInPast7Days();
+        // récupère le nombre de likes enregistrés dans les 30 derniers jours (via le LikeRepository)
+        $likesFromPast30Days = $this->likeRepository->getLikesAddedInPast30Days();
+        // récupère les category et comptabilise leurs likes
+        $mostLikedCategories = $this->categoryRepository->getMostLikedCategories();
 
         return $this->render('admin/index.html.twig', [
             'users' => $users,
@@ -61,6 +73,9 @@ class DashboardController extends AbstractDashboardController
             'users_from_past_thirty_days' => $usersFromPast30Days,
             'videos_from_past_seven_days' => $videosFromPast7Days,
             'videos_from_past_thirty_days' => $videosFromPast30Days,
+            'likes_from_past_seven_days' => $likesFromPast7Days,
+            'likes_from_past_thirty_days' => $likesFromPast30Days,
+            'most_liked_categories' => $mostLikedCategories,
         ]);
     }
 
