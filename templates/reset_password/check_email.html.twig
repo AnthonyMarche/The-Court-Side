@@ -4,7 +4,7 @@
 
 {% block body %}
 
-    <div class="mb-3 img-fluid col-lg-12 d-flex justify-content-center"  style="text-align: center">
+    <div class=" mt-3 mb-3 img-fluid col-lg-12 d-flex justify-content-center"  style="text-align: center">
         <img src="{{ asset('build/images/TCS_white_logo.png') }}"
              alt="Logo The Court Side">
     </div>
@@ -12,5 +12,8 @@
         If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password.
         This link will expire in {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.
     </p>
-    <p style="color: white; text-align: center">If you don't receive an email please check your spam folder or <a href="{{ path('app_forgot_password_request') }}">try again</a>.</p>
+    <p style="color: white; text-align: center">If you don't receive an email please check your spam folder or <a href="{{ path('app_forgot_password_request') }}" style="color:  var(--element-color)">try again</a>.</p>
+{% endblock %}
+
+{% block footer %}
 {% endblock %}
