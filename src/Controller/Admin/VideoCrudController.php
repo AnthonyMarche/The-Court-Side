@@ -13,9 +13,11 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\Translation\TranslatableMessage;
 
+#[IsGranted('ROLE_ADMIN')]
 class VideoCrudController extends AbstractCrudController
 {
     private const PATHVIDEO = 'uploads/videos';
@@ -106,13 +108,14 @@ class VideoCrudController extends AbstractCrudController
                 ->setBasePath(self::PATHVIDEO)
                 ->setUploadDir('public/uploads/videos')
                 ->setUploadedFileNamePattern(self::PATHVIDEO . '/[slug]-[timestamp].[extension]')
-                ->setHelp('Fichiers .avi, .mp4, .ogg and .wbm'),
+                ->setHelp(new TranslatableMessage('file.extensions', ['parameter' => 'value'], 'admin')),
 
             ImageField::new('teaser', new TranslatableMessage('entity.teaser', ['parameter' => 'value'], 'admin'))
-                ->onlyWhenCreating()
+                ->onlyOnForms()
                 ->setBasePath(self::PATHTEASER)
                 ->setUploadDir('public/uploads/teasers')
-                ->setUploadedFileNamePattern(self::PATHTEASER . '/teaser-[slug]-[timestamp].[extension]'),
+                ->setUploadedFileNamePattern(self::PATHTEASER . '/teaser-[slug]-[timestamp].[extension]')
+                ->setHelp(new TranslatableMessage('file.extensions', ['parameter' => 'value'], 'admin')),
 
             DateTimeField::new(
                 'createdAt',
@@ -136,10 +139,6 @@ class VideoCrudController extends AbstractCrudController
         /** @var \App\Entity\User */
         $user = $this->getUser();
         $entityInstance->setUser($user);
-
-        if (!$entityInstance->getTeaser()) {
-            $entityInstance->setTeaser($entityInstance->getUrl());
-        }
 
         $slug = $this->slugger->slug($entityInstance->getTitle());
         $entityInstance->setSlug($slug);
@@ -185,7 +184,7 @@ class VideoCrudController extends AbstractCrudController
         $teaser = $entityInstance->getTeaser();
 
         unlink($video);
-        if ($teaser != null) {
+        if ($teaser) {
             unlink($teaser);
         }
 

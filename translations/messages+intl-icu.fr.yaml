@@ -4,7 +4,6 @@ navbar.about: A propos
 navbar.register: Inscription
 navbar.login: Connexion
 navbar.hello: Bonjour
-navbar.seeMore: Voir plus
 navbar.admin: Administrateur
 navbar.profile: Profil
 navbar.logout: Deconnexion

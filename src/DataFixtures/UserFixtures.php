@@ -50,7 +50,7 @@ class UserFixtures extends Fixture
             $user->setPassword($this->passwordHasher->hashPassword($user, 'user'));
             $user->setUsername('user' . $i);
             $user->setCreatedAt($faker->dateTimeBetween('-6 month'));
-            $user->setNewsletter(false);
+            $user->setNewsletter($faker->boolean);
             $manager->persist($user);
             $this->addReference('user_' . $i, $user);
         }

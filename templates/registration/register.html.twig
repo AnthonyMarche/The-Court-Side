@@ -35,11 +35,14 @@
             </div>
 
 
+
             <div class="mb-3 col-12 col-md-10 col-lg-8">
                 {{ form_label(registrationForm.plainPassword, 'Mot de passe ') }}
                 {{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'form-control mb-3'}}) }}
+                
+      </div>
 
-            </div>
+     
 
             <div class="form-check mb-3 col-11 col-md-9 col-lg-7 pl-0">
                 {{ form_widget(registrationForm.agreeTerms) }}

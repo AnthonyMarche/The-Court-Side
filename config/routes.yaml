@@ -8,3 +8,7 @@ controllers:
 kernel:
     resource: ../src/Kernel.php
     type: annotation
+
+index:
+    path: /aboutpage
+    controller: App\Controller\AboutController::aboutpage
