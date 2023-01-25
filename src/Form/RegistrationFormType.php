@@ -3,7 +3,6 @@
 namespace App\Form;
 
 use App\Entity\User;
-use Faker\Provider\Text;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -19,6 +18,8 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            ->add('newsletter', CheckboxType::class, [
+                'required' => false])
             ->add('email')
             ->add('username', TextType::class, [
                 'required' => false,])

@@ -3,13 +3,32 @@
 {% block title %}Recherche : {{ search }}{% endblock %}
 
 {% block body %}
-    <h2 class="text-center mt-4 category-main-title">Recherche : {{ search }}</h2>
+    {% include '_includes/_modal.html.twig' with {
+        buttons : true
+    } %}
+    <h2 class="text-center mt-4 category-main-title title-font">Recherche : {{ search }}</h2>
 
-    <h4>Nombre de résultats : {{ videos|length }}</h4>
-    {# include the videos grid #}
-    <div class="container-fluid p-5 py-3">
-        <div class="row js-content">
-            {% include '_includes/_videos_grid.html.twig' %}
+    {% if videos is not empty %}
+        <p class="results-info">Nombre de résultats : {{ videos|length }}</p>
+
+        {#  include filter button  #}
+        {% include '_includes/_filter_button.html.twig' with {
+            recent : path('app_search', { sort : 'recent', search : search}),
+            likes : path('app_search', { sort : 'likes', search : search}),
+            views : path('app_search', { sort : 'views', search : search})
+        } %}
+        {# include the videos grid #}
+        <div class="container-fluid p-5 py-3">
+            <div class="row js-content">
+                {% include '_includes/_videos_grid.html.twig' %}
+            </div>
         </div>
-    </div>
+    {% else %}
+
+        {% include'_includes/_info_card.html.twig' with {
+            title : 'Aucun résultat',
+            text : 'Désolé aucune vidéo n\'a été trouvée pour cette recherche',
+            buttons : false
+        } %}
+    {% endif %}
 {% endblock %}
