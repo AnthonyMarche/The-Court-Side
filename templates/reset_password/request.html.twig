@@ -8,27 +8,34 @@
             <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
         {% endfor %}
 
-        <div class = "container">
-            <div class="mb-3 img-fluid col-lg-12 d-flex justify-content-center">
+
+            <div class="mt-3 mb-3 img-fluid col-lg-12 d-flex justify-content-center">
                 <img src="{{ asset('build/images/TCS_white_logo.png') }}"
                      alt="Logo The Court Side">
             </div>
 
             {{ form_start(requestForm) }}
 
-            <div class="text-center"><p class="h5"></p></div>
+        <div class="container mt-3 p-4">
+            <div class="row d-flex justify-content-center">
+
+        <div class="mb-3 col-12 col-md-10 col-lg-8">
             {{ form_row(requestForm.email, {'attr':{'class':'form form-control'}}) }}
             <small style="color: white; text-align: center">
                 Enter your email address and we will send you a
                 link to reset your password.
             </small>
         </div>
-        <hr>
-        <div class="d-flex justify-content-around mb-3">
-            <button class="btn btn-info">{{ button_label|default('Reset your password') }}</button>
+
+
+            <button class="btn btn-lg col-sm-11 col-md-9 col-lg-7 custom-login-connect">{{ button_label|default('Reset your password') }}</button>
             <a href="{{ path('app_forgot_password_request')}}"></a>
 
         </div>
     </div>
+        </div>
     {{ form_end(requestForm) }}
+{% endblock %}
+
+{% block footer %}
 {% endblock %}
