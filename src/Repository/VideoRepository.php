@@ -135,18 +135,42 @@ class VideoRepository extends ServiceEntityRepository
         }
     }
 
-    public function findVideosBySearch(string $search): array
+    public function findOrderedVideosBySearch(string $sort, string $search): array
     {
-        return $this->createQueryBuilder('v')
-            ->join('v.tag', 't')
-            ->join('v.category', 'c')
-            ->where('v.title LIKE :search')
-            ->orWhere('t.name LIKE :search')
-            ->orWhere('c.name LIKE :search')
-            ->setParameter('search', '%' . $search . '%')
-            ->orderBy('v.createdAt', 'DESC')
-            ->getQuery()
-            ->getResult();
+        if ($sort === 'recent') {
+            return $this->createQueryBuilder('v')
+                ->join('v.tag', 't')
+                ->join('v.category', 'c')
+                ->where('v.title LIKE :search')
+                ->orWhere('t.name LIKE :search')
+                ->orWhere('c.name LIKE :search')
+                ->setParameter('search', '%' . $search . '%')
+                ->orderBy('v.createdAt', 'DESC')
+                ->getQuery()
+                ->getResult();
+        } elseif ($sort === 'likes') {
+            return $this->createQueryBuilder('v')
+                ->join('v.tag', 't')
+                ->join('v.category', 'c')
+                ->where('v.title LIKE :search')
+                ->orWhere('t.name LIKE :search')
+                ->orWhere('c.name LIKE :search')
+                ->setParameter('search', '%' . $search . '%')
+                ->orderBy('v.numberOfLike', 'DESC')
+                ->getQuery()
+                ->getResult();
+        } else {
+            return $this->createQueryBuilder('v')
+                ->join('v.tag', 't')
+                ->join('v.category', 'c')
+                ->where('v.title LIKE :search')
+                ->orWhere('t.name LIKE :search')
+                ->orWhere('c.name LIKE :search')
+                ->setParameter('search', '%' . $search . '%')
+                ->orderBy('v.numberOfView', 'DESC')
+                ->getQuery()
+                ->getResult();
+        }
     }
 
     /**

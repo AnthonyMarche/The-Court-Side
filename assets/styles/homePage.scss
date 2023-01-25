@@ -155,10 +155,16 @@
     color: var(--subFont-color);
 }
 
+.results-info {
+    font-family: var(--text-font);
+    color: var(--subFont-color);
+    text-align: center;
+
 .grow {
     transition: all .2s ease-in-out;
 }
 
 .grow:hover {
     transform: scale(1.11);
+
 }

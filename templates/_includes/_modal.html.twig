@@ -14,16 +14,16 @@
                 Désolé ce contenu n'est disponible que pour les utilisateurs inscrits.
                 Vous pouvez vous inscrire gratuitement ou vous connectez si vous avez déjà un compte.
             </div>
+            {% if buttons == true %}
             <div class="modal-footer">
-                {% if buttons == true %}
                     <a href="{{ path('app_user_login') }}">
                         <button type="button" class="btn btn-secondary">Se connecter</button>
                     </a>
                     <a href="{{ path('app_register') }}">
                         <button type="button" class="btn btn-primary">S'inscrire</button>
                     </a>
-                {% endif %}
             </div>
+            {% endif %}
         </div>
     </div>
 </div>
