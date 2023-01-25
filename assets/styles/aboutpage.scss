@@ -1,18 +1,19 @@
-*{
+.allform {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background-color:#0c0b0b ;
+    background-color: var( --mainBg-color);
+
 }
 
 section {
     padding: 4% 10%;
 }
 
-.about-us{
+  .about-us{
     width: 100%;
     height: 100vh;
-    background-color:#0c0b0b ;
+    background-color:var( --mainBg-color) ;
     display: grid;
     grid-template-columns: repeat(2,1fr);
     gap: 4rem;
@@ -22,7 +23,7 @@ section {
     max-width: 100%;
     width:560px;
     height: auto;
-    box-shadow: 0 0 10px 10px #2DBFB2;
+    box-shadow: 0 0 10px 10px var(--element-color);
     object-position: left center;
     margin-bottom: 20px;
 
@@ -37,31 +38,31 @@ section {
     padding: 6% 0;
 }
 .text h4{
-    color: #2DBFB2;
+    color: var(--element-color);
     font-size: 16px;
     font-weight: 600;
     text-transform: uppercase;
     margin-bottom: 10px;
 }
 .text h1 {
-    color: #EEFFFF;
+    color:  var(--mainFont-color);
     font-size: 36px;
     text-transform: capitalize;
     font-weight: 700;
     line-height: 46px;
     margin-bottom:30px;
 }
-hr{
+.space{
     width:30%;
     border: none;
     height:2px;
-    background-color: #2DBFB2;
+    background-color: var(--element-color);
     margin-bottom: 50px;
 }
 
 .text p{
     max-width:600px;
-    color: #EEFFFF;
+    color:  var(--mainFont-color);
     font-size: 15px;
     font-weight: 400;
     line-height: 1.7;
@@ -77,13 +78,13 @@ hr{
 }
 
 .last-text h3{
-    color:#2DBFB2;
+    color:var(--element-color);
     font-size: 60px;
     font-weight: 700;
 }
 
 .last-text h5{
-    color: #EEFFFF;;
+    color:  var(--mainFont-color);
     font-size: 18px;
     font-weight: 500;
     line-height: 18px;
