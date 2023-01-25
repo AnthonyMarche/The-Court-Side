@@ -83,7 +83,8 @@ class DashboardController extends AbstractDashboardController
     {
         return Dashboard::new()
             ->setTranslationDomain('admin')
-            ->setTitle('THE COURT SIDE | Admin');
+            ->setTitle('THE COURT SIDE | Admin')
+            ->setFaviconPath('build/images/TCS favicon.png');
     }
 
     /**

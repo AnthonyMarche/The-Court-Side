@@ -22,14 +22,6 @@
     max-height: 37rem;
 }
 
-.single-video:hover {
-    background-color: var(--subBg-color);
-}
-
-.single-video {
-    border-radius: 10px;
-}
-
 .home-section-line {
     height: 1px;
     background: var(--mainFont-color);
@@ -167,4 +159,12 @@
     font-family: var(--text-font);
     color: var(--subFont-color);
     text-align: center;
+
+.grow {
+    transition: all .2s ease-in-out;
+}
+
+.grow:hover {
+    transform: scale(1.11);
+
 }
