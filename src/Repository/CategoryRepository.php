@@ -39,4 +39,20 @@ class CategoryRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+
+    /**
+     * Displays the three most liked categories
+     * @return float|int|mixed|string
+     */
+    public function getMostLikedCategories()
+    {
+        $entityManager = $this->getEntityManager();
+        $query = $entityManager->createQuery(
+            'SELECT c.name, SUM(v.numberOfLike) as totalLikes
+            FROM App\Entity\Video v JOIN v.category c
+            GROUP BY c.name
+            ORDER BY totalLikes DESC'
+        )->setMaxResults(3);
+        return $query->getResult();
+    }
 }
