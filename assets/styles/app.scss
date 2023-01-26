@@ -15,7 +15,7 @@
 /* ressource sur les breakpoints bootstrap: https://getbootstrap.com/docs/5.0/layout/breakpoints/ */
 
 /* ci-dessous, imports des fichiers css des différentes vues et composants */
-@import "_navbar.scss";
+@import "_navbar";
 @import "homePage";
 @import "watchVideo";
 @import "categoryPages";
