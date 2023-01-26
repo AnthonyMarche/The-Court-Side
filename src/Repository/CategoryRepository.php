@@ -52,7 +52,7 @@ class CategoryRepository extends ServiceEntityRepository
             FROM App\Entity\Video v JOIN v.category c
             GROUP BY c.name
             ORDER BY totalLikes DESC'
-        )->setMaxResults(3);
+        )->setMaxResults(5);
         return $query->getResult();
     }
 }
