@@ -48,4 +48,15 @@ class Filter
     {
         return $this->videoRepository->findOrderedVideosBySearch($filter, $search);
     }
+
+    public function getOrderedPrivateVideos(string $filter): array
+    {
+        if ($filter == 'views') {
+            return $this->videoRepository->findBy(['isPrivate' => 1], ['numberOfView' => 'DESC']);
+        } elseif ($filter == 'likes') {
+            return $this->videoRepository->findBy(['isPrivate' => 1], ['numberOfLike' => 'DESC']);
+        } else {
+            return $this->videoRepository->findBy(['isPrivate' => 1], ['createdAt' => 'DESC']);
+        }
+    }
 }

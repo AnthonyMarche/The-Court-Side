@@ -63,7 +63,7 @@
         {% include '_includes/_videos_head.html.twig' with {
             title : 'Réservées aux inscrits',
             buttons : true,
-            path :  '#'
+            path :  path('app_private_videos', { sort : 'recent'})
         } %}
         <div class="row">
             {% include '_includes/_videos_grid.html.twig' with {
