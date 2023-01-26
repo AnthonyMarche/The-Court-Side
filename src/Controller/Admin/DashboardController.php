@@ -67,10 +67,11 @@ class DashboardController extends AbstractDashboardController
         // récupère le nombre de likes enregistrés dans les 30 derniers jours (via le LikeRepository)
         $likesFromPast30Days = $this->likeRepository->getLikesAddedInPast30Days();
         // récupère les category et comptabilise leurs likes
-        $mostLikedCategories = $this->categoryRepository->getMostLikedCategories();
-
-        // --- AFFICHAGE DES GRAPHIQUES -- //
+        $mostLikedCategories = $this->statsGraphs->viewMostLikedCategories();
+        // graph évolution des inscriptions sur douze mois
         $subscriptionChart = $this->statsGraphs->viewSubscriptionsEvolution();
+        // graph évolution des likes sur douze mois
+        $likesChart = $this->statsGraphs->viewLikesEvolution();
 
         return $this->render('admin/index.html.twig', [
             'users' => $users,
@@ -82,8 +83,9 @@ class DashboardController extends AbstractDashboardController
             'videos_from_past_thirty_days' => $videosFromPast30Days,
             'likes_from_past_seven_days' => $likesFromPast7Days,
             'likes_from_past_thirty_days' => $likesFromPast30Days,
-            'most_liked_categories' => $mostLikedCategories,
+            'most_liked_categories_chart' => $mostLikedCategories,
             'subscription_chart' => $subscriptionChart,
+            'likes_chart' => $likesChart,
         ]);
     }
 
