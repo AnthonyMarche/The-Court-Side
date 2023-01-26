@@ -4,7 +4,7 @@
             {% if video.isPrivate and not app.user %}
                 data-toggle="modal" data-target="#contentModal"
             {% endif %}
-           class="card card-video border-0 bg-transparent mb-4 home-video-link">
+           class="card card-video border-0 bg-transparent mb-4 home-video-link grow">
             <div class="lock-image-container">
                 <video src="{{ asset(video.teaser) }}" type="video/mp4" loop muted
                        class="w-100 mt-2 private-video d-flex align-self-center hover-to-play">

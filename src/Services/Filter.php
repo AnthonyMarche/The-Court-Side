@@ -44,14 +44,8 @@ class Filter
         return $this->videoRepository->findOrderedTagVideos($filter, $slug);
     }
 
-    public function getOrderedVideos(string $filter): array
+    public function getOrderedVideosBySearch(string $filter, string $search): array
     {
-        if ($filter === 'recent') {
-            return  $this->videoRepository->findBy([], ['createdAt' => 'DESC']);
-        } elseif ($filter === 'likes') {
-            return  $this->videoRepository->findBy([], ['numberOfLike' => 'DESC']);
-        } else {
-            return  $this->videoRepository->findBy([], ['numberOfView' => 'DESC']);
-        }
+        return $this->videoRepository->findOrderedVideosBySearch($filter, $search);
     }
 }

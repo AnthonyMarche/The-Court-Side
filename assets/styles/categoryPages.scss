@@ -83,6 +83,14 @@ html {
     padding: 3px;
 }
 
+.arrow-video {
+    border: solid var(--mainFont-color);
+    border-width: 0 5px 5px 0;
+    display: inline-block;
+    padding: 3px;
+    margin-bottom: 5rem;
+}
+
 .right {
     transform: rotate(-45deg);
     -webkit-transform: rotate(-45deg);
@@ -91,6 +99,20 @@ html {
 }
 
 .left {
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.right-video {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.left-video {
     transform: rotate(135deg);
     -webkit-transform: rotate(135deg);
     margin-left: 1rem;
