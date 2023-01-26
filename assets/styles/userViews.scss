@@ -5,7 +5,12 @@
     justify-content: center;
 }
 
-.show-user-table {
-    border: 2px solid var(--element-color);
+.table-dark {
     border-radius: 20px;
+    margin: 0;
+}
+
+.show-user-table .btn-outline-secondary {
+    border: 1px solid var(--mainFont-color);
+    color: var(--mainFont-color)
 }
