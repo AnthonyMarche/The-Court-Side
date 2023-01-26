@@ -25,7 +25,7 @@ class UserFixtures extends Fixture
         $admin->setEmail('admin@me.fr');
         $admin->setPassword($this->passwordHasher->hashPassword($admin, 'admin'));
         $admin->setUsername('admin');
-        $admin->setCreatedAt($faker->dateTimeBetween('-6 month'));
+        $admin->setCreatedAt($faker->dateTimeBetween('-12 month'));
         $admin->setRoles(['ROLE_ADMIN']);
         $admin->setIsVerified(true);
         $admin->setNewsletter(true);
@@ -37,7 +37,7 @@ class UserFixtures extends Fixture
         $superAdmin->setEmail('superadmin@me.fr');
         $superAdmin->setPassword($this->passwordHasher->hashPassword($superAdmin, 'superadmin'));
         $superAdmin->setUsername('superadmin');
-        $superAdmin->setCreatedAt($faker->dateTimeBetween('-6 month'));
+        $superAdmin->setCreatedAt($faker->dateTimeBetween('-12 month'));
         $superAdmin->setRoles(['ROLE_SUPER_ADMIN']);
         $superAdmin->setIsVerified(true);
         $superAdmin->setNewsletter(true);
@@ -49,7 +49,7 @@ class UserFixtures extends Fixture
             $user->setEmail($faker->email());
             $user->setPassword($this->passwordHasher->hashPassword($user, 'user'));
             $user->setUsername('user' . $i);
-            $user->setCreatedAt($faker->dateTimeBetween('-6 month'));
+            $user->setCreatedAt($faker->dateTimeBetween('-12 month'));
             $user->setNewsletter($faker->boolean);
             $manager->persist($user);
             $this->addReference('user_' . $i, $user);

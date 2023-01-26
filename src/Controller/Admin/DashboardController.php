@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use _PHPStan_980551bf2\Nette\Utils\DateTime;
 use App\Entity\Category;
 use App\Entity\Tag;
 use App\Entity\User;
@@ -10,6 +11,7 @@ use App\Repository\CategoryRepository;
 use App\Repository\LikeRepository;
 use App\Repository\UserRepository;
 use App\Repository\VideoRepository;
+use App\Services\StatsGraphs;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -26,17 +28,19 @@ class DashboardController extends AbstractDashboardController
     private VideoRepository $videoRepository;
     private LikeRepository $likeRepository;
     private CategoryRepository $categoryRepository;
-
+    private StatsGraphs $statsGraphs;
     public function __construct(
         UserRepository $userRepository,
         VideoRepository $videoRepository,
         LikeRepository $likeRepository,
         CategoryRepository $categoryRepository,
+        StatsGraphs $statsGraphs,
     ) {
         $this->userRepository = $userRepository;
         $this->videoRepository = $videoRepository;
         $this->likeRepository = $likeRepository;
         $this->categoryRepository = $categoryRepository;
+        $this->statsGraphs = $statsGraphs;
     }
 
     #[Route('/admin', name: 'admin')]
@@ -65,6 +69,9 @@ class DashboardController extends AbstractDashboardController
         // récupère les category et comptabilise leurs likes
         $mostLikedCategories = $this->categoryRepository->getMostLikedCategories();
 
+        // --- AFFICHAGE DES GRAPHIQUES -- //
+        $subscriptionChart = $this->statsGraphs->viewSubscriptionsEvolution();
+
         return $this->render('admin/index.html.twig', [
             'users' => $users,
             'videos' => $videos,
@@ -76,6 +83,7 @@ class DashboardController extends AbstractDashboardController
             'likes_from_past_seven_days' => $likesFromPast7Days,
             'likes_from_past_thirty_days' => $likesFromPast30Days,
             'most_liked_categories' => $mostLikedCategories,
+            'subscription_chart' => $subscriptionChart,
         ]);
     }
 

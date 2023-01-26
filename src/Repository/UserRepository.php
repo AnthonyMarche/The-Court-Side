@@ -58,6 +58,41 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         return $query->getScalarResult();
     }
 
+    /**
+     * Récupère tous les utilisateurs inscrits (createAt) mois par mois, depuis douze mois
+     * /!\ Le mois courant n'est pas pris en compte
+     * @return array
+     * @throws \Exception
+     */
+    public function getUsersSubscriptionsMonthByMonth()
+    {
+        $users = [];
+        $userCount = [];
+
+        for ($i = 1; $i <= 12; $i++) {
+            // Premier jour d'un mois
+            $firstDayOfMonth = new DateTime("first day of " . $i . " month ago");
+            // Dernier jour d'un mois
+            $lastDayOfMonth = new DateTime("last day of " . $i . " month ago");
+            // Initialise le querybuilder avec la table User
+            $qb = $this->createQueryBuilder('u');
+            // Ajoute une condition pour sélectionner les utilisateurs entre deux dates
+            $qb->select('count(u.id)');
+            $qb->andWhere('u.createdAt >= :firstDayOfMonth')
+                ->andWhere('u.createdAt <= :lastDayOfMonth')
+                ->setParameter('firstDayOfMonth', $firstDayOfMonth)
+                ->setParameter('lastDayOfMonth', $lastDayOfMonth);
+            $users[] = $qb->getQuery()->getResult();
+        }
+        // Met les résultats dans un tableau simplifié
+        // ($users a trois niveaux de profondeur, $userCount un seul niveau)
+        for ($j = 0; $j < count($users); $j++) {
+            $userCount[] = $users[$j][0][1];
+        }
+        // on permute les valeurs pour les mettre dans l'ordre chronologique
+        return array_reverse($userCount);
+    }
+
     public function save(User $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
@@ -73,7 +108,6 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         foreach ($userVideos as $video) {
             $video->setUser(null);
         }
-
 
 
         $this->getEntityManager()->remove($entity);
@@ -106,8 +140,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             ->setParameter('roles', '%[]%')
             ->orderBy('u.id', 'ASC')
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
 
 //    public function findOneBySomeField($value): ?User
