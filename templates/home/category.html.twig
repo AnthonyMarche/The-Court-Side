@@ -23,7 +23,7 @@
                 <div class="d-flex justify-content-between p-0 mb-0">
                     <h3 class="section-name">{{ category.name }}</h3>
                     {% if category.videos|length > 4 %}
-                        <a href="{{ path('app_single_category', {slug : category.slug}) }}">
+                        <a href="{{ path('app_single_category', {slug : category.slug, sort : 'recent'}) }}">
                             <button type="button" class="btn btn-outline-primary see-more-button">VOIR PLUS</button>
                         </a>
                     {% endif %}

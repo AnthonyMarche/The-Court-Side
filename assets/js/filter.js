@@ -7,6 +7,7 @@ if (document.querySelector('.js-content')) {
     const sortingLikes = document.querySelector('.sorted-by-likes')
     const sortingViews = document.querySelector('.sorted-by-views')
     const sortingRecent = document.querySelector('.sorted-by-recent')
+    const categoryTitle = document.getElementById('allVideosTitle')
     const delay = ms => new Promise(res => setTimeout(res, ms));
 
     dateFilter.addEventListener('click', applyFilter);
@@ -14,22 +15,31 @@ if (document.querySelector('.js-content')) {
     viewsFilter.addEventListener('click', applyFilter);
 
     viewsFilter.addEventListener('click', async function () {
+        await delay(1000);
+        categoryTitle.classList.add('disappearance');
         await delay(1500);
         sortingViews.classList.remove('disappearance');
         sortingRecent.classList.add('disappearance');
         sortingLikes.classList.add('disappearance');
+        categoryTitle.classList.remove('disappearance');
     });
     likesFilter.addEventListener('click', async function () {
+        await delay(1000);
+        categoryTitle.classList.add('disappearance');
         await delay(1500);
         sortingViews.classList.add('disappearance');
         sortingRecent.classList.add('disappearance');
         sortingLikes.classList.remove('disappearance');
+        categoryTitle.classList.remove('disappearance');
     });
     dateFilter.addEventListener('click', async function () {
+        await delay(1000);
+        categoryTitle.classList.add('disappearance');
         await delay(1500);
         sortingViews.classList.add('disappearance');
         sortingRecent.classList.remove('disappearance');
         sortingLikes.classList.add('disappearance');
+        categoryTitle.classList.remove('disappearance');
     });
 
     // eslint-disable-next-line no-inner-declarations
