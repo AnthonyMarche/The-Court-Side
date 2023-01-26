@@ -4,17 +4,18 @@ nav {
 
 nav .navbar-brand {
     font-weight: bold;
+    color: var(--element-color);
 }
 
-nav .navbar-brand {
+nav .navbar-brand:hover {
+    color: var(--subFont-color);
+}
+
+nav .nav-link {
     color: var(--mainFont-color);
 }
 
-nav a {
-    color: var(--mainFont-color);
-}
-
-nav a:hover {
+nav .nav-link:hover {
     color: var(--element-color);
 }
 
@@ -85,6 +86,8 @@ header {
     border-bottom: 1px solid var(--mainFont-color);
 }
 
+/* --------------------------------------------- Searchbar -------------------------------------------- */
+
 nav .submit-searchBar {
     margin: 0 0 3px 0;
 }
@@ -92,7 +95,6 @@ nav .submit-searchBar {
 nav .custom-searchBar {
     border-radius: 20px 0 0 20px;
     background-color: var(--subBg-color);
-
 }
 
 nav .custom-searchBar:focus {
@@ -110,7 +112,7 @@ nav .btn-searchBar {
 
 nav .btn-searchBar:hover {
     border-radius: 0 20px 20px 0;
-    background-color: var(--subBg-color);
+    background-color: var(--subFont-color);
     border-color: var(--title-font);
 }
 
