@@ -7,9 +7,9 @@
         buttons : true
     } %}
     <h2 id="allVideosTitle" class="text-center mt-4 category-main-title text-white title-font">
-        <span class="sorted-by-likes {% if 'likes' not in app.request.uri %}disappearance{% endif %}">Les plus likées</span>
-        <span class="sorted-by-recent {% if 'recent' not in app.request.uri %}disappearance{% endif %}">Les plus récentes</span>
-        <span class="sorted-by-views {% if 'views' not in app.request.uri %}disappearance{% endif %}">Les plus vues</span>
+        <span class="sorted-by-likes-title {% if 'likes' not in app.request.uri %}disappearance{% endif %}">Les plus likées</span>
+        <span class="sorted-by-recent-title {% if 'recent' not in app.request.uri %}disappearance{% endif %}">Les plus récentes</span>
+        <span class="sorted-by-views-title {% if 'views' not in app.request.uri %}disappearance{% endif %}">Les plus vues</span>
     </h2>
 
     {#        filter button include only if liked videos length is > 1#}
