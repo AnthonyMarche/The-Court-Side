@@ -6,8 +6,9 @@
             {% endif %}
            class="card card-video border-0 bg-transparent mb-4 home-video-link grow">
             <div class="lock-image-container">
-                <video src="{{ asset(video.teaser) }}" type="video/mp4" loop muted
-                       class="w-100 mt-2 private-video d-flex align-self-center hover-to-play">
+                <video src="{% if video.teaser %}{{ asset(video.teaser) }}{% else %}{{ asset(video.url) }}{% endif %}"
+                       type="video/mp4" loop muted
+                       class="w-100 mt-2 private-video d-flex align-self-center hover-to-play{% if video.teaser %}-teaser{% else %}-video{% endif %}">
                 </video>
             </div>
             <div class="card-video-details d-flex mt-2">
