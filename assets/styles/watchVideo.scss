@@ -1,11 +1,15 @@
-.embed-responsive {
-    width: 60%;
-    height: 60%;
+.video-player {
+    width: 75%;
+}
+
+.video-infos-container {
+    width: 75%;
+    margin: auto;
 }
 
 .watch-video-player-container {
-    padding-top: 6rem;
-    margin: auto auto 1rem;
+    padding-top: 2rem;
+    padding-bottom: 1rem;
 }
 
 .watch-video-release {
@@ -18,24 +22,10 @@
     text-align: right;
 }
 
-.watch-video-head {
-    margin-left: 20%;
-    margin-right: 20%;
-}
-
-.watch-video-description, .watch-private-video-message-container {
-    margin-left: 20%;
-    margin-right: 20%;
-}
-
 .watch-private-video-image {
     max-width: 60%;
     max-height: 60%;
     background-color: gray;
-}
-
-.watch-video-tags-container {
-    margin-left: 20%;
 }
 
 .watch-video-tag-name {
@@ -81,9 +71,6 @@
     background-color: var(--subBg-color);
 }
 
-.share-buttons-container {
-    margin-right: 20%;
-}
 
 .share-mail-button {
     width: 5rem;
