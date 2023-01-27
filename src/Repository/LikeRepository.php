@@ -113,4 +113,39 @@ class LikeRepository extends ServiceEntityRepository
 
         return $query->getScalarResult();
     }
+
+    /**
+     * Récupère tous les utilisateurs inscrits (createAt) mois par mois, depuis douze mois
+     * /!\ Le mois courant n'est pas pris en compte
+     * @return array
+     * @throws \Exception
+     */
+    public function getLikesMonthByMonth()
+    {
+        $likes = [];
+        $likesCount = [];
+
+        for ($i = 1; $i <= 12; $i++) {
+            // Premier jour d'un mois
+            $firstDayOfMonth = new DateTime("first day of " . $i . " month ago");
+            // Dernier jour d'un mois
+            $lastDayOfMonth = new DateTime("last day of " . $i . " month ago");
+            // Initialise le querybuilder avec la table Like
+            $qb = $this->createQueryBuilder('l');
+            // Ajoute une condition pour sélectionner les likes entre deux dates
+            $qb->select('count(l.id)');
+            $qb->andWhere('l.createdAt >= :firstDayOfMonth')
+                ->andWhere('l.createdAt <= :lastDayOfMonth')
+                ->setParameter('firstDayOfMonth', $firstDayOfMonth)
+                ->setParameter('lastDayOfMonth', $lastDayOfMonth);
+            $likes[] = $qb->getQuery()->getResult();
+        }
+        // Met les résultats dans un tableau simplifié
+        // ($likes a trois niveaux de profondeur, $likesCount un seul niveau)
+        for ($j = 0; $j < count($likes); $j++) {
+            $likesCount[] = $likes[$j][0][1];
+        }
+        // on permute les valeurs pour les mettre dans l'ordre chronologique
+        return array_reverse($likesCount);
+    }
 }

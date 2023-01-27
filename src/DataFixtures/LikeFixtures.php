@@ -20,7 +20,7 @@ class LikeFixtures extends Fixture implements DependentFixtureInterface
                 $like = new Like();
                 $like->setVideo($this->getReference('video_' . $i));
                 $like->setUser($this->getReference('user_' . $j));
-                $like->setCreatedAt($faker->dateTimeBetween('-6 month'));
+                $like->setCreatedAt($faker->dateTimeBetween('-12 month'));
                 $manager->persist($like);
             }
         }

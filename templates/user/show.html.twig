@@ -21,7 +21,7 @@
                         accès aux vidéos réservées aux abonnés.
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-warning" data-dismiss="modal">Annuler</button>
+                        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Annuler</button>
                         {% include 'user/_delete_form.html.twig' %}
                     </div>
                 </div>
@@ -30,10 +30,10 @@
 
         {# --- RESUME PROFIL UTILISATEUR --- #}
         <div class="container show-user">
-            <h1 class="text-center">Profil utilisateur</h1>
-            <div>
-                <div class="p-3 show-user-table">
-                    <table class="table">
+            <div class="row d-flex justify-content-center">
+                <div class="col-12 col-md-10 col-lg-8">
+                    <h1 class="text-center text-light">Profil utilisateur</h1>
+                    <table class="table table-striped table-dark">
                         <tr>
                             <th>Adresse email</th>
                             <td>{{ app.user.email }}</td>
@@ -59,24 +59,30 @@
                             <td>
                                 {% if not app.user.newsletter %}
                                     <p class="font-italic">
-                                        Vous n'êtes pas encore abonné à la newsletter. Vous pouvez vous y abonner en modifiant votre profil.
+                                        Vous n'êtes pas encore abonné à la newsletter. Vous pouvez vous y abonner en
+                                        modifiant votre profil.
                                     </p>
                                 {% else %}
                                     <p class="font-italic">
-                                        Vous êtes abonné à la newsletter. Vous pouvez vous désabonner en modifiant votre profil.
+                                        Vous êtes abonné à la newsletter. Vous pouvez vous désabonner en modifiant votre
+                                        profil.
                                     </p>
                                 {% endif %}
                             </td>
                         </tr>
                     </table>
                 </div>
-                <div class="container d-flex justify-content-around p-4">
-                    <a href="{{ path('app_user_edit', {'id': user.id}) }}" class="btn btn-warning">Modifier mon
-                        profil</a>
-                    <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteProfileModal">
-                        Supprimer mon compte
-                    </button>
+                <div class="col-12 col-md-10 col-lg-8">
+                    <div class="container d-flex justify-content-around justify-content-md-end p-4">
+                        <a href="{{ path('app_user_edit', {'id': user.id}) }}" class="btn btn-secondary mx-md-2">Modifier
+                            mon
+                            profil</a>
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-danger" data-toggle="modal"
+                                data-target="#deleteProfileModal">
+                            Supprimer mon compte
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
