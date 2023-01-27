@@ -2,15 +2,6 @@ nav {
     background-color: var(--mainBg-color);
 }
 
-nav .navbar-brand {
-    font-weight: bold;
-    color: var(--element-color);
-}
-
-nav .navbar-brand:hover {
-    color: var(--subFont-color);
-}
-
 nav .nav-link {
     color: var(--mainFont-color);
 }
@@ -82,6 +73,15 @@ nav .user-options:hover {
     text-decoration: none;
 }
 
+nav .user-profile-dropdown {
+    color: var(--element-color);
+}
+
+nav .user-profile-dropdown:hover {
+    color: var(--subFont-color);
+    text-decoration: none;
+}
+
 header {
     border-bottom: 1px solid var(--mainFont-color);
 }
@@ -149,4 +149,11 @@ nav .searchForm {
 
 .settings-logo {
     font-size: 1.5rem;
+}
+
+@media screen and (min-width: 768px) {
+    .navbar-brand {
+        width: 75px;
+        height: auto;
+    }
 }
