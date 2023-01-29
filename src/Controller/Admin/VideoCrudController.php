@@ -20,8 +20,8 @@ use Symfony\Component\Translation\TranslatableMessage;
 #[IsGranted('ROLE_ADMIN')]
 class VideoCrudController extends AbstractCrudController
 {
-    private const PATHVIDEO = 'uploads/videos';
-    private const PATHTEASER = 'uploads/teasers';
+    private const PATH_VIDEO = 'uploads/videos';
+    private const PATH_TEASER = 'uploads/teasers';
 
     private SluggerInterface $slugger;
 
@@ -105,16 +105,16 @@ class VideoCrudController extends AbstractCrudController
 
             ImageField::new('url', new TranslatableMessage('entity.file', ['parameter' => 'value'], 'admin'))
                 ->onlyWhenCreating()
-                ->setBasePath(self::PATHVIDEO)
+                ->setBasePath(self::PATH_VIDEO)
                 ->setUploadDir('public/uploads/videos')
-                ->setUploadedFileNamePattern(self::PATHVIDEO . '/[slug]-[timestamp].[extension]')
+                ->setUploadedFileNamePattern(self::PATH_VIDEO . '/[slug]-[timestamp].[extension]')
                 ->setHelp(new TranslatableMessage('file.extensions', ['parameter' => 'value'], 'admin')),
 
             ImageField::new('teaser', new TranslatableMessage('entity.teaser', ['parameter' => 'value'], 'admin'))
                 ->onlyOnForms()
-                ->setBasePath(self::PATHTEASER)
+                ->setBasePath(self::PATH_TEASER)
                 ->setUploadDir('public/uploads/teasers')
-                ->setUploadedFileNamePattern(self::PATHTEASER . '/teaser-[slug]-[timestamp].[extension]')
+                ->setUploadedFileNamePattern(self::PATH_TEASER . '/teaser-[slug]-[timestamp].[extension]')
                 ->setHelp(new TranslatableMessage('file.extensions', ['parameter' => 'value'], 'admin')),
 
             DateTimeField::new(
