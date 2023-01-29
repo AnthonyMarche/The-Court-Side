@@ -54,6 +54,7 @@ class TeaserController extends AbstractController
                 ]);
             }
 
+            // If file created, flash message then redirect to view teaser page
             $this->addFlash('success', 'Votre teaser a été créé, téléchargez le dès maintenant !');
 
             return $this->viewNewTeaser($teaser, $name);
@@ -75,13 +76,14 @@ class TeaserController extends AbstractController
 
     // Download created teaser
     #[Route('/download/{name}', name: '_download')]
-    public function downloadTeaser($name): BinaryFileResponse
+    public function downloadTeaser(string $name): BinaryFileResponse
     {
         $teaser = self::PATH_NEW_TEASER . $name;
 
         return $this->file($teaser, $name);
     }
 
+    // Create teaser with file and time define
     public function createTeaser(File $file, int $secondStart, int $duration): void
     {
         // Get FFMpeg binary file to create object
@@ -95,7 +97,7 @@ class TeaserController extends AbstractController
         // Open file with FFMpeg
         $video = $ffmpeg->open($file);
 
-        //Get video duration
+        //Get video duration then verify if it's possible to create teaser with this timer
         $baseDuration = $video->getStreams()->first()->get('duration');
 
         if ($secondStart + $duration > $baseDuration) {
@@ -126,17 +128,20 @@ class TeaserController extends AbstractController
         }
     }
 
+    // Get file name and create teaser name
     public function getFileName(File $file): string
     {
         $originalName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
         return 'teaser-' . $this->slugger->slug($originalName)->lower();
     }
 
+    // Get file extension
     public function getFileExtension(File $file): string
     {
         return '.' . $file->guessExtension();
     }
 
+    // Get path + name + extension of teaser
     public function getTeaserPath(File $file): string
     {
         $name = $this->getFileName($file);
