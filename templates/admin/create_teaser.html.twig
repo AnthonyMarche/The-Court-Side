@@ -8,29 +8,35 @@
     <div class="container">
         {{ form_start(teaserForm) }}
         <div class="col-6 m-auto">
-            {{ form_label(teaserForm.video, 'Ma vidéo :') }}
+            {{ form_label(teaserForm.video) }}
             {{ form_widget(teaserForm.video, {'attr': {'class': 'form-control mt-1'}}) }}
+            {{ form_help(teaserForm.video) }}
+            {{ form_errors(teaserForm.video) }}
         </div>
         <div class="d-flex justify-content-around mt-5">
 
             <div class="d-flex flex-column justify-content-around mb-1">
                 <div class="d-flex flex-column">
-                    {{ form_label(teaserForm.secondStart, 'Start :') }}
-                    {{ form_widget(teaserForm.secondStart, {'attr': {'class': ''}}) }}
+                    {{ form_label(teaserForm.secondStart) }}
+                    {{ form_widget(teaserForm.secondStart) }}
+                    {{ form_help(teaserForm.secondStart) }}
+                    {{ form_errors(teaserForm.secondStart) }}
                 </div>
                 <div class="d-flex flex-column">
-                    {{ form_label(teaserForm.duration, 'Duration :') }}
-                    {{ form_widget(teaserForm.duration, {'attr': {'class': ''}}) }}
+                    {{ form_label(teaserForm.duration) }}
+                    {{ form_widget(teaserForm.duration) }}
+                    {{ form_help(teaserForm.duration) }}
+                    {{ form_errors(teaserForm.duration, {'attr': {'class': 'text-danger'}}) }}
                 </div>
             </div>
 
-            <video id="teaser" controls class="w-50">
-                <source src="" type="video/mp4">
+            <video id="teaser" controls class="w-50"
+                   src="">
             </video>
 
         </div>
         <div class="d-flex justify-content-center mt-5 mb-4">
-            <button type='submit' class="btn col-6">Télécharger mon teaser</button>
+            <button type='submit' class="btn col-6">Générer mon teaser</button>
         </div>
     </div>
     {{ form_end(teaserForm) }}

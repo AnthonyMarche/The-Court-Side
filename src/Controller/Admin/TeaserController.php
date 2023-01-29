@@ -3,29 +3,27 @@
 namespace App\Controller\Admin;
 
 use App\Form\TeaserType;
-use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
+use FFMpeg;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
-use FFMpeg;
 
+#[Route('/teaser', name: 'app_teaser')]
 class TeaserController extends AbstractController
 {
     private const PATH_NEW_TEASER = 'uploads/teasersCreated/';
-
     private SluggerInterface $slugger;
-    private AdminUrlGenerator $adminUrlGenerator;
 
-    public function __construct(SluggerInterface $slugger, AdminUrlGenerator $adminUrlGenerator)
+    public function __construct(SluggerInterface $slugger)
     {
         $this->slugger = $slugger;
-        $this->adminUrlGenerator = $adminUrlGenerator;
     }
 
-    #[Route('/teaser', name: 'app_teaser')]
+    #[Route('/new', name: '_new')]
     public function teaserFormView(Request $request): Response
     {
         // Create form
@@ -36,7 +34,7 @@ class TeaserController extends AbstractController
 
         $teaserForm->handleRequest($request);
 
-        // If form is submitted call method to create a teaser then return
+        // If form is submitted call method to create teaser
         if ($teaserForm->isSubmitted() && $teaserForm->isValid()) {
             $file = $teaserForm->getData()['video'];
             $secondStart = $teaserForm->getData()['secondStart'];
@@ -45,25 +43,43 @@ class TeaserController extends AbstractController
             $this->createTeaser($file, $secondStart, $duration);
 
             // Get teaser information
-            $name = $this->getFileName($file);
-            $extension = $this->getFileExtension($file);
+            $name = $this->getFileName($file) . $this->getFileExtension($file);
+            $teaser = $this->getTeaserPath($file);
 
-            $teaser = self::PATH_NEW_TEASER . $name . $extension;
-
+            // Verify is teaser was created, if not return flash message with error
             if (!file_exists($teaser)) {
-                $this->addFlash('warning', 'Impossible de creer un teaser avec ces valeurs');
+                $this->addFlash('warning', 'Impossible de créer un teaser avec ces valeurs');
                 return $this->render('admin/create_teaser.html.twig', [
                     'teaserForm' => $teaserForm->createView()
                 ]);
             }
-            $this->addFlash('success', 'Votre teaser a été téléchargé');
 
-            return $this->file($teaser, $name)->deleteFileAfterSend();
+            $this->addFlash('success', 'Votre teaser a été créé, téléchargez le dès maintenant !');
+
+            return $this->viewNewTeaser($teaser, $name);
         }
 
         return $this->render('admin/create_teaser.html.twig', [
             'teaserForm' => $teaserForm->createView()
         ]);
+    }
+
+    // View created teaser
+    public function viewNewTeaser(string $teaser, string $name): Response
+    {
+        return $this->render('admin/download_teaser.html.twig', [
+            'teaser' => $teaser,
+            'name' => $name,
+        ]);
+    }
+
+    // Download created teaser
+    #[Route('/download/{name}', name: '_download')]
+    public function downloadTeaser($name): BinaryFileResponse
+    {
+        $teaser = self::PATH_NEW_TEASER . $name;
+
+        return $this->file($teaser, $name);
     }
 
     public function createTeaser(File $file, int $secondStart, int $duration): void
@@ -82,7 +98,7 @@ class TeaserController extends AbstractController
         //Get video duration
         $baseDuration = $video->getStreams()->first()->get('duration');
 
-        if ($secondStart < 0 || $duration < 1 || $secondStart + $duration > $baseDuration) {
+        if ($secondStart + $duration > $baseDuration) {
             return;
         }
 
@@ -95,13 +111,19 @@ class TeaserController extends AbstractController
             );
 
         // Get teaser information
-        $name = $this->getFileName($file);
         $extension = $this->getFileExtension($file);
-
-        $teaser = self::PATH_NEW_TEASER . $name . $extension;
+        $teaser = $this->getTeaserPath($file);
 
         // Save teaser
-        $video->save(new FFMpeg\Format\Video\X264(), $teaser);
+        if ($extension === '.mp4') {
+            $video->save(new FFMpeg\Format\Video\X264(), $teaser);
+        } elseif ($extension === '.ogg') {
+            $video->save(new FFMpeg\Format\Video\Ogg(), $teaser);
+        } elseif ($extension === '.webm') {
+            $video->save(new FFMpeg\Format\Video\WebM(), $teaser);
+        } elseif ($extension === '.wmv') {
+            $video->save(new FFMpeg\Format\Video\WMV(), $teaser);
+        }
     }
 
     public function getFileName(File $file): string
@@ -113,5 +135,13 @@ class TeaserController extends AbstractController
     public function getFileExtension(File $file): string
     {
         return '.' . $file->guessExtension();
+    }
+
+    public function getTeaserPath(File $file): string
+    {
+        $name = $this->getFileName($file);
+        $extension = $this->getFileExtension($file);
+
+        return self::PATH_NEW_TEASER . $name . $extension;
     }
 }

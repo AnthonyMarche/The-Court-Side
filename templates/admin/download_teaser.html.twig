@@ -1,0 +1,17 @@
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block page_title %}<h1 class="title">My teaser</h1>{% endblock %}
+
+{% block page_content %}
+    {{ encore_entry_script_tags('app') }}
+
+    <div class="container d-flex justify-content-center">
+        <video controls class="w-50 mt-4 mb-2"
+               src="{{ asset(teaser) }}">
+        </video>
+    </div>
+    <div class="d-flex justify-content-center mt-5">
+        <a href="{{ path('app_teaser_download', {'name': name}) }}" class="btn col-6">Télécharger mon teaser</a>
+    </div>
+
+{% endblock %}

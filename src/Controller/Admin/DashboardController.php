@@ -2,7 +2,6 @@
 
 namespace App\Controller\Admin;
 
-use _PHPStan_980551bf2\Nette\Utils\DateTime;
 use App\Entity\Category;
 use App\Entity\Tag;
 use App\Entity\User;
@@ -167,7 +166,7 @@ class DashboardController extends AbstractDashboardController
                     Video::class
                 )
                     ->setAction(Crud::PAGE_NEW),
-                MenuItem::linkToRoute('Teaser', 'fa-sharp fa-solid fa-file-video', 'app_teaser')
+                MenuItem::linkToRoute('Teaser', 'fa-sharp fa-solid fa-file-video', 'app_teaser_new')
             ]);
 
         yield MenuItem::subMenu(
