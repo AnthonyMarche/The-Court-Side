@@ -40,5 +40,6 @@ yarn-error.log
 ###> uploads ###
 /public/uploads/videos/*
 /public/uploads/teasers/*
+/public/uploads/teasersCreated/*
 !.gitignore
 ###< uploads ###

@@ -12,3 +12,11 @@ if (document.getElementById("Video_url_file")) {
     }
 
 }
+
+if (document.getElementById("teaser_video")) {
+    document.getElementById("teaser_video").onchange = function (event) {
+        let teaserFile = event.target.files[0];
+        let teaser = document.getElementById("teaser");
+        teaser.src = URL.createObjectURL(teaserFile);
+    }
+}
