@@ -18,6 +18,8 @@ class NewsletterController extends AbstractController
     #[Route('/newsletter', name: 'app_newsletter')]
     public function index(Request $request, MailerInterface $mailer, UserRepository $userRepository): Response
     {
+        // récupère tous les Users qui ont souscrit à la newsletter
+        $users = $userRepository->findBy(['newsletter' => true]);
 
         $form = $this->createForm(NewsletterType::class);
 
@@ -26,8 +28,6 @@ class NewsletterController extends AbstractController
             // récupère le contenu de la newsletter
             $newsletterTitle = $form->get('title')->getData();
             $newsletterContent = $form->get('content')->getData();
-            // récupère tous les Users qui ont souscrit à la newsletter
-            $users = $userRepository->findBy(['newsletter' => true]);
             // envoie un mail par User qui a souscrit
             foreach ($users as $user) {
                 $userEmail = $user->getEmail();
@@ -41,10 +41,12 @@ class NewsletterController extends AbstractController
                         ]));
                 $mailer->send($email);
             }
+            $this->addFlash('success', 'La newsletter a bien été envoyée.');
         }
 
         return $this->render('/newsletter/index.html.twig', [
             'newsletter_form' => $form->createView(),
+            'nb_of_users_subs_to_newsletter' => $users,
         ]);
     }
 }
