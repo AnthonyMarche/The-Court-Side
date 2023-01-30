@@ -14,7 +14,7 @@
                 <a class="nav-link" href="{{ path('app_category') }}">{{ 'navbar.categories'|trans }}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ path('app_likes') }}">{{ 'navbar.favorite'|trans }}</a>
+                <a class="nav-link" href="{{ path('app_likes', { sort : 'recent'}) }}">{{ 'navbar.favorite'|trans }}</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ path('app_about') }}">{{ 'navbar.about'|trans }}</a>
