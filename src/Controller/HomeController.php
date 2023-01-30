@@ -222,9 +222,8 @@ class HomeController extends AbstractController
             'videos' => $filter->getOrderedPrivateVideos($sort)
         ]);
     }
-}
 
- #[Route('/all/{sort}', name: 'all')]
+    #[Route('/all/{sort}', name: 'all')]
     public function showAllVideos(Request $request, Filter $filter, string $sort): Response|JsonResponse
     {
         //injection security
