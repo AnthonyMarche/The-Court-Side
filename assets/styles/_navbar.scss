@@ -2,19 +2,11 @@ nav {
     background-color: var(--mainBg-color);
 }
 
-nav .navbar-brand {
-    font-weight: bold;
-}
-
-nav .navbar-brand {
+nav .nav-link {
     color: var(--mainFont-color);
 }
 
-nav a {
-    color: var(--mainFont-color);
-}
-
-nav a:hover {
+nav .nav-link:hover {
     color: var(--element-color);
 }
 
@@ -81,9 +73,20 @@ nav .user-options:hover {
     text-decoration: none;
 }
 
+nav .user-profile-dropdown {
+    color: var(--element-color);
+}
+
+nav .user-profile-dropdown:hover {
+    color: var(--subFont-color);
+    text-decoration: none;
+}
+
 header {
     border-bottom: 1px solid var(--mainFont-color);
 }
+
+/* --------------------------------------------- Searchbar -------------------------------------------- */
 
 nav .submit-searchBar {
     margin: 0 0 3px 0;
@@ -92,7 +95,6 @@ nav .submit-searchBar {
 nav .custom-searchBar {
     border-radius: 20px 0 0 20px;
     background-color: var(--subBg-color);
-
 }
 
 nav .custom-searchBar:focus {
@@ -110,7 +112,7 @@ nav .btn-searchBar {
 
 nav .btn-searchBar:hover {
     border-radius: 0 20px 20px 0;
-    background-color: var(--subBg-color);
+    background-color: var(--subFont-color);
     border-color: var(--title-font);
 }
 
@@ -147,4 +149,11 @@ nav .searchForm {
 
 .settings-logo {
     font-size: 1.5rem;
+}
+
+@media screen and (min-width: 768px) {
+    .navbar-brand {
+        width: 75px;
+        height: auto;
+    }
 }

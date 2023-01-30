@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Private Videos{% endblock %}
+
+{% block body %}
+    {% if app.user %}
+        <h2 class="text-center mt-4 category-main-title text-white title-font">Réservées aux inscrits</h2>
+
+        {#        filter button include only if liked videos length is > 1 #}
+        {% if videos|length > 1 %}
+            {% include '_includes/_filter_button.html.twig' with  {
+                recent : path('app_private_videos', { sort : 'recent'}),
+                likes : path('app_private_videos', { sort : 'likes'}),
+                views : path('app_private_videos', { sort : 'views'})
+            } %}
+        {% endif %}
+
+        {#    include the videos grid #}
+        <div class="container-fluid p-5 py-3">
+            <div class="row js-content">
+                {% include '_includes/_videos_grid.html.twig' %}
+            </div>
+        </div>
+    {% else %}
+        {# message in case the user is not connected #}
+        {% include '_includes/_info_card.html.twig' with {
+            'text' : 'Désolé cette page n\'est disponible que pour les utilisateurs inscrits.
+            Vous pouvez vous inscrire gratuitement ou vous connectez si vous avez déjà un compte.',
+            'title' : 'Réservées aux inscrits',
+            'buttons' : 'true'} %}
+    {% endif %}
+{% endblock %}

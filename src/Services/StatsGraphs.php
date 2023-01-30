@@ -15,6 +15,7 @@ class StatsGraphs
     private UserRepository $userRepository;
     private CategoryRepository $categoryRepository;
     private LikeRepository $likeRepository;
+
     public function __construct(
         ChartBuilderInterface $chartBuilder,
         UserRepository $userRepository,
@@ -66,10 +67,31 @@ class StatsGraphs
         // définition des options
         $chart->setOptions([
             'scales' => [
+                'x' => [
+                    'grid' => [
+                        'color' => 'rgb(105, 105, 105)'
+                    ],
+                    'ticks' => [
+                        'color' => 'rgb(150, 150, 150)'
+                    ]
+                ],
                 'y' => [
                     'suggestedMin' => 0,
                     'suggestedMax' => $maxAmountOfUsers,
+                    'grid' => [
+                        'color' => 'rgb(105, 105, 105)'
+                    ],
+                    'ticks' => [
+                        'color' => 'rgb(150, 150, 150)'
+                    ]
                 ],
+            ],
+            'plugins' => [
+                'legend' => [
+                    'labels' => [
+                        'color' => 'white',
+                    ]
+                ]
             ],
         ]);
         return $chart;
@@ -114,10 +136,31 @@ class StatsGraphs
         // définition des options
         $chart->setOptions([
             'scales' => [
+                'x' => [
+                    'grid' => [
+                        'color' => 'rgb(105, 105, 105)'
+                    ],
+                    'ticks' => [
+                        'color' => 'rgb(150, 150, 150)'
+                    ]
+                ],
                 'y' => [
                     'suggestedMin' => 0,
                     'suggestedMax' => $maxAmountOfLikes,
+                    'grid' => [
+                        'color' => 'rgb(105, 105, 105)'
+                    ],
+                    'ticks' => [
+                        'color' => 'rgb(150, 150, 150)'
+                    ]
                 ],
+            ],
+            'plugins' => [
+                'legend' => [
+                    'labels' => [
+                        'color' => 'white',
+                    ]
+                ]
             ],
         ]);
         return $chart;
@@ -160,9 +203,19 @@ class StatsGraphs
                         'yellow',
                         'green'
                     ],
+                    'borderColor' => 'transparent',
                     'data' => $likes,
                     'hoverOffset' => 4
                 ],
+            ],
+        ]);
+        $chart->setOptions([
+            'plugins' => [
+                'legend' => [
+                    'labels' => [
+                        'color' => 'white',
+                    ]
+                ]
             ],
         ]);
 

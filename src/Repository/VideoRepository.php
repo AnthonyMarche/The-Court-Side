@@ -204,4 +204,17 @@ class VideoRepository extends ServiceEntityRepository
                 ->getResult();
         }
     }
+
+    public function findSimilarVideosByCategory(int $videoCategoryId, int $videoId): array
+    {
+        return $this->createQueryBuilder('v')
+            ->setMaxResults(4)
+            ->where('v.category = :categoryId')
+            ->andWhere('v.id != :id')
+            ->setParameter('categoryId', $videoCategoryId)
+            ->setParameter('id', $videoId)
+            ->orderBy('v.createdAt', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
 }

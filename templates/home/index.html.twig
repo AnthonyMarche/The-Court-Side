@@ -17,7 +17,7 @@
         {% include '_includes/_videos_head.html.twig' with {
             title : 'Publiées récemment',
             buttons : true,
-            path :  '#'
+            path :  path('app_all', {sort : 'recent'})
         } %}
         <div class="row video-row">
             {% include '_includes/_videos_grid.html.twig' with {
@@ -29,7 +29,7 @@
         {% include '_includes/_videos_head.html.twig' with {
             title : 'Les plus vues',
             buttons : true,
-            path :  '#'
+            path :  path('app_all', {sort : 'views'})
         } %}
         <div class="row">
             {% include '_includes/_videos_grid.html.twig' with {
@@ -49,9 +49,9 @@
 
         {# third videos row #}
         {% include '_includes/_videos_head.html.twig' with {
-            title : 'les plus likées',
+            title : 'Les plus likées',
             buttons : true,
-            path :  '#'
+            path :  path('app_all', {sort : 'likes'})
         } %}
         <div class="row video-row">
             {% include '_includes/_videos_grid.html.twig' with {
@@ -63,7 +63,7 @@
         {% include '_includes/_videos_head.html.twig' with {
             title : 'Réservées aux inscrits',
             buttons : true,
-            path :  '#'
+            path :  path('app_private_videos', { sort : 'recent'})
         } %}
         <div class="row">
             {% include '_includes/_videos_grid.html.twig' with {
