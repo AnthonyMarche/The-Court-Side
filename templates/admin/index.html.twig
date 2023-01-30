@@ -5,7 +5,7 @@
 {% block page_content %}
     <div class="container">
         <div class="row">
-            <div class="card col-12 col-sm-6 col-xl-3 bg-dark text-light">
+            <div class="card col-12 col-sm-6 col-xl-3 bg-dark bg-gradient text-light">
                 <div class="card-body">
                     <h5 class="card-title text-center mb-2 mb-xl-4">Statistiques globales</h5>
                     <p class="card-text">Nombre d'inscrits :</p>
@@ -16,7 +16,7 @@
                     <p class="text-center border border-info bg-info bg-opacity-50 rounded-pill fw-bold">{{ likes|length }}</p>
                 </div>
             </div>
-            <div class="card col-12 col-sm-6 col-xl-3 bg-dark text-light">
+            <div class="card col-12 col-sm-6 col-xl-3 bg-dark bg-gradient text-light">
                 <div class="card-body">
                     <h5 class="card-title text-center mb-2 mb-xl-4">7 derniers jours</h5>
                     <p class="card-text">Nouveaux inscrits :</p>
@@ -27,7 +27,7 @@
                     <p class="text-center border border-info bg-info bg-opacity-50 rounded-pill fw-bold">{{ likes_from_past_seven_days[0][1] }}</p>
                 </div>
             </div>
-            <div class="card col-12 col-sm-6 col-xl-3 bg-dark text-light">
+            <div class="card col-12 col-sm-6 col-xl-3 bg-dark bg-gradient text-light">
                 <div class="card-body">
                     <h5 class="card-title text-center mb-2 mb-xl-4">30 derniers jours</h5>
                     <p class="card-text">Nouveaux inscrits :</p>
@@ -38,7 +38,7 @@
                     <p class="text-center border border-info bg-info bg-opacity-50 rounded-pill fw-bold">{{ likes_from_past_thirty_days[0][1] }}</p>
                 </div>
             </div>
-            <div class="card col-12 col-sm-6 col-xl-3 bg-dark">
+            <div class="card col-12 col-sm-6 col-xl-3 bg-dark bg-gradient">
                 <div class="card-body">
                     <h5 class="card-title text-center mb-2">Catégories avec le plus de likes</h5>
                     <div>
@@ -48,7 +48,7 @@
             </div>
         </div>
         <div class="row pt-4">
-            <div class="card col-12 col-lg-6 bg-dark">
+            <div class="card col-12 col-lg-6 bg-dark bg-gradient">
                 <div class="card-body">
                     <h5 class="card-title text-center">Inscriptions sur le site (12 derniers mois)</h5>
                     <div>
@@ -56,7 +56,7 @@
                     </div>
                 </div>
             </div>
-            <div class="card col-12 col-lg-6 bg-dark">
+            <div class="card col-12 col-lg-6 bg-dark bg-gradient">
                 <div class="card-body">
                     <h5 class="card-title text-center">Likes sur le site (12 derniers mois)</h5>
                     <di class="">
