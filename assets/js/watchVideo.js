@@ -17,7 +17,9 @@ if (document.getElementsByClassName('.js-like')) {
             }
         }
     }
+}
 
+if (document.querySelector('.like-icon')) {
     let icon = document.querySelector('.like-icon');
     icon.onclick = function(){
         icon.classList.toggle('active');

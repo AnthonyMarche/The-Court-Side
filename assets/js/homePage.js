@@ -9,3 +9,24 @@ for (let i = 0; i < clip.length; i++) {
     });
 }
 
+if (document.getElementById('top-button-container')) {
+    const topButton = document.getElementById('top-button-container');
+    let firstScroll;
+    window.onscroll = () => {
+        if (window.scrollY > 300) {
+            topButton.classList.remove('top-button-container');
+            topButton.classList.add('top-button-container-active');
+            firstScroll = false;
+        } else if (window.scrollY < 300) {
+            topButton.classList.remove('top-button-container-active');
+            if (firstScroll === false) {
+                topButton.classList.remove('top-button-container');
+                topButton.classList.add('top-button-container-inactive');
+            }
+        }
+    }
+
+    topButton.addEventListener('click', function (e) {
+        window.scrollTo(0, 0);
+    })
+}

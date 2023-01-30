@@ -18,6 +18,18 @@
     text-align: right;
 }
 
+.watch-video-views {
+    color: var(--subFont-color);
+    font-family: var(--text-font);
+    font-size: .9rem;
+    font-style: italic;
+    word-break: keep-all;
+}
+
+.watch-views-container {
+    margin-left: 20%;
+}
+
 .watch-video-head {
     margin-left: 20%;
     margin-right: 20%;
