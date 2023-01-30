@@ -194,7 +194,31 @@ class HomeController extends AbstractController
         ]);
     }
 
-    #[Route('/all/{sort}', name: 'all')]
+    #[Route('/private/{sort}', name: 'private_videos')]
+    public function showPrivateVideos(Request $request, Filter $filter, string $sort): Response
+    {
+
+        //injection security
+        if (!$filter->preventInjection($sort)) {
+            throw $this->createNotFoundException('filtre invalide');
+        }
+
+        //handle ajax request
+        if ($request->isXmlHttpRequest()) {
+            return new JsonResponse([
+                'content' => $this->renderView('_includes/_videos_grid.html.twig', [
+                    'videos' => $filter->getOrderedPrivateVideos($sort),
+                ])
+            ]);
+        }
+
+        return $this->render('home/privateVideos.html.twig', [
+            'videos' => $filter->getOrderedPrivateVideos($sort)
+        ]);
+    }
+}
+
+ #[Route('/all/{sort}', name: 'all')]
     public function showAllVideos(Request $request, Filter $filter, string $sort): Response|JsonResponse
     {
         //injection security
