@@ -159,14 +159,14 @@
     font-family: var(--text-font);
     color: var(--subFont-color);
     text-align: center;
+}
 
-    .grow {
-        transition: all .2s ease-in-out;
-    }
+.grow {
+    transition: all .2s ease-in-out;
+}
 
-    .grow:hover {
-        transform: scale(1.11);
-    }
+.grow:hover {
+    transform: scale(1.11);
 }
 
 .top-button {

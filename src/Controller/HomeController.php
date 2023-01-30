@@ -37,19 +37,25 @@ class HomeController extends AbstractController
     }
 
     #[Route('/watch/{slug}', name: 'watch')]
-    public function watch(Video $video): Response
+    public function watch(Video $video, VideoRepository $videoRepository): Response
     {
-        //prevent the video to be seen by an unsubscribed user
+        //prevent a private video to be seen by an unsubscribed user
         if ($video->isIsPrivate() === true && $this->getUser() === null) {
             throw $this->createNotFoundException('access denied');
         }
 
+        //more videos from the same category
+        $videoCategoryId = $video->getCategory()->getId();
+        $videoId = $video->getId();
+        $moreVideos = $videoRepository->findSimilarVideosByCategory($videoCategoryId, $videoId);
+
         return $this->render('home/watch.html.twig', [
-            'video' => $video
+            'video' => $video,
+            'moreVideos' => $moreVideos,
         ]);
     }
 
-    #[Route('watch/{id}/like', name: 'watch_like', methods: ['GET','POST'])]
+    #[Route('watch/{id}/like', name: 'watch_like', methods: ['GET', 'POST'])]
     public function addToLike(
         Video $video,
         EntityManagerInterface $manager,
@@ -95,11 +101,11 @@ class HomeController extends AbstractController
     /**
      * @throws Exception
      */
-    #[Route('/likes/{sort}', name: 'likes')]
+    #[Route('/favorite/{sort}', name: 'likes')]
     public function showLikes(
         Filter $filter,
         Request $request,
-        string $sort = 'recent'
+        string $sort
     ): Response {
 
         $likedVideos = "";
@@ -142,7 +148,7 @@ class HomeController extends AbstractController
         Request $request,
         Filter $filter,
         string $slug,
-        string $sort = 'recent'
+        string $sort
     ): Response {
 
         //injection security
@@ -169,7 +175,7 @@ class HomeController extends AbstractController
         Request $request,
         Filter $filter,
         string $slug,
-        string $sort = 'recent'
+        string $sort
     ): Response {
 
         //injection security
@@ -191,6 +197,51 @@ class HomeController extends AbstractController
             'videos' => $filter->getOrderedTagVideos($sort, $slug),
             'tagSlug' => $slug,
             'tagName' => str_replace('-', ' ', $slug)
+        ]);
+    }
+
+    #[Route('/private/{sort}', name: 'private_videos')]
+    public function showPrivateVideos(Request $request, Filter $filter, string $sort): Response
+    {
+
+        //injection security
+        if (!$filter->preventInjection($sort)) {
+            throw $this->createNotFoundException('filtre invalide');
+        }
+
+        //handle ajax request
+        if ($request->isXmlHttpRequest()) {
+            return new JsonResponse([
+                'content' => $this->renderView('_includes/_videos_grid.html.twig', [
+                    'videos' => $filter->getOrderedPrivateVideos($sort),
+                ])
+            ]);
+        }
+
+        return $this->render('home/privateVideos.html.twig', [
+            'videos' => $filter->getOrderedPrivateVideos($sort)
+        ]);
+    }
+
+    #[Route('/all/{sort}', name: 'all')]
+    public function showAllVideos(Request $request, Filter $filter, string $sort): Response|JsonResponse
+    {
+        //injection security
+        if (!$filter->preventInjection($sort)) {
+            throw $this->createNotFoundException('filtre invalide');
+        }
+
+        //handle ajax request
+        if ($request->isXmlHttpRequest()) {
+            return new JsonResponse([
+                'content' => $this->renderView('_includes/_videos_grid.html.twig', [
+                    'videos' => $filter->getOrderedVideos($sort)
+                ])
+            ]);
+        }
+
+        return $this->render('home/allVideos.html.twig', [
+            'videos' => $filter->getOrderedVideos($sort)
         ]);
     }
 }
