@@ -1,0 +1,56 @@
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block page_title %}<h1 class="title">Create teaser</h1>{% endblock %}
+
+{% block page_content %}
+    {{ include('_includes/_loaderAdmin.html.twig') }}
+    <div id="adminBody" class="container">
+        {{ form_start(teaserForm) }}
+        <div class="col-6 m-auto">
+            {{ form_label(teaserForm.video) }}
+            {{ form_widget(teaserForm.video, {'attr': {'class': 'form-control mt-1 bg-dark bg-gradient'}}) }}
+            <div style="font-style: italic ">
+                {{ form_help(teaserForm.video) }}
+            </div>
+            <div style="color: red; list-style: none">
+                {{ form_errors(teaserForm.video) }}
+            </div>
+        </div>
+        <div class="d-flex justify-content-around mt-5">
+
+            <div class="d-flex flex-column justify-content-around mb-1">
+                <div class="d-flex flex-column">
+                    {{ form_label(teaserForm.secondStart) }}
+                    {{ form_widget(teaserForm.secondStart, {'attr': {'class': 'form-control bg-dark bg-gradient'}}) }}
+                    <div style="font-style: italic ">
+                        {{ form_help(teaserForm.secondStart) }}
+                    </div>
+                    <div style="color: red; list-style: none">
+                        {{ form_errors(teaserForm.secondStart) }}
+                    </div>
+                </div>
+                <div class="d-flex flex-column">
+                    {{ form_label(teaserForm.duration) }}
+                    {{ form_widget(teaserForm.duration, {'attr': {'class': 'form-control bg-dark bg-gradient'}}) }}
+                    <div style="font-style: italic ">
+                        {{ form_help(teaserForm.duration) }}
+                    </div>
+                    <div style="color: red; list-style: none">
+                        {{ form_errors(teaserForm.duration) }}
+                    </div>
+                </div>
+            </div>
+
+            <video id="teaser" controls class="w-50"
+                   src="">
+            </video>
+
+        </div>
+        <div class="d-flex justify-content-center mt-5 mb-4">
+            <button disabled id="submit-new-teaser" type='submit' class="btn col-6 bg-dark bg-gradient">Générer mon
+                teaser
+            </button>
+        </div>
+    </div>
+    {{ form_end(teaserForm) }}
+{% endblock %}
