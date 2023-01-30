@@ -18,18 +18,35 @@ if (document.querySelector('.js-content')) {
         sortingViews.classList.remove('disappearance');
         sortingRecent.classList.add('disappearance');
         sortingLikes.classList.add('disappearance');
+        if (document.querySelector('.sorted-by-recent-title')) {
+            document.querySelector('.sorted-by-recent-title').classList.add('disappearance')
+            document.querySelector('.sorted-by-likes-title').classList.add('disappearance')
+            document.querySelector('.sorted-by-views-title').classList.remove('disappearance')
+        }
     });
+
     likesFilter.addEventListener('click', async function () {
         await delay(1500);
         sortingViews.classList.add('disappearance');
         sortingRecent.classList.add('disappearance');
         sortingLikes.classList.remove('disappearance');
+        if (document.querySelector('.sorted-by-recent-title')) {
+            document.querySelector('.sorted-by-recent-title').classList.add('disappearance')
+            document.querySelector('.sorted-by-likes-title').classList.remove('disappearance')
+            document.querySelector('.sorted-by-views-title').classList.add('disappearance')
+        }
     });
+
     dateFilter.addEventListener('click', async function () {
         await delay(1500);
         sortingViews.classList.add('disappearance');
         sortingRecent.classList.remove('disappearance');
         sortingLikes.classList.add('disappearance');
+        if (document.querySelector('.sorted-by-recent-title')) {
+            document.querySelector('.sorted-by-recent-title').classList.remove('disappearance')
+            document.querySelector('.sorted-by-likes-title').classList.add('disappearance')
+            document.querySelector('.sorted-by-views-title').classList.add('disappearance')
+        }
     });
 
     // eslint-disable-next-line no-inner-declarations
@@ -55,6 +72,16 @@ if (document.querySelector('.js-content')) {
             loadingIcon.classList.add('disappearance');
 
             history.replaceState({}, '', link)
+
+            const video = document.querySelectorAll(".hover-to-play");
+            for (let i = 0; i < video.length; i++) {
+                video[i].addEventListener("mouseenter", function (e) {
+                    video[i].play();
+                });
+                video[i].addEventListener("mouseout", function (e) {
+                    video[i].pause();
+                });
+            }
         }
     }
 }

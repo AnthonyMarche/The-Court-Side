@@ -22,14 +22,14 @@
                 <div class="d-flex justify-content-between p-0 mb-0">
                     <h3 class="section-name">{{ category.name }}</h3>
                     {% if category.videos|length > 4 %}
-                        <a href="{{ path('app_single_category', {slug : category.slug}) }}">
+                        <a href="{{ path('app_single_category', {slug : category.slug, sort : 'recent'}) }}">
                             <button type="button" class="btn btn-outline-primary see-more-button">VOIR PLUS</button>
                         </a>
                     {% endif %}
                 </div>
                 <div class="category-section-line mb-2"></div>
-                <div class="row d-flex flex-nowrap {% if category.videos|length > 4 %}js-video-slick{% endif %}">
-                    {% for video in category.videos[:8] %}
+                <div class="row">
+                    {% for video in category.videos[:4] %}
                         <div class="col-12 col-md-6 col-lg-4 col-xl-3 single-video grow">
                             <a href="{{ path('app_watch', {slug : video.slug}) }}"
                                 {% if video.isPrivate and not app.user %}
