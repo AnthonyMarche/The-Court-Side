@@ -59,8 +59,8 @@ class Filter
             return $this->videoRepository->findBy(['isPrivate' => 1], ['createdAt' => 'DESC']);
         }
     }
-    
-  
+
+
     public function getOrderedVideos(string $filter): array
     {
         if ($filter == 'views') {

@@ -1,6 +1,4 @@
 if (document.getElementsByClassName('.js-like')) {
-    const LIKE_ICON = 'watch-like-icon bi bi-heart-fill';
-    const UNLIKE_ICON = 'watch-like-icon bi bi-heart';
     Array.from(document.querySelectorAll('a.js-like')).forEach(function (link) {
         link.addEventListener('click', onClickLink);
     });
@@ -13,11 +11,17 @@ if (document.getElementsByClassName('.js-like')) {
         try {
             const result = await axios.post(url);
             const data = result.data;
-            icone.className = icone.className === LIKE_ICON ? UNLIKE_ICON : LIKE_ICON;
         } catch (error) {
             if (error.response.status === 403) {
                 window.location = '/login'
             }
         }
+    }
+}
+
+if (document.querySelector('.like-icon')) {
+    let icon = document.querySelector('.like-icon');
+    icon.onclick = function(){
+        icon.classList.toggle('active');
     }
 }
