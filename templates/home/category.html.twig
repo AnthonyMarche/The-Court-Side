@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Sports{% endblock %}
+{% block title %}Categories{% endblock %}
 
 {% block body %}
     {#  modal include #}
     {% include '_includes/_modal.html.twig' with {
         buttons : true
     } %}
-    <div class="{% if categories|length > 10 %}js-slick{% endif %} chip-container d-flex align-items-center">
+    <div class="js-slick chip-container d-flex align-items-center">
         <strong class="ml-2 mr-2 distinct-pipe">|</strong>
         {% for category in categories %}
             <div class="chip">
@@ -15,45 +15,24 @@
             </div>
         {% endfor %}
     </div>
-    <h2 class="text-center mt-4 category-main-title">Sports</h2>
+
+    <h2 class="text-center mt-4 category-main-title">Catégories</h2>
+
     {% for category in categories %}
         <div class="category-video-row-container">
             <div id="{{ category.name }}" class="container-fluid p-5 py-3 home-main-container">
-                <div class="d-flex justify-content-between p-0 mb-0">
-                    <h3 class="section-name">{{ category.name }}</h3>
-                    {% if category.videos|length > 4 %}
-                        <a href="{{ path('app_single_category', {slug : category.slug, sort : 'recent'}) }}">
-                            <button type="button" class="btn btn-outline-primary see-more-button">VOIR PLUS</button>
-                        </a>
-                    {% endif %}
-                </div>
-                <div class="category-section-line mb-2"></div>
+
+                {% if category.videos|length < 4 %}{% set buttons = false %}{% else %}{% set buttons = true %}{% endif %}
+                {% include '_includes/_videos_head.html.twig' with {
+                    title : category.name,
+                    buttons : buttons,
+                    path : path('app_single_category', {slug : category.slug, sort : 'recent'})
+                    } %}
+
                 <div class="row">
-                    {% for video in category.videos[:4] %}
-                        <div class="col-12 col-md-6 col-lg-4 col-xl-3 single-video grow">
-                            <a href="{{ path('app_watch', {slug : video.slug}) }}"
-                                {% if video.isPrivate and not app.user %}
-                                    data-toggle="modal" data-target="#contentModal"
-                                {% endif %}
-                               class="card card-video border-0 bg-transparent mb-4 home-video-link">
-                                <div class="lock-image-container">
-                                    <video src="{{ asset(video.teaser) }}" type="video/mp4" loop muted
-                                           class="w-100 mt-2 private-video d-flex align-self-center hover-to-play">
-                                    </video>
-                                </div>
-                                <div class="card-video-details d-flex mt-2">
-                                    <div>
-                                        {% if video.isPrivate and not app.user %}
-                                            <i class="fa fa-lock video-private-message"> Réservée aux inscrits</i>
-                                        {% endif %}
-                                        <h4 class="home-video-title">{{ video.title }}</h4>
-                                        <div class="home-video-details">{{ video.numberOfView }} vues • publiée
-                                            le {{ video.createdAt|date("d/m/Y") }}</div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    {% endfor %}
+                    {% include '_includes/_videos_grid.html.twig' with {
+                        videos : category.videos[:4]
+                    } %}
                 </div>
             </div>
         </div>
