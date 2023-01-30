@@ -3,7 +3,7 @@ const $ = window.$;
 
 //fixed nav bar js for the category page
 if (document.querySelector('.chip-container')){
-    const RAF = requestAnimationFrame
+    const animationFrame = requestAnimationFrame
     const $nav = document.querySelector('.chip-container')
     const threshold = $nav.getBoundingClientRect()
     const topButton = document.getElementById('top-button-container');
@@ -18,12 +18,12 @@ if (document.querySelector('.chip-container')){
             $nav.classList.remove('chip-container--fixed')
         updating = false
     }
-    console.log(window.scrollY)
+
     window.onscroll = () => {
         if (updating) return
         else {
             updating = true
-            RAF(handleScroll)
+            animationFrame(handleScroll)
         }
         if (window.scrollY > 301) {
             topButton.classList.remove('top-button-container');
