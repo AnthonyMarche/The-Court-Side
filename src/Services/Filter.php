@@ -48,4 +48,15 @@ class Filter
     {
         return $this->videoRepository->findOrderedVideosBySearch($filter, $search);
     }
+
+    public function getOrderedVideos(string $filter): array
+    {
+        if ($filter == 'views') {
+            return $this->videoRepository->findBy([], ['numberOfView' => 'DESC']);
+        } elseif ($filter == 'likes') {
+            return $this->videoRepository->findBy([], ['numberOfLike' => 'DESC']);
+        } else {
+            return $this->videoRepository->findBy([], ['createdAt' => 'DESC']);
+        }
+    }
 }
