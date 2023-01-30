@@ -55,7 +55,7 @@ class HomeController extends AbstractController
         ]);
     }
 
-    #[Route('watch/{id}/like', name: 'watch_like', methods: ['GET','POST'])]
+    #[Route('watch/{id}/like', name: 'watch_like', methods: ['GET', 'POST'])]
     public function addToLike(
         Video $video,
         EntityManagerInterface $manager,
@@ -101,11 +101,11 @@ class HomeController extends AbstractController
     /**
      * @throws Exception
      */
-    #[Route('/likes/{sort}', name: 'likes')]
+    #[Route('/favorite/{sort}', name: 'likes')]
     public function showLikes(
         Filter $filter,
         Request $request,
-        string $sort = 'recent'
+        string $sort
     ): Response {
 
         $likedVideos = "";
@@ -148,7 +148,7 @@ class HomeController extends AbstractController
         Request $request,
         Filter $filter,
         string $slug,
-        string $sort = 'recent'
+        string $sort
     ): Response {
 
         //injection security
@@ -175,7 +175,7 @@ class HomeController extends AbstractController
         Request $request,
         Filter $filter,
         string $slug,
-        string $sort = 'recent'
+        string $sort
     ): Response {
 
         //injection security
@@ -197,6 +197,28 @@ class HomeController extends AbstractController
             'videos' => $filter->getOrderedTagVideos($sort, $slug),
             'tagSlug' => $slug,
             'tagName' => str_replace('-', ' ', $slug)
+        ]);
+    }
+
+    #[Route('/all/{sort}', name: 'all')]
+    public function showAllVideos(Request $request, Filter $filter, string $sort): Response|JsonResponse
+    {
+        //injection security
+        if (!$filter->preventInjection($sort)) {
+            throw $this->createNotFoundException('filtre invalide');
+        }
+
+        //handle ajax request
+        if ($request->isXmlHttpRequest()) {
+            return new JsonResponse([
+                'content' => $this->renderView('_includes/_videos_grid.html.twig', [
+                    'videos' => $filter->getOrderedVideos($sort)
+                ])
+            ]);
+        }
+
+        return $this->render('home/allVideos.html.twig', [
+            'videos' => $filter->getOrderedVideos($sort)
         ]);
     }
 }

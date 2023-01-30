@@ -53,19 +53,19 @@
                     </div>
                 </div>
             </div>
-            <div class="watch-video-description text-left mt-2">
-                <p class="video-description-head">Description :</p>
-                <p class="video-description">{{ video.description }}</p>
-            </div>
-            <div class="watch-video-tags-container">
-                <div class="watch-video-tags d-flex pb-5">
-                    {% for tag in video.tag %}
-                        <a href="{{ path('app_tag', {slug : tag.slug}) }}">
-                            <button type="button" class="btn btn-outline-primary tag-button btn-sm mr-2">
-                                #{{ tag.name }}</button>
-                        </a>
-                    {% endfor %}
-                </div>
+        </div>
+        <div class="watch-video-description text-left mt-2">
+            <p class="video-description-head">Description :</p>
+            <p class="video-description">{{ video.description }}</p>
+        </div>
+        <div class="watch-video-tags-container">
+            <div class="watch-video-tags d-flex pb-5">
+                {% for tag in video.tag %}
+                    <a href="{{ path('app_tag', {slug : tag.slug, sort : 'recent'}) }}">
+                        <button type="button" class="btn btn-outline-primary tag-button btn-sm mr-2">
+                            #{{ tag.name }}</button>
+                    </a>
+                {% endfor %}
             </div>
         </div>
         {% include '_includes/_modal.html.twig' with {
