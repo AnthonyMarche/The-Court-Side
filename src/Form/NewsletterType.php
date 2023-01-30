@@ -2,8 +2,8 @@
 
 namespace App\Form;
 
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -13,7 +13,11 @@ class NewsletterType extends AbstractType
     {
         $builder
             ->add('title')
-            ->add('content', TextareaType::class, array('attr' => array('rows' => '10')));
+            ->add('content', CKEditorType::class, array(
+                'config' => array(
+                    'uiColor' => '#ededed',
+                ),
+                'attr' => array('rows' => '12')))
         ;
     }
 

@@ -1,5 +1,6 @@
 const Encore = require('@symfony/webpack-encore');
 
+
 // Manually configure the runtime environment if not already configured yet by the "encore" command.
 // It's useful when you use tools that rely on webpack.config.js file.
 if (!Encore.isRuntimeEnvironmentConfigured()) {
@@ -25,9 +26,24 @@ Encore
         // only copy files matching this pattern
         // pattern: /\.(png|jpg|jpeg)$/
     })
+    // CKeditor config
+    .copyFiles([
+        {
+            from: './node_modules/ckeditor4/',
+            to: 'ckeditor/[path][name].[ext]',
+            pattern: /\.(js|css)$/,
+            includeSubdirectories: false
+        },
+        {from: './node_modules/ckeditor4/adapters', to: 'ckeditor/adapters/[path][name].[ext]'},
+        {from: './node_modules/ckeditor4/lang', to: 'ckeditor/lang/[path][name].[ext]'},
+        {from: './node_modules/ckeditor4/plugins', to: 'ckeditor/plugins/[path][name].[ext]'},
+        {from: './node_modules/ckeditor4/skins', to: 'ckeditor/skins/[path][name].[ext]'},
+        {from: './node_modules/ckeditor4/vendor', to: 'ckeditor/vendor/[path][name].[ext]'}
+    ])
 
     .copyFiles(
-        {from: './assets/fixturesVideos',
+        {
+            from: './assets/fixturesVideos',
 
             to: 'fixturesVideos/[path][name].[hash:8].[ext]',
         })
@@ -72,8 +88,8 @@ Encore
         config.useBuiltIns = 'usage';
         config.corejs = 3;
     })
-    // uncomment if you use TypeScript
-    // .enableTypeScriptLoader()
+// uncomment if you use TypeScript
+// .enableTypeScriptLoader()
 
 // uncomment if you use React
 // .enableReactPreset()
