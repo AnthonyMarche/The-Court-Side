@@ -8,6 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\GreaterThanOrEqual;
+use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\PositiveOrZero;
 use Symfony\Component\Validator\Constraints\File;
 
@@ -20,9 +21,12 @@ class TeaserType extends AbstractType
                 'label' => 'Votre vidéo :',
                 'required' => true,
                 'help' => 'file .mp4, .webm, .ogg, .wmv',
-                'constraints' => [new File([
-                    'mimeTypes' => ['video/mp4', 'video/webm', 'video/ogg', 'video/wmv']
-                ])],
+                'constraints' => [
+                    new File([
+                        'mimeTypes' => ['video/mp4', 'video/webm', 'video/ogg', 'video/wmv']
+                    ]),
+                    new NotBlank()
+                ],
             ])
             ->add('secondStart', IntegerType::class, [
                 'label' => 'Début :',

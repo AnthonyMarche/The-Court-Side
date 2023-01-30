@@ -19,4 +19,23 @@ if (document.getElementById("teaser_video")) {
         let teaser = document.getElementById("teaser");
         teaser.src = URL.createObjectURL(teaserFile);
     }
+
+    let submitTeaser = document.getElementById('submit-new-teaser');
+    let loaderTeaser = document.getElementById('adminLoader');
+    let input = document.getElementById("teaser_video")
+    let adminBody = document.getElementById("adminBody")
+
+    input.addEventListener('change', function (){
+        submitTeaser.removeAttribute('disabled');
+    })
+
+    submitTeaser.addEventListener("click", async function (e) {
+        loaderTeaser.classList.remove('d-none');
+        adminBody.classList.add('body-admin');
+    });
+
+
+
 }
+
+

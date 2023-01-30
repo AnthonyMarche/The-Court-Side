@@ -11,6 +11,7 @@ use App\Repository\LikeRepository;
 use App\Repository\UserRepository;
 use App\Repository\VideoRepository;
 use App\Services\StatsGraphs;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -95,6 +96,12 @@ class DashboardController extends AbstractDashboardController
             ->setTranslationDomain('admin')
             ->setTitle('THE COURT SIDE | Admin')
             ->setFaviconPath('build/images/TCS favicon.png');
+    }
+
+    public function configureAssets(): Assets
+    {
+        return parent::configureAssets()
+            ->addWebpackEncoreEntry('admin');
     }
 
     /**
