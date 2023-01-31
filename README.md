@@ -1,30 +1,21 @@
-# Project 3 - Starter Kit - Symfony
+# Project 3 Symfony - Origins Digital - The Court Side
 
 ## Presentation
 
-This starter kit is here to easily start a repository for Wild Code School students.
+This is our third and final project at the Wild Code School. The team is composed of Alexis Boucherie, Anthony Marché, Yazid Hamzi and Naomie Atil. We are part of the PHP course.
+Our client desired a user-friendly website with an intuitive design.
+
+The Court Side is a direct-to-consumer video content free platform specialized in sports where the users need to register in order to access the premium content.
 
 It's symfony website-skeleton project with some additional library (webpack, fixtures) and tools to validate code standards.
 
-* GrumPHP, as pre-commit hook, will run 2 tools when `git commit` is run :
 
-    * PHP_CodeSniffer to check PSR12
-    * PHPStan focuses on finding errors in your code (without actually running it)
-    * PHPmd will check if you follow PHP best practices
-
-  If tests fail, the commit is canceled and a warning message is displayed to developper.
-
-* Github Action as Continuous Integration will be run when a branch with active pull request is updated on github. It will run :
-
-    * Tasks to check if vendor, .idea, env.local are not versionned,
-    * PHP_CodeSniffer, PHPStan and PHPmd with same configuration as GrumPHP.
-
-## Getting Started for Students
+## Getting Started for Users
 
 ### Prerequisites
 
-1. Check composer is installed
-2. Check yarn & node are installed
+1. Check if composer is installed
+2. Check if yarn & node are installed
 
 ### Install
 
@@ -38,12 +29,25 @@ It's symfony website-skeleton project with some additional library (webpack, fix
 1. Run `symfony server:start` to launch your local php web server
 2. Run `yarn run dev --watch` to launch your local server for assets (or `yarn dev-server` do the same with Hot Module Reload activated)
 
-### Testing
+### Modify the .env file
+1. Create an .env.local file
+2. Add your credentials on DATABASE_URL="mysql://db_user:db_password@127.0.0.1:3306/db_name?serverVersion=5.7&charset=utf8mb4"
 
-1. Run `php ./vendor/bin/phpcs` to launch PHP code sniffer
-2. Run `php ./vendor/bin/phpstan analyse src --level max` to launch PHPStan
-3. Run `php ./vendor/bin/phpmd src text phpmd.xml` to launch PHP Mess Detector
-4. Run `./node_modules/.bin/eslint assets/js` to launch ESLint JS linter
+
+### Mail Testing
+1. In your .env.local file modify the # MAILER_DSN=null://null with the email delivry platform of your choice.
+After register, you will be sent a confirmation email.
+
+
+### Create and Get the database
+1. php bin/console doctrine:database:create
+2. php bin/console doctrine:make:migration  
+3. php bin/console doctrine:migrations:migrate
+
+
+### Generate the fixtures
+1. php bin/console doctrine:fixtures:load 
+
 
 ### Windows Users
 
@@ -64,15 +68,6 @@ docker-compose up -d
 3. Wait a moment and visit http://localhost:8000
 
 
-## Deployment
-
-Some files are used to manage automatic deployments (using tools as Caprover, Docker and Github Action). Please do not modify them.
-
-* [captain-definition](/captain-definition) Caprover entry point
-* [Dockerfile](/Dockerfile) Web app configuration for Docker container
-* [docker-entry.sh](/docker-entry.sh) shell instruction to execute when docker image is built
-* [nginx.conf](/ginx.conf) Nginx server configuration
-* [php.ini](/php.ini) Php configuration
 
 
 ## Built With
@@ -86,17 +81,10 @@ Some files are used to manage automatic deployments (using tools as Caprover, Do
 * [Sass-Lint](https://github.com/sasstools/sass-lint)
 
 
+## Application
 
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-
-## Authors
-
-Wild Code School trainers team
+You will first access to the homepage. From there, you are able to log in using the predefined Super Admin account whom credentials are admin@me.fr and admin as password.
+Once connected, you will have access to the premium content and from the admin page you will be able to create, upload videos and teasers or even delete content for example.
 
 ## License
 
@@ -121,6 +109,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
-## Acknowledgments
-
