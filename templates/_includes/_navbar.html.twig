@@ -29,10 +29,6 @@
 
         {# -------SEARCHBAR------- #}
         {{ render(controller('App\\Controller\\SearchController::search')) }}
-        {% set currentPath = path(app.request.attributes.get('_route'),
-            app.request.attributes.get('_route_params')) %}
-        {#        {{ set currentPath =  currentPath|trim('/', 'left') }} #}
-        {#        {{ dump(currentPath|trim('/', 'left')) }} #}
 
         {# -------NAV-LOGIN------- #}
         <div class="nav-links d-flex justify-content-center align-items-center justify-content-lg-end
