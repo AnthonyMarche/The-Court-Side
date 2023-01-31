@@ -35,22 +35,23 @@ if (document.getElementById('top-button-container')) {
         window.scrollTo(0, 0);
     })
 
-for (let i = 0; i < video.length; i++) {
-    let play;
-    video[i].onmouseover = async function () {
-        play = true;
-        while (play === true) {
-            video[i].play();
-            await delay(15000);
-            video[i].pause();
-            video[i].currentTime = 0;
+    for (let i = 0; i < video.length; i++) {
+        let play;
+        video[i].onmouseover = async function () {
+            play = true;
+            while (play === true) {
+                video[i].play();
+                await delay(15000);
+                video[i].pause();
+                video[i].currentTime = 0;
+            }
         }
-    }
 
-    video[i].onmouseout = async function () {
-        play = false;
-        video[i].currentTime = 0;
-        await delay(100);
-        video[i].pause();
+        video[i].onmouseout = async function () {
+            play = false;
+            video[i].currentTime = 0;
+            await delay(100);
+            video[i].pause();
+        }
     }
 }
