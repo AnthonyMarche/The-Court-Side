@@ -4,8 +4,12 @@
         <p class="card-text text-gray text-font mb-5">{{ text }}</p>
         {% if buttons == 'true' %}
             <div class="info-card-buttons-container d-flex justify-content-center mb-5">
-                <a href="#" class="btn btn-outline-info">S'inscrire</a>
-                <a href="{{ path('app_user_login') }}" class="btn btn-primary">Se connecter</a>
+                <a href="{{ path('app_register') }}">
+                    <button type="button" class="btn btn-outline-custom">S'inscrire</button>
+                </a>
+                <a href="{{ path('app_user_login') }}">
+                    <button type="button" class="btn btn-custom">Se connecter</button>
+                </a>
             </div>
         {% endif %}
     </div>
