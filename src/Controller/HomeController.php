@@ -137,10 +137,15 @@ class HomeController extends AbstractController
         ]);
     }
 
-    #[Route('/Language/{language}/{route}', name: 'language')]
-    public function changeLanguage(string $language, string $route): Response
+    #[Route('/Language/{language}', name: 'language')]
+    public function changeLanguage(string $language, Request $request): Response
     {
-        return $this->redirectToRoute($route, ['_locale' => $language]);
+        $currentLocal = $request->getLocale();
+        $currentUrl = $request->headers->get('referer');
+        $newUrl = str_replace('/' . $currentLocal . '/', '/' . $language . '/', $currentUrl);
+        $request->setLocale($language);
+
+        return $this->redirect($newUrl);
     }
 
     #[Route('/category/{slug}/{sort}', name: 'single_category', methods: ['GET'])]
