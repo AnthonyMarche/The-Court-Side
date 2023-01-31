@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -12,7 +11,6 @@ class AboutController extends AbstractController
     #[Route('/aboutpage', name: 'app_about')]
     public function aboutpageAction(): Response
     {
-
         return $this->render('/home/aboutpage.html.twig');
     }
 }
