@@ -1,15 +1,11 @@
-.video-player {
+.embed-responsive {
     width: 75%;
-}
-
-.video-infos-container {
-    width: 75%;
-    margin: auto;
+    height: 75%;
 }
 
 .watch-video-player-container {
-    padding-top: 2rem;
-    padding-bottom: 1rem;
+    padding-top: 6rem;
+    margin: auto auto 1rem;
 }
 
 .watch-video-release {
@@ -22,10 +18,36 @@
     text-align: right;
 }
 
+.watch-video-views {
+    color: var(--subFont-color);
+    font-family: var(--text-font);
+    font-size: .9rem;
+    font-style: italic;
+    word-break: keep-all;
+}
+
+.watch-views-container {
+    margin-left: 12.5%;
+}
+
+.watch-video-head {
+    margin-left: 12.5%;
+    margin-right: 12.5%;
+}
+
+.watch-video-description, .watch-private-video-message-container {
+    margin-left: 12.5%;
+    margin-right: 12.5%;
+}
+
 .watch-private-video-image {
     max-width: 60%;
     max-height: 60%;
     background-color: gray;
+}
+
+.watch-video-tags-container {
+    margin-left: 12.5%;
 }
 
 .watch-video-tag-name {
@@ -38,39 +60,17 @@
     max-height: 300px;
 }
 
-.like-button {
-    background-color: var(--subBg-color);
-    border-color: var(--element-color);
-    color: var(--element-color);
-}
-
-.like-button:hover {
-    background-color: var(--element-color);
-    color: var(--mainFont-color);
-    border: var(--element-color);
-
-    .bi-heart-fill {
-        color: var(--mainFont-color);
-    }
-}
-
-.like-button:focus {
-    box-shadow: none;
-}
-
-.bi-heart-fill {
-    color: var(--element-color);
-}
-
 .watch-like-container {
     margin-left: 20%;
-    margin-right: 20%;
 }
 
 .watch-video-container {
     background-color: var(--subBg-color);
 }
 
+.share-buttons-container {
+    margin-right: 12.5%;
+}
 
 .share-mail-button {
     width: 5rem;
@@ -119,17 +119,30 @@
     color: var(--mainFont-color);
 }
 
-.heart {
-    width: 100px;
-    height: 100px;
-    background: url("https://cssanimation.rocks/images/posts/steps/heart.png") no-repeat;
-    background-position: 0 0;
-    cursor: pointer;
-    transition: background-position 1s steps(28);
-    transition-duration: 0s;
+.like-link {
+    text-decoration: none;
+    color: transparent;
+}
 
-    &.is-active {
-        transition-duration: 1s;
-        background-position: -2800px 0;
-    }
+.like-link:hover {
+    text-decoration: none;
+    color: transparent;
+}
+
+.like-icon, .like-icon-inactive {
+    fill: var(--subFont-color);
+    stroke-width:10;
+    transition:all 0.5s;
+    font-size: 2rem;
+}
+
+.like-icon.active{
+    animation:like 0.5s 1;
+    fill: var(--element-color);
+}
+
+@-webkit-keyframes like {
+    0%   { transform: scale(1); }
+    90%   { transform: scale(1.5); }
+    100% { transform: scale(1.1); }
 }
