@@ -52,7 +52,7 @@ class Video
     private Collection $tag;
 
     #[ORM\ManyToOne(inversedBy: 'videos')]
-    #[ORM\JoinColumn(nullable: true)]
+    #[ORM\JoinColumn(nullable: true, onDelete:"SET NULL")]
     private ?User $user = null;
 
     #[ORM\Column(length: 255)]
