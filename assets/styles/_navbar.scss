@@ -78,7 +78,7 @@ nav .user-profile-dropdown {
 }
 
 nav .user-profile-dropdown:hover {
-    color: var(--subFont-color);
+    color: rgba(45, 191, 178, 0.6);
     text-decoration: none;
 }
 
@@ -112,7 +112,7 @@ nav .btn-searchBar {
 
 nav .btn-searchBar:hover {
     border-radius: 0 20px 20px 0;
-    background-color: var(--subFont-color);
+    background-color: rgba(45, 191, 178, 0.6);
     border-color: var(--title-font);
 }
 
