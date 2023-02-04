@@ -20,16 +20,6 @@
         gap: 4rem;
     }
 
-    .main-img img {
-        max-width: 100%;
-        width: 560px;
-        height: auto;
-        box-shadow: 0 0 10px 10px var(--element-color);
-        object-position: left center;
-        margin-bottom: 20px;
-
-    }
-
     .second-img {
         display: flex;
         justify-content: center;
@@ -76,10 +66,6 @@
 
     .last-text {
         display: flex;
-    }
-
-    .text1 {
-        margin-right: 60px;
     }
 
     .last-text h3 {
