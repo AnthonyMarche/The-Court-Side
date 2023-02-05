@@ -45,5 +45,5 @@ yarn-error.log
 ###< uploads ###
 
 ###> fixtures ###
-/assets/fixturesVideos/*
+/assets/fixtures_videos/*.mp4
 ###< fixtures ###

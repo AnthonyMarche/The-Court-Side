@@ -40,112 +40,112 @@ class VideoFixtures extends Fixture implements DependentFixtureInterface
 
         for ($i = 0; $i < 3; $i++) {
             $video = $this->baseNewVideo();
-            $video->setUrl("build/fixturesVideos/basketball-video.mp4");
-            $video->setTeaser("build/fixturesVideos/basketball-video.mp4");
+            $video->setUrl("build/fixturesVideos/basketball_video.mp4");
+            $video->setTeaser("build/fixturesVideos/basketball_video.mp4");
             $video->setCategory($this->getReference('category_' . self::CATEGORIES[0]));
             $this->addReference('video_' . $videoNumber, $video);
             $videoNumber++;
             $manager->persist($video);
 
             $video = $this->baseNewVideo();
-            $video->setUrl("build/fixturesVideos/basketball-video2.mp4");
-            $video->setTeaser("build/fixturesVideos/basketball-video2.mp4");
+            $video->setUrl("build/fixturesVideos/basketball_video2.mp4");
+            $video->setTeaser("build/fixturesVideos/basketball_video2.mp4");
             $video->setCategory($this->getReference('category_' . self::CATEGORIES[0]));
             $this->addReference('video_' . $videoNumber, $video);
             $videoNumber++;
             $manager->persist($video);
 
             $video = $this->baseNewVideo();
-            $video->setUrl("build/fixturesVideos/basketball-video3.mp4");
-            $video->setTeaser("build/fixturesVideos/basketball-video3.mp4");
+            $video->setUrl("build/fixturesVideos/basketball_video3.mp4");
+            $video->setTeaser("build/fixturesVideos/basketball_video3.mp4");
             $video->setCategory($this->getReference('category_' . self::CATEGORIES[0]));
             $this->addReference('video_' . $videoNumber, $video);
             $videoNumber++;
             $manager->persist($video);
 
             $video = $this->baseNewVideo();
-            $video->setUrl("build/fixturesVideos/boxe-video.mp4");
-            $video->setTeaser("build/fixturesVideos/boxe-video.mp4");
+            $video->setUrl("build/fixturesVideos/boxe_video.mp4");
+            $video->setTeaser("build/fixturesVideos/boxe_video.mp4");
             $video->setCategory($this->getReference('category_' . self::CATEGORIES[1]));
             $this->addReference('video_' . $videoNumber, $video);
             $videoNumber++;
             $manager->persist($video);
 
             $video = $this->baseNewVideo();
-            $video->setUrl("build/fixturesVideos/course-video.mp4");
-            $video->setTeaser("build/fixturesVideos/course-video.mp4");
+            $video->setUrl("build/fixturesVideos/course_video.mp4");
+            $video->setTeaser("build/fixturesVideos/course_video.mp4");
             $video->setCategory($this->getReference('category_' . self::CATEGORIES[2]));
             $this->addReference('video_' . $videoNumber, $video);
             $videoNumber++;
             $manager->persist($video);
 
             $video = $this->baseNewVideo();
-            $video->setUrl("build/fixturesVideos/escalade-video.mp4");
-            $video->setTeaser("build/fixturesVideos/escalade-video.mp4");
+            $video->setUrl("build/fixturesVideos/escalade_video.mp4");
+            $video->setTeaser("build/fixturesVideos/escalade_video.mp4");
             $video->setCategory($this->getReference('category_' . self::CATEGORIES[3]));
             $this->addReference('video_' . $videoNumber, $video);
             $videoNumber++;
             $manager->persist($video);
 
             $video = $this->baseNewVideo();
-            $video->setUrl("build/fixturesVideos/escalade-video2.mp4");
-            $video->setTeaser("build/fixturesVideos/escalade-video2.mp4");
+            $video->setUrl("build/fixturesVideos/escalade_video2.mp4");
+            $video->setTeaser("build/fixturesVideos/escalade_video2.mp4");
             $video->setCategory($this->getReference('category_' . self::CATEGORIES[3]));
             $this->addReference('video_' . $videoNumber, $video);
             $videoNumber++;
             $manager->persist($video);
 
             $video = $this->baseNewVideo();
-            $video->setUrl("build/fixturesVideos/rugby-video.mp4");
-            $video->setTeaser("build/fixturesVideos/rugby-video.mp4");
+            $video->setUrl("build/fixturesVideos/rugby_video.mp4");
+            $video->setTeaser("build/fixturesVideos/rugby_video.mp4");
             $video->setCategory($this->getReference('category_' . self::CATEGORIES[4]));
             $this->addReference('video_' . $videoNumber, $video);
             $videoNumber++;
             $manager->persist($video);
 
             $video = $this->baseNewVideo();
-            $video->setUrl("build/fixturesVideos/rugby-video2.mp4");
-            $video->setTeaser("build/fixturesVideos/rugby-video2.mp4");
+            $video->setUrl("build/fixturesVideos/rugby_video2.mp4");
+            $video->setTeaser("build/fixturesVideos/rugby_video2.mp4");
             $video->setCategory($this->getReference('category_' . self::CATEGORIES[4]));
             $this->addReference('video_' . $videoNumber, $video);
             $videoNumber++;
             $manager->persist($video);
 
             $video = $this->baseNewVideo();
-            $video->setUrl("build/fixturesVideos/ski-video.mp4");
-            $video->setTeaser("build/fixturesVideos/ski-video.mp4");
+            $video->setUrl("build/fixturesVideos/ski_video.mp4");
+            $video->setTeaser("build/fixturesVideos/ski_video.mp4");
             $video->setCategory($this->getReference('category_' . self::CATEGORIES[5]));
             $this->addReference('video_' . $videoNumber, $video);
             $videoNumber++;
             $manager->persist($video);
 
             $video = $this->baseNewVideo();
-            $video->setUrl("build/fixturesVideos/surf-video.mp4");
-            $video->setTeaser("build/fixturesVideos/surf-video.mp4");
+            $video->setUrl("build/fixturesVideos/surf_video.mp4");
+            $video->setTeaser("build/fixturesVideos/surf_video.mp4");
             $video->setCategory($this->getReference('category_' . self::CATEGORIES[6]));
             $this->addReference('video_' . $videoNumber, $video);
             $videoNumber++;
             $manager->persist($video);
 
             $video = $this->baseNewVideo();
-            $video->setUrl("build/fixturesVideos/surf-video2.mp4");
-            $video->setTeaser("build/fixturesVideos/surf-video2.mp4");
+            $video->setUrl("build/fixturesVideos/surf_video2.mp4");
+            $video->setTeaser("build/fixturesVideos/surf_video2.mp4");
             $video->setCategory($this->getReference('category_' . self::CATEGORIES[6]));
             $this->addReference('video_' . $videoNumber, $video);
             $videoNumber++;
             $manager->persist($video);
 
             $video = $this->baseNewVideo();
-            $video->setUrl("build/fixturesVideos/tennis-video.mp4");
-            $video->setTeaser("build/fixturesVideos/tennis-video.mp4");
+            $video->setUrl("build/fixturesVideos/tennis_video.mp4");
+            $video->setTeaser("build/fixturesVideos/tennis_video.mp4");
             $video->setCategory($this->getReference('category_' . self::CATEGORIES[7]));
             $this->addReference('video_' . $videoNumber, $video);
             $videoNumber++;
             $manager->persist($video);
 
             $video = $this->baseNewVideo();
-            $video->setUrl("build/fixturesVideos/tennis-video2.mp4");
-            $video->setTeaser("build/fixturesVideos/tennis-video2.mp4");
+            $video->setUrl("build/fixturesVideos/tennis_video2.mp4");
+            $video->setTeaser("build/fixturesVideos/tennis_video2.mp4");
             $video->setCategory($this->getReference('category_' . self::CATEGORIES[7]));
             $this->addReference('video_' . $videoNumber, $video);
             $videoNumber++;
