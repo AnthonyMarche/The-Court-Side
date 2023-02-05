@@ -35,16 +35,16 @@ class NewsletterController extends AbstractController
                     ->from('do-not-reply@thecourtside.com')
                     ->to($userEmail)
                     ->subject($newsletterTitle)
-                    ->html($this->renderView('newsletter/NewsletterMailTemplate.html.twig', [
-                            'newsletter_title' => $newsletterTitle,
-                            'newsletter_content' => $newsletterContent,
-                        ]));
+                    ->html($this->renderView('admin/newsletter/NewsletterMailTemplate.html.twig', [
+                        'newsletter_title' => $newsletterTitle,
+                        'newsletter_content' => $newsletterContent,
+                    ]));
                 $mailer->send($email);
             }
             $this->addFlash('success', 'La newsletter a bien été envoyée.');
         }
 
-        return $this->render('/newsletter/index.html.twig', [
+        return $this->render('admin/newsletter/index.html.twig', [
             'newsletter_form' => $form->createView(),
             'nb_of_users_subs_to_newsletter' => $users,
         ]);

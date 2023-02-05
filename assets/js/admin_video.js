@@ -29,13 +29,8 @@ if (document.getElementById("teaser_video")) {
         submitTeaser.removeAttribute('disabled');
     })
 
-    submitTeaser.addEventListener("click", async function (e) {
+    submitTeaser.addEventListener("click", async function () {
         loaderTeaser.classList.remove('d-none');
         adminBody.classList.add('body-admin');
     });
-
-
-
 }
-
-
