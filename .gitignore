@@ -43,3 +43,7 @@ yarn-error.log
 /public/uploads/teasersCreated/*
 !.gitignore
 ###< uploads ###
+
+###> fixtures ###
+/assets/fixturesVideos/*
+###< fixtures ###

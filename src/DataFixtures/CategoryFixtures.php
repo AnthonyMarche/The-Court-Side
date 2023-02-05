@@ -11,16 +11,14 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 class CategoryFixtures extends Fixture
 {
     public const CATEGORIES = [
-        'Football',
         'Basketball',
-        'Tennis',
-        'Volleyball',
-        'Handball',
-        'Hockey sur glace',
+        'Boxe',
+        'Course',
+        'Escalade',
         'Rugby',
-        'MMA',
-        'Choco Week',
-        'Boxe'
+        'Ski',
+        'Surf',
+        'Tennis',
     ];
 
     private SluggerInterface $slugger;
