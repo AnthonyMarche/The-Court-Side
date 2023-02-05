@@ -3,85 +3,84 @@
 {% block title %}{{ video.title }}{% endblock %}
 
 {% block body %}
-<div class="watch-video-container text-center">
-    <div class="watch-video-player-container embed-responsive embed-responsive-16by9">
-        <video src="{{ asset(video.url) }}" controls
-               class="watch-video-player embed-responsive-item"></video>
-    </div>
-    <div class="watch-video-head d-flex justify-content-between">
-        <div class="d-flex">
-            {% if not app.user %}
-                <div class="like-icon-container">
-                    <ion-icon name="heart"
-                              class="like-icon-inactive md hydrated"
-                              data-toggle="modal"
-                              data-target="#featureModal">
-                        <div class='red-bg'></div>
-                    </ion-icon>
-                </div>
-            {% else %}
-                <a class="js-like like-link" href="{{ path('app_watch_like', {id: video.id}) }}">
+    <div class="watch-video-container text-center">
+        <div class="watch-video-player-container embed-responsive embed-responsive-16by9">
+            <video src="{{ asset(video.url) }}" controls
+                   class="watch-video-player embed-responsive-item"></video>
+        </div>
+        <div class="watch-video-head d-flex justify-content-between">
+            <div class="d-flex">
+                {% if not app.user %}
                     <div class="like-icon-container">
                         <ion-icon name="heart"
-                                  class="like-icon {{ video.isLikedByUser(app.user) ? 'md hydrated active' : 'md hydrated' }} ">
+                                  class="like-icon-inactive md hydrated"
+                                  data-toggle="modal"
+                                  data-target="#featureModal">
                             <div class='red-bg'></div>
                         </ion-icon>
                     </div>
-                </a>
-            {% endif %}
-            <h2 class="watch-video-title text-left ml-2">{{ video.title }}</h2>
+                {% else %}
+                    <a class="js-like like-link" href="{{ path('app_watch_like', {id: video.id}) }}">
+                        <div class="like-icon-container">
+                            <ion-icon name="heart"
+                                      class="like-icon {{ video.isLikedByUser(app.user) ? 'md hydrated active' : 'md hydrated' }} ">
+                                <div class='red-bg'></div>
+                            </ion-icon>
+                        </div>
+                    </a>
+                {% endif %}
+                <h2 class="watch-video-title text-left ml-2">{{ video.title }}</h2>
+            </div>
+            <p class="watch-video-release">publiée le : {{ video.createdAt|date('d/m/Y') }}</p>
         </div>
-        <p class="watch-video-release">publiée le : {{ video.createdAt|date('d/m/Y') }}</p>
-    </div>
-    <div class="d-flex justify-content-between align-items-center pb-3">
-        <div class="watch-views-container">
-            <p class="watch-video-views">{{ video.numberOfView }} Vue{% if video.numberOfView > 1 %}s{% endif %}</p>
-        </div>
-        <div class="mt-2 share-buttons-container d-flex">
-            {# SHARE VIDEO #}
-            <div class="tweet-button-container">
-                {% set url = app.request.uri %}
-                <a class="twitter-share-button twitter"
-                   href="https://twitter.com/intent/tweet"
-                   data-size="large"
-                   data-text="🤯 Cette vidéo est incroyable ! 🤯
+        <div class="d-flex justify-content-between align-items-center pb-3">
+            <div class="watch-views-container">
+                <p class="watch-video-views">{{ video.numberOfView }} Vue{% if video.numberOfView > 1 %}s{% endif %}</p>
+            </div>
+            <div class="mt-2 share-buttons-container d-flex">
+                {# SHARE VIDEO #}
+                <div class="tweet-button-container">
+                    {% set url = app.request.uri %}
+                    <a class="twitter-share-button twitter"
+                       href="https://twitter.com/intent/tweet"
+                       data-size="large"
+                       data-text="🤯 Cette vidéo est incroyable ! 🤯
 "
-                   data-url="{{ url }}"
-                   data-hashtags="{% for tag in video.tag %}{{ tag.name }},{% endfor %}{{ video.category.name }}"
-                   data-via="TheCourtSide"
-                   data-related="twitterapi,twitter">
-                    Tweet
-                </a>
-            </div>
-            <div class="mail-button-container ml-2">
-                <a href="mailto:?subject=🤯 Cette vidéo est incroyable ! 🤯&body=Regarde cette vidéo !%0A{{ url }}"
-                   class="btn btn-secondary btn-sm rounded-pill share-mail-button">
-                    <i class="bi bi-envelope mail-icon"> </i>Mail
-                </a>
+                       data-url="{{ url }}"
+                       data-hashtags="{% for tag in video.tag %}{{ tag.name }},{% endfor %}{{ video.category.name }}"
+                       data-via="TheCourtSide"
+                       data-related="twitterapi,twitter">
+                        Tweet
+                    </a>
+                </div>
+                <div class="mail-button-container ml-2">
+                    <a href="mailto:?subject=🤯 Cette vidéo est incroyable ! 🤯&body=Regarde cette vidéo !%0A{{ url }}"
+                       class="btn btn-secondary btn-sm rounded-pill share-mail-button">
+                        <i class="bi bi-envelope mail-icon"> </i>Mail
+                    </a>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="watch-video-description text-left mt-2">
-        <p class="video-description-head">Description :</p>
-        <p class="video-description">{{ video.description }}</p>
-    </div>
-    <div class="watch-video-tags-container">
-        <div class="watch-video-tags d-flex pb-5">
-            {% for tag in video.tag %}
-                <a href="{{ path('app_tag', {slug : tag.slug, sort : 'recent'}) }}" name="{{ tag.name }}">
-                    <button type="button" class="btn btn-outline-primary tag-button btn-sm mr-2">
-                        #{{ tag.name }}</button>
-                </a>
-            {% endfor %}
+        <div class="watch-video-description text-left mt-2">
+            <p class="video-description-head">Description :</p>
+            <p class="video-description">{{ video.description }}</p>
         </div>
+        <div class="watch-video-tags-container">
+            <div class="watch-video-tags d-flex pb-5">
+                {% for tag in video.tag %}
+                    <a href="{{ path('app_tag', {slug : tag.slug, sort : 'recent'}) }}" name="{{ tag.name }}">
+                        <button type="button" class="btn btn-outline-primary tag-button btn-sm mr-2">
+                            #{{ tag.name }}</button>
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+        {% include '_includes/_modal.html.twig' with {
+            buttons : true
+        } %}
     </div>
-    {% include '_includes/_modal.html.twig' with {
-        buttons : true
-    } %}
 
-</div>
-
-{#      see more section#}
+    {# See more section #}
     <div class="container-fluid p-5 py-3 home-main-container">
         {% if video.category.videos|length > 4 %}{% set buttons = true %}{% else %}{% set buttons = false %}{% endif %}
         {% include '_includes/_videos_head.html.twig' with {
@@ -96,9 +95,8 @@
         </div>
     </div>
 
-      sponsor image
     <div class="watch-sponsor-image">
-        <img src="{{ asset('build/images/home-middle-image.jpg') }}" class="shadow-lg img-fluid home-middle-image"
+        <img src="{{ asset('build/images/swimmer_banner.jpg') }}" class="shadow-lg img-fluid home-middle-image"
              alt="watch sponsor image">
     </div>
 {% endblock %}
