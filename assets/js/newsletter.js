@@ -1,3 +1,5 @@
+import CKEDITOR from 'ckeditor4';
+
 let newsletterBody = document.getElementById('newsletter-body');
 let submitButton = document.getElementById('newsletter_submit');
 let titleInput = document.getElementById('newsletter_title');
