@@ -1,7 +1,17 @@
-.footer-link {
-    color: var(--element-color)
-}
+footer {
+    .footer-link {
+        color: var(--element-color)
+    }
 
-.sponsor-section {
-    background-color: var(--subBg-color);
+    .footer-link:hover, a:hover {
+        color: rgba(45, 191, 178, 0.6);
+    }
+
+    .footer-social-logo:hover {
+        color: var(--element-color);
+    }
+
+    .sponsor-section {
+        background-color: var(--subBg-color);
+    }
 }

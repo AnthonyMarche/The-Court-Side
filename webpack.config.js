@@ -43,7 +43,7 @@ Encore
 
     .copyFiles(
         {
-            from: './assets/fixturesVideos',
+            from: './assets/fixtures_videos',
 
             to: 'fixturesVideos/[path][name].[hash:8].[ext]',
         })

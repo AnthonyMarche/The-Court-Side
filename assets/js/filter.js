@@ -66,9 +66,7 @@ if (document.querySelector('.js-content')) {
 
             //fake loading
             loadingIcon.classList.remove('disappearance');
-            loadingIcon.classList.add('apparition');
             await delay(1500);
-            loadingIcon.classList.remove('apparition');
             loadingIcon.classList.add('disappearance');
 
             history.replaceState({}, '', link)

@@ -28,7 +28,7 @@ class TagFixtures extends Fixture implements DependentFixtureInterface
             $tag->setCreatedAt($faker->dateTimeBetween('-6 month'));
             $rand = rand(1, 3);
             for ($j = 0; $j <= $rand; $j++) {
-                $tag->addVideo($this->getReference('video_' . $faker->numberBetween(0, 49)));
+                $tag->addVideo($this->getReference('video_' . $faker->numberBetween(0, 41)));
             }
 
             $slug = $this->slugger->slug($tag->getName());
