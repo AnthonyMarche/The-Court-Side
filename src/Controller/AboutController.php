@@ -2,6 +2,9 @@
 
 namespace App\Controller;
 
+use App\Repository\LikeRepository;
+use App\Repository\UserRepository;
+use App\Repository\VideoRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
