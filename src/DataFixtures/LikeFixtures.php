@@ -14,7 +14,7 @@ class LikeFixtures extends Fixture implements DependentFixtureInterface
     {
         $faker = Factory::create();
 
-        for ($i = 0; $i < 50; $i++) {
+        for ($i = 0; $i < 41; $i++) {
             $rand = rand(0, 50);
             for ($j = 0; $j < $rand; $j++) {
                 $like = new Like();
