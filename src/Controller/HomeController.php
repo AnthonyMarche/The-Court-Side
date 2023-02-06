@@ -146,10 +146,6 @@ class HomeController extends AbstractController
         $newUrl = str_replace('/' . $currentLocal . '/', '/' . $language . '/', $currentUrl);
         $request->setLocale($language);
 
-        if ($currentUrl === "http://127.0.0.1:8000/fr/search") {
-            $newUrl = str_replace('/' . $currentLocal . '/', '/' . $language . '/', "http://127.0.0.1:8000/fr/");
-        }
-
         return $this->redirect($newUrl);
     }
 
