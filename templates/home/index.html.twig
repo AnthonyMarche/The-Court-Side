@@ -3,12 +3,12 @@
 {% block title %}Accueil{% endblock %}
 
 {% block body %}
-    {#  modal priavte video #}
+    {# Modal private video #}
     {% include '_includes/_modal.html.twig' with {
         buttons : true
     } %}
 
-{#    home carousel#}
+    {# Home carousel #}
     {% include '_includes/_carousel.html.twig' %}
 
     <div class="container-fluid p-5 py-3 home-main-container">
@@ -38,9 +38,9 @@
         </div>
     </div>
 
-    {#  middle image  #}
+    {#  Banner  #}
     <div class="home-middle-image-container">
-        <img src="{{ asset('build/images/home-middle-image.jpg') }}" class="shadow-lg img-fluid home-middle-image"
+        <img src="{{ asset('build/images/swimmer_banner.jpg') }}" class="shadow-lg img-fluid home-middle-image"
              alt="Picture of a swimmer">
     </div>
 
