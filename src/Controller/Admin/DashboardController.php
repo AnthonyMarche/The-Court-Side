@@ -131,7 +131,8 @@ class DashboardController extends AbstractDashboardController
                     ),
                     'fa fa-eye',
                     User::class
-                ),
+                )
+                    ->setPermission('ROLE_SUPER_ADMIN'),
                 MenuItem::linkToRoute(
                     new TranslatableMessage(
                         'dashboard.export',
@@ -141,8 +142,7 @@ class DashboardController extends AbstractDashboardController
                     'fa fa-file-export',
                     'download_users'
                 )
-            ])
-            ->setPermission('ROLE_SUPER_ADMIN');
+            ]);
 
         yield MenuItem::subMenu(
             new TranslatableMessage(
