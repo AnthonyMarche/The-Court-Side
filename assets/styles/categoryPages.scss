@@ -141,84 +141,16 @@ html {
     width: 100%;
 }
 
-//======================================================
-
-.section-title1 {
-    color: var(--mainFont-color);
-    text-align: center;
-    margin-top: 3rem;
-    font-size: 2.5rem;
-    font-weight: 400;
-    font-style: oblique;
-}
-
-.section-title2 {
-    color: var(--element-color);
-    text-align: center;
-    margin-top: 3rem;
-    font-size: 2.5rem;
-
-}
-
-.section-title3 {
-    color: var(--mainFont-color);
-    text-align: center;
-    font-size: 2.5rem;
-    font-weight: 400;
-    font-style: oblique;
-}
-
-.section-title3hr {
-    border: 1px solid var(--mainFont-color);
-    width: 50%;
-}
-
-.section-title4 {
-    color: var(--mainFont-color);
-    text-align: center;
-    border: 1px solid #e0e0e0;
-    border-radius: 1rem;
-    margin-right: 30%;
-    margin-left: 30%;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    background: var(--subBg-color);
-}
-
-.section-title5 {
-    color: var(--mainFont-color);
-    text-align: center;
-    border: 2px solid #e0e0e0;
-    margin-right: 30%;
-    margin-left: 30%;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    border-top: none;
-    border-bottom: none;
-    background: var(--subBg-color);
-}
-
-.section-title6 {
-    color: var(--mainFont-color);
-    text-align: center;
-    border: 2px solid #e0e0e0;
-    margin-right: 35%;
-    margin-left: 35%;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    border-top: none;
-    border-bottom: none;
-}
-
-.section-title7 {
+.section-title {
     background: linear-gradient(180deg, var(--mainBg-color), var(--subBg-color));
     color: var(--mainFont-color);
     text-align: center;
-    border-bottom: 2px solid #e0e0e0;
+    border: 2px solid #e0e0e0;
     margin-right: 35%;
     margin-left: 35%;
     padding-top: 1rem;
     padding-bottom: 1rem;
-    border-right: none;
-    border-left: none;
+    border-top: none;
+    border-bottom: none;
+    margin-top: 2rem;
 }
