@@ -44,7 +44,6 @@ class UserCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-//            ->overrideTemplate('crud/index', 'admin/index.html.twig')
             ->setEntityLabelInSingular(new TranslatableMessage('entity.user', ['parameter' => 'value'], 'admin'))
             ->setEntityLabelInPlural(new TranslatableMessage('entity.users', ['parameter' => 'value'], 'admin'))
             ->setPageTitle(
