@@ -13,23 +13,14 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class SearchController extends AbstractController
 {
-    private Filter $filter;
-    private UrlGeneratorInterface $urlGenerator;
-
-    public function __construct(Filter $filter, UrlGeneratorInterface $urlGenerator)
-    {
-        $this->filter = $filter;
-        $this->urlGenerator = $urlGenerator;
-    }
-
     #[Route('/search', name: 'app_search')]
-    public function search(Request $request): Response
+    public function search(Request $request, UrlGeneratorInterface $urlGenerator): Response
     {
         $searchForm = $this->createForm(SearchType::class);
         $searchForm->handleRequest($request);
 
         if ($searchForm->isSubmitted() && $searchForm->isValid()) {
-            $url = $this->urlGenerator->generate('app_results', [
+            $url = $urlGenerator->generate('app_results', [
                 'search' => $searchForm->getData(),
                 'sort' => 'recent'
             ]);
@@ -43,10 +34,10 @@ class SearchController extends AbstractController
     }
 
     #[Route('/results/{search}/{sort}', name: 'app_results')]
-    public function searchResults(string $search, string $sort, Request $request): Response
+    public function searchResults(string $search, string $sort, Request $request, Filter $filter): Response
     {
         //injection security
-        if (!$this->filter->preventInjection($sort)) {
+        if (!$filter->preventInjection($sort)) {
             throw $this->createNotFoundException('filtre invalide');
         }
 
@@ -54,12 +45,12 @@ class SearchController extends AbstractController
         if ($request->isXmlHttpRequest()) {
             return new JsonResponse([
                 'content' => $this->renderView('_includes/_videos_grid.html.twig', [
-                    'videos' => $this->filter->getOrderedVideosBySearch($sort, $search),
+                    'videos' => $filter->getOrderedVideosBySearch($sort, $search),
                 ])
             ]);
         }
 
-        $videos = $this->filter->getOrderedVideosBySearch($sort, $search);
+        $videos = $filter->getOrderedVideosBySearch($sort, $search);
         return $this->render('home/search_results.html.twig', [
             'videos' => $videos,
             'search' => $search
