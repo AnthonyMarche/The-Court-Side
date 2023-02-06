@@ -14,39 +14,43 @@ It's symfony website-skeleton project with some additional library (webpack, fix
 
 ### Prerequisites
 
-1. Check if composer is installed
-2. Check if yarn & node are installed
+1. Check if composer is installed.
+2. Check if yarn & node are installed.
 
 ### Install
 
-1. Clone this project
-2. Run `composer install`
-3. Run `yarn install`
-4. Run `yarn encore dev` to build assets
+1. Clone this project.
+2. Run `composer install`.
+3. Run `yarn install`.
+4. Run `yarn encore dev` to build assets.
+
+#### Generate the fixtures and videos
+1. php bin/console doctrine:fixtures:load.
+2. Our fixtures, operates with the videos uploaded [here](https://drive.google.com/drive/folders/1nupHgasIGT-MW0Z0LsW0dQ4ZdwnUYoyd?usp=share_link).
+   You have to download the videos and move them to the directory `assets/fixtures_videos`.
+
+
 
 ### Working
 
-1. Run `symfony server:start` to launch your local php web server
-2. Run `yarn run dev --watch` to launch your local server for assets (or `yarn dev-server` do the same with Hot Module Reload activated)
+1. Run `symfony server:start` to launch your local php web server.
+2. Run `yarn run dev --watch` to launch your local server for assets (or `yarn dev-server` do the same with Hot Module Reload activated).
 
 ### Modify the .env file
-1. Create an .env.local file
-2. Add your credentials on DATABASE_URL="mysql://db_user:db_password@127.0.0.1:3306/db_name?serverVersion=5.7&charset=utf8mb4"
+1. Create an .env.local file.
+2. Add your credentials on `DATABASE_URL="mysql://db_user:db_password@127.0.0.1:3306/db_name?serverVersion=5.7&charset=utf8mb4"`.
 
 
 ### Mail Testing
-1. In your .env.local file modify the # MAILER_DSN=null://null with the email delivry platform of your choice.
+1. In your .env.local file modify the `# MAILER_DSN=null://null` with the email delivery platform of your choice.
 After register, you will be sent a confirmation email.
 
 
 ### Create and Get the database
-1. php bin/console doctrine:database:create
-2. php bin/console doctrine:make:migration  
-3. php bin/console doctrine:migrations:migrate
+1. php bin/console doctrine:database:create.
+2. php bin/console doctrine:make:migration.
+3. php bin/console doctrine:migrations:migrate.
 
-
-### Generate the fixtures
-1. php bin/console doctrine:fixtures:load 
 
 
 ### Windows Users
@@ -68,8 +72,6 @@ docker-compose up -d
 3. Wait a moment and visit http://localhost:8000
 
 
-
-
 ## Built With
 
 * [Symfony](https://github.com/symfony/symfony)
@@ -83,7 +85,7 @@ docker-compose up -d
 
 ## Application
 
-You will first access to the homepage. From there, you are able to log in using the predefined Super Admin account whom credentials are admin@me.fr and admin as password.
+You will first access to the homepage. From there, you are able to log in using the predefined `Admin` account whom credentials are `admin@me.fr` and `admin` as password.
 Once connected, you will have access to the premium content and from the admin page you will be able to create, upload videos and teasers or even delete content for example.
 
 ## License
