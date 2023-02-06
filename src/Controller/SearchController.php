@@ -22,27 +22,32 @@ class SearchController extends AbstractController
         $this->urlGenerator = $urlGenerator;
     }
 
-    #[Route('/search/{sort}/{search}', name: 'app_search')]
-    public function search(
-        Request $request,
-        string $search = "",
-        string $sort = 'recent'
-    ): JsonResponse|Response {
-
-        //injection security
-        if (!$this->filter->preventInjection($sort)) {
-            throw $this->createNotFoundException('filtre invalide');
-        }
-
+    #[Route('/search', name: 'app_search')]
+    public function search(Request $request): Response
+    {
         $searchForm = $this->createForm(SearchType::class);
         $searchForm->handleRequest($request);
+
         if ($searchForm->isSubmitted() && $searchForm->isValid()) {
             $url = $this->urlGenerator->generate('app_results', [
                 'search' => $searchForm->getData(),
-                'sort' => $sort
+                'sort' => 'recent'
             ]);
 
             return $this->redirect($url);
+        }
+
+        return $this->render('_includes/_searchForm.html.twig', [
+            'searchForm' => $searchForm->createView()
+        ]);
+    }
+
+    #[Route('/results/{search}/{sort}', name: 'app_results')]
+    public function searchResults(string $search, string $sort, Request $request): Response
+    {
+        //injection security
+        if (!$this->filter->preventInjection($sort)) {
+            throw $this->createNotFoundException('filtre invalide');
         }
 
         //handle ajax request
@@ -54,14 +59,6 @@ class SearchController extends AbstractController
             ]);
         }
 
-        return $this->render('_includes/_searchForm.html.twig', [
-            'searchForm' => $searchForm->createView()
-        ]);
-    }
-
-    #[Route('/results/{search}/{sort}', name: 'app_results')]
-    public function searchResults(string $search, string $sort): Response
-    {
         $videos = $this->filter->getOrderedVideosBySearch($sort, $search);
         return $this->render('home/search_results.html.twig', [
             'videos' => $videos,
