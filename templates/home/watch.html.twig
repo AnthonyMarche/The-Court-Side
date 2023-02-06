@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ video.title }}{% endblock %}
+{% block title %}Visionner la vidéo : {{ video.title }}{% endblock %}
 
 {% block body %}
 <div class="watch-video-container text-center">
@@ -95,10 +95,8 @@
             } %}
         </div>
     </div>
-
-      sponsor image
     <div class="watch-sponsor-image">
         <img src="{{ asset('build/images/home-middle-image.jpg') }}" class="shadow-lg img-fluid home-middle-image"
-             alt="watch sponsor image">
+             alt="Picture of a swimmer">
     </div>
 {% endblock %}
