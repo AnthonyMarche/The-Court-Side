@@ -4,11 +4,13 @@ controllers:
     prefix: /{_locale}
     requirements:
         _locale: fr|en|es
+    defaults:
+        _locales: fr
 
 kernel:
     resource: ../src/Kernel.php
     type: annotation
 
-index:
-    path: /aboutpage
-    controller: App\Controller\AboutController::aboutpage
+redirect:
+    path: /
+    controller: App\Controller\RedirectController::redirectToLocale
