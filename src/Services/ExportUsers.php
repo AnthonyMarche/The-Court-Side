@@ -24,11 +24,11 @@ class ExportUsers
         $sheet->setCellValue('A1', 'Email');
         $sheet->setCellValue('B1', 'Register since');
 
-        $i = 2;
+        $lineNumber = 2;
         foreach ($users as $user) {
-            $sheet->setCellValue('A' . $i, $user['email']);
-            $sheet->setCellValue('B' . $i, $user['createdAt']->format('d-m-Y'));
-            $i++;
+            $sheet->setCellValue('A' . $lineNumber, $user['email']);
+            $sheet->setCellValue('B' . $lineNumber, $user['createdAt']->format('d-m-Y'));
+            $lineNumber++;
         }
 
         $writer = new Csv($spreadsheet);

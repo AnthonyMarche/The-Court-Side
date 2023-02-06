@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Mes favoris{% endblock %}
+{% block title %}Voir mes favoris{% endblock %}
 
 {% block body %}
     {% if app.user %}
-        <h2 class="text-center mt-4 category-main-title text-white title-font">Mes favoris</h2>
+        <h2 class="section-title">Mes favoris</h2>
 
         {#    message in case the user has no video liked    #}
         {% if videos is empty %}

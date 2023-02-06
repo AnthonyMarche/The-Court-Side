@@ -8,11 +8,6 @@ html {
     border-radius: 10px;
 }
 
-.category-main-title {
-    text-decoration: underline;
-    color: var(--mainFont-color);
-}
-
 .category-video-link:hover {
     text-decoration: none;
 }
@@ -144,4 +139,18 @@ html {
 
 .top-button-container {
     width: 100%;
+}
+
+.section-title {
+    background: linear-gradient(180deg, var(--mainBg-color), var(--subBg-color));
+    color: var(--mainFont-color);
+    text-align: center;
+    border: 2px solid #e0e0e0;
+    margin-right: 35%;
+    margin-left: 35%;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border-top: none;
+    border-bottom: none;
+    margin-top: 2rem;
 }

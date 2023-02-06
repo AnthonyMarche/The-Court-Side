@@ -1,12 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Videos{% endblock %}
+{% block title %}Voir toutes les videos{% endblock %}
 
 {% block body %}
     {% include '_includes/_modal.html.twig' with {
         buttons : true
     } %}
-    <h2 id="allVideosTitle" class="text-center mt-4 category-main-title text-white title-font">
+    <h2 id="allVideosTitle" class="section-title">
         <span class="sorted-by-likes-title {% if 'likes' not in app.request.uri %}disappearance{% endif %}">Les plus likées</span>
         <span class="sorted-by-recent-title {% if 'recent' not in app.request.uri %}disappearance{% endif %}">Les plus récentes</span>
         <span class="sorted-by-views-title {% if 'views' not in app.request.uri %}disappearance{% endif %}">Les plus vues</span>

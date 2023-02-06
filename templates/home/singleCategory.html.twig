@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
- {% block title %}{{ videos[0].category.name }}{% endblock %}
+ {% block title %}Voir la catégorie : {{ videos[0].category.name }}{% endblock %}
 
 {% block body %}
-    <h2 class="text-center mt-4 category-main-title text-white title-font">{{ videos[0].category.name }}</h2>
+    <h2 class="section-title">{{ videos[0].category.name }}</h2>
 
     {#        filter button include only if liked videos length is > 1#}
     {% if videos|length > 1 %}

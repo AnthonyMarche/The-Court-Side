@@ -95,7 +95,7 @@ class DashboardController extends AbstractDashboardController
         return Dashboard::new()
             ->setTranslationDomain('admin')
             ->setTitle('THE COURT SIDE | Admin')
-            ->setFaviconPath('build/images/TCS favicon.png');
+            ->setFaviconPath('build/images/TCS_logo/TCS_favicon.png');
     }
 
     public function configureAssets(): Assets

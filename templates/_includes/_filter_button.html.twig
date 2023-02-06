@@ -13,18 +13,18 @@
         <button type="button" class="btn btn-info dropdown-toggle filter-button" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
             <span class="sorted-by-likes {% if 'likes' not in app.request.uri %}disappearance{% endif %}">Les plus likées</span>
-            <span class="sorted-by-recent {% if 'recent' not in app.request.uri %}disappearance{% endif %}">Les plus récentes</span>
             <span class="sorted-by-views {% if 'views' not in app.request.uri %}disappearance{% endif %}">Les plus vues</span>
+            <span class="sorted-by-recent {% if 'likes' in app.request.uri or 'views' in app.request.uri %}disappearance{% endif %}">Les plus récentes</span>
         </button>
-        <div class="dropdown-menu dropdown-menu-right">
-            <a href="{{ recent }}" id="dateFilter">
-                <button class="dropdown-item" type="button">Les plus récentes</button>
+        <div class="dropdown-menu dropdown-menu-right filter-button-dropdown">
+            <a href="{{ recent }}" id="dateFilter" class="filter-button-link">
+                <button class="dropdown-item filter-button-link" type="button">Les plus récentes</button>
             </a>
-            <a href="{{ likes }}" id="likesFilter">
-                <button class="dropdown-item" type="button">Les plus likées</button>
+            <a href="{{ likes }}" id="likesFilter" class="filter-button-link">
+                <button class="dropdown-item filter-button-link" type="button">Les plus likées</button>
             </a>
-            <a href="{{ views }}" id="viewsFilter">
-                <button class="dropdown-item" type="button">Les plus vues</button>
+            <a href="{{ views }}" id="viewsFilter" class="filter-button-link">
+                <button class="dropdown-item filter-button-link" type="button">Les plus vues</button>
             </a>
         </div>
     </div>

@@ -12,22 +12,22 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 class VideoFixtures extends Fixture implements DependentFixtureInterface
 {
     public const CATEGORIES = [
-        'Football',
         'Basketball',
-        'Tennis',
-        'Volleyball',
-        'Handball',
-        'Hockey sur glace',
+        'Boxe',
+        'Course',
+        'Escalade',
         'Rugby',
-        'MMA',
-        'Choco Week',
-        'Boxe'
+        'Ski',
+        'Surf',
+        'Tennis',
     ];
 
     public const USER = [
         'admin',
         'superAdmin'
     ];
+
+    public const VIDEO_PATH = "build/fixturesVideos/";
 
     private SluggerInterface $slugger;
 
@@ -38,28 +38,63 @@ class VideoFixtures extends Fixture implements DependentFixtureInterface
 
     public function load(ObjectManager $manager): void
     {
-        $faker = Factory::create();
+        $videoNumber = 0;
 
-        for ($i = 0; $i < 50; $i++) {
-            $video = new Video();
-            $video->setTitle($faker->words(3, true));
-            $video->setDescription($faker->paragraphs(1, true));
-            $video->setIsPrivate($faker->boolean);
-            $video->setNumberOfView($faker->numberBetween(8, 1052));
-            $video->setNumberOfLike($faker->numberBetween(0, 100));
-            $video->setUrl("build/fixturesVideos/Recreated memes ( Then vs Now ) Part 3.mp4");
-            $video->setTeaser("build/fixturesVideos/test-video-teaser.mp4");
-            $video->setCategory($this->getReference('category_' . self::CATEGORIES[$faker->numberBetween(0, 9)]));
-            $video->setCreatedAt($faker->dateTimeBetween('-6 month'));
+        for ($i = 0; $i < 3; $i++) {
+            $video = $this->baseNewVideo(self::VIDEO_PATH . "basketball_video.mp4", self::CATEGORIES[0], $videoNumber);
+            $videoNumber++;
+            $manager->persist($video);
 
-            $randomUser = rand(0, 1);
-            $video->setUser($this->getReference(self::USER[$randomUser]));
+            $video = $this->baseNewVideo(self::VIDEO_PATH . "basketball_video2.mp4", self::CATEGORIES[0], $videoNumber);
+            $videoNumber++;
+            $manager->persist($video);
 
-            $slug = $this->slugger->slug($video->getTitle());
-            $video->setSlug($slug);
+            $video = $this->baseNewVideo(self::VIDEO_PATH . "basketball_video3.mp4", self::CATEGORIES[0], $videoNumber);
+            $videoNumber++;
+            $manager->persist($video);
 
-            $this->addReference('video_' . $i, $video);
+            $video = $this->baseNewVideo(self::VIDEO_PATH . "boxe_video.mp4", self::CATEGORIES[1], $videoNumber);
+            $videoNumber++;
+            $manager->persist($video);
 
+            $video = $this->baseNewVideo(self::VIDEO_PATH . "course_video.mp4", self::CATEGORIES[2], $videoNumber);
+            $videoNumber++;
+            $manager->persist($video);
+
+            $video = $this->baseNewVideo(self::VIDEO_PATH . "escalade_video.mp4", self::CATEGORIES[3], $videoNumber);
+            $videoNumber++;
+            $manager->persist($video);
+
+            $video = $this->baseNewVideo(self::VIDEO_PATH . "escalade_video2.mp4", self::CATEGORIES[3], $videoNumber);
+            $videoNumber++;
+            $manager->persist($video);
+
+            $video = $this->baseNewVideo(self::VIDEO_PATH . "rugby_video.mp4", self::CATEGORIES[4], $videoNumber);
+            $videoNumber++;
+            $manager->persist($video);
+
+            $video = $this->baseNewVideo(self::VIDEO_PATH . "rugby_video2.mp4", self::CATEGORIES[4], $videoNumber);
+            $videoNumber++;
+            $manager->persist($video);
+
+            $video = $this->baseNewVideo(self::VIDEO_PATH . "ski_video.mp4", self::CATEGORIES[5], $videoNumber);
+            $videoNumber++;
+            $manager->persist($video);
+
+            $video = $this->baseNewVideo(self::VIDEO_PATH . "surf_video.mp4", self::CATEGORIES[6], $videoNumber);
+            $videoNumber++;
+            $manager->persist($video);
+
+            $video = $this->baseNewVideo(self::VIDEO_PATH . "surf_video2.mp4", self::CATEGORIES[6], $videoNumber);
+            $videoNumber++;
+            $manager->persist($video);
+
+            $video = $this->baseNewVideo(self::VIDEO_PATH . "tennis_video.mp4", self::CATEGORIES[7], $videoNumber);
+            $videoNumber++;
+            $manager->persist($video);
+
+            $video = $this->baseNewVideo(self::VIDEO_PATH . "tennis_video2.mp4", self::CATEGORIES[7], $videoNumber);
+            $videoNumber++;
             $manager->persist($video);
         }
 
@@ -72,5 +107,30 @@ class VideoFixtures extends Fixture implements DependentFixtureInterface
             CategoryFixtures::class,
             UserFixtures::class,
         ];
+    }
+
+    public function baseNewVideo(string $url, string $category, int $videoNumber): Video
+    {
+        $faker = Factory::create();
+
+        $video = new Video();
+        $video->setTitle($faker->words(3, true));
+        $video->setDescription($faker->paragraphs(1, true));
+        $video->setIsPrivate($faker->boolean);
+        $video->setNumberOfView($faker->numberBetween(8, 1052));
+        $video->setNumberOfLike($faker->numberBetween(0, 100));
+        $video->setCreatedAt($faker->dateTimeBetween('-6 month'));
+
+        $randomUser = rand(0, 1);
+        $video->setUser($this->getReference(self::USER[$randomUser]));
+
+        $slug = $this->slugger->slug($video->getTitle());
+        $video->setSlug($slug);
+
+        $video->setUrl($url);
+        $video->setCategory($this->getReference('category_' . $category));
+        $this->addReference('video_' . $videoNumber, $video);
+
+        return $video;
     }
 }

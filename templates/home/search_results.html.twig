@@ -1,12 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Recherche : {{ search }}{% endblock %}
+{% block title %}Résultats pour la recherche : {{ search }}{% endblock %}
 
 {% block body %}
     {% include '_includes/_modal.html.twig' with {
         buttons : true
     } %}
-    <h2 class="text-center mt-4 category-main-title title-font">Recherche : {{ search }}</h2>
+    <h2 class="section-title">Recherche : {{ search }}</h2>
 
     {% if videos is not empty %}
         <p class="results-info">Nombre de résultats : {{ videos|length }}</p>

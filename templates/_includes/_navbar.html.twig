@@ -6,11 +6,11 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         {# -------NAV-LINKS------- #}
-        <ul class="navbar-nav mr-auto col col-lg-4 text-center d-flex align-items-center
+        <ul class="navbar-nav mr-auto col col-lg-3 text-center d-flex align-items-center
                     justify-content-center justify-content-lg-start">
             <li class="nav-item my-3 my-lg-0">
                 <a class="navbar-brand d-none d-lg-block" href="{{ path('app_home') }}">
-                    <img src="{{ asset('build/images/TCS_white_logo.png') }}"
+                    <img src="{{ asset('build/images/TCS_logo/TCS_white_logo.png') }}"
                          class="img-fluid"
                          alt="The Court Side Logo">
                 </a>
@@ -19,7 +19,8 @@
                 <a class="nav-link text-nowrap" href="{{ path('app_category') }}">{{ 'navbar.categories'|trans }}</a>
             </li>
             <li class="nav-item mb-3 my-lg-0">
-                <a class="nav-link text-nowrap" href="{{ path('app_likes', { sort : 'recent'}) }}">{{ 'navbar.favorite'|trans }}</a>
+                <a class="nav-link text-nowrap"
+                   href="{{ path('app_likes', { sort : 'recent'}) }}">{{ 'navbar.favorite'|trans }}</a>
             </li>
             <li class="nav-item mb-3 my-lg-0">
                 <a class="nav-link text-nowrap" href="{{ path('app_about') }}">{{ 'navbar.about'|trans }}</a>
@@ -37,27 +38,30 @@
                 <button class="btn dropdown-toggle text-secondary" type="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
                     <img class="flag-current-language"
-                         src="{{ asset('build/images/' ~ app.request.locale ~ '-flag.png') }}"
+                         src="{{ asset('build/images/flag_country/' ~ app.request.locale ~ '_flag.png') }}"
                          alt="Current language flag">
                 </button>
                 <ul class="dropdown-menu language-list">
                     <li><a class="dropdown-item flag-item"
-                           href="{{ path('app_language', {'language': 'fr', 'route': app.request.attributes.get('_route')}) }}">
-                            <img class="flag-size" src="{{ asset('build/images/fr-flag.png') }}" alt="French flag"></a>
+                           href="{{ path('app_language', {'language': 'fr'}) }}">
+                            <img class="flag-size" src="{{ asset('build/images/flag_country/fr_flag.png') }}"
+                                 alt="French flag"></a>
                     </li>
                     <li>
                         <hr class="dropdown-divider">
                     </li>
                     <li><a class="dropdown-item flag-item"
-                           href="{{ path('app_language', {'language': 'en', 'route': app.request.attributes.get('_route')}) }}">
-                            <img class="flag-size" src="{{ asset('build/images/en-flag.png') }}" alt="English flag"></a>
+                           href="{{ path('app_language', {'language': 'en'}) }}">
+                            <img class="flag-size" src="{{ asset('build/images/flag_country/en_flag.png') }}"
+                                 alt="English flag"></a>
                     </li>
                     <li>
                         <hr class="dropdown-divider">
                     </li>
                     <li><a class="dropdown-item flag-item"
-                           href="{{ path('app_language', {'language': 'es', 'route': app.request.attributes.get('_route')}) }}">
-                            <img class="flag-size" src="{{ asset('build/images/es-flag.png') }}" alt="Spanish flag"></a>
+                           href="{{ path('app_language', {'language': 'es'}) }}">
+                            <img class="flag-size" src="{{ asset('build/images/flag_country/es_flag.png') }}"
+                                 alt="Spanish flag"></a>
                     </li>
                 </ul>
             </div>

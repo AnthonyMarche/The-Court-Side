@@ -248,3 +248,23 @@
         bottom: -5rem;
     }
 }
+
+.btn-outline-custom {
+    color: var(--element-color);
+    border: 1px solid var(--element-color);
+}
+
+.btn-outline-custom:hover {
+    background-color: var(--element-color);
+    color: var(--mainFont-color);
+}
+
+.btn-custom {
+    background-color: var(--element-color);
+    color: var(--mainFont-color);
+}
+
+.btn-custom:hover {
+    background-color: rgba(45, 191, 178, 0.5);
+    color: var(--mainFont-color);
+}
