@@ -2,13 +2,12 @@
 
 ## Presentation
 
-This is our third and final project at the Wild Code School. The team is composed of Alexis Boucherie, Anthony Marché, Yazid Hamzi and Naomie Atil. We are part of the PHP course.
+This is our third and final project at the Wild Code School. The team is composed of Alexis Boucherie, Anthony Marché,
+Yazid Hamzi and Naomie Atil. We are part of the PHP course.
 Our client desired a user-friendly website with an intuitive design.
 
-The Court Side is a direct-to-consumer video content free platform specialized in sports where the users need to register in order to access the premium content.
-
-It's symfony website-skeleton project with some additional library (webpack, fixtures) and tools to validate code standards.
-
+The Court Side is a direct-to-consumer video content free platform specialized in sports where the users need to
+register in order to access the premium content.
 
 ## Getting Started for Users
 
@@ -22,35 +21,34 @@ It's symfony website-skeleton project with some additional library (webpack, fix
 1. Clone this project.
 2. Run `composer install`.
 3. Run `yarn install`.
-4. Run `yarn encore dev` to build assets.
+
+#### Modify the .env file
+
+1. Create an .env.local file.
+2. Add your credentials
+   on `DATABASE_URL="mysql://db_user:db_password@127.0.0.1:3306/db_name?serverVersion=5.7&charset=utf8mb4"`.
+
+### Create and Get the database
+
+1. php bin/console doctrine:database:create.
+2. php bin/console doctrine:migrations:migrate.
 
 #### Generate the fixtures and videos
+
 1. php bin/console doctrine:fixtures:load.
-2. Our fixtures, operates with the videos uploaded [here](https://drive.google.com/drive/folders/1nupHgasIGT-MW0Z0LsW0dQ4ZdwnUYoyd?usp=share_link).
-   You have to download the videos and move them to the directory `assets/fixtures_videos`.
-
-
+2. Our fixtures, operates with the videos
+   uploaded [here](https://drive.google.com/drive/folders/1nupHgasIGT-MW0Z0LsW0dQ4ZdwnUYoyd?usp=share_link). <br /> You have to download the videos and move them to the directory `assets/fixtures_videos`.
 
 ### Working
 
 1. Run `symfony server:start` to launch your local php web server.
-2. Run `yarn run dev --watch` to launch your local server for assets (or `yarn dev-server` do the same with Hot Module Reload activated).
+2. Run `yarn dev-server` to launch your local server for assets and `yarn build` for the deployment.
 
-### Modify the .env file
-1. Create an .env.local file.
-2. Add your credentials on `DATABASE_URL="mysql://db_user:db_password@127.0.0.1:3306/db_name?serverVersion=5.7&charset=utf8mb4"`.
+### Mail Verification
 
-
-### Mail Testing
 1. In your .env.local file modify the `# MAILER_DSN=null://null` with the email delivery platform of your choice.
-After register, you will be sent a confirmation email.
-
-
-### Create and Get the database
-1. php bin/console doctrine:database:create.
-2. php bin/console doctrine:make:migration.
-3. php bin/console doctrine:migrations:migrate.
-
+   After register, you will be sent a confirmation email. When forgetting a password, you will be notified to create a
+   new one. And also, if you decide to subscribe to our newsletter, you will be alerted.
 
 
 ### Windows Users
@@ -59,18 +57,21 @@ If you develop on Windows, you should edit you git configuration to change your 
 
 `git config --global core.autocrlf true`
 
-The `.editorconfig` file in root directory do this for you. You probably need `EditorConfig` extension if your IDE is VSCode.
+The `.editorconfig` file in root directory do this for you. You probably need `EditorConfig` extension if your IDE is
+VSCode.
+
 
 ### Run locally with Docker
 
 1. Fill DATABASE_URL variable in .env.local file with
-`DATABASE_URL="mysql://root:password@database:3306/<choose_a_db_name>"`
+   `DATABASE_URL="mysql://root:password@database:3306/<choose_a_db_name>"`
 2. Install Docker Desktop an run the command:
+
 ```bash
 docker-compose up -d
 ```
-3. Wait a moment and visit http://localhost:8000
 
+3. Wait a moment and visit http://localhost:8000
 
 ## Built With
 
@@ -82,11 +83,14 @@ docker-compose up -d
 * [ESLint](https://eslint.org/)
 * [Sass-Lint](https://github.com/sasstools/sass-lint)
 
-
 ## Application
 
-You will first access to the homepage. From there, you are able to log in using the predefined `Admin` account whom credentials are `admin@me.fr` and `admin` as password.
-Once connected, you will have access to the premium content and from the admin page you will be able to create, upload videos and teasers or even delete content for example.
+You will first access to the homepage. From there, you are able to log in using the predefined `SuperAdmin` account whom
+credentials are `superadmin@me.fr` and `admin` as password from there you will be able to manage the users profiles and
+also you can upgrade a user to the admin role along with downgrading an admin to a user. This is exclusive to the super
+admin. To access the `Admin` account, your credentials will be `admin@me.fr` with `admin` as password.
+Once connected, you will have access to the premium content and from the admin page you will be able to create, upload
+videos and teasers or even delete content for example.
 
 ## License
 
