@@ -18,7 +18,7 @@
         </div>
         <div class="d-flex justify-content-around mt-5">
 
-            <div class="d-flex flex-column justify-content-around mb-1">
+            <div class="d-flex flex-column justify-content-around mb-1 btn-space-teaser">
                 <div class="d-flex flex-column">
                     {{ form_label(teaserForm.secondStart) }}
                     {{ form_widget(teaserForm.secondStart, {'attr': {'class': 'form-control bg-dark bg-gradient'}}) }}
@@ -41,7 +41,7 @@
                 </div>
             </div>
 
-            <video id="teaser" controls class="w-50"
+            <video id="teaser" controls class="w-50 d-none"
                    src="">
             </video>
 
