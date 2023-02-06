@@ -13,21 +13,10 @@
 
     .about-us {
         width: 100%;
-        height: 100vh;
         background-color: var(--mainBg-color);
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: 4rem;
-    }
-
-    .main-img img {
-        max-width: 100%;
-        width: 560px;
-        height: auto;
-        box-shadow: 0 0 10px 10px var(--element-color);
-        object-position: left center;
-        margin-bottom: 20px;
-
     }
 
     .second-img {
@@ -78,10 +67,6 @@
         display: flex;
     }
 
-    .text1 {
-        margin-right: 60px;
-    }
-
     .last-text h3 {
         color: var(--element-color);
         font-size: 60px;
@@ -97,22 +82,11 @@
 
     /* responsive design*/
 
-    @media(max-width: 1385px) {
-        section {
-            padding: 4% 4%;
-            transition: .3s;
-        }
-        .main-img img {
-            width: 500px;
-            height: auto;
-            transition: .3s;
-        }
-    }
-    @media (max-width: 1240px) {
-        .text h1 {
-            font-size: 30px;
-            transition: .3s;
+    @media screen and (min-width: 200px) and (max-width: 1200px) {
+        .about-us {
+            display: flex;
+            flex-direction: column;
+
         }
     }
 }
-
