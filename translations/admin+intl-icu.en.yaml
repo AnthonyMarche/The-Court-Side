@@ -14,10 +14,10 @@ entity.user: User
 entity.users: Users
 entity.video: Video
 entity.videos: Videos
-entity.listOfVideos: Liste of videos
-entity.listOfCategories: Liste of categories
-entity.listOfTags: Liste of tags
-entity.listOfUsers: Liste of users
+entity.listOfVideos: 'Liste of videos'
+entity.listOfCategories: 'Liste of categories'
+entity.listOfTags: 'Liste of tags'
+entity.listOfUsers: 'Liste of users'
 entity.title: Title
 entity.description: Description
 entity.visibility: Visibility
@@ -26,7 +26,18 @@ entity.teaser: Teaser
 entity.name: Name
 entity.username: Username
 entity.role: Role
-entity.createdAt: Created at
-dashboard.usersList: List of users
-dashboard.export: Export list of users
-file.extensions: File .avi, .mp4, .ogg and .wbm
+entity.createdAt: 'Created at'
+dashboard.usersList: 'List of users'
+dashboard.export: 'Export list of users'
+file.extensions: 'File .avi, .mp4, .ogg and .wbm'
+newsletter.flash: __newsletter.flash
+teaser.flash: __teaser.flash
+newsletter.title: __newsletter.title
+newsletter.title-placeholder: __newsletter.title-placeholder
+newsletter.content: __newsletter.content
+teaser.video: __teaser.video
+teaser.extension: __teaser.extension
+teaser.start: __teaser.start
+teaser.start-help: __teaser.start-help
+teaser.duration: __teaser.duration
+teaser.duration-help: __teaser.duration-help

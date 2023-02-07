@@ -1,13 +1,13 @@
-dashboard.dashboard: Tableau de bord
-dashboard.usersList: Liste des utilisateurs
-dashboard.export: Exporter la liste des utilisateurs
-dashboard.videosList: Liste des vidéos
-dashboard.newVideo: Nouvelle vidéo
-dashboard.categoriesList: Liste des catégories
-dashboard.newCategory: Nouvelle catégorie
-dashboard.tagsList: Liste des tags
-dashboard.newTag: Nouveau tag
-dashboard.leaveAdministration: Quitter l'administration
+dashboard.dashboard: 'Tableau de bord'
+dashboard.usersList: 'Liste des utilisateurs'
+dashboard.export: 'Exporter la liste des utilisateurs'
+dashboard.videosList: 'Liste des vidéos'
+dashboard.newVideo: 'Nouvelle vidéo'
+dashboard.categoriesList: 'Liste des catégories'
+dashboard.newCategory: 'Nouvelle catégorie'
+dashboard.tagsList: 'Liste des tags'
+dashboard.newTag: 'Nouveau tag'
+dashboard.leaveAdministration: "Quitter l'administration"
 entity.category: Catégorie
 entity.categories: Catégories
 entity.tag: Tag
@@ -16,17 +16,28 @@ entity.user: Utilisateur
 entity.users: Utilisateurs
 entity.video: Vidéo
 entity.videos: Vidéos
-entity.listOfVideos: Liste des vidéos
-entity.listOfCategories: Liste des catégories
-entity.listOfTags: Liste des tags
-entity.listOfUsers: Liste des utilisateurs
+entity.listOfVideos: 'Liste des vidéos'
+entity.listOfCategories: 'Liste des catégories'
+entity.listOfTags: 'Liste des tags'
+entity.listOfUsers: 'Liste des utilisateurs'
 entity.title: Titre
 entity.description: Description
 entity.visibility: Visibilité
-entity.file: Fichier vidéo
+entity.file: 'Fichier vidéo'
 entity.teaser: Teaser
 entity.name: Nom
-entity.username: Nom d'utilisateur
+entity.username: "Nom d'utilisateur"
 entity.role: Role
-entity.createdAt: Créé le
-file.extensions: Fichier .avi, .mp4, .ogg and .wbm
+entity.createdAt: 'Créé le'
+file.extensions: 'Fichier .avi, .mp4, .ogg and .wbm'
+newsletter.flash: __newsletter.flash
+teaser.flash: __teaser.flash
+newsletter.title: __newsletter.title
+newsletter.title-placeholder: __newsletter.title-placeholder
+newsletter.content: __newsletter.content
+teaser.video: __teaser.video
+teaser.extension: __teaser.extension
+teaser.start: __teaser.start
+teaser.start-help: __teaser.start-help
+teaser.duration: __teaser.duration
+teaser.duration-help: __teaser.duration-help
