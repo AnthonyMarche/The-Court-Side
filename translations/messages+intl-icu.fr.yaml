@@ -106,3 +106,7 @@ modal.content-message: __modal.content-message
 modal.feature-title: __modal.feature-title
 search.placeholder: __search.placeholder
 video.see-more-button: __video.see-more-button
+title.about: __title.about
+register.title: __register.title
+title.request: __title.request
+title.login: __title.login
