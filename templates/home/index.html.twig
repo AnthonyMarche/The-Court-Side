@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Accueil{% endblock %}
+{% block title %}{{ 'home.title'|trans }}{% endblock %}
 
 {% block body %}
     {# Modal private video #}
@@ -15,7 +15,7 @@
 
         {# first videos row #}
         {% include '_includes/_videos_head.html.twig' with {
-            title : 'Publiées récemment',
+            title : 'filter.recent'|trans,
             buttons : true,
             path :  path('app_all', {sort : 'recent'})
         } %}
@@ -27,7 +27,7 @@
 
         {# second videos row #}
         {% include '_includes/_videos_head.html.twig' with {
-            title : 'Les plus vues',
+            title : 'filter.views'|trans,
             buttons : true,
             path :  path('app_all', {sort : 'views'})
         } %}
@@ -49,7 +49,7 @@
 
         {# third videos row #}
         {% include '_includes/_videos_head.html.twig' with {
-            title : 'Les plus likées',
+            title : 'filter.likes'|trans,
             buttons : true,
             path :  path('app_all', {sort : 'likes'})
         } %}
@@ -61,7 +61,7 @@
 
         {# fourth videos row #}
         {% include '_includes/_videos_head.html.twig' with {
-            title : 'Réservées aux inscrits',
+            title : 'video.private'|trans,
             buttons : true,
             path :  path('app_private_videos', { sort : 'recent'})
         } %}
