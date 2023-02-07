@@ -95,6 +95,7 @@ nav .submit-searchBar {
 nav .custom-searchBar {
     border-radius: 20px 0 0 20px;
     background-color: var(--subBg-color);
+    width: 40vw;
 }
 
 nav .custom-searchBar:focus {
@@ -107,17 +108,25 @@ nav .custom-searchBar:focus {
 nav .btn-searchBar {
     border-radius: 0 20px 20px 0;
     background-color: var(--element-color);
-    border-color: var(--title-font);
+    border-color: var(--mainFont-color);
 }
 
 nav .btn-searchBar:hover {
     border-radius: 0 20px 20px 0;
     background-color: rgba(45, 191, 178, 0.6);
-    border-color: var(--title-font);
+}
+
+nav .btn-searchBar:focus {
+    outline: none;
+    box-shadow: none;
 }
 
 nav .searchForm {
     min-width: 35%;
+}
+
+nav .logo-search {
+    color: var(--mainFont-color);
 }
 
 /* --------------------------------------------- Change language -------------------------------------------- */
@@ -155,5 +164,11 @@ nav .searchForm {
     .navbar-brand {
         width: 75px;
         height: auto;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    nav .custom-searchBar {
+        width: 18vw;
     }
 }
