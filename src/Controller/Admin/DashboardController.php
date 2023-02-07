@@ -27,20 +27,17 @@ class DashboardController extends AbstractDashboardController
     private UserRepository $userRepository;
     private VideoRepository $videoRepository;
     private LikeRepository $likeRepository;
-    private CategoryRepository $categoryRepository;
     private StatsGraphs $statsGraphs;
 
     public function __construct(
         UserRepository $userRepository,
         VideoRepository $videoRepository,
         LikeRepository $likeRepository,
-        CategoryRepository $categoryRepository,
         StatsGraphs $statsGraphs,
     ) {
         $this->userRepository = $userRepository;
         $this->videoRepository = $videoRepository;
         $this->likeRepository = $likeRepository;
-        $this->categoryRepository = $categoryRepository;
         $this->statsGraphs = $statsGraphs;
     }
 
