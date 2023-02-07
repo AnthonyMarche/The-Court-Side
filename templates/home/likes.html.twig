@@ -1,17 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Voir mes favoris{% endblock %}
+{% block title %}{{ 'favorite.title'|trans }}{% endblock %}
 
 {% block body %}
     {% if app.user %}
-        <h2 class="section-title">Mes favoris</h2>
+        <h2 class="section-title">{{ 'favorite.title'|trans }}</h2>
 
         {#    message in case the user has no video liked    #}
         {% if videos is empty %}
             {% include '_includes/_info_card.html.twig' with {
-                'text' : 'Vous n\'avez aucune vidéo dans vos favoris pour l\'instant.
-                Pour en ajouter vous pouvez cliquer sur le bouton \'coeur\' en dessous de chaque vidéo',
-                'title' : 'Mes favoris',
+                'text' : 'favorite.card-no-video-text'|trans,
+                'title' : 'favorite.title'|trans,
                 'buttons' : 'false'} %}
         {% else %}
 
@@ -36,11 +35,8 @@
 
         {# message in case the user is not connected #}
         {% include '_includes/_info_card.html.twig' with {
-            'text' : 'Désolé cette page n\'est disponible que pour les utilisateurs inscrits.
-            Vous pouvez vous inscrire gratuitement ou vous connectez si vous avez déjà un compte.',
-            'title' : 'Mes favoris',
+            'text' : 'favorite.card-not-connected-text'|trans,
+            'title' : 'favorite.title'|trans,
             'buttons' : 'true'} %}
     {% endif %}
 {% endblock %}
-
-

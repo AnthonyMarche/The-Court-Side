@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Voir toutes les catégories{% endblock %}
+{% block title %}{{ 'category.title'|trans }}{% endblock %}
 
 {% block body %}
     {#  modal include #}
@@ -15,7 +15,7 @@
             </div>
         {% endfor %}
     </div>
-    <h2 class="section-title">Catégories</h2>
+    <h2 class="section-title">{{ 'category.title'|trans }}</h2>
     {% for category in categories %}
         <div class="category-video-row-container">
             <div id="{{ category.name }}" class="container-fluid p-5 py-3 home-main-container">
