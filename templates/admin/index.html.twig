@@ -1,46 +1,46 @@
 {% extends '@EasyAdmin/page/content.html.twig' %}
 
-{% block page_title %}<h1 class="text-center">Statistiques du site</h1>{% endblock %}
+{% block page_title %}<h1 class="text-center">{{ 'stats.title'|trans }}</h1>{% endblock %}
 
 {% block page_content %}
     <div class="container">
         <div class="row">
             <div class="card col-12 col-sm-6 col-xl-3 bg-dark bg-gradient text-light">
                 <div class="card-body">
-                    <h5 class="card-title text-center mb-2 mb-xl-4">Statistiques globales</h5>
-                    <p class="card-text">Nombre d'inscrits :</p>
+                    <h5 class="card-title text-center mb-2 mb-xl-4">{{ 'stats.general'|trans }}</h5>
+                    <p class="card-text">{{ 'stats.subs-nb'|trans }}</p>
                     <p class="text-center border border-success bg-success bg-opacity-50 rounded-pill fw-bold">{{ users|length }}</p>
-                    <p class="card-text">Nombre de vidéos :</p>
+                    <p class="card-text">{{ 'stats.video-nb'|trans }}</p>
                     <p class="text-center border border-warning bg-warning bg-opacity-50 rounded-pill fw-bold">{{ videos|length }}</p>
-                    <p class="card-text">Nombre de likes :</p>
+                    <p class="card-text">{{ 'stats.like-nb'|trans }}</p>
                     <p class="text-center border border-info bg-info bg-opacity-50 rounded-pill fw-bold">{{ likes|length }}</p>
                 </div>
             </div>
             <div class="card col-12 col-sm-6 col-xl-3 bg-dark bg-gradient text-light">
                 <div class="card-body">
-                    <h5 class="card-title text-center mb-2 mb-xl-4">7 derniers jours</h5>
-                    <p class="card-text">Nouveaux inscrits :</p>
+                    <h5 class="card-title text-center mb-2 mb-xl-4">{{ 'stats.last-7-days'|trans }}</h5>
+                    <p class="card-text">{{ 'stats.new-subs'|trans }}</p>
                     <p class="text-center border border-success bg-success bg-opacity-50 rounded-pill fw-bold">{{ users_from_past_seven_days[0][1] }}</p>
-                    <p class="card-text">Vidéos ajoutées :</p>
+                    <p class="card-text">{{ 'stats.new-videos'|trans }}</p>
                     <p class="text-center border border-warning bg-warning bg-opacity-50 rounded-pill fw-bold">{{ videos_from_past_seven_days[0][1] }}</p>
-                    <p class="card-text">Derniers likes :</p>
+                    <p class="card-text">{{ 'stats.last-likes'|trans }}</p>
                     <p class="text-center border border-info bg-info bg-opacity-50 rounded-pill fw-bold">{{ likes_from_past_seven_days[0][1] }}</p>
                 </div>
             </div>
             <div class="card col-12 col-sm-6 col-xl-3 bg-dark bg-gradient text-light">
                 <div class="card-body">
-                    <h5 class="card-title text-center mb-2 mb-xl-4">30 derniers jours</h5>
-                    <p class="card-text">Nouveaux inscrits :</p>
+                    <h5 class="card-title text-center mb-2 mb-xl-4">{{ 'stats.last-30-days'|trans }}</h5>
+                    <p class="card-text">{{ 'stats.new-subs'|trans }}</p>
                     <p class="text-center border border-success bg-success bg-opacity-50 rounded-pill fw-bold">{{ users_from_past_thirty_days[0][1] }}</p>
-                    <p class="card-text">Vidéos ajoutées :</p>
+                    <p class="card-text">{{ 'stats.new-videos'|trans }}</p>
                     <p class="text-center border border-warning bg-warning bg-opacity-50 rounded-pill fw-bold">{{ videos_from_past_thirty_days[0][1] }}</p>
-                    <p class="card-text">Derniers likes :</p>
+                    <p class="card-text">{{ 'stats.last-likes'|trans }}</p>
                     <p class="text-center border border-info bg-info bg-opacity-50 rounded-pill fw-bold">{{ likes_from_past_thirty_days[0][1] }}</p>
                 </div>
             </div>
             <div class="card col-12 col-sm-6 col-xl-3 bg-dark bg-gradient">
                 <div class="card-body">
-                    <h5 class="card-title text-center mb-2">Catégories avec le plus de likes</h5>
+                    <h5 class="card-title text-center mb-2">{{ 'stats.most-liked-cats'|trans }}</h5>
                     <div>
                         {{ render_chart(most_liked_categories_chart) }}
                     </div>
@@ -50,7 +50,7 @@
         <div class="row pt-4">
             <div class="card col-12 col-lg-6 bg-dark bg-gradient">
                 <div class="card-body">
-                    <h5 class="card-title text-center">Inscriptions sur le site (12 derniers mois)</h5>
+                    <h5 class="card-title text-center">{{ 'stats.subs-last-12-months'|trans }}</h5>
                     <div>
                         {{ render_chart(subscription_chart, {'class': ''}) }}
                     </div>
@@ -58,7 +58,7 @@
             </div>
             <div class="card col-12 col-lg-6 bg-dark bg-gradient">
                 <div class="card-body">
-                    <h5 class="card-title text-center">Likes sur le site (12 derniers mois)</h5>
+                    <h5 class="card-title text-center">{{ 'stats.likes-last-12-months'|trans }}</h5>
                     <di class="">
                         {{ render_chart(likes_chart) }}
                 </div>
