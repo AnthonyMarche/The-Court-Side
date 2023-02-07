@@ -30,14 +30,14 @@ entity.createdAt: 'Created at'
 dashboard.usersList: 'List of users'
 dashboard.export: 'Export list of users'
 file.extensions: 'File .avi, .mp4, .ogg and .wbm'
-newsletter.flash: __newsletter.flash
-teaser.flash: __teaser.flash
-newsletter.title: __newsletter.title
-newsletter.title-placeholder: __newsletter.title-placeholder
-newsletter.content: __newsletter.content
-teaser.video: __teaser.video
-teaser.extension: __teaser.extension
-teaser.start: __teaser.start
-teaser.start-help: __teaser.start-help
-teaser.duration: __teaser.duration
-teaser.duration-help: __teaser.duration-help
+newsletter.flash: The newsletter has been sent successfully.
+teaser.flash: Your teaser has been created, download it now!
+newsletter.title: 'Title:'
+newsletter.title-placeholder: Indicate the title of your newsletter
+newsletter.content: Content
+teaser.video: 'Video:'
+teaser.extension: 'File .mp4, .ogg and .wbm'
+teaser.start: 'Start:'
+teaser.start-help: Start of clip (second)
+teaser.duration: 'Duration:'
+teaser.duration-help: Duration of clip (second)

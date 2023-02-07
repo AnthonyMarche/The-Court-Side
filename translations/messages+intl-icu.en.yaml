@@ -7,106 +7,107 @@ navbar.hello: Hello
 navbar.admin: Administrator
 navbar.profile: Profile
 navbar.logout: Logout
-navbar.search: Search...
-login.already-login: __login.already-login
-userprofile.edit-profile-flash: __userprofile.edit-profile-flash
-newsletter.register: __newsletter.register
-mail.register: __mail.register
-placeholder.register: __placeholder.register
-username.register: __username.register
-messageagree.register: __messageagree.register
-agree.register: __agree.register
-messagemdp.register: __messagemdp.register
-password.register: __password.register
-usertype.username: __usertype.username
-usertype.current-password: __usertype.current-password
-usertype.new-password: __usertype.new-password
-usertype.verify-password: __usertype.verify-password
-usertype.newsletter-subscribe: __usertype.newsletter-subscribe
-graph.subs-evolution: __graph.subs-evolution
-graph.likes-evolution: __graph.likes-evolution
-teaser.title: __teaser.title
-teaser.submit: __teaser.submit
-teaser.dl_title: __teaser.dl_title
-teaser.download: __teaser.download
-stats.title: __stats.title
-stats.general: __stats.general
-stats.subs-nb: __stats.subs-nb
-stats.video-nb: __stats.video-nb
-stats.like-nb: __stats.like-nb
-stats.last-7-days: __stats.last-7-days
-stats.new-subs: __stats.new-subs
-stats.new-videos: __stats.new-videos
-stats.last-likes: __stats.last-likes
-stats.last-30-days: __stats.last-30-days
-stats.most-liked-cats: __stats.most-liked-cats
-stats.subs-last-12-months: __stats.subs-last-12-months
-stats.likes-last-12-months: __stats.likes-last-12-months
-newsletter.there-is: __newsletter.there-is
-newsletter.nb-register: __newsletter.nb-register
-newsletter.no-register: __newsletter.no-register
-newsletter.personalize: __newsletter.personalize
-newsletter.submit: __newsletter.submit
-registeredusers.about: __registeredusers.about
-sportsvideo.about: __sportsvideo.about
-videoliked.about: __videoliked.about
-aboutus.about: __aboutus.about
-premiumsports.about: __premiumsports.about
-video.all: __video.all
-filter.likes: __filter.likes
-filter.recent: __filter.recent
-filter.views: __filter.views
-category.title: __category.title
-home.title: __home.title
-video.private: __video.private
-favorite.title: __favorite.title
-favorite.card-no-video-text: __favorite.card-no-video-text
-favorite.card-not-connected-text: __favorite.card-not-connected-text
-private.card-text: __private.card-text
-video.published: __video.published
-video.view: __video.view
-video.description: __video.description
-video.see-more-text: __video.see-more-text
-button.register: __button.register
-text.register: __text.register
-link.register: __link.register
-textpassword.reset: __textpassword.reset
-button.reset: __button.reset
-rgpd.legal-notices: __rgpd.legal-notices
-rgpd.privary-policy: __rgpd.privary-policy
-mail.login: __mail.login
-password.login: __password.login
-checkbox.login: __checkbox.login
-passwordforgot.login: __passwordforgot.login
-button.login: __button.login
-userprofile.edit-profile: __userprofile.edit-profile
-userprofile.confirm: __userprofile.confirm
-userprofile.forbidden: __userprofile.forbidden
-userprofile.back-to-home-btn: __userprofile.back-to-home-btn
-userprofile.title: __userprofile.title
-userprofile.modal-title: __userprofile.modal-title
-userprofile.modal-body: __userprofile.modal-body
-userprofile.modal-cancel-btn: __userprofile.modal-cancel-btn
-userprofile.h1: __userprofile.h1
-userprofile.email: __userprofile.email
-userprofile.password: __userprofile.password
-userprofile.username: __userprofile.username
-userprofile.username-add: __userprofile.username-add
-userprofile.newsletter: __userprofile.newsletter
-userprofile.newsletter-sub-false: __userprofile.newsletter-sub-false
-userprofile.newsletter-sub-true: __userprofile.newsletter-sub-true
-userprofile.modify-btn: __userprofile.modify-btn
-userprofile.erase-btn: __userprofile.erase-btn
-userprofile.modal-confirm-btn: __userprofil.modal-confirm-btn
-userprofile.personal-data: __userprofile.personal-data
-userprofile.save-btn: __userprofile.save-btn
-userprofile.back-to-profile-btn: __userprofile.back-to-profile-btn
-modal.content-title: __modal.content-title
-modal.content-message: __modal.content-message
-modal.feature-title: __modal.feature-title
-search.placeholder: __search.placeholder
-video.see-more-button: __video.see-more-button
-title.about: __title.about
-register.title: __register.title
-title.request: __title.request
-title.login: __title.login
+login.already-login: Unable to access this page, you are already logged in.
+userprofile.edit-profile-flash: You profile was updated successfully
+newsletter.register: Subscribe to our newsletter
+mail.register: 'Email:'
+placeholder.register: enter a username
+username.register: 'Username:'
+messageagree.register: Please agree to the terms & conditions
+agree.register: Agree to terms & conditions
+messagemdp.register: Password should be at least 6 characters
+password.register: 'Password:'
+usertype.username: Username
+usertype.current-password: Current password
+usertype.new-password: New password
+usertype.verify-password: Confirm password
+usertype.newsletter-subscribe: I want to subscribe to the newsletter
+graph.subs-evolution: Subscriptions evolution, by month
+graph.likes-evolution: Likes evolution, by month
+teaser.title: 'Title:'
+teaser.submit: Generate my teaser
+teaser.dl_title: My teaser
+teaser.download: Download my teaser
+stats.title: Website statistics
+stats.general: General statistics
+stats.subs-nb: 'Number of subscriptions:'
+stats.video-nb: 'Number of videos:'
+stats.like-nb: 'Number of likes:'
+stats.last-7-days: Last 7 days
+stats.new-subs: New subscriptions
+stats.new-videos: New videos
+stats.last-likes: Last likes
+stats.last-30-days: Last 30 days
+stats.most-liked-cats: Most liked categories
+stats.subs-last-12-months: Subscriptions to the website (last 12 months)
+stats.likes-last-12-months: Likes on the website (last 12 months)
+newsletter.there-is: There is currently
+newsletter.nb-register: newsletter subscribers
+newsletter.no-register: Currently there are no subscribers to the newsletter
+newsletter.personalize: Personalize the content of your newsletter
+newsletter.submit: Send newsletter to all subscribers
+registeredusers.about: Registered users
+sportsvideo.about: Sports videos
+videoliked.about: Videos liked
+aboutus.about: About us
+premiumsports.about: Premium sports content provider since 2022
+video.all: All videos
+filter.likes: Most liked
+filter.recent: Most recent
+filter.views: Most Viewed
+category.title: Category
+home.title: Home
+video.private: Available only for subscribers
+favorite.title: My favorites
+favorite.card-no-video-text: You don't have any videos in your favorites at the moment. To add more you can click on the 'heart' button below each video
+favorite.card-not-connected-text: Sorry this page is only available to registered users. You can register for free or log in if you already have an account.
+private.card-text: Sorry this page is only available to registered users. You can register for free or log in if you already have an account.
+video.published: published on
+video.view: view
+video.description: 'Description :'
+video.see-more-text: See more in the category
+button.register: Register
+text.register: You already have an account ?
+link.register: Click here to login
+textpassword.reset: Enter your email address and we will send you a link to reset your password.
+button.reset: Reset your password
+rgpd.legal-notices: Legal notices
+rgpd.privary-policy: Privacy policy
+mail.login: 'Email:'
+password.login: 'Password:'
+checkbox.login: Remember me
+passwordforgot.login: Password Forgotten?
+inscription.login: Register here
+button.login: Login
+userprofile.edit-profile: Modify my profile
+userprofile.confirm: Confirm
+userprofile.forbidden: You're not allowed to access this page.
+userprofile.back-to-home-btn: Back to the homepage
+userprofile.title: View my profile
+userprofile.modal-title: Account deletion
+userprofile.modal-body: Are you really sure you want to erase your account? By doing do, you will no longer have access to our premium content.
+userprofile.modal-cancel-btn: Cancel
+userprofile.h1: User profile
+userprofile.email: Email adress
+userprofile.password: Password
+userprofile.username: Username
+userprofile.username-add: You can add your username by modifying your profile.
+userprofile.newsletter: Newsletter subscription
+userprofile.newsletter-sub-false: You did not subscribe to the newsletter. You can subscribe by modifying your profile.
+userprofile.newsletter-sub-true: You subscribed to the newsletter. You can cancel your subscription by modifying your profile.
+userprofile.modify-btn: Modify my profile
+userprofile.erase-btn: Erase my account
+userprofile.modal-confirm-btn: Erase my account
+userprofile.personal-data: Personal data
+userprofile.save-btn: Save
+userprofile.back-to-profile-btn: Back to my profile
+modal.content-title: This video is only available for subscribers
+modal.content-message: Sorry this content is only available to registered users. You can register for free or log in if you already have an account.
+modal.feature-title: This feature is only available for subscribers
+search.placeholder: Search…
+video.see-more-button: SEE MORE
+title.about: About
+register.title: Registration
+title.request: Reset Password
+title.login: Login
+
