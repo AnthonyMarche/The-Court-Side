@@ -1,6 +1,6 @@
 {% extends '@EasyAdmin/page/content.html.twig' %}
 
-{% block page_title %}<h1 class="title">Create teaser</h1>{% endblock %}
+{% block page_title %}<h1 class="title">{{ 'teaser.title'|trans }}</h1>{% endblock %}
 
 {% block page_content %}
     {{ include('_includes/_loaderAdmin.html.twig') }}
@@ -47,8 +47,8 @@
 
         </div>
         <div class="d-flex justify-content-center mt-5 mb-4">
-            <button disabled id="submit-new-teaser" type='submit' class="btn col-6 bg-dark bg-gradient">Générer mon
-                teaser
+            <button disabled id="submit-new-teaser" type='submit' class="btn col-6 bg-dark bg-gradient">
+                {{ 'teaser.submit'|trans }}
             </button>
         </div>
     </div>

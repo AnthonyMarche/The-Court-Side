@@ -1,4 +1,4 @@
-import CKEDITOR from 'ckeditor4';
+const CKEDITOR = window.CKEDITOR
 
 let newsletterBody = document.getElementById('newsletter-body');
 let submitButton = document.getElementById('newsletter_submit');

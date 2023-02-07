@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Translation\TranslatableMessage;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -20,27 +21,33 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('newsletter', CheckboxType::class, [
-                'required' => false])
+                'required' => false,
+                'label' => new TranslatableMessage('newsletter.register')
+            ])
             ->add('email', EmailType::class, [
                 'attr' => [
                     'placeholder' => 'email@gmail.com'
-                ]
+                ],
+                'label' => new TranslatableMessage('mail.register'),
             ])
-
             ->add('username', TextType::class, [
                 'required' => false,
                 'attr' => [
-                    'placeholder' => 'my username'
-                ]
+                    'placeholder' => new TranslatableMessage('placeholder.register'),
 
-                ])
+                ],
+                'label' => new TranslatableMessage('username.register'),
+
+            ])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'constraints' => [
                     new IsTrue([
-                        'message' => 'You should agree to our terms.',
+                        'message' => new TranslatableMessage('messageagree.register'),
                     ]),
                 ],
+                'label' => new TranslatableMessage('agree.register'),
+
             ])
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,
@@ -49,7 +56,7 @@ class RegistrationFormType extends AbstractType
                 'attr' => ['autocomplete' => 'new-password'],
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please enter a password',
+                        'message' => new TranslatableMessage('messagemdp.register')
                     ]),
                     new Length([
                         'min' => 6,
@@ -58,6 +65,7 @@ class RegistrationFormType extends AbstractType
                         'max' => 4096,
                     ]),
                 ],
+                'label' => new TranslatableMessage('password.register')
             ]);
     }
 

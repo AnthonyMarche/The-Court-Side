@@ -14,11 +14,12 @@
             <div class="card-video-details d-flex mt-2">
                 <div>
                     {% if video.isPrivate and not app.user %}
-                        <i class="fa fa-lock video-private-message"> Réservée aux inscrits</i>
+                        <i class="fa fa-lock video-private-message"> {{ 'video.private'|trans }}</i>
                     {% endif %}
                     <h4 class="home-video-title">{{ video.title }}</h4>
-                    <div class="home-video-details">{{ video.numberOfView }} vues • publiée
-                        le {{ video.createdAt|date("d/m/Y") }}</div>
+                    <div
+                        class="home-video-details">{{ video.numberOfView }} {{ 'video.view'|trans }}{% if video.numberOfView > 1 %}s{% endif %}
+                        • {{ 'video.published'|trans }} {{ video.createdAt|date("d/m/Y") }}</div>
                 </div>
             </div>
         </a>

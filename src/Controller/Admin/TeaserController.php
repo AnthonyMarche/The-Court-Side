@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Component\Translation\TranslatableMessage;
 
 #[Route('/teaser', name: 'app_teaser')]
 class TeaserController extends AbstractController
@@ -55,7 +56,14 @@ class TeaserController extends AbstractController
             }
 
             // If file created, flash message then redirect to view teaser page
-            $this->addFlash('success', 'Votre teaser a été créé, téléchargez le dès maintenant !');
+            $this->addFlash(
+                'success',
+                new TranslatableMessage(
+                    'teaser.flash',
+                    ['parameter' => 'value'],
+                    'admin'
+                )
+            );
 
             return $this->viewNewTeaser($teaser, $name);
         }

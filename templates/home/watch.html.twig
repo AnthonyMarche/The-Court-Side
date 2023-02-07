@@ -31,11 +31,11 @@
                 {% endif %}
                 <h2 class="watch-video-title text-left ml-2">{{ video.title }}</h2>
             </div>
-            <p class="watch-video-release">publiée le : {{ video.createdAt|date('d/m/Y') }}</p>
+            <p class="watch-video-release">{{ 'video.published'|trans }} : {{ video.createdAt|date('d/m/Y') }}</p>
         </div>
         <div class="d-flex justify-content-between align-items-center pb-3">
             <div class="watch-views-container">
-                <p class="watch-video-views">{{ video.numberOfView }} Vue{% if video.numberOfView > 1 %}s{% endif %}</p>
+                <p class="watch-video-views">{{ video.numberOfView }} {{ 'video.view'|trans }}{% if video.numberOfView > 1 %}s{% endif %}</p>
             </div>
             <div class="mt-2 share-buttons-container d-flex">
                 {# SHARE VIDEO #}
@@ -62,13 +62,13 @@
             </div>
         </div>
         <div class="watch-video-description text-left mt-2">
-            <p class="video-description-head">Description :</p>
-            <p class="video-description">{{ video.description }}</p>
+            <p class="video-description-head">{{ 'video.description'|trans }}</p>
+            <p class="video-description">{{ video.description }} </p>
         </div>
         <div class="watch-video-tags-container">
             <div class="watch-video-tags d-flex pb-5">
                 {% for tag in video.tag %}
-                    <a href="{{ path('app_tag', {slug : tag.slug, sort : 'recent'}) }}" name="{{ tag.name }}">
+                    <a href="{{ path('app_tag', {slug : tag.slug, sort : 'recent'}) }}">
                         <button type="button" class="btn btn-outline-primary tag-button btn-sm mr-2">
                             #{{ tag.name }}</button>
                     </a>
@@ -84,7 +84,7 @@
     <div class="container-fluid p-5 py-3 home-main-container">
         {% if video.category.videos|length > 4 %}{% set buttons = true %}{% else %}{% set buttons = false %}{% endif %}
         {% include '_includes/_videos_head.html.twig' with {
-            title : 'Plus dans la catégorie ' ~ video.category.name,
+            title : 'video.see-more-text'|trans ~ ' ' ~ video.category.name,
             buttons : buttons,
             path : path('app_single_category', {slug : video.category.slug, sort : 'recent'})
         } %}

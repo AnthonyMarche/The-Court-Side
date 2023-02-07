@@ -4,23 +4,22 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="message-modal-title" id="exampleModalLabel"><i class="fa fa-lock"></i> Vidéo résérvées aux inscrits
+                <h5 class="message-modal-title" id="exampleModalLabel"><i class="fa fa-lock"></i>   {{ 'modal.content-title'|trans }}
                 </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="message-modal-body text-center">
-                Désolé ce contenu n'est disponible que pour les utilisateurs inscrits.
-                Vous pouvez vous inscrire gratuitement ou vous connectez si vous avez déjà un compte.
+                {{ 'modal.content-message'|trans }}
             </div>
             {% if buttons == true %}
             <div class="modal-footer">
                 <a href="{{ path('app_register') }}">
-                    <button type="button" class="btn btn-outline-custom">S'inscrire</button>
+                    <button type="button" class="btn btn-outline-custom">{{ 'button.register'|trans }}</button>
                 </a>
                 <a href="{{ path('app_user_login') }}">
-                    <button type="button" class="btn btn-custom">Se connecter</button>
+                    <button type="button" class="btn btn-custom">{{ 'button.login'|trans }}</button>
                 </a>
             </div>
             {% endif %}
@@ -34,24 +33,22 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="message-modal-title" id="exampleModalLabel"><i class="fa fa-lock"></i> Fonctioanlité résérvées aux
-                    inscrits</h5>
+                <h5 class="message-modal-title" id="exampleModalLabel"><i class="fa fa-lock"></i>   {{ 'modal.feature-title'|trans }}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="message-modal-body">
-                Désolé cette fonctionalité n'est disponible que pour les utilisateurs inscrits.
-                Vous pouvez vous inscrire gratuitement ou vous connectez si vous avez déjà un compte.
+                {{ 'modal.feature-title'|trans }}
             </div>
             <div class="modal-footer">
                 {% if buttons == true %}
                     <div class="modal-footer">
                         <a href="{{ path('app_register') }}">
-                            <button type="button" class="btn btn-outline-custom">S'inscrire</button>
+                            <button type="button" class="btn btn-outline-custom">{{ 'button.register'|trans }}</button>
                         </a>
                         <a href="{{ path('app_user_login') }}">
-                            <button type="button" class="btn btn-custom">Se connecter</button>
+                            <button type="button" class="btn btn-custom">{{ 'button.login'|trans }}</button>
                         </a>
                     </div>
                 {% endif %}

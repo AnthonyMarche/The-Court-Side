@@ -5,10 +5,10 @@
         {% if buttons == 'true' %}
             <div class="info-card-buttons-container d-flex justify-content-center mb-5">
                 <a href="{{ path('app_register') }}">
-                    <button type="button" class="btn btn-outline-custom">S'inscrire</button>
+                    <button type="button" class="btn btn-outline-custom">{{ 'button.register'|trans }}</button>
                 </a>
                 <a href="{{ path('app_user_login') }}">
-                    <button type="button" class="btn btn-custom">Se connecter</button>
+                    <button type="button" class="btn btn-custom">{{ 'button.login'|trans }}</button>
                 </a>
             </div>
         {% endif %}
