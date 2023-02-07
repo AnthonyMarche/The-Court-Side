@@ -18,13 +18,12 @@
                     {{ form_row(requestForm.email, {'attr':{'class':'form form-control'}}) }}
 
                     <small style="color: white; text-align: center">
-                        Enter your email address and we will send you a
-                        link to reset your password.
+                       {{ 'textpassword.reset'|trans}}
                     </small>
                 </div>
 
                 <button
-                    class="btn btn-lg col-sm-11 col-md-9 col-lg-7 custom-login-connect">{{ button_label|default('Reset your password') }}</button>
+                    class="btn btn-lg col-sm-11 col-md-9 col-lg-7 custom-login-connect">{{ 'button.reset' | trans}}</button>
 
                 <a href="{{ path('app_forgot_password_request') }}"></a>
             </div>
