@@ -13,9 +13,9 @@
 
         {#  include filter button  #}
         {% include '_includes/_filter_button.html.twig' with {
-            recent : path('app_search', { sort : 'recent', search : search}),
-            likes : path('app_search', { sort : 'likes', search : search}),
-            views : path('app_search', { sort : 'views', search : search})
+            recent : path('app_results', { sort : 'recent', search : search}),
+            likes : path('app_results', { sort : 'likes', search : search}),
+            views : path('app_results', { sort : 'views', search : search})
         } %}
         {# include the videos grid #}
         <div class="container-fluid p-5 py-3">
