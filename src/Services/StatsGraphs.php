@@ -6,6 +6,7 @@ use App\Repository\CategoryRepository;
 use App\Repository\LikeRepository;
 use App\Repository\UserRepository;
 use DateTime;
+use Symfony\Component\Translation\TranslatableMessage;
 use Symfony\UX\Chartjs\Builder\ChartBuilderInterface;
 use Symfony\UX\Chartjs\Model\Chart;
 
@@ -57,7 +58,7 @@ class StatsGraphs
             'labels' => $lastTwelveMonths,
             'datasets' => [
                 [
-                    'label' => 'Evolution de l\'inscription des visiteurs, par mois',
+                    'label' => new TranslatableMessage('graph.subs-evolution'),
                     'backgroundColor' => 'rgb(255, 99, 132)',
                     'borderColor' => 'rgb(255, 99, 132)',
                     'data' => $usersMonthByMonth,
@@ -126,7 +127,7 @@ class StatsGraphs
             'labels' => $lastTwelveMonths,
             'datasets' => [
                 [
-                    'label' => 'Evolution des likes, par mois',
+                    'label' => new TranslatableMessage('graph.likes-evolution'),
                     'backgroundColor' => 'rgb(45, 191, 178)',
                     'borderColor' => 'rgb(45, 191, 178)',
                     'data' => $likesMonthByMonth,
@@ -195,7 +196,6 @@ class StatsGraphs
             ],
             'datasets' => [
                 [
-                    'label' => 'Top 5 des catégories les plus likées',
                     'backgroundColor' => [
                         'red',
                         'orange',
