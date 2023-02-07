@@ -10,7 +10,7 @@
 
     {{ form_start(resetForm) }}
         {{ form_row(resetForm.plainPassword,{'attr': {'class':'form-control' }}) }}
-        <button class="btn btn-primary btn-block">Reset password</button>
+        <button class="btn btn-primary btn-block">{{ 'button.reset'|trans }}</button>
     {{ form_end(resetForm) }}
 {% endblock %}
 {% block footer%} {% endblock %}
