@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Translation\TranslatableMessage;
 
 #[IsGranted('ROLE_ADMIN')]
 class NewsletterController extends AbstractController
@@ -41,7 +42,14 @@ class NewsletterController extends AbstractController
                     ]));
                 $mailer->send($email);
             }
-            $this->addFlash('success', 'La newsletter a bien été envoyée.');
+            $this->addFlash(
+                'success',
+                new TranslatableMessage(
+                    'newsletter.flash',
+                    ['parameter' => 'value'],
+                    'admin'
+                )
+            );
         }
 
         return $this->render('admin/newsletter/index.html.twig', [
