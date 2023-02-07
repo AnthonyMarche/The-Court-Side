@@ -7,6 +7,7 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Translation\TranslatableMessage;
 use Symfony\Component\Validator\Constraints\GreaterThanOrEqual;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\PositiveOrZero;
@@ -18,9 +19,17 @@ class TeaserType extends AbstractType
     {
         $builder
             ->add('video', FileType::class, [
-                'label' => 'Votre vidéo :',
+                'label' => new TranslatableMessage(
+                    'teaser.video',
+                    ['parameter' => 'value'],
+                    'admin'
+                ),
                 'required' => true,
-                'help' => 'file .mp4, .webm, .ogg, .wmv',
+                'help' => new TranslatableMessage(
+                    'teaser.extension',
+                    ['parameter' => 'value'],
+                    'admin'
+                ),
                 'constraints' => [
                     new File([
                         'mimeTypes' => ['video/mp4', 'video/webm', 'video/ogg', 'video/wmv']
@@ -29,10 +38,18 @@ class TeaserType extends AbstractType
                 ],
             ])
             ->add('secondStart', IntegerType::class, [
-                'label' => 'Début :',
+                'label' => new TranslatableMessage(
+                    'teaser.start',
+                    ['parameter' => 'value'],
+                    'admin'
+                ),
                 'required' => false,
                 'empty_data' => '0',
-                'help' => 'What time start (in second)',
+                'help' => new TranslatableMessage(
+                    'teaser.start-help',
+                    ['parameter' => 'value'],
+                    'admin'
+                ),
                 'attr' => [
                     'placeholder' => '0',
                     'class' => "d-flex flex-column"
@@ -41,10 +58,18 @@ class TeaserType extends AbstractType
                 'constraints' => [new PositiveOrZero()],
             ])
             ->add('duration', IntegerType::class, [
-                'label' => 'Durée :',
+                'label' => new TranslatableMessage(
+                    'teaser.duration',
+                    ['parameter' => 'value'],
+                    'admin'
+                ),
                 'required' => false,
                 'empty_data' => '10',
-                'help' => 'Duration teaser (in second)',
+                'help' => new TranslatableMessage(
+                    'teaser.duration-help',
+                    ['parameter' => 'value'],
+                    'admin'
+                ),
                 'attr' => [
                     'placeholder' => '10',
                     'class' => "d-flex flex-column"
