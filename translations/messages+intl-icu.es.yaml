@@ -7,107 +7,107 @@ navbar.hello: Hola
 navbar.admin: Administrador
 navbar.profile: Perfil
 navbar.logout: Desconexión
-login.already-login: No se puede acceder a esta página, ya ha iniciado sesión.
-userprofile.edit-profile-flash: Su perfil fue puesta al día con successo
-newsletter.register: Suscríbete a nuestro boletín
+login.already-login: 'No se puede acceder a esta página, ya ha iniciado sesión.'
+userprofile.edit-profile-flash: 'Su perfil fue puesta al día con successo'
+newsletter.register: 'Suscríbete a nuestro boletín'
 mail.register: 'Correo electrónico:'
-placeholder.register: Introduzca un nombre de usuario
+placeholder.register: 'Introduzca un nombre de usuario'
 username.register: 'Nombre de usuario:'
-messageagree.register: Por favor acepte los términos y condiciones
-agree.register: Por favor acepte los términos y condiciones
-messagemdp.register: La contraseña debe tener al menos 6 caracteres
+messageagree.register: 'Por favor acepte los términos y condiciones'
+agree.register: 'Por favor acepte los términos y condiciones'
+messagemdp.register: 'La contraseña debe tener al menos 6 caracteres'
 password.register: 'Contraseña :'
-usertype.username: Nombre de usuario
-usertype.current-password: Confirmar la contraseña
-usertype.new-password: Nueva contraseña
-usertype.verify-password: Confirmar la contraseña
-usertype.newsletter-subscribe: Quiero suscribirme al newsletter
-graph.subs-evolution: Evolución de las suscripciones, por mes
-graph.likes-evolution: Evolución de los likes, por mes
+usertype.username: 'Nombre de usuario'
+usertype.current-password: 'Confirmar la contraseña'
+usertype.new-password: 'Nueva contraseña'
+usertype.verify-password: 'Confirmar la contraseña'
+usertype.newsletter-subscribe: 'Quiero suscribirme al newsletter'
+graph.subs-evolution: 'Evolución de las suscripciones, por mes'
+graph.likes-evolution: 'Evolución de los likes, por mes'
 teaser.title: 'Título :'
-teaser.submit: Generar mi teaser
-teaser.dl_title: Mi teaser
-teaser.download: Descarga mi teaser
-stats.title: Estadísticas del sitio
-stats.general: Estadísticas generales
+teaser.submit: 'Generar mi teaser'
+teaser.dl_title: 'Mi teaser'
+teaser.download: 'Descarga mi teaser'
+stats.title: 'Estadísticas del sitio'
+stats.general: 'Estadísticas generales'
 stats.subs-nb: 'Número de suscripciones:'
 stats.video-nb: 'Número de vídeos:'
 stats.like-nb: 'Número de likes:'
-stats.last-7-days: Últimos 7 días
-stats.new-subs: Nuevas suscripciones
-stats.new-videos: Nuevos vídeos
-stats.last-likes: Ultimos likes
-stats.last-30-days: Últimos 30 días
-stats.most-liked-cats: Categorías las más populares
-stats.subs-last-12-months: Suscripciones al sitio (últimos 12 meses)
-stats.likes-last-12-months: Likes en el sitio (últimos 12 meses)
-newsletter.there-is: Actualmente hay
-newsletter.nb-register: suscriptores del boletín
-newsletter.no-register: Actualmente no hay suscriptores al boletín
-newsletter.personalize: Personaliza el contenido de tu newsletter
-newsletter.submit: Enviar boletín a todos los suscriptores
-registeredusers.about: Usuarios Registrados
-sportsvideo.about: Vídeos de deportes
-videoliked.about: Vídeos amados
-aboutus.about: A proposito
-premiumsports.about: Proveedor de contenido deportivo premium desde 2022
-video.all: Todos los videos
-filter.likes: Los más amados
-filter.recent: Los más recientes
-filter.views: Los más vistos
+stats.last-7-days: 'Últimos 7 días'
+stats.new-subs: 'Nuevas suscripciones'
+stats.new-videos: 'Nuevos vídeos'
+stats.last-likes: 'Ultimos likes'
+stats.last-30-days: 'Últimos 30 días'
+stats.most-liked-cats: 'Categorías las más populares'
+stats.subs-last-12-months: 'Suscripciones al sitio (últimos 12 meses)'
+stats.likes-last-12-months: 'Likes en el sitio (últimos 12 meses)'
+newsletter.there-is: 'Actualmente hay'
+newsletter.nb-register: 'suscriptores del boletín'
+newsletter.no-register: 'Actualmente no hay suscriptores al boletín'
+newsletter.personalize: 'Personaliza el contenido de tu newsletter'
+newsletter.submit: 'Enviar boletín a todos los suscriptores'
+registeredusers.about: 'Usuarios Registrados'
+sportsvideo.about: 'Vídeos de deportes'
+videoliked.about: 'Vídeos amados'
+aboutus.about: 'A proposito'
+premiumsports.about: 'Proveedor de contenido deportivo premium desde 2022'
+video.all: 'Todos los videos'
+filter.likes: 'Los más amados'
+filter.recent: 'Los más recientes'
+filter.views: 'Los más vistos'
 category.title: Categoría
-home.title: Pagina de inicio
-video.private: Reservado para suscriptores
-favorite.title: Mis preferidos
-favorite.card-no-video-text: No tiene ningún video en sus favoritos en este momento. Para agregar más, puede hacer clic en el botón 'corazón' debajo de cada video
-favorite.card-not-connected-text: Lo sentimos, esta página solo está disponible para usuarios registrados. Puedes registrarte gratis o iniciar sesión si ya tienes una cuenta.
-private.card-text: Lo sentimos, esta página solo está disponible para usuarios registrados. Puedes registrarte gratis o iniciar sesión si ya tienes una cuenta.
-video.published: Publicado en
+home.title: 'Pagina de inicio'
+video.private: 'Reservado para suscriptores'
+favorite.title: 'Mis preferidos'
+favorite.card-no-video-text: "No tiene ningún video en sus favoritos en este momento. Para agregar más, puede hacer clic en el botón 'corazón' debajo de cada video"
+favorite.card-not-connected-text: 'Lo sentimos, esta página solo está disponible para usuarios registrados. Puedes registrarte gratis o iniciar sesión si ya tienes una cuenta.'
+private.card-text: 'Lo sentimos, esta página solo está disponible para usuarios registrados. Puedes registrarte gratis o iniciar sesión si ya tienes una cuenta.'
+video.published: 'Publicado en'
 video.view: Visto
 video.description: 'Descripción:'
-video.see-more-text: Ver más en la categoría
+video.see-more-text: 'Ver más en la categoría'
 button.register: Inscribirse
-text.register: Ya tienes una cuenta ?
-link.register: Haga clic aquí para ingresar
-textpassword.reset: Ingrese su dirección de correo electrónico y le enviaremos un enlace para restablecer su contraseña.
-button.reset: Restablecer su contraseña
-rgpd.legal-notices: Notas legales
-rgpd.privary-policy: Política de confidencialidad
-mail.login: ‘Correo electrónico:’
-password.login: ‘Contraseña:’
-checkbox.login: Acuérdate de mí
-passwordforgot.login: ¿Contraseña olvidada?
-inscription.login: Registrar aquí
+text.register: 'Ya tienes una cuenta ?'
+link.register: 'Haga clic aquí para ingresar'
+textpassword.reset: 'Ingrese su dirección de correo electrónico y le enviaremos un enlace para restablecer su contraseña.'
+button.reset: 'Restablecer su contraseña'
+rgpd.legal-notices: 'Notas legales'
+rgpd.privary-policy: 'Política de confidencialidad'
+mail.login: '‘Correo electrónico:’'
+password.login: '‘Contraseña:’'
+checkbox.login: 'Acuérdate de mí'
+passwordforgot.login: '¿Contraseña olvidada?'
+inscription.login: 'Registrar aquí'
 button.login: Acceso
-userprofile.edit-profile: Modificar mi cuenta
+userprofile.edit-profile: 'Modificar mi cuenta'
 userprofile.confirm: Confirmar
-userprofile.forbidden: No tiene la autorización para ver esta página.
-userprofile.back-to-home-btn: Volver en la página de inicio
-userprofile.title: Ver mi perfil
-userprofile.modal-title: Eliminar la cuenta
-userprofile.modal-body: Está seguro de que quiere eliminar su cuenta? Si confirma, ya no tendrá acceso al contenido reservado a los clientes registrados.
+userprofile.forbidden: 'No tiene la autorización para ver esta página.'
+userprofile.back-to-home-btn: 'Volver en la página de inicio'
+userprofile.title: 'Ver mi perfil'
+userprofile.modal-title: 'Eliminar la cuenta'
+userprofile.modal-body: 'Está seguro de que quiere eliminar su cuenta? Si confirma, ya no tendrá acceso al contenido reservado a los clientes registrados.'
 userprofile.modal-cancel-btn: Anular
-userprofile.h1: Perfil de usuario
-userprofile.email: Correo electrónico
+userprofile.h1: 'Perfil de usuario'
+userprofile.email: 'Correo electrónico'
 userprofile.password: Contraseña
-userprofile.username: Nombre de usuario
-userprofile.username-add: Puede añadir un nombre de usuario modificando su perfil.
-userprofile.newsletter: Suscripción al newsletter
-userprofile.newsletter-sub-false: Al momento no esta registrado al newsletter. Lo puede hacer si modifica su cuenta.
-userprofile.newsletter-sub-true: Está registrado al newsletter. Puede anular su suscripción modificando su perfil.
-userprofile.modify-btn: Modificar mi perfil
-userprofile.erase-btn: Suprimir mi cuenta
-userprofile.modal-confirm-btn: Eliminar mi cuenta
-userprofile.personal-data: Datos personales
+userprofile.username: 'Nombre de usuario'
+userprofile.username-add: 'Puede añadir un nombre de usuario modificando su perfil.'
+userprofile.newsletter: 'Suscripción al newsletter'
+userprofile.newsletter-sub-false: 'Al momento no esta registrado al newsletter. Lo puede hacer si modifica su cuenta.'
+userprofile.newsletter-sub-true: 'Está registrado al newsletter. Puede anular su suscripción modificando su perfil.'
+userprofile.modify-btn: 'Modificar mi perfil'
+userprofile.erase-btn: 'Suprimir mi cuenta'
+userprofile.modal-confirm-btn: 'Eliminar mi cuenta'
+userprofile.personal-data: 'Datos personales'
 userprofile.save-btn: Salvaguardar
-userprofile.back-to-profile-btn: Volver en mi cuenta
-modal.content-title: Video reservado para suscriptores
-modal.content-message: Lo sentimos, este contenido solo está disponible para usuarios registrados. Puede registrarse gratis o iniciar sesión si ya tiene una cuenta.
-modal.feature-title: Funcionalidad reservada para suscriptores
+userprofile.back-to-profile-btn: 'Volver en mi cuenta'
+modal.content-title: 'Video reservado para suscriptores'
+modal.content-message: 'Lo sentimos, este contenido solo está disponible para usuarios registrados. Puede registrarse gratis o iniciar sesión si ya tiene una cuenta.'
+modal.feature-title: 'Funcionalidad reservada para suscriptores'
 search.placeholder: Buscar…
-video.see-more-button: VER MÁS
-title.about: A propósito
+video.see-more-button: 'VER MÁS'
+title.about: 'A propósito'
 register.title: Registro
-title.request: Resetear contraseña
+title.request: 'Resetear contraseña'
 title.login: Conexión
-
+modal.feature-content: "Lo sentimos, esta función solo está disponible para usuarios registrados. Puedes registrarte gratis o iniciar sesión si ya tienes una cuenta."

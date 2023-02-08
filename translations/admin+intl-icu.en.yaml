@@ -30,14 +30,14 @@ entity.createdAt: 'Created at'
 dashboard.usersList: 'List of users'
 dashboard.export: 'Export list of users'
 file.extensions: 'File .avi, .mp4, .ogg and .wbm'
-newsletter.flash: The newsletter has been sent successfully.
-teaser.flash: Your teaser has been created, download it now!
+newsletter.flash: 'The newsletter has been sent successfully.'
+teaser.flash: 'Your teaser has been created, download it now!'
 newsletter.title: 'Title:'
-newsletter.title-placeholder: Indicate the title of your newsletter
+newsletter.title-placeholder: 'Indicate the title of your newsletter'
 newsletter.content: Content
 teaser.video: 'Video:'
 teaser.extension: 'File .mp4, .ogg and .wbm'
 teaser.start: 'Start:'
-teaser.start-help: Start of clip (second)
+teaser.start-help: 'Start of clip (second)'
 teaser.duration: 'Duration:'
-teaser.duration-help: Duration of clip (second)
+teaser.duration-help: 'Duration of clip (second)'
