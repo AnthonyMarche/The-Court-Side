@@ -58,7 +58,7 @@ class StatsGraphs
             'labels' => $lastTwelveMonths,
             'datasets' => [
                 [
-                    'label' => new TranslatableMessage('graph.subs-evolution'),
+                    'label' => 'Evolution du nombre d\'inscriptions (12 derniers mois)',
                     'backgroundColor' => 'rgb(255, 99, 132)',
                     'borderColor' => 'rgb(255, 99, 132)',
                     'data' => $usersMonthByMonth,
@@ -127,7 +127,7 @@ class StatsGraphs
             'labels' => $lastTwelveMonths,
             'datasets' => [
                 [
-                    'label' => new TranslatableMessage('graph.likes-evolution'),
+                    'label' => 'Evolution du nombre de likes (12 derniers mois)',
                     'backgroundColor' => 'rgb(45, 191, 178)',
                     'borderColor' => 'rgb(45, 191, 178)',
                     'data' => $likesMonthByMonth,
