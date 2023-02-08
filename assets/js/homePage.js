@@ -61,12 +61,12 @@ const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
 const alert = (message, type) => {
     const wrapper = document.createElement('div')
     wrapper.innerHTML = [
-        `<div class="alert alert-${type} alert-dismissible pr-0 py-3 d-flex flex-column justify-content-between align-items-center" role="alert">`,
+        `<div class="alert alert-${type} alert-dismissible pr-0 pb-3 d-flex flex-column justify-content-between align-items-center" role="alert">`,
+        '       <button type="button" class="btn btn-close d-flex align-self-end p-0 pr-2" data-bs-dismiss="alert" aria-label="Close">X</button>',
         `   <div class="mr-5 mb-3 text-center"> ${message}</div>`,
         `   <div class="d-flex">`,
         '       <button type="button" class="btn btn-custom mr-2" data-bs-dismiss="alert" aria-label="Close">Accepter</button>',
         '       <button type="button" class="btn btn-danger" data-bs-dismiss="alert" aria-label="Close">Refuser</button>',
-        '       <button type="button" class="btn btn-close " data-bs-dismiss="alert" aria-label="Close">X</button>',
         '   </div>',
         '</div>'
     ].join('')
@@ -75,9 +75,9 @@ const alert = (message, type) => {
 }
 
 if (alertPlaceholder && !sessionStorage.getItem("firstVisit")) {
-    var delayInMilliseconds = 3000;
+    var delayInMilliseconds = 5000;
     setTimeout(function () {
-        alert('Cookies : Vous pouvez cliquer sur "Accepter" pour accepter les cookies, sur le boutton "Refuser" pour ne pas que vos cookies soit utilisés ou pour continuer sans accepter des cookies non opérationnels, veuillez cliquez sur le bouton X.', 'info')
+        alert('Cookies : Vous pouvez cliquer sur "Accepter" pour accepter les cookies, sur le boutton "Refuser" pour que vos cookies ne soient pas utilisés ou pour continuer sans accepter les cookies non opérationnels, veuillez cliquez sur le bouton X.', 'info')
         sessionStorage.setItem("firstVisit", "false")
     }, delayInMilliseconds);
 }
