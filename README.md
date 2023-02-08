@@ -51,6 +51,10 @@ register in order to access the premium content.
    new one. And also, if you decide to subscribe to our newsletter, you will be alerted.
 
 
+### Install FFMPEG
+
+Install the binary directories and configure your environment variables to create your teasers.
+
 ### Windows Users
 
 If you develop on Windows, you should edit you git configuration to change your end of line rules with this command:
@@ -86,7 +90,7 @@ docker-compose up -d
 ## Application
 
 You will first access to the homepage. From there, you are able to log in using the predefined `SuperAdmin` account whom
-credentials are `superadmin@me.fr` and `admin` as password from there you will be able to manage the users profiles and
+credentials are `superadmin@me.fr` and `superadmin` as password from there you will be able to manage the users profiles and
 also you can upgrade a user to the admin role along with downgrading an admin to a user. This is exclusive to the super
 admin. To access the `Admin` account, your credentials will be `admin@me.fr` with `admin` as password.
 Once connected, you will have access to the premium content and from the admin page you will be able to create, upload
