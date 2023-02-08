@@ -7,107 +7,107 @@ navbar.hello: Hello
 navbar.admin: Administrator
 navbar.profile: Profile
 navbar.logout: Logout
-login.already-login: Unable to access this page, you are already logged in.
-userprofile.edit-profile-flash: You profile was updated successfully
-newsletter.register: Subscribe to our newsletter
+login.already-login: 'Unable to access this page, you are already logged in.'
+userprofile.edit-profile-flash: 'You profile was updated successfully'
+newsletter.register: 'Subscribe to our newsletter'
 mail.register: 'Email:'
-placeholder.register: enter a username
+placeholder.register: 'enter a username'
 username.register: 'Username:'
-messageagree.register: Please agree to the terms & conditions
-agree.register: Agree to terms & conditions
-messagemdp.register: Password should be at least 6 characters
+messageagree.register: 'Please agree to the terms & conditions'
+agree.register: 'Agree to terms & conditions'
+messagemdp.register: 'Password should be at least 6 characters'
 password.register: 'Password:'
 usertype.username: Username
-usertype.current-password: Current password
-usertype.new-password: New password
-usertype.verify-password: Confirm password
-usertype.newsletter-subscribe: I want to subscribe to the newsletter
-graph.subs-evolution: Subscriptions evolution, by month
-graph.likes-evolution: Likes evolution, by month
+usertype.current-password: 'Current password'
+usertype.new-password: 'New password'
+usertype.verify-password: 'Confirm password'
+usertype.newsletter-subscribe: 'I want to subscribe to the newsletter'
+graph.subs-evolution: 'Subscriptions evolution, by month'
+graph.likes-evolution: 'Likes evolution, by month'
 teaser.title: 'Title:'
-teaser.submit: Generate my teaser
-teaser.dl_title: My teaser
-teaser.download: Download my teaser
-stats.title: Website statistics
-stats.general: General statistics
+teaser.submit: 'Generate my teaser'
+teaser.dl_title: 'My teaser'
+teaser.download: 'Download my teaser'
+stats.title: 'Website statistics'
+stats.general: 'General statistics'
 stats.subs-nb: 'Number of subscriptions:'
 stats.video-nb: 'Number of videos:'
 stats.like-nb: 'Number of likes:'
-stats.last-7-days: Last 7 days
-stats.new-subs: New subscriptions
-stats.new-videos: New videos
-stats.last-likes: Last likes
-stats.last-30-days: Last 30 days
-stats.most-liked-cats: Most liked categories
-stats.subs-last-12-months: Subscriptions to the website (last 12 months)
-stats.likes-last-12-months: Likes on the website (last 12 months)
-newsletter.there-is: There is currently
-newsletter.nb-register: newsletter subscribers
-newsletter.no-register: Currently there are no subscribers to the newsletter
-newsletter.personalize: Personalize the content of your newsletter
-newsletter.submit: Send newsletter to all subscribers
-registeredusers.about: Registered users
-sportsvideo.about: Sports videos
-videoliked.about: Videos liked
-aboutus.about: About us
-premiumsports.about: Premium sports content provider since 2022
-video.all: All videos
-filter.likes: Most liked
-filter.recent: Most recent
-filter.views: Most Viewed
+stats.last-7-days: 'Last 7 days'
+stats.new-subs: 'New subscriptions'
+stats.new-videos: 'New videos'
+stats.last-likes: 'Last likes'
+stats.last-30-days: 'Last 30 days'
+stats.most-liked-cats: 'Most liked categories'
+stats.subs-last-12-months: 'Subscriptions to the website (last 12 months)'
+stats.likes-last-12-months: 'Likes on the website (last 12 months)'
+newsletter.there-is: 'There is currently'
+newsletter.nb-register: 'newsletter subscribers'
+newsletter.no-register: 'Currently there are no subscribers to the newsletter'
+newsletter.personalize: 'Personalize the content of your newsletter'
+newsletter.submit: 'Send newsletter to all subscribers'
+registeredusers.about: 'Registered users'
+sportsvideo.about: 'Sports videos'
+videoliked.about: 'Videos liked'
+aboutus.about: 'About us'
+premiumsports.about: 'Premium sports content provider since 2022'
+video.all: 'All videos'
+filter.likes: 'Most liked'
+filter.recent: 'Most recent'
+filter.views: 'Most Viewed'
 category.title: Category
 home.title: Home
-video.private: Available only for subscribers
-favorite.title: My favorites
-favorite.card-no-video-text: You don't have any videos in your favorites at the moment. To add more you can click on the 'heart' button below each video
-favorite.card-not-connected-text: Sorry this page is only available to registered users. You can register for free or log in if you already have an account.
-private.card-text: Sorry this page is only available to registered users. You can register for free or log in if you already have an account.
-video.published: published on
+video.private: 'Available only for subscribers'
+favorite.title: 'My favorites'
+favorite.card-no-video-text: "You don't have any videos in your favorites at the moment. To add more you can click on the 'heart' button below each video"
+favorite.card-not-connected-text: 'Sorry this page is only available to registered users. You can register for free or log in if you already have an account.'
+private.card-text: 'Sorry this page is only available to registered users. You can register for free or log in if you already have an account.'
+video.published: 'published on'
 video.view: view
 video.description: 'Description :'
-video.see-more-text: See more in the category
+video.see-more-text: 'See more in the category'
 button.register: Register
-text.register: You already have an account ?
-link.register: Click here to login
-textpassword.reset: Enter your email address and we will send you a link to reset your password.
-button.reset: Reset your password
-rgpd.legal-notices: Legal notices
-rgpd.privary-policy: Privacy policy
+text.register: 'You already have an account ?'
+link.register: 'Click here to login'
+textpassword.reset: 'Enter your email address and we will send you a link to reset your password.'
+button.reset: 'Reset your password'
+rgpd.legal-notices: 'Legal notices'
+rgpd.privary-policy: 'Privacy policy'
 mail.login: 'Email:'
 password.login: 'Password:'
-checkbox.login: Remember me
-passwordforgot.login: Password Forgotten?
-inscription.login: Register here
+checkbox.login: 'Remember me'
+passwordforgot.login: 'Password Forgotten?'
+inscription.login: 'Register here'
 button.login: Login
-userprofile.edit-profile: Modify my profile
+userprofile.edit-profile: 'Modify my profile'
 userprofile.confirm: Confirm
-userprofile.forbidden: You're not allowed to access this page.
-userprofile.back-to-home-btn: Back to the homepage
-userprofile.title: View my profile
-userprofile.modal-title: Account deletion
-userprofile.modal-body: Are you really sure you want to erase your account? By doing do, you will no longer have access to our premium content.
+userprofile.forbidden: "You're not allowed to access this page."
+userprofile.back-to-home-btn: 'Back to the homepage'
+userprofile.title: 'View my profile'
+userprofile.modal-title: 'Account deletion'
+userprofile.modal-body: 'Are you really sure you want to erase your account? By doing do, you will no longer have access to our premium content.'
 userprofile.modal-cancel-btn: Cancel
-userprofile.h1: User profile
-userprofile.email: Email adress
+userprofile.h1: 'User profile'
+userprofile.email: 'Email adress'
 userprofile.password: Password
 userprofile.username: Username
-userprofile.username-add: You can add your username by modifying your profile.
-userprofile.newsletter: Newsletter subscription
-userprofile.newsletter-sub-false: You did not subscribe to the newsletter. You can subscribe by modifying your profile.
-userprofile.newsletter-sub-true: You subscribed to the newsletter. You can cancel your subscription by modifying your profile.
-userprofile.modify-btn: Modify my profile
-userprofile.erase-btn: Erase my account
-userprofile.modal-confirm-btn: Erase my account
-userprofile.personal-data: Personal data
+userprofile.username-add: 'You can add your username by modifying your profile.'
+userprofile.newsletter: 'Newsletter subscription'
+userprofile.newsletter-sub-false: 'You did not subscribe to the newsletter. You can subscribe by modifying your profile.'
+userprofile.newsletter-sub-true: 'You subscribed to the newsletter. You can cancel your subscription by modifying your profile.'
+userprofile.modify-btn: 'Modify my profile'
+userprofile.erase-btn: 'Erase my account'
+userprofile.modal-confirm-btn: 'Erase my account'
+userprofile.personal-data: 'Personal data'
 userprofile.save-btn: Save
-userprofile.back-to-profile-btn: Back to my profile
-modal.content-title: This video is only available for subscribers
-modal.content-message: Sorry this content is only available to registered users. You can register for free or log in if you already have an account.
-modal.feature-title: This feature is only available for subscribers
+userprofile.back-to-profile-btn: 'Back to my profile'
+modal.content-title: 'This video is only available for subscribers'
+modal.content-message: 'Sorry this content is only available to registered users. You can register for free or log in if you already have an account.'
+modal.feature-title: 'This feature is only available for subscribers'
 search.placeholder: Search…
-video.see-more-button: SEE MORE
+video.see-more-button: 'SEE MORE'
 title.about: About
 register.title: Registration
-title.request: Reset Password
+title.request: 'Reset Password'
 title.login: Login
-
+modal.feature-content: "Sorry this feature is only available for registered users. You can register for free or log in if you already have an account."

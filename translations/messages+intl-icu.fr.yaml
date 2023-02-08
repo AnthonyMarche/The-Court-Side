@@ -1,112 +1,113 @@
 navbar.categories: Catégories
 navbar.favorite: Favoris
-navbar.about: À propos
+navbar.about: 'À propos'
 navbar.register: Inscription
 navbar.login: Connexion
 navbar.hello: Bonjour
 navbar.admin: Administrateur
 navbar.profile: Profil
 navbar.logout: Déconnexion
-login.already-login: Impossible d’accéder à cette page, vous êtes déjà connecté.
-userprofile.edit-profile-flash: Votre profil a bien été mis à jour
-newsletter.register: Abonnez-vous à notre newsletter
-mail.register: ‘Adresse email :’
-placeholder.register: Entrez un nom d'utilisateur
+login.already-login: 'Impossible d’accéder à cette page, vous êtes déjà connecté.'
+userprofile.edit-profile-flash: 'Votre profil a bien été mis à jour'
+newsletter.register: 'Abonnez-vous à notre newsletter'
+mail.register: '‘Adresse email :’'
+placeholder.register: "Entrez un nom d'utilisateur"
 username.register: "Nom d'utilisateur :"
-messageagree.register: Veuillez accepter les termes et conditions
-agree.register: Veuillez accepter les termes et conditions
-messagemdp.register: Le mot de passe doit comporter au moins 6 caractères
+messageagree.register: 'Veuillez accepter les termes et conditions'
+agree.register: 'Veuillez accepter les termes et conditions'
+messagemdp.register: 'Le mot de passe doit comporter au moins 6 caractères'
 password.register: 'Mot de passe :'
 usertype.username: "Nom d'utilisateur"
-usertype.current-password: Mot de passe actuel
-usertype.new-password: Nouveau mot de passe
-usertype.verify-password: Confirmer le nouveau mot de passe
-usertype.newsletter-subscribe: Je souhaite être abonné à la newsletter
-graph.subs-evolution: Evolution de l'inscription des visiteurs, par mois
-graph.likes-evolution: Evolution du nombre de likes, par mois
+usertype.current-password: 'Mot de passe actuel'
+usertype.new-password: 'Nouveau mot de passe'
+usertype.verify-password: 'Confirmer le nouveau mot de passe'
+usertype.newsletter-subscribe: 'Je souhaite être abonné à la newsletter'
+graph.subs-evolution: "Evolution de l'inscription des visiteurs, par mois"
+graph.likes-evolution: 'Evolution du nombre de likes, par mois'
 teaser.title: 'Titre :'
-teaser.submit: Générer mon teaser
-teaser.dl_title: Mon teaser
-teaser.download: Télécharger mon teaser
-stats.title: Statistiques du site
+teaser.submit: 'Générer mon teaser'
+teaser.dl_title: 'Mon teaser'
+teaser.download: 'Télécharger mon teaser'
+stats.title: 'Statistiques du site'
 stats.general: 'Statistiques globales :'
 stats.subs-nb: "Nombre d'inscrits :"
 stats.video-nb: 'Nombre de vidéos :'
 stats.like-nb: 'Nombre de likes :'
-stats.last-7-days: 7 derniers jours
-stats.new-subs: Nouveaux inscrits
-stats.new-videos: Vidéos ajoutées
-stats.last-likes: Derniers likes
-stats.last-30-days: 30 derniers jours
-stats.most-liked-cats: Catégories avec le plus de likes
-stats.subs-last-12-months: Inscriptions sur le site (12 derniers mois)
-stats.likes-last-12-months: Likes sur le site (12 derniers mois)
-newsletter.there-is: Il y a actuellement
-newsletter.nb-register: Personnes inscrites à la newsletter
-newsletter.no-register: Actuellement, il n'y a aucun inscrit à la newsletter
-newsletter.personalize: Personnalisez le contenu de votre newsletter
-newsletter.submit: Envoyer la newsletter à tous les inscrits
-registeredusers.about: Utilisateurs enregistrés
-sportsvideo.about: Vidéos de sport
-videoliked.about: Vidéos likées
-aboutus.about: À propos de nous
-premiumsports.about: Fournisseur de contenu sportif premium depuis 2022
-video.all: Toutes les vidéos
-filter.likes: Les plus likées
-filter.recent: Les plus récentes
-filter.views: Les plus vues
+stats.last-7-days: '7 derniers jours'
+stats.new-subs: 'Nouveaux inscrits'
+stats.new-videos: 'Vidéos ajoutées'
+stats.last-likes: 'Derniers likes'
+stats.last-30-days: '30 derniers jours'
+stats.most-liked-cats: 'Catégories avec le plus de likes'
+stats.subs-last-12-months: 'Inscriptions sur le site (12 derniers mois)'
+stats.likes-last-12-months: 'Likes sur le site (12 derniers mois)'
+newsletter.there-is: 'Il y a actuellement'
+newsletter.nb-register: 'Personnes inscrites à la newsletter'
+newsletter.no-register: "Actuellement, il n'y a aucun inscrit à la newsletter"
+newsletter.personalize: 'Personnalisez le contenu de votre newsletter'
+newsletter.submit: 'Envoyer la newsletter à tous les inscrits'
+registeredusers.about: 'Utilisateurs enregistrés'
+sportsvideo.about: 'Vidéos de sport'
+videoliked.about: 'Vidéos likées'
+aboutus.about: 'À propos de nous'
+premiumsports.about: 'Fournisseur de contenu sportif premium depuis 2022'
+video.all: 'Toutes les vidéos'
+filter.likes: 'Les plus likées'
+filter.recent: 'Les plus récentes'
+filter.views: 'Les plus vues'
 category.title: Catégorie
 home.title: Accueil
-video.private: Réservée aux inscrits
-favorite.title: Mes favoris
-favorite.card-no-video-text: Vous n'avez aucune vidéo dans vos favoris pour l'instant. Pour en ajouter vous pouvez cliquer sur le bouton 'coeur' en dessous de chaque vidéo
-favorite.card-not-connected-text: Désolé cette page n'est disponible que pour les utilisateurs inscrits. Vous pouvez vous inscrire gratuitement ou vous connecter si vous avez déjà un compte.
-private.card-text: Désolé cette page n'est disponible que pour les utilisateurs inscrits. Vous pouvez vous inscrire gratuitement ou vous connecter si vous avez déjà un compte.
-video.published: Publiée le
+video.private: 'Réservée aux inscrits'
+favorite.title: 'Mes favoris'
+favorite.card-no-video-text: "Vous n'avez aucune vidéo dans vos favoris pour l'instant. Pour en ajouter vous pouvez cliquer sur le bouton 'coeur' en dessous de chaque vidéo"
+favorite.card-not-connected-text: "Désolé cette page n'est disponible que pour les utilisateurs inscrits. Vous pouvez vous inscrire gratuitement ou vous connecter si vous avez déjà un compte."
+private.card-text: "Désolé cette page n'est disponible que pour les utilisateurs inscrits. Vous pouvez vous inscrire gratuitement ou vous connecter si vous avez déjà un compte."
+video.published: 'Publiée le'
 video.view: Vue
 video.description: 'Description :'
-video.see-more-text: Voir plus dans la catégorie
+video.see-more-text: 'Voir plus dans la catégorie'
 button.register: Inscrivez-vous
-text.register: Avez vous déjà un compte ?
-link.register: Cliquez ici pour vous identifier
-textpassword.reset: Entrez votre adresse e-mail et nous vous enverrons un lien pour réinitialiser votre mot de passe.
-button.reset: Réinitialisez votre mot de passe
-rgpd.legal-notices: Mentions légales
-rgpd.privary-policy: Politique de confidentialité
-mail.login: ‘Email :’
+text.register: 'Avez vous déjà un compte ?'
+link.register: 'Cliquez ici pour vous identifier'
+textpassword.reset: 'Entrez votre adresse e-mail et nous vous enverrons un lien pour réinitialiser votre mot de passe.'
+button.reset: 'Réinitialisez votre mot de passe'
+rgpd.legal-notices: 'Mentions légales'
+rgpd.privary-policy: 'Politique de confidentialité'
+mail.login: '‘Email :’'
 password.login: 'Mot de passe :'
-checkbox.login: Se souvenir de moi
-passwordforgot.login: J'ai oublié mon mot de passe
-inscription.login: Cliquez ici pour vous inscrire !
+checkbox.login: 'Se souvenir de moi'
+passwordforgot.login: "J'ai oublié mon mot de passe"
+inscription.login: 'Cliquez ici pour vous inscrire !'
 button.login: Connexion
-userprofile.edit-profile: Modifier mon profil
+userprofile.edit-profile: 'Modifier mon profil'
 userprofile.confirm: Confirmer
-userprofile.forbidden: Vous n'êtes pas autorisé à accéder à cette page.
-userprofile.back-to-home-btn: Retourner vers la page d'accueil
-userprofile.title: Voir mon profil
-userprofile.modal-title: Suppression du compte
-userprofile.modal-body: Êtes-vous bien sûr de vouloir supprimer votre compte ? Si vous confirmez, vous n'aurez plus accès aux vidéos réservées aux abonnés.
+userprofile.forbidden: "Vous n'êtes pas autorisé à accéder à cette page."
+userprofile.back-to-home-btn: "Retourner vers la page d'accueil"
+userprofile.title: 'Voir mon profil'
+userprofile.modal-title: 'Suppression du compte'
+userprofile.modal-body: "Êtes-vous bien sûr de vouloir supprimer votre compte ? Si vous confirmez, vous n'aurez plus accès aux vidéos réservées aux abonnés."
 userprofile.modal-cancel-btn: Annuler
-userprofile.h1: Profil utilisateur
-userprofile.email: Adresse email
-userprofile.password: Mot de passe
-userprofile.username: Nom d'utilisateur
-userprofile.username-add: Vous pouvez ajouter un nom d'utilisateur en modifiant votre profil.
-userprofile.newsletter: Abonnement newsletter
-userprofile.newsletter-sub-false: Vous n'êtes pas encore abonné à la newsletter. Vous pouvez vous y abonner en modifiant votre profil.
-userprofile.newsletter-sub-true: Vous êtes abonné à la newsletter. Vous pouvez vous désabonner en modifiant votre profil.
-userprofile.modify-btn: Modifier mon profil
-userprofile.erase-btn: Supprimer mon compte
-userprofile.modal-confirm-btn: Supprimer mon compte
-userprofile.personal-data: Données personnelles
+userprofile.h1: 'Profil utilisateur'
+userprofile.email: 'Adresse email'
+userprofile.password: 'Mot de passe'
+userprofile.username: "Nom d'utilisateur"
+userprofile.username-add: "Vous pouvez ajouter un nom d'utilisateur en modifiant votre profil."
+userprofile.newsletter: 'Abonnement newsletter'
+userprofile.newsletter-sub-false: "Vous n'êtes pas encore abonné à la newsletter. Vous pouvez vous y abonner en modifiant votre profil."
+userprofile.newsletter-sub-true: 'Vous êtes abonné à la newsletter. Vous pouvez vous désabonner en modifiant votre profil.'
+userprofile.modify-btn: 'Modifier mon profil'
+userprofile.erase-btn: 'Supprimer mon compte'
+userprofile.modal-confirm-btn: 'Supprimer mon compte'
+userprofile.personal-data: 'Données personnelles'
 userprofile.save-btn: Sauvegarder
-userprofile.back-to-profile-btn: Revenir sur mon profil
-modal.content-title: Vidéo réservées aux inscrits
-modal.content-message: Désolé ce contenu n'est disponible que pour les utilisateurs inscrits. Vous pouvez vous inscrire gratuitement ou vous connecter si vous avez déjà un compte.
-modal.feature-title: Fonctionnalité réservées aux inscrits
+userprofile.back-to-profile-btn: 'Revenir sur mon profil'
+modal.content-title: 'Vidéo réservées aux inscrits'
+modal.content-message: "Désolé ce contenu n'est disponible que pour les utilisateurs inscrits. Vous pouvez vous inscrire gratuitement ou vous connecter si vous avez déjà un compte."
+modal.feature-title: 'Fonctionnalité réservées aux inscrits'
 search.placeholder: Rechercher…
-video.see-more-button: VOIR PLUS
-title.about: À propos
+video.see-more-button: 'VOIR PLUS'
+title.about: 'À propos'
 register.title: Inscription
-title.request: Réinitialiser mon mot de passe
+title.request: 'Réinitialiser mon mot de passe'
 title.login: Connexion
+modal.feature-content: "Désolé cette fonctionalité n'est disponible que pour les utilisateurs inscrits. Vous pouvez vous inscrire gratuitement ou vous connectez si vous avez déjà un compte."
