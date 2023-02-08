@@ -73,8 +73,8 @@ textpassword.reset: 'Ingrese su dirección de correo electrónico y le enviaremo
 button.reset: 'Restablecer su contraseña'
 rgpd.legal-notices: 'Notas legales'
 rgpd.privary-policy: 'Política de confidencialidad'
-mail.login: '‘Correo electrónico:’'
-password.login: '‘Contraseña:’'
+mail.login: 'Correo electrónico:'
+password.login: 'Contraseña:'
 checkbox.login: 'Acuérdate de mí'
 passwordforgot.login: '¿Contraseña olvidada?'
 inscription.login: 'Registrar aquí'
@@ -111,3 +111,11 @@ register.title: Registro
 title.request: 'Resetear contraseña'
 title.login: Conexión
 modal.feature-content: "Lo sentimos, esta función solo está disponible para usuarios registrados. Puedes registrarte gratis o iniciar sesión si ya tienes una cuenta."
+about.text1: The Court Side es un proveedor de contenido deportivo premium desde 2022. Ofrecemos una variedad de
+    contenido exclusivo y original, que cubre una amplia gama de deportes y eventos deportivos en
+    mundial.
+about.text2: Contamos con un equipo de periodistas deportivos experimentados y apasionados que
+    trabajar incansablemente para producir contenido informativo, entretenido y relevante. Nosotros
+    están comprometidos a proporcionar a nuestros lectores la mejor información deportiva en uno y
+    solo sitio.
+about.text3: ¡Únase a nosotros para una experiencia de lectura deportiva premium!

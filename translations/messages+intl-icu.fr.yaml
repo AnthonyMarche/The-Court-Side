@@ -10,7 +10,7 @@ navbar.logout: Déconnexion
 login.already-login: 'Impossible d’accéder à cette page, vous êtes déjà connecté.'
 userprofile.edit-profile-flash: 'Votre profil a bien été mis à jour'
 newsletter.register: 'Abonnez-vous à notre newsletter'
-mail.register: '‘Adresse email :’'
+mail.register: 'Adresse email :'
 placeholder.register: "Entrez un nom d'utilisateur"
 username.register: "Nom d'utilisateur :"
 messageagree.register: 'Veuillez accepter les termes et conditions'
@@ -73,7 +73,7 @@ textpassword.reset: 'Entrez votre adresse e-mail et nous vous enverrons un lien 
 button.reset: 'Réinitialisez votre mot de passe'
 rgpd.legal-notices: 'Mentions légales'
 rgpd.privary-policy: 'Politique de confidentialité'
-mail.login: '‘Email :’'
+mail.login: 'Email :'
 password.login: 'Mot de passe :'
 checkbox.login: 'Se souvenir de moi'
 passwordforgot.login: "J'ai oublié mon mot de passe"
@@ -111,3 +111,11 @@ register.title: Inscription
 title.request: 'Réinitialiser mon mot de passe'
 title.login: Connexion
 modal.feature-content: "Désolé cette fonctionalité n'est disponible que pour les utilisateurs inscrits. Vous pouvez vous inscrire gratuitement ou vous connectez si vous avez déjà un compte."
+about.text1: The Court Side un fournisseur de contenu sportif premium depuis 2022. Nous offrons une variété de
+    contenus exclusifs et originaux, couvrant une large gamme de sports et d'événements sportifs à
+    travers le monde.
+about.text2: Nous avons une équipe de journalistes sportifs expérimentés et passionnés qui
+    travaillent sans relâche pour produire des contenus informatifs, divertissants et pertinents. Nous
+    sommes déterminés à offrir à nos lecteurs les meilleures informations sportives sur un seul et
+    unique site.
+about.text3: Rejoignez-nous pour une expérience de lecture sportive de qualité supérieure !
