@@ -268,3 +268,11 @@
     background-color: rgba(45, 191, 178, 0.5);
     color: var(--mainFont-color);
 }
+
+#liveAlertPlaceholder {
+    position: fixed;
+    bottom: 0;
+    width: 90%;
+    right: 5%;
+    z-index: 50;
+}
