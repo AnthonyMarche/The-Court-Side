@@ -95,12 +95,7 @@ class TeaserController extends AbstractController
     public function createTeaser(File $file, int $secondStart, int $duration): void
     {
         // Get FFMpeg binary file to create object
-        $ffmpeg = FFMpeg\FFMpeg::create([
-            'ffmpeg.binaries' => $this->getParameter('ffmpeg_file_path'),
-            'ffprobe.binaries' => $this->getParameter('ffprobe_file_path'),
-            'timeout' => 3600,
-            'ffmpeg.threads' => 12,
-        ]);
+        $ffmpeg = FFMpeg\FFMpeg::create();
 
         // Open file with FFMpeg
         $video = $ffmpeg->open($file);
