@@ -160,15 +160,21 @@ nav .logo-search {
     font-size: 1.5rem;
 }
 
-@media screen and (min-width: 768px) {
-    .navbar-brand {
-        width: 75px;
-        height: auto;
-    }
+.custom-nav-logo {
+    margin-right: 0;
+}
+
+.navbar-brand {
+    width: 75px;
+    height: auto;
 }
 
 @media screen and (min-width: 992px) {
     nav .custom-searchBar {
         width: 18vw;
+    }
+
+    .custom-nav-logo {
+        margin-right: 1rem;
     }
 }
