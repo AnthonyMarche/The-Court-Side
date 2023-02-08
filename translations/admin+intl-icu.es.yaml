@@ -1,11 +1,11 @@
 dashboard.dashboard: Salpicadero
-dashboard.videosList: Lista de videos
-dashboard.newVideo: Nuevo Video
-dashboard.categoriesList: Lista de categorías
-dashboard.newCategory: Nueva Categoría
-dashboard.tagsList: Lista de etiquetas
-dashboard.newTag: Nueva etiqueta
-dashboard.leaveAdministration: Salir de administrador
+dashboard.videosList: 'Lista de videos'
+dashboard.newVideo: 'Nuevo Video'
+dashboard.categoriesList: 'Lista de categorías'
+dashboard.newCategory: 'Nueva Categoría'
+dashboard.tagsList: 'Lista de etiquetas'
+dashboard.newTag: 'Nueva etiqueta'
+dashboard.leaveAdministration: 'Salir de administrador'
 entity.category: Categoría
 entity.categories: Categorías
 entity.tag: Etiqueta
@@ -14,19 +14,30 @@ entity.user: Usuario
 entity.users: Usuarios
 entity.video: Vídeo
 entity.videos: Vídeos
-entity.listOfVideos: Lista de vídeos
-entity.listOfCategories: Lista de categorías
-entity.listOfTags: Lista de etiquetas
-entity.listOfUsers: Lista de usuarios
+entity.listOfVideos: 'Lista de vídeos'
+entity.listOfCategories: 'Lista de categorías'
+entity.listOfTags: 'Lista de etiquetas'
+entity.listOfUsers: 'Lista de usuarios'
 entity.title: Titulo
 entity.description: Descripción
 entity.visibility: Visibilidad
-entity.file: Archivo de vídeo
+entity.file: 'Archivo de vídeo'
 entity.teaser: Teaser
 entity.name: Nombre
-entity.username: Nombre de usuario
+entity.username: 'Nombre de usuario'
 entity.role: Rol
-entity.createdAt: Creado el
-dashboard.usersList: lista de usuarios
-dashboard.export: Exportar lista de usuarios
-file.extensions: Archivos .avi, .mp4, .ogg y .wbm
+entity.createdAt: 'Creado el'
+dashboard.usersList: 'lista de usuarios'
+dashboard.export: 'Exportar lista de usuarios'
+file.extensions: 'Archivos .avi, .mp4, .ogg y .wbm'
+newsletter.flash: El boletín se ha enviado correctamente.
+teaser.flash: Tu teaser ha sido creado, ¡descárgalo ahora!
+newsletter.title: 'Título :'
+newsletter.title-placeholder: Indique el título de su newsletter
+newsletter.content: 'Contenido :'
+teaser.video: 'Vídeo :'
+teaser.extension: Archivo .mp4, .webm, .ogg, .wmv
+teaser.start: 'Inicio :'
+teaser.start-help: Inicio de clip (segundo)
+teaser.duration: Duración
+teaser.duration-help: Duración del clip (segundo)
