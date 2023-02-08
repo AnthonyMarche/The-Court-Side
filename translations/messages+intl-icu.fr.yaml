@@ -10,7 +10,7 @@ navbar.logout: Déconnexion
 login.already-login: 'Impossible d’accéder à cette page, vous êtes déjà connecté.'
 userprofile.edit-profile-flash: 'Votre profil a bien été mis à jour'
 newsletter.register: 'Abonnez-vous à notre newsletter'
-mail.register: '‘Adresse email :’'
+mail.register: 'Adresse email :'
 placeholder.register: "Entrez un nom d'utilisateur"
 username.register: "Nom d'utilisateur :"
 messageagree.register: 'Veuillez accepter les termes et conditions'
@@ -73,7 +73,7 @@ textpassword.reset: 'Entrez votre adresse e-mail et nous vous enverrons un lien 
 button.reset: 'Réinitialisez votre mot de passe'
 rgpd.legal-notices: 'Mentions légales'
 rgpd.privary-policy: 'Politique de confidentialité'
-mail.login: '‘Email :’'
+mail.login: 'Email :'
 password.login: 'Mot de passe :'
 checkbox.login: 'Se souvenir de moi'
 passwordforgot.login: "J'ai oublié mon mot de passe"
