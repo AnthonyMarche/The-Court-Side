@@ -6,6 +6,7 @@
 parameters:
     ffmpeg_file_path: '%env(resolve:FFMPEG_FILE_PATH)%'
     ffprobe_file_path: '%env(resolve:FFPROBE_FILE_PATH)%'
+    languages: fr|en|es
 
 services:
     # default configuration for services in *this* file

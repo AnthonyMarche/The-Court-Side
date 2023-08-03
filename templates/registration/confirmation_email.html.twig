@@ -1,21 +1,19 @@
-<div class="all" style="background-color: #0f172a">
+<div class="all" style="background-color: #0f172a; padding: 20px 0">
 <div class=" mt-3 mb-3 img-fluid col-lg-12 d-flex justify-content-center"  style="text-align: center">
-    <img src="{{ asset('build/images/TCS_white_logo.png') }}"
+    <img style="width: 100px" src="{{ email.image('@images/TCS_logo/TCS_white_logo.png') }}"
          alt="Logo The Court Side">
 </div>
 
-
-<h1 style="text-align: center;  color: white">Welcome to the Court Side!</h1>
-<h1 style="text-align: center; color: white">Hi! Please confirm your email!</h1>
+<h1 style="text-align: center;  color: white">Bienvenue sur The Court Side!</h1>
 
 <p style="text-align: center;color: white">
-    Please confirm your email address by clicking the following link: <br><br>
-    <a href="{{ signedUrl|raw }}" style= "color: #2DBFB2 ">Confirm my Email </a>.
-    This link will expire in {{ expiresAtMessageKey|trans(expiresAtMessageData, 'VerifyEmailBundle') }}.
+    Veuillez confirmer votre adresse email en cliquant sur le lien ci-dessous : <br><br>
+    <a href="{{ signedUrl|raw }}" style= "color: #2DBFB2 ">Confirmer mon email</a>. <br><br>
+    Ce lien expirera dans {{ expiresAtMessageKey|trans(expiresAtMessageData, 'VerifyEmailBundle') }}.
 </p>
 
 <p style="text-align:center; color: white">
-    Cheers!
+    L'équipe de The Court Side
 </p>
 
 </div>
