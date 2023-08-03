@@ -4,7 +4,6 @@ namespace App\Controller\Admin;
 
 use App\Form\NewsletterType;
 use App\Repository\UserRepository;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,7 +12,6 @@ use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Translation\TranslatableMessage;
 
-#[IsGranted('ROLE_ADMIN')]
 class NewsletterController extends AbstractController
 {
     #[Route('/newsletter', name: 'app_newsletter')]

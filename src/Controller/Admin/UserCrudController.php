@@ -19,12 +19,10 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Translation\TranslatableMessage;
 
-#[IsGranted('ROLE_ADMIN')]
 class UserCrudController extends AbstractCrudController
 {
     private ManagerRegistry $doctrine;
@@ -52,8 +50,7 @@ class UserCrudController extends AbstractCrudController
                     'admin'
                 )
             )
-            ->setDefaultSort(['createdAt' => 'DESC'])
-            ->setEntityPermission('ROLE_SUPER_ADMIN');
+            ->setEntityPermission('ROLE_ADMIN');
     }
 
     public function configureFields(string $pageName): iterable
@@ -80,7 +77,7 @@ class UserCrudController extends AbstractCrudController
                 )
             )
                 ->setChoices([
-                    'Admin' => 'ROLE_ADMIN',
+                    'Admin' => 'ROLE_MEDIA_MANAGER',
                 ])
                 ->renderExpanded()
                 ->allowMultipleChoices(),
@@ -116,13 +113,19 @@ class UserCrudController extends AbstractCrudController
         FilterCollection $filters
     ): QueryBuilder {
         $entityManager = $this->doctrine->getManager();
-        return $entityManager->createQueryBuilder()
-            ->select('u')
+        $qb = $entityManager->createQueryBuilder();
+        $qb->select('u')
             ->from($entityDto->getFqcn(), 'u')
-            ->Where('u.roles LIKE :roles')
-            ->setParameter('roles', '%[]%')
-            ->orWhere('u.roles LIKE :role')
-            ->setParameter('role', '%ROLE_ADMIN%');
+            ->where('u.roles NOT LIKE :adminRole')
+            ->setParameter('adminRole', '%ROLE_ADMIN%');
+        if (empty($searchDto->getSort())) {
+            $qb->orderBy("u.createdAt", 'DESC');
+        } else {
+            foreach ($searchDto->getSort() as $filterName => $order) {
+                $qb->orderBy("u.$filterName", $order);
+            }
+        }
+        return $qb;
     }
 
     #[Route('/users-csv', name: 'download_users')]
