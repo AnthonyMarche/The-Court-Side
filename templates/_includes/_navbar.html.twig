@@ -83,7 +83,7 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
                         <div class="d-flex flex-column">
-                            {% if is_granted('ROLE_ADMIN') %}
+                            {% if is_granted('ROLE_MEDIA_MANAGER') %}
                                 <a href="{{ path('admin') }}"
                                    class="user-profile-dropdown d-flex flex-nowrap align-items-center">
                                     <i class="bi bi-person-fill-gear"></i> {{ 'navbar.admin'|trans }}

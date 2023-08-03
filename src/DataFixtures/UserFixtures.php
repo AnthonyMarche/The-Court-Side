@@ -26,7 +26,7 @@ class UserFixtures extends Fixture
         $admin->setPassword($this->passwordHasher->hashPassword($admin, 'admin'));
         $admin->setUsername('admin');
         $admin->setCreatedAt($faker->dateTimeBetween('-12 month'));
-        $admin->setRoles(['ROLE_ADMIN']);
+        $admin->setRoles(['ROLE_MEDIA_MANAGER']);
         $admin->setIsVerified(true);
         $admin->setNewsletter(true);
         $manager->persist($admin);
@@ -38,7 +38,7 @@ class UserFixtures extends Fixture
         $superAdmin->setPassword($this->passwordHasher->hashPassword($superAdmin, 'superadmin'));
         $superAdmin->setUsername('superadmin');
         $superAdmin->setCreatedAt($faker->dateTimeBetween('-12 month'));
-        $superAdmin->setRoles(['ROLE_SUPER_ADMIN']);
+        $superAdmin->setRoles(['ROLE_ADMIN']);
         $superAdmin->setIsVerified(true);
         $superAdmin->setNewsletter(true);
         $manager->persist($superAdmin);
