@@ -3,13 +3,17 @@ controllers:
     type: annotation
     prefix: /{_locale}
     requirements:
-        _locale: fr|en|es
+        _locale: '%languages%'
     defaults:
         _locales: fr
 
 kernel:
     resource: ../src/Kernel.php
     type: annotation
+
+app_logout:
+    path: /logout
+    methods: POST
 
 redirect:
     path: /

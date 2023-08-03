@@ -67,7 +67,7 @@ class HomeController extends AbstractController
 
         if ($this->getUser() === null) {
             $this->addFlash('warning', 'vous devez être connectez pour accéder a cette page');
-            return $this->redirectToRoute('app_user_login');
+            return $this->redirectToRoute('app_login');
         }
 
         if ($video->isLikedByUser($user)) {

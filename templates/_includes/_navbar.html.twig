@@ -93,9 +93,9 @@
                                class="user-profile-dropdown d-flex flex-nowrap align-items-center">
                                 <i class="bi bi-person-lines-fill"></i> {{ 'navbar.profile'|trans }}
                             </a>
-                            <a class="nav-link text-center" href="{{ path('app_user_logout') }}">
-                                <button type="button" class="btn btn-custom">{{ 'navbar.logout'|trans }}</button>
-                            </a>
+                            <form class="nav-link text-center" action="{{ path('app_logout') }}" method="post">
+                                <button class="btn btn-custom" type="submit">Déconnexion</button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -103,7 +103,7 @@
                 <a class="nav-link" href="{{ path('app_register') }}">
                     <button type="button" class="btn btn-outline-custom">{{ 'navbar.register'|trans }}</button>
                 </a>
-                <a class="nav-link" href="{{ path('app_user_login') }}">
+                <a class="nav-link" href="{{ path('app_login') }}">
                     <button type="button" class="btn btn-custom">{{ 'navbar.login'|trans }}</button>
                 </a>
             {% endif %}

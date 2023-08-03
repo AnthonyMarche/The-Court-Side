@@ -14,7 +14,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Translation\TranslatableMessage;
 
-#[Route('/user')]
+#[Route('/profile', name:'app_user_')]
 class UserController extends AbstractController
 {
     private UserPasswordHasherInterface $passwordHasher;
@@ -24,7 +24,7 @@ class UserController extends AbstractController
         $this->passwordHasher = $passwordHasher;
     }
 
-    #[Route('/{id}', name: 'app_user_show', methods: ['GET'])]
+    #[Route('/{id}', name: 'show', methods: ['GET'])]
     public function show(User $user): Response
     {
         return $this->render('user/show.html.twig', [
@@ -94,7 +94,7 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_user_delete', methods: ['POST'])]
+    #[Route('/{id}', name: 'delete', methods: ['POST'])]
     public function delete(Request $request, User $user, UserRepository $userRepository): Response
     {
         if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {
@@ -104,7 +104,6 @@ class UserController extends AbstractController
             $request->getSession()->invalidate();
             $this->container->get('security.token_storage')->setToken(null);
         }
-
 
         return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
     }
