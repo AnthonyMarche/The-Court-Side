@@ -4,7 +4,6 @@ namespace App\Repository;
 
 use App\Entity\Category;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\DBAL\Exception;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -40,19 +39,16 @@ class CategoryRepository extends ServiceEntityRepository
         }
     }
 
-    /**
-     * Displays the three most liked categories
-     * @return float|int|mixed|string
-     */
-    public function getMostLikedCategories()
+    public function getFiveMostLikedCategories(): array
     {
-        $entityManager = $this->getEntityManager();
-        $query = $entityManager->createQuery(
-            'SELECT c.name, SUM(v.numberOfLike) as totalLikes
-            FROM App\Entity\Video v JOIN v.category c
-            GROUP BY c.name
-            ORDER BY totalLikes DESC'
-        )->setMaxResults(5);
-        return $query->getResult();
+        $qb = $this->createQueryBuilder('c');
+        $qb->select('c.name AS category')
+            ->addSelect('SUM(v.numberOfLike) AS numberOfLikes')
+            ->join('c.videos', 'v')
+            ->groupBy('category')
+            ->orderBy('numberOfLikes', 'DESC')
+            ->setMaxResults(5);
+
+        return $qb->getQuery()->getResult();
     }
 }

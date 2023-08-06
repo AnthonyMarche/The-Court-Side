@@ -6,10 +6,7 @@ use App\Entity\Category;
 use App\Entity\Tag;
 use App\Entity\User;
 use App\Entity\Video;
-use App\Repository\LikeRepository;
-use App\Repository\UserRepository;
-use App\Repository\VideoRepository;
-use App\Services\StatsGraphs;
+use App\Services\Statistics;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
@@ -23,66 +20,27 @@ use Symfony\Component\Translation\TranslatableMessage;
 
 class DashboardController extends AbstractDashboardController
 {
-    private UserRepository $userRepository;
-    private VideoRepository $videoRepository;
-    private LikeRepository $likeRepository;
-    private StatsGraphs $statsGraphs;
+    private Statistics $statistics;
 
     public function __construct(
-        UserRepository $userRepository,
-        VideoRepository $videoRepository,
-        LikeRepository $likeRepository,
-        StatsGraphs $statsGraphs,
+        Statistics $statistics
     ) {
-        $this->userRepository = $userRepository;
-        $this->videoRepository = $videoRepository;
-        $this->likeRepository = $likeRepository;
-        $this->statsGraphs = $statsGraphs;
+        $this->statistics = $statistics;
     }
 
     #[Route('/admin', name: 'admin')]
     public function index(): Response
     {
-        // --- GENERATION DES STATISTIQUES -- //
-
-        // récupère tous les utilisateurs (via le UserRepository)
-        $users = $this->userRepository->findAll();
-        // récupère toutes les videos (via le VideoRepository)
-        $videos = $this->videoRepository->findAll();
-        // récupère le nombre de likes
-        $likes = $this->likeRepository->findAll();
-        // récupère le nombre d'utilisateurs enregistrés dans les 7 derniers jours (via le UserRepository)
-        $usersFromPast7Days = $this->userRepository->getUsersRegisteredInPast7Days();
-        // récupère le nombre d'utilisateurs enregistrés dans les 30 derniers jours (via le UserRepository)
-        $usersFromPast30Days = $this->userRepository->getUsersRegisteredInPast30Days();
-        // récupère le nombre de videos ajoutées dans les 7 derniers jours (via le VideoRepository)
-        $videosFromPast7Days = $this->videoRepository->getVideosAddedInPast7Days();
-        // récupère le nombre de videos ajoutées dans les 30 derniers jours (via le VideoRepository)
-        $videosFromPast30Days = $this->videoRepository->getVideosAddedInPast30Days();
-        // récupère le nombre de likes enregistrés dans les 7 derniers jours (via le LikeRepository)
-        $likesFromPast7Days = $this->likeRepository->getLikesAddedInPast7Days();
-        // récupère le nombre de likes enregistrés dans les 30 derniers jours (via le LikeRepository)
-        $likesFromPast30Days = $this->likeRepository->getLikesAddedInPast30Days();
-        // récupère les category et comptabilise leurs likes
-        $mostLikedCategories = $this->statsGraphs->viewMostLikedCategories();
-        // graph évolution des inscriptions sur douze mois
-        $subscriptionChart = $this->statsGraphs->viewSubscriptionsEvolution();
-        // graph évolution des likes sur douze mois
-        $likesChart = $this->statsGraphs->viewLikesEvolution();
+        $statistics = $this->statistics->getStatistics();
+        $registeredUserByMonth = $this->statistics->getRegisteredUserByMonth();
+        $likeByMonth = $this->statistics->getNumberOfLikeByMonth();
+        $mostLikedCategories = $this->statistics->getMostLikedCategory();
 
         return $this->render('admin/index.html.twig', [
-            'users' => $users,
-            'videos' => $videos,
-            'likes' => $likes,
-            'users_from_past_seven_days' => $usersFromPast7Days,
-            'users_from_past_thirty_days' => $usersFromPast30Days,
-            'videos_from_past_seven_days' => $videosFromPast7Days,
-            'videos_from_past_thirty_days' => $videosFromPast30Days,
-            'likes_from_past_seven_days' => $likesFromPast7Days,
-            'likes_from_past_thirty_days' => $likesFromPast30Days,
-            'most_liked_categories_chart' => $mostLikedCategories,
-            'subscription_chart' => $subscriptionChart,
-            'likes_chart' => $likesChart,
+            'statistics' => $statistics,
+            'registeredUserByMonth' => $registeredUserByMonth,
+            'likeByMonth' => $likeByMonth,
+            'mostLikedCategories' => $mostLikedCategories
         ]);
     }
 

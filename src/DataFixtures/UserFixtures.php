@@ -10,6 +10,7 @@ use Faker\Factory;
 
 class UserFixtures extends Fixture
 {
+    private const TWELVE_MONTHS_AGO = '-12 months';
     private UserPasswordHasherInterface $passwordHasher;
 
     public function __construct(UserPasswordHasherInterface $passwordHasher)
@@ -25,19 +26,18 @@ class UserFixtures extends Fixture
         $admin->setEmail('admin@me.fr');
         $admin->setPassword($this->passwordHasher->hashPassword($admin, 'admin'));
         $admin->setUsername('admin');
-        $admin->setCreatedAt($faker->dateTimeBetween('-12 month'));
+        $admin->setCreatedAt($faker->dateTimeBetween(self::TWELVE_MONTHS_AGO));
         $admin->setRoles(['ROLE_MEDIA_MANAGER']);
         $admin->setIsVerified(true);
         $admin->setNewsletter(true);
         $manager->persist($admin);
         $this->addReference('admin', $admin);
 
-
         $superAdmin = new User();
         $superAdmin->setEmail('superadmin@me.fr');
         $superAdmin->setPassword($this->passwordHasher->hashPassword($superAdmin, 'superadmin'));
         $superAdmin->setUsername('superadmin');
-        $superAdmin->setCreatedAt($faker->dateTimeBetween('-12 month'));
+        $superAdmin->setCreatedAt($faker->dateTimeBetween(self::TWELVE_MONTHS_AGO));
         $superAdmin->setRoles(['ROLE_ADMIN']);
         $superAdmin->setIsVerified(true);
         $superAdmin->setNewsletter(true);
@@ -49,7 +49,7 @@ class UserFixtures extends Fixture
             $user->setEmail($faker->email());
             $user->setPassword($this->passwordHasher->hashPassword($user, 'user'));
             $user->setUsername('user' . $i);
-            $user->setCreatedAt($faker->dateTimeBetween('-12 month'));
+            $user->setCreatedAt($faker->dateTimeBetween(self::TWELVE_MONTHS_AGO));
             $user->setNewsletter(false);
             $manager->persist($user);
             $this->addReference('user_' . $i, $user);

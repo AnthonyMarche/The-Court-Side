@@ -41,6 +41,8 @@ stats.last-30-days: 'Últimos 30 días'
 stats.most-liked-cats: 'Categorías las más populares'
 stats.subs-last-12-months: 'Suscripciones al sitio (últimos 12 meses)'
 stats.likes-last-12-months: 'Likes en el sitio (últimos 12 meses)'
+stats.subs-evolution: "Evolución del número de registros"
+stats.like-evolution: 'Evolución del número de likes'
 newsletter.there-is: 'Actualmente hay'
 newsletter.nb-register: 'suscriptores del boletín'
 newsletter.no-register: 'Actualmente no hay suscriptores al boletín'
