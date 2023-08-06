@@ -6,7 +6,6 @@ use App\Entity\User;
 use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
@@ -26,71 +25,31 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         parent::__construct($registry, User::class);
     }
 
-    /**
-     *  Get all users who registered less than 7 days ago ('created_at')
-     * @return float|int|mixed[]|string
-     */
-    public function getUsersRegisteredInPast7Days()
+    public function countRegisteredUserFromDate(DateTime $date = null): int
     {
-        $entityManager = $this->getEntityManager();
-        $query = $entityManager->createQuery(
-            'SELECT COUNT(u.id)
-            FROM App\Entity\User u
-            WHERE u.createdAt > :date'
-        )->setParameter('date', new DateTime('-7 days'));
+        $qb = $this->createQueryBuilder('u');
+        $qb->select('count(u)');
+        if ($date) {
+            $qb->where('u.createdAt > :date')
+                ->setParameter('date', $date);
+        }
 
-        return $query->getScalarResult();
+        return $qb->getQuery()->getSingleScalarResult();
     }
 
-    /**
-     * Get all users who registered less than 30 days ago ('created_at')
-     * @return float|int|mixed[]|string
-     */
-    public function getUsersRegisteredInPast30Days()
+    public function countUsersSubscriptionsByMonth(): array
     {
-        $entityManager = $this->getEntityManager();
-        $query = $entityManager->createQuery(
-            'SELECT COUNT(u.id)
-            FROM App\Entity\User u
-            WHERE u.createdAt > :date'
-        )->setParameter('date', new DateTime('-30 days'));
+        $lastYear = new DateTime('first day of next month');
+        $lastYear->modify('-12 months');
 
-        return $query->getScalarResult();
-    }
+        $qb = $this->createQueryBuilder('u');
+        $qb->select('MONTH(u.createdAt) AS month')
+            ->addSelect('COUNT(u) AS numberOfUsers')
+            ->where('u.createdAt >= :startDate')
+            ->setParameter('startDate', $lastYear)
+            ->groupBy('month');
 
-    /**
-     * Récupère tous les utilisateurs inscrits (createAt) mois par mois, depuis douze mois
-     * /!\ Le mois courant n'est pas pris en compte
-     * @return array
-     * @throws \Exception
-     */
-    public function getUsersSubscriptionsMonthByMonth()
-    {
-        $users = [];
-        $userCount = [];
-
-        for ($i = 1; $i <= 12; $i++) {
-            // Premier jour d'un mois
-            $firstDayOfMonth = new DateTime("first day of " . $i . " month ago");
-            // Dernier jour d'un mois
-            $lastDayOfMonth = new DateTime("last day of " . $i . " month ago");
-            // Initialise le querybuilder avec la table User
-            $qb = $this->createQueryBuilder('u');
-            // Ajoute une condition pour sélectionner les utilisateurs entre deux dates
-            $qb->select('count(u.id)');
-            $qb->andWhere('u.createdAt >= :firstDayOfMonth')
-                ->andWhere('u.createdAt <= :lastDayOfMonth')
-                ->setParameter('firstDayOfMonth', $firstDayOfMonth)
-                ->setParameter('lastDayOfMonth', $lastDayOfMonth);
-            $users[] = $qb->getQuery()->getResult();
-        }
-        // Met les résultats dans un tableau simplifié
-        // ($users a trois niveaux de profondeur, $userCount un seul niveau)
-        for ($j = 0; $j < count($users); $j++) {
-            $userCount[] = $users[$j][0][1];
-        }
-        // on permute les valeurs pour les mettre dans l'ordre chronologique
-        return array_reverse($userCount);
+        return $qb->getQuery()->getResult();
     }
 
     public function save(User $entity, bool $flush = false): void
@@ -142,14 +101,4 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             ->getQuery()
             ->getResult();
     }
-
-//    public function findOneBySomeField($value): ?User
-//    {
-//        return $this->createQueryBuilder('u')
-//            ->andWhere('u.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
 }

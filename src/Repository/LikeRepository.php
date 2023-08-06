@@ -82,70 +82,30 @@ class LikeRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    /**
-     *  Get all videos added less than 7 days ago ('created_at')
-     * @return float|int|mixed[]|string
-     */
-    public function getLikesAddedInPast7Days()
+    public function getNumberOfLikeFromDate(DateTime $date = null): int
     {
-        $entityManager = $this->getEntityManager();
-        $query = $entityManager->createQuery(
-            'SELECT COUNT(l.id)
-            FROM App\Entity\Like l
-            WHERE l.createdAt > :date'
-        )->setParameter('date', new DateTime('-7 days'));
+        $qb = $this->createQueryBuilder('l');
+        $qb->select('count(l)');
+        if ($date) {
+            $qb->where('l.createdAt > :date')
+                ->setParameter('date', $date);
+        }
 
-        return $query->getScalarResult();
+        return $qb->getQuery()->getSingleScalarResult();
     }
 
-    /**
-     * Get all videos added less than 30 days ago ('created_at')
-     * @return float|int|mixed[]|string
-     */
-    public function getLikesAddedInPast30Days()
+    public function countLikeByMonth(): array
     {
-        $entityManager = $this->getEntityManager();
-        $query = $entityManager->createQuery(
-            'SELECT COUNT(l.id)
-            FROM App\Entity\Like l
-            WHERE l.createdAt > :date'
-        )->setParameter('date', new DateTime('-30 days'));
+        $lastYear = new DateTime('first day of next month');
+        $lastYear->modify('-12 months');
 
-        return $query->getScalarResult();
-    }
+        $qb = $this->createQueryBuilder('l');
+        $qb->select('MONTH(l.createdAt) AS month')
+            ->addSelect('COUNT(l) AS numberOfLikes')
+            ->where('l.createdAt >= :startDate')
+            ->setParameter('startDate', $lastYear)
+            ->groupBy('month');
 
-    /**
-     * Récupère tous les utilisateurs inscrits (createAt) mois par mois, depuis douze mois
-     * /!\ Le mois courant n'est pas pris en compte
-     * @return array
-     * @throws \Exception
-     */
-    public function getLikesMonthByMonth()
-    {
-        $likes = [];
-        $likesCount = [];
-
-        for ($i = 1; $i <= 12; $i++) {
-            // Premier jour d'un mois
-            $firstDayOfMonth = new DateTime("first day of " . $i . " month ago");
-            // Dernier jour d'un mois
-            $lastDayOfMonth = new DateTime("last day of " . $i . " month ago");
-            // Initialise le querybuilder avec la table Like
-            $qb = $this->createQueryBuilder('l');
-            // Ajoute une condition pour sélectionner les likes entre deux dates
-            $qb->select('count(l.id)');
-            $qb->andWhere('l.createdAt >= :firstDayOfMonth')
-                ->andWhere('l.createdAt <= :lastDayOfMonth')
-                ->setParameter('firstDayOfMonth', $firstDayOfMonth)
-                ->setParameter('lastDayOfMonth', $lastDayOfMonth);
-            $likes[] = $qb->getQuery()->getResult();
-        }
-        // Met les résultats dans un tableau simplifié
-        // ($likes a trois niveaux de profondeur, $likesCount un seul niveau)
-        for ($j = 0; $j < count($likes); $j++) {
-            $likesCount[] = $likes[$j][0][1];
-        }
-        // on permute les valeurs pour les mettre dans l'ordre chronologique
-        return array_reverse($likesCount);
+        return $qb->getQuery()->getResult();
     }
 }

@@ -41,6 +41,8 @@ stats.last-30-days: 'Last 30 days'
 stats.most-liked-cats: 'Most liked categories'
 stats.subs-last-12-months: 'Subscriptions to the website (last 12 months)'
 stats.likes-last-12-months: 'Likes on the website (last 12 months)'
+stats.subs-evolution: "Evolution of the number of registrations"
+stats.like-evolution: 'Evolution of the number of likes'
 newsletter.there-is: 'There is currently'
 newsletter.nb-register: 'newsletter subscribers'
 newsletter.no-register: 'Currently there are no subscribers to the newsletter'
