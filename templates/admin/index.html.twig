@@ -5,12 +5,12 @@
 {% block page_content %}
     <div class="container">
         <div class="row">
-            {% for key, value in statistics %}
+            {% for key, statistic in statistics %}
                 <div class="card col-12 col-sm-6 col-xl-3 bg-dark bg-gradient text-light">
                     <div class="card-body">
                         <h5 class="card-title text-center mb-2 mb-xl-4">{{ key }}</h5>
-                        {% for innerKey, innerValue in value %}
-                            {% set dayColor %}
+                        {% for statKey, statValue in statistic %}
+                            {% set loopColor %}
                                 {% if loop.index == 1 %}
                                     border border-success bg-success
                                 {% elseif loop.index == 2 %}
@@ -19,8 +19,8 @@
                                     border-info bg-info
                                 {% endif %}
                             {% endset %}
-                            <p class="card-text">{{ innerKey }}</p>
-                            <p class="text-center {{ dayColor }} bg-opacity-50 rounded-pill fw-bold">{{ innerValue }}</p>
+                            <p class="card-text">{{ statKey }}</p>
+                            <p class="text-center {{ loopColor }} bg-opacity-50 rounded-pill fw-bold">{{ statValue }}</p>
                         {% endfor %}
                     </div>
                 </div>
