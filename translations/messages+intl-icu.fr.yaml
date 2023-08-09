@@ -24,7 +24,7 @@ usertype.verify-password: 'Confirmer le nouveau mot de passe'
 usertype.newsletter-subscribe: 'Je souhaite être abonné à la newsletter'
 graph.subs-evolution: "Evolution de l'inscription des visiteurs, par mois"
 graph.likes-evolution: 'Evolution du nombre de likes, par mois'
-teaser.title: 'Titre :'
+teaser.title: 'Créer teaser'
 teaser.submit: 'Générer mon teaser'
 teaser.dl_title: 'Mon teaser'
 teaser.download: 'Télécharger mon teaser'

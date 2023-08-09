@@ -1,28 +1,22 @@
-if (document.getElementById("Video_url_file")) {
-    document.getElementById("Video_url_file").onchange = function (event) {
-        let videoFile = event.target.files[0];
-        let video = document.getElementById("video");
-        video.classList.remove('d-none');
-        video.src = URL.createObjectURL(videoFile);
-    }
+function videoPreview(inputId, mediaPlayerId) {
+    let input = document.getElementById(inputId);
+    let video = document.getElementById(mediaPlayerId);
 
-    document.getElementById("Video_teaser_file").onchange = function (event) {
-        let teaserFile = event.target.files[0];
-        let teaser = document.getElementById("teaser");
-        teaser.classList.remove("d-none");
-        teaser.src = URL.createObjectURL(teaserFile);
+    if (input) {
+        input.onchange = function (event) {
+            let file = event.target.files[0];
+            video.classList.remove('d-none');
+            video.src = URL.createObjectURL(file);
+        }
     }
-
 }
 
-if (document.getElementById("teaser_video")) {
-    document.getElementById("teaser_video").onchange = function (event) {
-        let teaserFile = event.target.files[0];
-        let teaser = document.getElementById("teaser");
-        teaser.classList.remove("d-none");
-        teaser.src = URL.createObjectURL(teaserFile);
-    }
+videoPreview("Video_url_file", "video");
+videoPreview("Video_teaser_file", "teaser");
+videoPreview("teaser_video", "teaser");
 
+
+if (document.getElementById("teaser_video")) {
     let submitTeaser = document.getElementById('submit-new-teaser');
     let loaderTeaser = document.getElementById('adminLoader');
     let input = document.getElementById("teaser_video")
