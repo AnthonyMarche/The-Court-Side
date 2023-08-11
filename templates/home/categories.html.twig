@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'category.title'|trans }}{% endblock %}
+
+{% block body %}
+    {#  modal include #}
+    {% include '_includes/_modal.html.twig' with {
+        buttons : true
+    } %}
+    <div class="js-slick chip-container d-flex align-items-center">
+        <strong class="ml-2 mr-2 distinct-pipe">|</strong>
+        {% for category in categories %}
+            <div class="chip">
+                <a class="category-link" href="#{{ category.name }}">{{ category.name }}</a>
+            </div>
+        {% endfor %}
+    </div>
+    <h2 class="section-title">{{ 'category.title'|trans }}</h2>
+    {% for category in categories %}
+        <div class="category-video-row-container">
+            <div id="{{ category.name }}" class="container-fluid p-5 py-3 home-main-container">
+
+                {% if category.videos|length < 4 %}{% set buttons = false %}{% else %}{% set buttons = true %}{% endif %}
+                {% include '_includes/_videos_head.html.twig' with {
+                title : category.name,
+                buttons : buttons,
+                    path : path('app_category', {'slug': category.slug, 'sortedBy': 'recent'})
+                } %}
+
+                <div class="row">
+                    {% include '_includes/_videos_grid.html.twig' with {
+                        videos : category.videos[:4]
+                    } %}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

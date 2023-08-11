@@ -1,16 +1,16 @@
 {% extends 'base.html.twig' %}
 
- {% block title %}Voir la catégorie : {{ videos[0].category.name }}{% endblock %}
+{% block title %}Vidéos associées au tag : {{ tagName }}{% endblock %}
 
 {% block body %}
-    <h2 class="section-title">{{ videos[0].category.name }}</h2>
+    <h2 class="section-title">{{ tagName }}</h2>
 
-    {#        filter button include only if liked videos length is > 1#}
+    {# filter button include only if liked videos length is > 1 #}
     {% if videos|length > 1 %}
         {% include '_includes/_filter_button.html.twig' %}
     {% endif %}
 
-{#    include the videos grid#}
+    {# include the videos grid #}
     <div class="container-fluid p-5 py-3">
         <div class="row update-videos">
             {% include '_includes/_videos_grid.html.twig' %}

@@ -1,86 +1,94 @@
-if (document.querySelector('.js-content')) {
-    const dateFilter = document.getElementById('dateFilter')
-    const likesFilter = document.getElementById('likesFilter')
-    const viewsFilter = document.getElementById('viewsFilter')
-    const content = document.querySelector('.js-content')
-    const loadingIcon = document.querySelector('.loading-container')
-    const sortingLikes = document.querySelector('.sorted-by-likes')
-    const sortingViews = document.querySelector('.sorted-by-views')
-    const sortingRecent = document.querySelector('.sorted-by-recent')
-    const delay = ms => new Promise(res => setTimeout(res, ms));
+import { initializePreviewVideo } from './homePage';
 
-    dateFilter.addEventListener('click', applyFilter);
-    likesFilter.addEventListener('click', applyFilter);
-    viewsFilter.addEventListener('click', applyFilter);
+if (document.querySelector('.update-videos')) {
+    const baseUrl = window.location.protocol + '//' + window.location.host + window.location.pathname;
+    const dateFilter = document.getElementById('date-filter');
+    const likesFilter = document.getElementById('likes-filter');
+    const viewsFilter = document.getElementById('views-filter');
+    const currentFilter = document.querySelectorAll('.current-filter');
+    const content = document.querySelector('.update-videos');
+    const loader = document.querySelector('.loading-container');
+    const filters = [dateFilter, likesFilter, viewsFilter];
 
-    viewsFilter.addEventListener('click', async function () {
-        await delay(1500);
-        sortingViews.classList.remove('disappearance');
-        sortingRecent.classList.add('disappearance');
-        sortingLikes.classList.add('disappearance');
-        if (document.querySelector('.sorted-by-recent-title')) {
-            document.querySelector('.sorted-by-recent-title').classList.add('disappearance')
-            document.querySelector('.sorted-by-likes-title').classList.add('disappearance')
-            document.querySelector('.sorted-by-views-title').classList.remove('disappearance')
-        }
-    });
+    // Function to get current selected filter
+    function getCurrentFilter() {
+        const url = new URL(location.href);
+        const urlFilter = url.searchParams.get('sortedBy');
+        return filters.find(filter =>
+            filter.getAttribute('data-filter') === urlFilter
+        );
+    }
 
-    likesFilter.addEventListener('click', async function () {
-        await delay(1500);
-        sortingViews.classList.add('disappearance');
-        sortingRecent.classList.add('disappearance');
-        sortingLikes.classList.remove('disappearance');
-        if (document.querySelector('.sorted-by-recent-title')) {
-            document.querySelector('.sorted-by-recent-title').classList.add('disappearance')
-            document.querySelector('.sorted-by-likes-title').classList.remove('disappearance')
-            document.querySelector('.sorted-by-views-title').classList.add('disappearance')
-        }
-    });
+    // Function to show the loader
+    function showLoader() {
+        loader.classList.remove('disappearance');
+        setTimeout(() => {
+            loader.classList.add('disappearance');
+        }, 1500);
+    }
 
-    dateFilter.addEventListener('click', async function () {
-        await delay(1500);
-        sortingViews.classList.add('disappearance');
-        sortingRecent.classList.remove('disappearance');
-        sortingLikes.classList.add('disappearance');
-        if (document.querySelector('.sorted-by-recent-title')) {
-            document.querySelector('.sorted-by-recent-title').classList.remove('disappearance')
-            document.querySelector('.sorted-by-likes-title').classList.add('disappearance')
-            document.querySelector('.sorted-by-views-title').classList.add('disappearance')
-        }
-    });
-
-    // eslint-disable-next-line no-inner-declarations
+    // Function to apply the selected filter
     async function applyFilter(event) {
-        event.preventDefault()
-        let filterLink = event.currentTarget;
-        let link = filterLink.href;
+        event.preventDefault();
+        const selectedFilter = event.currentTarget;
 
-        const response = await fetch(link, {
+        const filterName = selectedFilter.getAttribute('data-filter');
+        const url = baseUrl + '?sortedBy=' + filterName;
+
+        try {
+            await updateVideo(url);
+
+            currentFilter.forEach(filterTag => {
+                filterTag.innerHTML = selectedFilter.innerHTML;
+            })
+
+            history.pushState({ filtersApplied: true }, '', url);
+            initializePreviewVideo()
+        } catch (error) {
+            content.innerHTML =
+                '<h4 style="color:white">An error occurred while loading videos</h4>';
+        }
+    }
+
+    // Function to update videos based on the selected filter
+    async function updateVideo(url) {
+        const response = await fetch(url, {
             headers: {
                 'X-Requested-with': 'XMLHttpRequest'
             }
-        })
+        });
+
         if (response.status >= 200 && response.status < 300) {
-            const data = await response.json()
-            content.innerHTML = data.content
-
-            //fake loading
-            loadingIcon.classList.remove('disappearance');
-            await delay(1500);
-            loadingIcon.classList.add('disappearance');
-
-            history.replaceState({}, '', link)
-
-            const video = document.querySelectorAll(".hover-to-play");
-            for (let i = 0; i < video.length; i++) {
-                video[i].addEventListener("mouseenter", function (e) {
-                    video[i].play();
-                });
-                video[i].addEventListener("mouseout", function (e) {
-                    video[i].pause();
-                });
-            }
+            const data = await response.json();
+            showLoader();
+            content.innerHTML = data.content;
+        } else {
+            throw new Error('Failed to load videos');
         }
     }
-}
 
+    window.addEventListener('popstate', async () => {
+        if (history.state.filtersApplied) {
+            const filterToSelect = getCurrentFilter();
+            const filterName = filterToSelect.getAttribute('data-filter');
+            const url = baseUrl + '?sortedBy=' + filterName;
+
+            try {
+                await updateVideo(url);
+                initializePreviewVideo();
+            } catch (error) {
+                content.innerHTML =
+                    '<h4 style="color:white">An error occurred while loading videos</h4>';
+            }
+        }
+    });
+
+    const urlFilter = getCurrentFilter();
+    currentFilter.forEach(filterTag => {
+        filterTag.innerHTML = urlFilter.innerHTML;
+    })
+
+    filters.forEach(filter => {
+        filter.addEventListener('click', applyFilter);
+    });
+}
