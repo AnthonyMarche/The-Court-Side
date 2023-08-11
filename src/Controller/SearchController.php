@@ -45,7 +45,7 @@ class SearchController extends AbstractController
         $sortByRequest = $request->query->get('sortedBy');
 
         if (!$filter->isAllowedFilter($sortByRequest)) {
-            throw new BadRequestHttpException(HomeController::INVALID_FILTER);
+            throw new BadRequestHttpException(VideoController::INVALID_FILTER);
         }
 
         $sortBy = $filter->getMappedField($sortByRequest);
@@ -53,7 +53,7 @@ class SearchController extends AbstractController
 
         if ($request->isXmlHttpRequest()) {
             return new JsonResponse([
-                'content' => $this->renderView(HomeController::VIDEO_TEMPLATE, [
+                'content' => $this->renderView(VideoController::VIDEO_TEMPLATE, [
                     'videos' => $videos,
                 ])
             ]);

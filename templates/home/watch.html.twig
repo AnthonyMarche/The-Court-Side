@@ -20,7 +20,7 @@
                         </ion-icon>
                     </div>
                 {% else %}
-                    <a class="js-like like-link" href="{{ path('app_watch_like', {id: video.id}) }}">
+                    <a class="js-like like-link" href="{{ path('app_like', {id: video.id}) }}">
                         <div class="like-icon-container">
                             <ion-icon name="heart"
                                       class="like-icon {{ video.isLikedByUser(app.user) ? 'md hydrated active' : 'md hydrated' }} ">

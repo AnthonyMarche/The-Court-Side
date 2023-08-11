@@ -18,10 +18,12 @@ use Symfony\Component\Translation\TranslatableMessage;
 class UserController extends AbstractController
 {
     private UserPasswordHasherInterface $passwordHasher;
+    private UserRepository $userRepository;
 
-    public function __construct(UserPasswordHasherInterface $passwordHasher)
+    public function __construct(UserPasswordHasherInterface $passwordHasher, UserRepository $userRepository)
     {
         $this->passwordHasher = $passwordHasher;
+        $this->userRepository = $userRepository;
     }
 
     #[Route('/{id}', name: 'show', methods: ['GET'])]
@@ -32,11 +34,10 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_user_edit', methods: ['GET', 'POST'])]
+    #[Route('/{id}/edit', name: 'edit', methods: ['GET', 'POST'])]
     public function edit(
         Request $request,
         User $user,
-        UserRepository $userRepository,
         UserEditService $userEditService
     ): Response {
         $errors = [];
@@ -73,7 +74,7 @@ class UserController extends AbstractController
                     // MàJ auto de "updated_at"
                     $date = new DateTime('now');
                     $user->setUpdatedAt($date);
-                    $userRepository->save($user, true);
+                    $this->userRepository->save($user, true);
                     $this->addFlash('success', new TranslatableMessage('userprofile.edit-profile-flash'));
                     return $this->redirectToRoute('app_user_show', ['id' => $user->getId()]);
                 }
@@ -81,7 +82,7 @@ class UserController extends AbstractController
                 // MàJ auto de "updated_at"
                 $date = new DateTime('now');
                 $user->setUpdatedAt($date);
-                $userRepository->save($user, true);
+                $this->userRepository->save($user, true);
                 $this->addFlash('success', new TranslatableMessage('userprofile.edit-profile-flash'));
                 return $this->redirectToRoute('app_user_show', ['id' => $user->getId()]);
             }
@@ -95,14 +96,14 @@ class UserController extends AbstractController
     }
 
     #[Route('/{id}', name: 'delete', methods: ['POST'])]
-    public function delete(Request $request, User $user, UserRepository $userRepository): Response
+    public function delete(Request $request, User $user): Response
     {
         if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {
-            $userRepository->remove($user, true);
+            $this->userRepository->remove($user, true);
             // on récupère la session utilisateur et on l'invalide,
             // puis on supprime le token, avant de rafraîchir la page
             $request->getSession()->invalidate();
-            $this->container->get('security.token_storage')->setToken(null);
+            $this->container->get('security.token_storage')->setToken();
         }
 
         return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);

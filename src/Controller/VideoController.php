@@ -20,7 +20,7 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route(name: 'app_')]
-class HomeController extends AbstractController
+class VideoController extends AbstractController
 {
     public const VIDEO_TEMPLATE = '_includes/_videos_grid.html.twig';
     public const INVALID_FILTER = 'Invalid filter';
@@ -52,71 +52,7 @@ class HomeController extends AbstractController
         ]);
     }
 
-    #[Route('/watch/{slug}', name: 'watch')]
-    public function watch(Video $video): Response
-    {
-        // Prevent a private video to be seen by an unsubscribed user
-        if ($video->isIsPrivate() && !$this->getUser()) {
-            throw $this->createAccessDeniedException(
-                'Access denied, you should be registered to watch this video'
-            );
-        }
-
-        // More videos from the same category
-        $categoryId = $video->getCategory()->getId();
-        $videoId = $video->getId();
-        $moreVideos = $this->videoRepository->getSimilarVideosByCategory($categoryId, $videoId);
-
-        return $this->render('home/watch.html.twig', [
-            'video' => $video,
-            'moreVideos' => $moreVideos,
-        ]);
-    }
-
-    #[Route('watch/{id}/like', name: 'watch_like', methods: ['GET', 'POST'])]
-    public function addToLike(
-        Video $video,
-        EntityManagerInterface $manager,
-        LikeRepository $likeRepository
-    ): JsonResponse|RedirectResponse {
-
-        /** @var User|null $user */
-        $user = $this->getUser();
-
-        if (!$user) {
-            $this->addFlash('warning', 'Vous devez être connectez pour accéder a cette page');
-            return $this->redirectToRoute('app_login');
-        }
-
-        if ($video->isLikedByUser($user)) {
-            $like = $likeRepository->findOneBy(['video' => $video, 'user' => $user]);
-            $video->setNumberOfLike($video->getNumberOfLike() - 1);
-            $manager->remove($like);
-            $manager->flush();
-
-            return $this->json(['code' => 200]);
-        }
-
-        $like = new Like();
-        $like->setVideo($video)
-            ->setUser($user)
-            ->setCreatedAt(new DateTime('now'));
-        $video->setNumberOfLike($video->getNumberOfLike() + 1);
-        $manager->persist($like);
-        $manager->flush();
-
-        return $this->json(['code' => 200]);
-    }
-
-    #[Route('/categories', name: 'categories')]
-    public function showCategory(CategoryRepository $categoryRepository): Response
-    {
-        return $this->render('home/categories.html.twig', [
-            'categories' => $categoryRepository->findBy([], ['name' => 'ASC'])
-        ]);
-    }
-
-    #[Route('/favorite', name: 'like')]
+    #[Route('/favorite', name: 'favorite')]
     public function showLikes(Request $request): Response
     {
         /** @var User $user */
@@ -144,16 +80,12 @@ class HomeController extends AbstractController
         ]);
     }
 
-    #[Route('/Language/{language}', name: 'language')]
-    public function changeLanguage(string $language, Request $request): Response
+    #[Route('/categories', name: 'categories')]
+    public function showCategory(CategoryRepository $categoryRepository): Response
     {
-        $currentLocal = $request->getLocale();
-        $currentUrl = $request->headers->get('referer');
-
-        $newUrl = str_replace('/' . $currentLocal . '/', '/' . $language . '/', $currentUrl);
-        $request->setLocale($language);
-
-        return $this->redirect($newUrl);
+        return $this->render('home/categories.html.twig', [
+            'categories' => $categoryRepository->findBy([], ['name' => 'ASC'])
+        ]);
     }
 
     #[Route('/category/{slug}', name: 'category', methods: ['GET'])]
@@ -178,32 +110,6 @@ class HomeController extends AbstractController
 
         return $this->render('home/category.html.twig', [
             'videos' => $videos,
-        ]);
-    }
-
-    #[Route('/tag/{slug}', name: 'tag', methods: ['GET'])]
-    public function showSingleTag(Request $request, string $slug): Response
-    {
-        $sortByRequest = $request->query->get('sortedBy');
-
-        if (!$this->filter->isAllowedFilter($sortByRequest)) {
-            throw new BadRequestHttpException(self::INVALID_FILTER);
-        }
-
-        $sortBy = $this->filter->getMappedField($sortByRequest);
-        $videos = $this->videoRepository->getVideoByTag($slug, $sortBy);
-
-        if ($request->isXmlHttpRequest()) {
-            return new JsonResponse([
-                'content' => $this->renderView(self::VIDEO_TEMPLATE, [
-                    'videos' => $videos,
-                ])
-            ]);
-        }
-
-        return $this->render('home/tag.html.twig', [
-            'videos' => $videos,
-            'tagName' => str_replace('-', ' ', $slug)
         ]);
     }
 
@@ -257,15 +163,85 @@ class HomeController extends AbstractController
         ]);
     }
 
-    #[Route('/legal-notice', name: 'legal_notice')]
-    public function legalNotice(): Response
+    #[Route('/tag/{slug}', name: 'tag', methods: ['GET'])]
+    public function showSingleTag(Request $request, string $slug): Response
     {
-        return $this->render('RGPD/legal_notice.html.twig');
+        $sortByRequest = $request->query->get('sortedBy');
+
+        if (!$this->filter->isAllowedFilter($sortByRequest)) {
+            throw new BadRequestHttpException(self::INVALID_FILTER);
+        }
+
+        $sortBy = $this->filter->getMappedField($sortByRequest);
+        $videos = $this->videoRepository->getVideoByTag($slug, $sortBy);
+
+        if ($request->isXmlHttpRequest()) {
+            return new JsonResponse([
+                'content' => $this->renderView(self::VIDEO_TEMPLATE, [
+                    'videos' => $videos,
+                ])
+            ]);
+        }
+
+        return $this->render('home/tag.html.twig', [
+            'videos' => $videos,
+            'tagName' => str_replace('-', ' ', $slug)
+        ]);
     }
 
-    #[Route('/privacy-policy', name: 'privacy_policy')]
-    public function privacyPolicy(): Response
+    #[Route('/watch/{slug}', name: 'watch')]
+    public function watch(Video $video): Response
     {
-        return $this->render('RGPD/privacy-policy.html.twig');
+        // Prevent a private video to be seen by an unsubscribed user
+        if ($video->isIsPrivate() && !$this->getUser()) {
+            throw $this->createAccessDeniedException(
+                'Access denied, you should be registered to watch this video'
+            );
+        }
+
+        // More videos from the same category
+        $categoryId = $video->getCategory()->getId();
+        $videoId = $video->getId();
+        $moreVideos = $this->videoRepository->getSimilarVideosByCategory($categoryId, $videoId);
+
+        return $this->render('home/watch.html.twig', [
+            'video' => $video,
+            'moreVideos' => $moreVideos,
+        ]);
+    }
+
+    #[Route('like/{id}', name: 'like', methods: 'POST')]
+    public function addToLike(
+        Video $video,
+        EntityManagerInterface $manager,
+        LikeRepository $likeRepository
+    ): JsonResponse|RedirectResponse {
+
+        /** @var User|null $user */
+        $user = $this->getUser();
+
+        if (!$user) {
+            $this->addFlash('warning', 'Vous devez être connectez pour accéder a cette page');
+            return $this->redirectToRoute('app_login');
+        }
+
+        if ($video->isLikedByUser($user)) {
+            $like = $likeRepository->findOneBy(['video' => $video, 'user' => $user]);
+            $video->setNumberOfLike($video->getNumberOfLike() - 1);
+            $manager->remove($like);
+            $manager->flush();
+
+            return $this->json(['code' => 200]);
+        }
+
+        $like = new Like();
+        $like->setVideo($video)
+            ->setUser($user)
+            ->setCreatedAt(new DateTime('now'));
+        $video->setNumberOfLike($video->getNumberOfLike() + 1);
+        $manager->persist($like);
+        $manager->flush();
+
+        return $this->json(['code' => 200]);
     }
 }
