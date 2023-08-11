@@ -1,18 +1,32 @@
 // hover to play on videos
-const teaser = document.querySelectorAll(".hover-to-play-teaser");
-const video = document.querySelectorAll(".hover-to-play-video");
-const delay = ms => new Promise(res => setTimeout(res, ms));
+initializePreviewVideo()
+function initializePreviewVideo () {
+    const videos = document.querySelectorAll(".hover-to-play");
+    const delay = ms => new Promise(res => setTimeout(res, ms));
+    if (videos) {
+        for (let i = 0; i < videos.length; i++) {
+            let play;
+            videos[i].onmouseover = async function () {
+                play = true;
+                while (play === true) {
+                    videos[i].play();
+                    await delay(15000);
+                    videos[i].pause();
+                    videos[i].currentTime = 0;
+                }
 
-for (let i = 0; i < teaser.length; i++) {
-    teaser[i].addEventListener("mouseenter", async function (e) {
-        teaser[i].play();
-    });
-    teaser[i].addEventListener("mouseout", async function (e) {
-        teaser[i].currentTime = 0;
-        await delay(100);
-        teaser[i].pause();
-    });
+            }
+            videos[i].onmouseout = async function () {
+                play = false;
+                videos[i].currentTime = 0;
+                await delay(100);
+                videos[i].pause();
+            }
+        }
+
+    }
 }
+export { initializePreviewVideo };
 
 if (document.getElementById('top-button-container')) {
     const topButton = document.getElementById('top-button-container');
@@ -35,25 +49,7 @@ if (document.getElementById('top-button-container')) {
         window.scrollTo(0, 0);
     })
 
-    for (let i = 0; i < video.length; i++) {
-        let play;
-        video[i].onmouseover = async function () {
-            play = true;
-            while (play === true) {
-                video[i].play();
-                await delay(15000);
-                video[i].pause();
-                video[i].currentTime = 0;
-            }
-        }
 
-        video[i].onmouseout = async function () {
-            play = false;
-            video[i].currentTime = 0;
-            await delay(100);
-            video[i].pause();
-        }
-    }
 }
 
 const alertPlaceholder = document.getElementById('liveAlertPlaceholder')

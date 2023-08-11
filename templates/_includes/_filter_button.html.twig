@@ -3,27 +3,23 @@
     <div class="btn-group">
         <button type="button" class="btn btn-info dropdown-toggle filter-button" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
-            <span
-                class="sorted-by-likes {% if 'likes' not in app.request.uri %}disappearance{% endif %}">{{ 'filter.likes'|trans }}</span>
-            <span
-                class="sorted-by-views {% if 'views' not in app.request.uri %}disappearance{% endif %}">{{ 'filter.views'|trans }}</span>
-            <span
-                class="sorted-by-recent {% if 'likes' in app.request.uri or 'views' in app.request.uri %}disappearance{% endif %}">{{ 'filter.recent'|trans }}</span>
+            <span class="current-filter"></span>
         </button>
         <div class="dropdown-menu dropdown-menu-right filter-button-dropdown">
-            <a href="{{ recent }}" id="dateFilter" class="filter-button-link">
-                <button class="dropdown-item filter-button-link" type="button">{{ 'filter.recent'|trans }}</button>
-            </a>
-            <a href="{{ likes }}" id="likesFilter" class="filter-button-link">
-                <button class="dropdown-item filter-button-link" type="button">{{ 'filter.likes'|trans }}</button>
-            </a>
-            <a href="{{ views }}" id="viewsFilter" class="filter-button-link">
-                <button class="dropdown-item filter-button-link" type="button">{{ 'filter.views'|trans }}</button>
-            </a>
+            <button id="date-filter" class="dropdown-item filter-choice" data-filter="recent">
+                {{ 'filter.recent'|trans }}
+            </button>
+            <button id="likes-filter" class="dropdown-item filter-choice" data-filter="likes">
+                {{ 'filter.likes'|trans }}
+            </button>
+            <button id="views-filter" class="dropdown-item filter-choice" data-filter="views">
+                {{ 'filter.views'|trans }}
+            </button>
         </div>
     </div>
 </div>
-{# fake loading #}
+
+{# loader #}
 <div class="loading-container disappearance">
     <div>
         <div class="spinner-border text-secondary loading-spinner" role="status">
@@ -31,4 +27,3 @@
         </div>
     </div>
 </div>
-

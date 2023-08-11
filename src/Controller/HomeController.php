@@ -3,31 +3,47 @@
 namespace App\Controller;
 
 use App\Entity\Like;
+use App\Entity\User;
 use App\Entity\Video;
 use App\Repository\CategoryRepository;
 use App\Repository\LikeRepository;
 use App\Repository\VideoRepository;
 use App\Services\Filter;
 use DateTime;
-use Doctrine\DBAL\Exception;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route(name: 'app_')]
 class HomeController extends AbstractController
 {
-    #[Route('/', name: 'home')]
-    public function index(VideoRepository $videoRepository): Response
+    public const VIDEO_TEMPLATE = '_includes/_videos_grid.html.twig';
+    public const INVALID_FILTER = 'Invalid filter';
+    private VideoRepository $videoRepository;
+    private Filter $filter;
+
+    /**
+     * @param VideoRepository $videoRepository
+     * @param Filter $filter
+     */
+    public function __construct(VideoRepository $videoRepository, Filter $filter)
     {
-        $latestVideos = $videoRepository->findBy([], ['createdAt' => 'DESC'], 4);
-        $popularVideos = $videoRepository->findBy([], ['numberOfView' => 'DESC'], 4);
-        $moreLikedVideos = $videoRepository->findBy([], ['numberOfLike' => 'DESC'], 4);
-        $registerVideos = $videoRepository->findBy(['isPrivate' => true], ['createdAt' => 'DESC'], 4);
+        $this->videoRepository = $videoRepository;
+        $this->filter = $filter;
+    }
+
+    #[Route('/', name: 'home')]
+    public function index(): Response
+    {
+        $latestVideos = $this->videoRepository->findBy([], ['createdAt' => 'DESC'], 4);
+        $popularVideos = $this->videoRepository->findBy([], ['numberOfView' => 'DESC'], 4);
+        $moreLikedVideos = $this->videoRepository->findBy([], ['numberOfLike' => 'DESC'], 4);
+        $registerVideos = $this->videoRepository->findBy(['isPrivate' => true], ['createdAt' => 'DESC'], 4);
         return $this->render('home/index.html.twig', [
             'latestVideos' => $latestVideos,
             'popularVideos' => $popularVideos,
@@ -37,17 +53,19 @@ class HomeController extends AbstractController
     }
 
     #[Route('/watch/{slug}', name: 'watch')]
-    public function watch(Video $video, VideoRepository $videoRepository): Response
+    public function watch(Video $video): Response
     {
-        //prevent a private video to be seen by an unsubscribed user
-        if ($video->isIsPrivate() === true && $this->getUser() === null) {
-            throw $this->createNotFoundException('access denied');
+        // Prevent a private video to be seen by an unsubscribed user
+        if ($video->isIsPrivate() && !$this->getUser()) {
+            throw $this->createAccessDeniedException(
+                'Access denied, you should be registered to watch this video'
+            );
         }
 
-        //more videos from the same category
-        $videoCategoryId = $video->getCategory()->getId();
+        // More videos from the same category
+        $categoryId = $video->getCategory()->getId();
         $videoId = $video->getId();
-        $moreVideos = $videoRepository->findSimilarVideosByCategory($videoCategoryId, $videoId);
+        $moreVideos = $this->videoRepository->getSimilarVideosByCategory($categoryId, $videoId);
 
         return $this->render('home/watch.html.twig', [
             'video' => $video,
@@ -62,11 +80,11 @@ class HomeController extends AbstractController
         LikeRepository $likeRepository
     ): JsonResponse|RedirectResponse {
 
-        /** @var \App\Entity\User */
+        /** @var User|null $user */
         $user = $this->getUser();
 
-        if ($this->getUser() === null) {
-            $this->addFlash('warning', 'vous devez être connectez pour accéder a cette page');
+        if (!$user) {
+            $this->addFlash('warning', 'Vous devez être connectez pour accéder a cette page');
             return $this->redirectToRoute('app_login');
         }
 
@@ -76,7 +94,7 @@ class HomeController extends AbstractController
             $manager->remove($like);
             $manager->flush();
 
-            return $this->json(['code' => 200], 200);
+            return $this->json(['code' => 200]);
         }
 
         $like = new Like();
@@ -87,53 +105,42 @@ class HomeController extends AbstractController
         $manager->persist($like);
         $manager->flush();
 
-        return $this->json(['code' => 200], 200);
+        return $this->json(['code' => 200]);
     }
 
-    #[Route('/category', name: 'category')]
+    #[Route('/categories', name: 'categories')]
     public function showCategory(CategoryRepository $categoryRepository): Response
     {
-        return $this->render('home/category.html.twig', [
+        return $this->render('home/categories.html.twig', [
             'categories' => $categoryRepository->findBy([], ['name' => 'ASC'])
         ]);
     }
 
-    /**
-     * @throws Exception
-     */
-    #[Route('/favorite/{sort}', name: 'likes')]
-    public function showLikes(
-        Filter $filter,
-        Request $request,
-        string $sort
-    ): Response {
+    #[Route('/favorite', name: 'like')]
+    public function showLikes(Request $request): Response
+    {
+        /** @var User $user */
+        $user = $this->getUser();
+        $userId = $user->getId();
 
-        $likedVideos = "";
-
-        //injection security
-        if (!$filter->preventInjection($sort)) {
-            throw $this->createNotFoundException('filtre invalide');
+        $sortByRequest = $request->query->get('sortedBy');
+        if (empty($sortByRequest) || !$this->filter->isAllowedFilter($sortByRequest)) {
+            throw new BadRequestHttpException(self::INVALID_FILTER);
         }
 
-        //get videos liked by the current user
-        /** @var \App\Entity\User */
-        $user = $this->getUser();
-        if ($this->getUser()) {
-            $currentUserId = $user->getId();
-            $likedVideos = $filter->getOrderedLikedVideos($sort, $currentUserId);
+        $sortBy = $this->filter->getMappedField($sortByRequest);
+        $videos = $this->videoRepository->getLikedVideoByUser($userId, $sortBy);
 
-            //handle ajax request
-            if ($request->isXmlHttpRequest()) {
-                return new JsonResponse([
-                    'content' => $this->renderView('_includes/_videos_grid.html.twig', [
-                        'videos' => $filter->getOrderedLikedVideos($sort, $currentUserId),
-                    ])
-                ]);
-            }
+        if ($request->isXmlHttpRequest()) {
+            return new JsonResponse([
+                'content' => $this->renderView(self::VIDEO_TEMPLATE, [
+                    'videos' => $videos,
+                ])
+            ]);
         }
 
         return $this->render('home/likes.html.twig', [
-            'videos' => $likedVideos
+            'videos' => $videos
         ]);
     }
 
@@ -149,105 +156,104 @@ class HomeController extends AbstractController
         return $this->redirect($newUrl);
     }
 
-    #[Route('/category/{slug}/{sort}', name: 'single_category', methods: ['GET'])]
-    public function showSingleCategory(
-        Request $request,
-        Filter $filter,
-        string $slug,
-        string $sort
-    ): Response {
+    #[Route('/category/{slug}', name: 'category', methods: ['GET'])]
+    public function showSingleCategory(Request $request, string $slug): Response
+    {
+        $sortByRequest = $request->query->get('sortedBy');
 
-        //injection security
-        if (!$filter->preventInjection($sort)) {
-            throw $this->createNotFoundException('filtre invalide');
+        if (!$this->filter->isAllowedFilter($sortByRequest)) {
+            throw new BadRequestHttpException(self::INVALID_FILTER);
         }
 
-        //handle ajax request
+        $sortBy = $this->filter->getMappedField($sortByRequest);
+        $videos = $this->videoRepository->getVideoByCategory($slug, $sortBy);
+
         if ($request->isXmlHttpRequest()) {
             return new JsonResponse([
-                'content' => $this->renderView('_includes/_videos_grid.html.twig', [
-                    'videos' => $filter->getOrderedCategoryVideos($sort, $slug),
+                'content' => $this->renderView(self::VIDEO_TEMPLATE, [
+                    'videos' => $videos,
                 ])
             ]);
         }
 
-        return $this->render('home/singleCategory.html.twig', [
-            'videos' => $filter->getOrderedCategoryVideos($sort, $slug),
+        return $this->render('home/category.html.twig', [
+            'videos' => $videos,
         ]);
     }
 
-    #[Route('/tag/{slug}/{sort}', name: 'tag', methods: ['GET'])]
-    public function showSingleTag(
-        Request $request,
-        Filter $filter,
-        string $slug,
-        string $sort
-    ): Response {
+    #[Route('/tag/{slug}', name: 'tag', methods: ['GET'])]
+    public function showSingleTag(Request $request, string $slug): Response
+    {
+        $sortByRequest = $request->query->get('sortedBy');
 
-        //injection security
-        if (!$filter->preventInjection($sort)) {
-            throw $this->createNotFoundException('filtre invalide');
+        if (!$this->filter->isAllowedFilter($sortByRequest)) {
+            throw new BadRequestHttpException(self::INVALID_FILTER);
         }
 
-        //handle ajax request
+        $sortBy = $this->filter->getMappedField($sortByRequest);
+        $videos = $this->videoRepository->getVideoByTag($slug, $sortBy);
+
         if ($request->isXmlHttpRequest()) {
             return new JsonResponse([
-                'content' => $this->renderView('_includes/_videos_grid.html.twig', [
-                    'videos' => $filter->getOrderedTagVideos($sort, $slug),
-                    'tagSlug' => $slug,
-                    'tagName' => str_replace('-', ' ', $slug)
+                'content' => $this->renderView(self::VIDEO_TEMPLATE, [
+                    'videos' => $videos,
                 ])
             ]);
         }
-        return $this->render('home/singleTag.html.twig', [
-            'videos' => $filter->getOrderedTagVideos($sort, $slug),
-            'tagSlug' => $slug,
+
+        return $this->render('home/tag.html.twig', [
+            'videos' => $videos,
             'tagName' => str_replace('-', ' ', $slug)
         ]);
     }
 
-    #[Route('/private/{sort}', name: 'private_videos')]
-    public function showPrivateVideos(Request $request, Filter $filter, string $sort): Response
+    #[Route('/private-videos', name: 'private_videos')]
+    public function showPrivateVideos(Request $request): Response
     {
+        $sortByRequest = $request->query->get('sortedBy');
 
-        //injection security
-        if (!$filter->preventInjection($sort)) {
-            throw $this->createNotFoundException('filtre invalide');
+        if (!$this->filter->isAllowedFilter($sortByRequest)) {
+            throw new BadRequestHttpException(self::INVALID_FILTER);
         }
 
-        //handle ajax request
+        $sortBy = $this->filter->getMappedField($sortByRequest);
+        $videos = $this->videoRepository->getPrivateVideo($sortBy);
+
         if ($request->isXmlHttpRequest()) {
             return new JsonResponse([
-                'content' => $this->renderView('_includes/_videos_grid.html.twig', [
-                    'videos' => $filter->getOrderedPrivateVideos($sort),
+                'content' => $this->renderView(self::VIDEO_TEMPLATE, [
+                    'videos' => $videos,
                 ])
             ]);
         }
 
         return $this->render('home/privateVideos.html.twig', [
-            'videos' => $filter->getOrderedPrivateVideos($sort)
+            'videos' => $videos
         ]);
     }
 
-    #[Route('/all/{sort}', name: 'all')]
-    public function showAllVideos(Request $request, Filter $filter, string $sort): Response|JsonResponse
+    #[Route('/video', name: 'video')]
+    public function showAllVideos(Request $request): Response|JsonResponse
     {
-        //injection security
-        if (!$filter->preventInjection($sort)) {
-            throw $this->createNotFoundException('filtre invalide');
+        $sortByRequest = $request->query->get('sortedBy');
+
+        if (!$this->filter->isAllowedFilter($sortByRequest)) {
+            throw new BadRequestHttpException(self::INVALID_FILTER);
         }
 
-        //handle ajax request
+        $sortBy = $this->filter->getMappedField($sortByRequest);
+        $videos = $this->videoRepository->getVideoBySort($sortBy);
+
         if ($request->isXmlHttpRequest()) {
             return new JsonResponse([
-                'content' => $this->renderView('_includes/_videos_grid.html.twig', [
-                    'videos' => $filter->getOrderedVideos($sort)
+                'content' => $this->renderView(self::VIDEO_TEMPLATE, [
+                    'videos' => $videos,
                 ])
             ]);
         }
 
         return $this->render('home/allVideos.html.twig', [
-            'videos' => $filter->getOrderedVideos($sort)
+            'videos' => $videos
         ]);
     }
 

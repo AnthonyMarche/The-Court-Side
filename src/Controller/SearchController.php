@@ -2,12 +2,14 @@
 
 namespace App\Controller;
 
+use App\Repository\VideoRepository;
 use App\Services\Filter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SearchType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
@@ -20,9 +22,9 @@ class SearchController extends AbstractController
         $searchForm->handleRequest($request);
 
         if ($searchForm->isSubmitted() && $searchForm->isValid()) {
-            $url = $urlGenerator->generate('app_results', [
+            $url = $urlGenerator->generate('app_search_results', [
                 'search' => $searchForm->getData(),
-                'sort' => 'recent'
+                'sortedBy' => 'recent'
             ]);
 
             return $this->redirect($url);
@@ -33,24 +35,30 @@ class SearchController extends AbstractController
         ]);
     }
 
-    #[Route('/results/{search}/{sort}', name: 'app_results')]
-    public function searchResults(string $search, string $sort, Request $request, Filter $filter): Response
-    {
-        //injection security
-        if (!$filter->preventInjection($sort)) {
-            throw $this->createNotFoundException('filtre invalide');
+    #[Route('/results/{search}', name: 'app_search_results')]
+    public function searchResults(
+        string $search,
+        Request $request,
+        Filter $filter,
+        VideoRepository $videoRepository
+    ): Response {
+        $sortByRequest = $request->query->get('sortedBy');
+
+        if (!$filter->isAllowedFilter($sortByRequest)) {
+            throw new BadRequestHttpException(HomeController::INVALID_FILTER);
         }
 
-        //handle ajax request
+        $sortBy = $filter->getMappedField($sortByRequest);
+        $videos = $videoRepository->getVideoBySearch($search, $sortBy);
+
         if ($request->isXmlHttpRequest()) {
             return new JsonResponse([
-                'content' => $this->renderView('_includes/_videos_grid.html.twig', [
-                    'videos' => $filter->getOrderedVideosBySearch($sort, $search),
+                'content' => $this->renderView(HomeController::VIDEO_TEMPLATE, [
+                    'videos' => $videos,
                 ])
             ]);
         }
 
-        $videos = $filter->getOrderedVideosBySearch($sort, $search);
         return $this->render('home/search_results.html.twig', [
             'videos' => $videos,
             'search' => $search

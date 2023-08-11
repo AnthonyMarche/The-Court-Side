@@ -86,7 +86,7 @@
         {% include '_includes/_videos_head.html.twig' with {
             title : 'video.see-more-text'|trans ~ ' ' ~ video.category.name,
             buttons : buttons,
-            path : path('app_single_category', {slug : video.category.slug, sort : 'recent'})
+            path : path('app_category', {slug : video.category.slug, sortedBy : 'recent'})
         } %}
         <div class="row">
             {% include '_includes/_videos_grid.html.twig' with {
