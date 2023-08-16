@@ -1,10 +1,3 @@
-.show-user {
-    height: 85vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
 .table-dark {
     border-radius: 20px;
     margin: 0;
@@ -13,4 +6,41 @@
 .show-user-table .btn-outline-secondary {
     border: 1px solid var(--mainFont-color);
     color: var(--mainFont-color)
+}
+
+.profile-menu {
+    border-right: 1px solid white;
+    background-color: var(--subBg-color);
+}
+
+@media screen and (min-width: 992px) {
+    .profile-menu {
+        height: 100vh;
+    }
+}
+
+.profile-menu ul .active {
+    background-color: var(--mainBg-color);
+}
+
+.profile-menu ul li {
+    list-style: none;
+    padding: 20px 50px;
+}
+
+#change_password_newPassword div ul li {
+    color: #dc3545;
+}
+
+#password-requirement {
+    border: 1px white solid;
+    border-radius: 25px;
+}
+
+.invalid-border {
+    border: red solid;
+}
+
+.valid-border {
+    border: green solid;
 }

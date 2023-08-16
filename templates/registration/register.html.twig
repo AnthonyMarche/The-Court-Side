@@ -12,6 +12,9 @@
             <img src="{{ asset('build/images/TCS_logo/TCS_white_logo.png') }}"
                  alt="Logo The Court Side">
         </div>
+        <div class="col-12 col-md-10 col-lg-6 m-auto">
+            {{ include('_includes/_errors_container.html.twig') }}
+        </div>
         {{ form_start(registrationForm, {'attr': {'class': 'login-form'}}) }}
         <div class="row d-flex justify-content-center">
             <div class="mb-3 col-12 col-md-10 col-lg-8">
@@ -24,8 +27,9 @@
                 {{ form_widget(registrationForm.email, {'attr': {'class': 'form-control mb-3'}}) }}
             </div>
             <div class="mb-3 col-12 col-md-10 col-lg-8">
-                {{ form_label(registrationForm.plainPassword) }}
-                {{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'form-control mb-3'}}) }}
+                {{ form_label(registrationForm.newPassword) }}
+                {{ form_widget(registrationForm.newPassword) }}
+                {{ include('_includes/_password_requierement.html.twig') }}
             </div>
             <div class="form-check mb-3 col-11 col-md-9 col-lg-7 pl-0">
                 {{ form_widget(registrationForm.agreeTerms) }}

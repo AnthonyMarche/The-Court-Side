@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+    <div class="profile-section d-lg-flex">
+        <nav class="navbar navbar-expand-lg p-0 align-items-start">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarProfile"
+                    aria-controls="navbarProfile" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon p-3"><i class="fa fa-user" style="color: white"></i></span>
+            </button>
+
+            <div class="collapse navbar-collapse profile-menu flex-column text-white" id="navbarProfile">
+                <h2 class="text-center py-4">Mon profil</h2>
+                <ul class="navbar-nav flex-column mr-auto col text-white mt-3 p-0">
+                    <li class="nav-item {% if app.request.attributes.get('_route')  == 'app_user_show' %} active {% endif %}">
+                        <a class="text-decoration-none text-white"
+                           href="{{ path('app_user_show', {'id':app.user.id}) }}">
+                            Mon profil
+                        </a>
+                    </li>
+                    <li class="nav-item {% if app.request.attributes.get('_route')  == 'app_user_edit_profile' %} active {% endif %}">
+                        <a class="text-decoration-none text-white"
+                           href="{{ path('app_user_edit_profile', {'id':app.user.id}) }}">
+                            Modification profil
+                        </a>
+                    </li>
+                    <li class="nav-item {% if app.request.attributes.get('_route')  == 'app_user_edit_password' %} active {% endif %}">
+                        <a class="text-decoration-none text-white"
+                           href="{{ path('app_user_edit_password', {'id':app.user.id}) }}">
+                            Modification mot de passe
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        {% if user.id != app.user.id %}
+            <div class="container d-flex justify-content-center mt-4">
+                <div class="card">
+                    <div class="card-body d-flex flex-column">
+                        <p class="card-text font-italic">{{ 'userprofile.forbidden'|trans }}</p>
+                        <a href="{{ path('app_home') }}"
+                           class="btn btn-success">{{ 'userprofile.back-to-home-btn'|trans }}</a>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            {% block profileContent %}{% endblock %}
+        {% endif %}
+    </div>
+{% endblock %}
+{% block footer %}{% endblock %}

@@ -8,9 +8,14 @@
 
     <h1>Reset your password</h1>
 
+    <div class="col-12 col-md-10 col-lg-6 m-auto">
+        {{ include('_includes/_errors_container.html.twig') }}
+    </div>
     {{ form_start(resetForm) }}
-        {{ form_row(resetForm.plainPassword,{'attr': {'class':'form-control' }}) }}
-        <button class="btn btn-primary btn-block">{{ 'button.reset'|trans }}</button>
+    {{ form_row(resetForm.newPassword) }}
+    {{ include('_includes/_password_requierement.html.twig') }}
+
+    <button class="btn btn-primary btn-block">{{ 'button.reset'|trans }}</button>
     {{ form_end(resetForm) }}
 {% endblock %}
-{% block footer%} {% endblock %}
+{% block footer %} {% endblock %}
