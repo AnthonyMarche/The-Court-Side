@@ -20,7 +20,7 @@ password.register: 'Mot de passe :'
 usertype.username: "Nom d'utilisateur"
 usertype.current-password: 'Mot de passe actuel'
 usertype.new-password: 'Nouveau mot de passe'
-usertype.verify-password: 'Confirmer le nouveau mot de passe'
+usertype.verify-password: 'Confirmer le mot de passe'
 usertype.newsletter-subscribe: 'Je souhaite être abonné à la newsletter'
 graph.subs-evolution: "Evolution de l'inscription des visiteurs, par mois"
 graph.likes-evolution: 'Evolution du nombre de likes, par mois'
