@@ -10,7 +10,6 @@ use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -68,18 +67,15 @@ class UserController extends AbstractController
             ]);
         }
 
-        return $this->renderForm('user/edit_profile.html.twig', [
+        return $this->render('user/edit_profile.html.twig', [
             'profileForm' => $profileForm,
             'user' => $user
         ]);
     }
 
     #[Route('/{id}/edit-password', name: 'edit_password', methods: ['GET', 'POST'])]
-    public function editPassword(
-        User $user,
-        Request $request,
-        UserPasswordHasherInterface $passwordHasher
-    ): Response {
+    public function editPassword(User $user, Request $request): Response
+    {
         /** @var User|null $currentUser */
         $currentUser = $this->getUser();
 
@@ -87,25 +83,21 @@ class UserController extends AbstractController
             throw new AccessDeniedException();
         }
 
-        $passwordForm = $this->createForm(ChangePasswordType::class);
+        $passwordForm = $this->createForm(ChangePasswordType::class, $user);
         $passwordForm->handleRequest($request);
 
         if ($passwordForm->isSubmitted() && $passwordForm->isValid()) {
-            $encodedPassword = $passwordHasher->hashPassword(
-                $user,
-                $passwordForm->get('newPassword')->getData()
-            );
+            $userUpdate = $passwordForm->getData();
 
-            $user->setPassword($encodedPassword);
-            $user->setUpdatedAt(new DateTime());
-
-            $this->userRepository->save($user, true);
+            $this->userRepository->save($userUpdate, true);
 
             $this->addFlash('success', 'Password change with success');
-            return $this->redirectToRoute('app_user_show');
+            return $this->redirectToRoute('app_user_show', [
+                'id' => $user->getId()
+            ]);
         }
 
-        return $this->renderForm('user/edit_password.html.twig', [
+        return $this->render('user/edit_password.html.twig', [
             'passwordForm' => $passwordForm,
             'user' => $user
         ]);

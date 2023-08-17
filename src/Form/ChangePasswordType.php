@@ -2,8 +2,11 @@
 
 namespace App\Form;
 
+use App\Entity\User;
+use App\Validator\Constraints\PasswordRequirements;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -25,9 +28,28 @@ class ChangePasswordType extends AbstractType
                     [],
                     'mot de passe actuel incorrect'
                 ),
+                'mapped' => false
             ])
-            ->add('newPassword', ResetPasswordType::class, [
-                'label' => false
+            ->add('plainPassword', RepeatedType::class, [
+                'type' => PasswordType::class,
+                'options' => [
+                    'attr' => [
+                        'autocomplete' => 'new-password',
+                        'class' => 'form-control mb-3 password-input'
+                    ],
+                ],
+                'first_options' => [
+                    'constraints' => new PasswordRequirements(),
+                    'label' => new TranslatableMessage('usertype.new-password'),
+                    'label_attr' => ['class' => 'text-white'],
+                    'hash_property_path' => 'password'
+                ],
+                'second_options' => [
+                    'label' => new TranslatableMessage('usertype.verify-password'),
+                    'label_attr' => ['class' => 'text-white']
+                ],
+                'invalid_message' => 'The password fields must match.',
+                'mapped' => false,
             ])
             ->add('submit', SubmitType::class, [
                 'label' => new TranslatableMessage('userprofile.save-btn'),
@@ -39,6 +61,8 @@ class ChangePasswordType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefaults([]);
+        $resolver->setDefaults([
+            'data_class' => User::class,
+        ]);
     }
 }

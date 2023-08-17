@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\User;
 use App\Validator\Constraints\PasswordRequirements;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -15,7 +16,7 @@ class ResetPasswordType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('newPassword', RepeatedType::class, [
+            ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'options' => [
                     'attr' => [
@@ -26,7 +27,8 @@ class ResetPasswordType extends AbstractType
                 'first_options' => [
                     'constraints' => new PasswordRequirements(),
                     'label' => new TranslatableMessage('usertype.new-password'),
-                    'label_attr' => ['class' => 'text-white']
+                    'label_attr' => ['class' => 'text-white'],
+                    'hash_property_path' => 'password'
                 ],
                 'second_options' => [
                     'label' => new TranslatableMessage('usertype.verify-password'),
@@ -40,6 +42,8 @@ class ResetPasswordType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefaults([]);
+        $resolver->setDefaults([
+            'data_class' => User::class,
+        ]);
     }
 }

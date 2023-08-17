@@ -27,8 +27,7 @@
                 {{ form_widget(registrationForm.email, {'attr': {'class': 'form-control mb-3'}}) }}
             </div>
             <div class="mb-3 col-12 col-md-10 col-lg-8">
-                {{ form_label(registrationForm.newPassword) }}
-                {{ form_widget(registrationForm.newPassword) }}
+                {{ form_widget(registrationForm.plainPassword) }}
                 {{ include('_includes/_password_requierement.html.twig') }}
             </div>
             <div class="form-check mb-3 col-11 col-md-9 col-lg-7 pl-0">

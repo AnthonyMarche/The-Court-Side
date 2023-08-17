@@ -12,7 +12,7 @@
         {{ include('_includes/_errors_container.html.twig') }}
     </div>
     {{ form_start(resetForm) }}
-    {{ form_row(resetForm.newPassword) }}
+    {{ form_row(resetForm.plainPassword) }}
     {{ include('_includes/_password_requierement.html.twig') }}
 
     <button class="btn btn-primary btn-block">{{ 'button.reset'|trans }}</button>
