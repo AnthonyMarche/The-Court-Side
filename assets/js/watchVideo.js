@@ -1,8 +1,9 @@
+import axios from 'axios';
+
 if (document.getElementsByClassName('.js-like')) {
     Array.from(document.querySelectorAll('a.js-like')).forEach(function (link) {
         link.addEventListener('click', onClickLink);
     });
-    const axios = window.axios;
     // eslint-disable-next-line no-inner-declarations
     async function onClickLink(event) {
         event.preventDefault();
