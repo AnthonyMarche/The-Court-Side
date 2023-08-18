@@ -1,4 +1,5 @@
 import { initializePreviewVideo } from './homePage';
+import axios from 'axios';
 
 if (document.querySelector('.update-videos')) {
     const baseUrl = window.location.protocol + '//' + window.location.host + window.location.pathname;
@@ -35,36 +36,34 @@ if (document.querySelector('.update-videos')) {
         const filterName = selectedFilter.getAttribute('data-filter');
         const url = baseUrl + '?sortedBy=' + filterName;
 
-        try {
-            await updateVideo(url);
+        await updateVideo(url);
 
-            currentFilter.forEach(filterTag => {
-                filterTag.innerHTML = selectedFilter.innerHTML;
-            })
+        currentFilter.forEach(filterTag => {
+            filterTag.innerHTML = selectedFilter.innerHTML;
+        })
 
-            history.pushState({ filtersApplied: true }, '', url);
-            initializePreviewVideo()
-        } catch (error) {
-            content.innerHTML =
-                '<h4 style="color:white">An error occurred while loading videos</h4>';
-        }
+        history.pushState({filtersApplied: true}, '', url);
+        initializePreviewVideo()
     }
 
     // Function to update videos based on the selected filter
     async function updateVideo(url) {
-        const response = await fetch(url, {
+        const config = {
             headers: {
-                'X-Requested-with': 'XMLHttpRequest'
-            }
-        });
-
-        if (response.status >= 200 && response.status < 300) {
-            const data = await response.json();
-            showLoader();
-            content.innerHTML = data.content;
-        } else {
-            throw new Error('Failed to load videos');
+                'X-Requested-With': 'XMLHttpRequest',
+                'Content-Type': 'application/json'
+            },
         }
+        await axios.get(url, config)
+            .then(function (response) {
+                const data = response.data;
+                showLoader();
+                content.innerHTML = data.content;
+            })
+            .catch(function () {
+                content.innerHTML =
+                    '<h4 style="color:white">Une erreur s\'est produite lors du chargement des vidéos</h4>';
+            })
     }
 
     window.addEventListener('popstate', async () => {
@@ -73,13 +72,8 @@ if (document.querySelector('.update-videos')) {
             const filterName = filterToSelect.getAttribute('data-filter');
             const url = baseUrl + '?sortedBy=' + filterName;
 
-            try {
-                await updateVideo(url);
-                initializePreviewVideo();
-            } catch (error) {
-                content.innerHTML =
-                    '<h4 style="color:white">An error occurred while loading videos</h4>';
-            }
+            await updateVideo(url);
+            initializePreviewVideo();
         }
     });
 
