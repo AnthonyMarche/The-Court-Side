@@ -13,7 +13,7 @@ class PasswordRequirements extends Compound
             new Assert\NotBlank(),
             new Assert\Type('string'),
             new Assert\Length([
-                'min' => 6,
+                'min' => 12,
                 'minMessage' => 'Votre mot passe doit contenir au moins 12 caractères'
                 ]),
             new Assert\Regex([
@@ -30,7 +30,7 @@ class PasswordRequirements extends Compound
             ]),
             new Assert\Regex([
                 'pattern' => '/[!?@#$%^&*()+-]/',
-                'message' => 'Votre mot passe doit contenir au moins un caractère spécial parmi !@#$%^&*()',
+                'message' => 'Votre mot passe doit contenir au moins un caractère spécial parmi !?@#$%^&*()+-',
             ]),
         ];
     }
