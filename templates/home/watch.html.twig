@@ -10,17 +10,8 @@
         </div>
         <div class="watch-video-head d-flex justify-content-between">
             <div class="d-flex">
-                {% if not app.user %}
-                    <div class="like-icon-container">
-                        <ion-icon name="heart"
-                                  class="like-icon-inactive md hydrated"
-                                  data-toggle="modal"
-                                  data-target="#featureModal">
-                            <div class='red-bg'></div>
-                        </ion-icon>
-                    </div>
-                {% else %}
-                    <a class="js-like like-link" href="{{ path('app_like', {id: video.id}) }}">
+                {% if app.user %}
+                    <a class="like-heart like-link" href="{{ path('app_like', {id: video.id}) }}">
                         <div class="like-icon-container">
                             <ion-icon name="heart"
                                       class="like-icon {{ video.isLikedByUser(app.user) ? 'md hydrated active' : 'md hydrated' }} ">
@@ -61,6 +52,7 @@
                 </div>
             </div>
         </div>
+        {{ include('_includes/_errors_container.html.twig') }}
         <div class="watch-video-description text-left mt-2">
             <p class="video-description-head">{{ 'video.description'|trans }}</p>
             <p class="video-description">{{ video.description }} </p>

@@ -40,46 +40,15 @@ class LikeRepository extends ServiceEntityRepository
         }
     }
 
-    /**
-     * @return Like[] Returns an array of Like objects
-     */
-    public function findVideosLikedByCurrentUserOrderByDate(int $currentUserId): array
+    public function getLikeByUserIdAndVideoId(int $userId, int $videoId): ?Like
     {
         return $this->createQueryBuilder('l')
-            ->andWhere('l.user = :user')
-            ->setParameter('user', $currentUserId)
-            ->join('l.video', 'v')
-            ->orderBy('v.createdAt', 'DESC')
+            ->where('l.user = :userId')
+            ->andWhere('l.video = :videoId')
+            ->setParameter('userId', $userId)
+            ->setParameter('videoId', $videoId)
             ->getQuery()
-            ->getResult();
-    }
-
-    /**
-     * @return Like[] Returns an array of Like objects
-     */
-    public function findVideosLikedByCurrentUserOrderByViews(int $currentUserId): array
-    {
-        return $this->createQueryBuilder('l')
-            ->andWhere('l.user = :user')
-            ->setParameter('user', $currentUserId)
-            ->join('l.video', 'v')
-            ->orderBy('v.numberOfView', 'DESC')
-            ->getQuery()
-            ->getResult();
-    }
-
-    /**
-     * @return Like[] Returns an array of Like objects
-     */
-    public function findVideosLikedByCurrentUserOrderByLikes(int $currentUserId): array
-    {
-        return $this->createQueryBuilder('l')
-            ->andWhere('l.user = :user')
-            ->setParameter('user', $currentUserId)
-            ->join('l.video', 'v')
-            ->orderBy('v.numberOfLike', 'DESC')
-            ->getQuery()
-            ->getResult();
+            ->getSingleResult();
     }
 
     public function getNumberOfLikeFromDate(DateTime $date = null): int

@@ -71,10 +71,10 @@ if (document.querySelector('.password-input')) {
             event.preventDefault();
             let errors = [];
             if (!isPasswordValid) {
-                errors.push('Password does not meet all requirements')
+                errors.push('Le mot de passe ne respecte pas les conditions requises')
             }
             if (!isRepeatPasswordValid) {
-                errors.push('Password confirmation is incorrect')
+                errors.push('La confirmation du mot de passe est incorrect')
             }
             errorContainer.innerHTML = errors.map(error => `<p>${error}</p>`).join('');
             errorContainer.classList.remove('d-none')
