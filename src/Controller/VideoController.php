@@ -2,18 +2,14 @@
 
 namespace App\Controller;
 
-use App\Entity\Like;
 use App\Entity\User;
 use App\Entity\Video;
 use App\Repository\CategoryRepository;
-use App\Repository\LikeRepository;
 use App\Repository\VideoRepository;
 use App\Services\Filter;
-use DateTime;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Services\LikeService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
@@ -211,37 +207,23 @@ class VideoController extends AbstractController
     }
 
     #[Route('like/{id}', name: 'like', methods: 'POST')]
-    public function addToLike(
-        Video $video,
-        EntityManagerInterface $manager,
-        LikeRepository $likeRepository
-    ): JsonResponse|RedirectResponse {
-
+    public function addToLike(Video $video, LikeService $likeService): JsonResponse
+    {
         /** @var User|null $user */
         $user = $this->getUser();
-
         if (!$user) {
-            $this->addFlash('warning', 'Vous devez être connectez pour accéder a cette page');
-            return $this->redirectToRoute('app_login');
+            return new JsonResponse(
+                ['error' => 'Vous devez être connectez pour aimer une vidéo'],
+                400
+            );
         }
 
         if ($video->isLikedByUser($user)) {
-            $like = $likeRepository->findOneBy(['video' => $video, 'user' => $user]);
-            $video->setNumberOfLike($video->getNumberOfLike() - 1);
-            $manager->remove($like);
-            $manager->flush();
-
-            return $this->json(['code' => 200]);
+            $likeService->unlikeVideo($video, $user);
+        } else {
+            $likeService->likeVideo($video, $user);
         }
 
-        $like = new Like();
-        $like->setVideo($video)
-            ->setUser($user)
-            ->setCreatedAt(new DateTime('now'));
-        $video->setNumberOfLike($video->getNumberOfLike() + 1);
-        $manager->persist($like);
-        $manager->flush();
-
-        return $this->json(['code' => 200]);
+        return new JsonResponse([], 200);
     }
 }
