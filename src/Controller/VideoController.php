@@ -213,17 +213,23 @@ class VideoController extends AbstractController
         $user = $this->getUser();
         if (!$user) {
             return new JsonResponse(
-                ['error' => 'Vous devez être connectez pour aimer une vidéo'],
+                ['error' => 'Vous devez être connecté pour aimer une vidéo.'],
                 400
             );
         }
 
-        if ($video->isLikedByUser($user)) {
-            $likeService->unlikeVideo($video, $user);
-        } else {
-            $likeService->likeVideo($video, $user);
+        try {
+            if ($video->isLikedByUser($user)) {
+                $likeService->unlikeVideo($video, $user);
+            } else {
+                $likeService->likeVideo($video, $user);
+            }
+        } catch (\Exception) {
+            return new JsonResponse(
+                ['error' => "Une erreur s'est produite."],
+                500
+            );
         }
-
         return new JsonResponse([], 200);
     }
 }
