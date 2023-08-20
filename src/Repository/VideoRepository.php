@@ -101,6 +101,7 @@ class VideoRepository extends ServiceEntityRepository
             ->orWhere('c.name LIKE :search')
             ->setParameter('search', '%' . $search . '%')
             ->orderBy('v.' . $orderBy, 'DESC')
+            ->groupBy('v.' . $orderBy)
             ->getQuery()
             ->getResult();
     }

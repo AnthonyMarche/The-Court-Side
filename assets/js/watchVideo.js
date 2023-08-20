@@ -22,9 +22,6 @@ if (document.getElementsByClassName('.js-like')) {
                 if (error.response.data.error) {
                     errorContainer.innerHTML = `<p>${error.response.data.error}</p>`;
                     errorContainer.classList.remove('d-none');
-                } else {
-                    errorContainer.innerHTML = `<p>Une erreur est survenue.</p>`;
-                    errorContainer.classList.remove('d-none');
                 }
                 setTimeout(() => {
                     errorContainer.classList.add('d-none');
