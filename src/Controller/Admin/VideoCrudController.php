@@ -4,7 +4,6 @@ namespace App\Controller\Admin;
 
 use App\Entity\User;
 use App\Entity\Video;
-use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
@@ -130,30 +129,6 @@ class VideoCrudController extends AbstractCrudController
         /** @var User $user */
         $user = $this->getUser();
         $entityInstance->setUser($user);
-
-        $entityManager->persist($entityInstance);
-        $entityManager->flush();
-    }
-
-    public function createEntity(string $entityFqcn): Video
-    {
-        $video = new Video();
-
-        $video->setNumberOfView(0);
-        $video->setNumberOfLike(0);
-        $video->setCreatedAt(new DateTime());
-
-        return $video;
-    }
-
-    public function updateEntity(EntityManagerInterface $entityManager, $entityInstance): void
-    {
-
-        if (!$entityInstance instanceof Video) {
-            return;
-        }
-
-        $entityInstance->setUpdatedAt(new DateTime());
 
         $entityManager->persist($entityInstance);
         $entityManager->flush();

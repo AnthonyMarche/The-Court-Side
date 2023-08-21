@@ -3,17 +3,19 @@
 namespace App\Entity;
 
 use App\Repository\VideoRepository;
-use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation\Slug;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: VideoRepository::class)]
 class Video
 {
+    use TimestampableEntity;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -34,14 +36,8 @@ class Video
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $teaser = null;
 
-    #[ORM\Column]
-    private ?int $numberOfView = null;
-
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?DateTimeInterface $createdAt = null;
-
-    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?DateTimeInterface $updatedAt = null;
+    #[ORM\Column(options: ["default" => 0])]
+    private int $numberOfView = 0;
 
     #[ORM\ManyToOne(inversedBy: 'videos')]
     #[Assert\NotBlank(
@@ -63,8 +59,8 @@ class Video
     #[ORM\OneToMany(mappedBy: 'video', targetEntity: Like::class, orphanRemoval: true)]
     private Collection $likes;
 
-    #[ORM\Column(nullable: true)]
-    private ?int $numberOfLike = null;
+    #[ORM\Column(options: ["default" => 0])]
+    private int $numberOfLike = 0;
 
     public function __construct()
     {
@@ -145,30 +141,6 @@ class Video
     public function setNumberOfView(int $numberOfView): self
     {
         $this->numberOfView = $numberOfView;
-
-        return $this;
-    }
-
-    public function getCreatedAt(): ?DateTimeInterface
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(DateTimeInterface $createdAt): self
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getUpdatedAt(): ?DateTimeInterface
-    {
-        return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(?DateTimeInterface $updatedAt): self
-    {
-        $this->updatedAt = $updatedAt;
 
         return $this;
     }

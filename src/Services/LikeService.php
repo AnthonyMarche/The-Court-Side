@@ -31,8 +31,7 @@ class LikeService
     {
         $like = new Like();
         $like->setVideo($video)
-            ->setUser($user)
-            ->setCreatedAt(new DateTime());
+            ->setUser($user);
         $video->setNumberOfLike($video->getNumberOfLike() + 1);
         $this->likeRepository->save($like, true);
     }

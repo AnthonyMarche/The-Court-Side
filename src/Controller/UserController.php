@@ -6,7 +6,6 @@ use App\Entity\User;
 use App\Form\ChangePasswordType;
 use App\Form\ProfileType;
 use App\Repository\UserRepository;
-use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -57,7 +56,6 @@ class UserController extends AbstractController
         if ($profileForm->isSubmitted() && $profileForm->isValid()) {
             $user->setUsername($profileForm->get('username')->getData());
             $user->setNewsletter($profileForm->get('newsletter')->getData());
-            $user->setUpdatedAt(new DateTime());
 
             $this->userRepository->save($user, true);
 
