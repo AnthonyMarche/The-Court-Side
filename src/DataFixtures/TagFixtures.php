@@ -7,17 +7,9 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Faker\Factory;
-use Symfony\Component\String\Slugger\SluggerInterface;
 
 class TagFixtures extends Fixture implements DependentFixtureInterface
 {
-    private SluggerInterface $slugger;
-
-    public function __construct(SluggerInterface $slugger)
-    {
-        $this->slugger = $slugger;
-    }
-
     public function load(ObjectManager $manager): void
     {
         $faker = Factory::create();
@@ -30,9 +22,6 @@ class TagFixtures extends Fixture implements DependentFixtureInterface
             for ($j = 0; $j <= $rand; $j++) {
                 $tag->addVideo($this->getReference('video_' . $faker->numberBetween(0, 41)));
             }
-
-            $slug = $this->slugger->slug($tag->getName());
-            $tag->setSlug($slug);
 
             $manager->persist($tag);
         }

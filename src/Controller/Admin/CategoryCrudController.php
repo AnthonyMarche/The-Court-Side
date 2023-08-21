@@ -9,18 +9,10 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\Translation\TranslatableMessage;
 
 class CategoryCrudController extends AbstractCrudController
 {
-    private SluggerInterface $slugger;
-
-    public function __construct(SluggerInterface $slugger)
-    {
-        $this->slugger = $slugger;
-    }
-
     public static function getEntityFqcn(): string
     {
         return Category::class;
@@ -66,9 +58,6 @@ class CategoryCrudController extends AbstractCrudController
             return;
         }
 
-        $slug = $this->slugger->slug($entityInstance->getName());
-        $entityInstance->setSlug($slug);
-
         $entityManager->persist($entityInstance);
         $entityManager->flush();
     }
@@ -87,8 +76,6 @@ class CategoryCrudController extends AbstractCrudController
             return;
         }
 
-        $slug = $this->slugger->slug($entityInstance->getName());
-        $entityInstance->setSlug($slug);
         $entityInstance->setUpdatedAt(new DateTime());
 
         $entityManager->persist($entityInstance);

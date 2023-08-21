@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation\Slug;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: VideoRepository::class)]
@@ -55,7 +56,8 @@ class Video
     #[ORM\JoinColumn(nullable: true, onDelete:"SET NULL")]
     private ?User $user = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, unique: true)]
+    #[Slug(fields: ['title'])]
     private ?string $slug = null;
 
     #[ORM\OneToMany(mappedBy: 'video', targetEntity: Like::class, orphanRemoval: true)]

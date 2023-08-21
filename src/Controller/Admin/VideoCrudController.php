@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\User;
 use App\Entity\Video;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
@@ -13,20 +14,12 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\Translation\TranslatableMessage;
 
 class VideoCrudController extends AbstractCrudController
 {
     private const PATH_VIDEO = 'uploads/videos';
     private const PATH_TEASER = 'uploads/teasers';
-
-    private SluggerInterface $slugger;
-
-    public function __construct(SluggerInterface $slugger)
-    {
-        $this->slugger = $slugger;
-    }
 
     public static function getEntityFqcn(): string
     {
@@ -134,12 +127,9 @@ class VideoCrudController extends AbstractCrudController
             return;
         }
 
-        /** @var \App\Entity\User */
+        /** @var User $user */
         $user = $this->getUser();
         $entityInstance->setUser($user);
-
-        $slug = $this->slugger->slug($entityInstance->getTitle());
-        $entityInstance->setSlug($slug);
 
         $entityManager->persist($entityInstance);
         $entityManager->flush();
@@ -162,13 +152,6 @@ class VideoCrudController extends AbstractCrudController
         if (!$entityInstance instanceof Video) {
             return;
         }
-
-        /** @var \App\Entity\User */
-        $user = $this->getUser();
-        $entityInstance->setUser($user);
-
-        $slug = $this->slugger->slug($entityInstance->getTitle());
-        $entityInstance->setSlug($slug);
 
         $entityInstance->setUpdatedAt(new DateTime());
 

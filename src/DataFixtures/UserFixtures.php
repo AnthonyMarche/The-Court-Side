@@ -27,18 +27,18 @@ class UserFixtures extends Fixture
         $admin->setPassword($this->passwordHasher->hashPassword($admin, 'admin'));
         $admin->setUsername('admin');
         $admin->setCreatedAt($faker->dateTimeBetween(self::TWELVE_MONTHS_AGO));
-        $admin->setRoles(['ROLE_MEDIA_MANAGER']);
+        $admin->setRoles(['ROLE_ADMIN']);
         $admin->setIsVerified(true);
         $admin->setNewsletter(true);
         $manager->persist($admin);
         $this->addReference('admin', $admin);
 
         $superAdmin = new User();
-        $superAdmin->setEmail('superadmin@me.fr');
-        $superAdmin->setPassword($this->passwordHasher->hashPassword($superAdmin, 'superadmin'));
-        $superAdmin->setUsername('superadmin');
+        $superAdmin->setEmail('manager@me.fr');
+        $superAdmin->setPassword($this->passwordHasher->hashPassword($superAdmin, 'manager'));
+        $superAdmin->setUsername('manager');
         $superAdmin->setCreatedAt($faker->dateTimeBetween(self::TWELVE_MONTHS_AGO));
-        $superAdmin->setRoles(['ROLE_ADMIN']);
+        $superAdmin->setRoles(['ROLE_MEDIA_MANAGER']);
         $superAdmin->setIsVerified(true);
         $superAdmin->setNewsletter(true);
         $manager->persist($superAdmin);

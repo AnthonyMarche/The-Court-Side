@@ -7,7 +7,6 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
-use Symfony\Component\String\Slugger\SluggerInterface;
 
 class VideoFixtures extends Fixture implements DependentFixtureInterface
 {
@@ -28,13 +27,6 @@ class VideoFixtures extends Fixture implements DependentFixtureInterface
     ];
 
     public const VIDEO_PATH = "build/fixturesVideos/";
-
-    private SluggerInterface $slugger;
-
-    public function __construct(SluggerInterface $slugger)
-    {
-        $this->slugger = $slugger;
-    }
 
     public function load(ObjectManager $manager): void
     {
@@ -123,9 +115,6 @@ class VideoFixtures extends Fixture implements DependentFixtureInterface
 
         $randomUser = rand(0, 1);
         $video->setUser($this->getReference(self::USER[$randomUser]));
-
-        $slug = $this->slugger->slug($video->getTitle());
-        $video->setSlug($slug);
 
         $video->setUrl($url);
         $video->setCategory($this->getReference('category_' . $category));
