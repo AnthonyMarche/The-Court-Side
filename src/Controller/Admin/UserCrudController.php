@@ -4,8 +4,6 @@ namespace App\Controller\Admin;
 
 use App\Entity\User;
 use App\Services\ExportUsers;
-use DateTime;
-use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FieldCollection;
@@ -92,18 +90,6 @@ class UserCrudController extends AbstractCrudController
                 ->setFormat('dd/MM/YYYY')
                 ->onlyOnIndex(),
         ];
-    }
-
-    public function updateEntity(EntityManagerInterface $entityManager, $entityInstance): void
-    {
-        if (!$entityInstance instanceof User) {
-            return;
-        }
-
-        $entityInstance->setUpdatedAt(new DateTime());
-
-        $entityManager->persist($entityInstance);
-        $entityManager->flush();
     }
 
     public function createIndexQueryBuilder(

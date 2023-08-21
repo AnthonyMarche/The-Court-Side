@@ -3,8 +3,6 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Tag;
-use DateTime;
-use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
@@ -50,35 +48,5 @@ class TagCrudController extends AbstractCrudController
                 ->setFormat('dd/MM/YYYY')
                 ->onlyOnIndex(),
         ];
-    }
-
-    public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
-    {
-        if (!$entityInstance instanceof Tag) {
-            return;
-        }
-
-        $entityManager->persist($entityInstance);
-        $entityManager->flush();
-    }
-
-    public function createEntity(string $entityFqcn): Tag
-    {
-        $tag = new Tag();
-        $tag->setCreatedAt(new DateTime());
-
-        return $tag;
-    }
-
-    public function updateEntity(EntityManagerInterface $entityManager, $entityInstance): void
-    {
-        if (!$entityInstance instanceof Tag) {
-            return;
-        }
-
-        $entityInstance->setUpdatedAt(new DateTime());
-
-        $entityManager->persist($entityInstance);
-        $entityManager->flush();
     }
 }

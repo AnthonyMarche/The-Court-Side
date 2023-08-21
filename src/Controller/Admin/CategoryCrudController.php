@@ -3,8 +3,6 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Category;
-use DateTime;
-use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
@@ -50,35 +48,5 @@ class CategoryCrudController extends AbstractCrudController
                 ->setFormat('dd/MM/YYYY')
                 ->onlyOnIndex(),
         ];
-    }
-
-    public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
-    {
-        if (!$entityInstance instanceof Category) {
-            return;
-        }
-
-        $entityManager->persist($entityInstance);
-        $entityManager->flush();
-    }
-
-    public function createEntity(string $entityFqcn): Category
-    {
-        $category = new Category();
-        $category->setCreatedAt(new DateTime());
-
-        return $category;
-    }
-
-    public function updateEntity(EntityManagerInterface $entityManager, $entityInstance): void
-    {
-        if (!$entityInstance instanceof Category) {
-            return;
-        }
-
-        $entityInstance->setUpdatedAt(new DateTime());
-
-        $entityManager->persist($entityInstance);
-        $entityManager->flush();
     }
 }
