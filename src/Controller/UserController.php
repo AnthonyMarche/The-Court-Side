@@ -6,11 +6,12 @@ use App\Entity\User;
 use App\Form\ChangePasswordType;
 use App\Form\ProfileType;
 use App\Repository\UserRepository;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 #[Route('/profile', name:'app_user_')]
@@ -32,7 +33,7 @@ class UserController extends AbstractController
         $currentUser = $this->getUser();
 
         if ($currentUser->getId() !== $user->getId()) {
-            throw new AccessDeniedException();
+            throw $this->createAccessDeniedException();
         }
 
         return $this->render('user/show.html.twig', [
@@ -47,7 +48,7 @@ class UserController extends AbstractController
         $currentUser = $this->getUser();
 
         if ($currentUser->getId() !== $user->getId()) {
-            throw new AccessDeniedException();
+            throw $this->createAccessDeniedException();
         }
 
         $profileForm = $this->createForm(ProfileType::class, $user);
@@ -78,7 +79,7 @@ class UserController extends AbstractController
         $currentUser = $this->getUser();
 
         if ($currentUser->getId() !== $user->getId()) {
-            throw new AccessDeniedException();
+            throw $this->createAccessDeniedException();
         }
 
         $passwordForm = $this->createForm(ChangePasswordType::class, $user);
@@ -89,7 +90,7 @@ class UserController extends AbstractController
 
             $this->userRepository->save($userUpdate, true);
 
-            $this->addFlash('success', 'Password change with success');
+            $this->addFlash('success', 'Mot de passe modifié avec succès');
             return $this->redirectToRoute('app_user_show', [
                 'id' => $user->getId()
             ]);
@@ -101,6 +102,10 @@ class UserController extends AbstractController
         ]);
     }
 
+    /**
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     */
     #[Route('/{id}', name: 'delete', methods: ['POST'])]
     public function delete(Request $request, User $user): Response
     {

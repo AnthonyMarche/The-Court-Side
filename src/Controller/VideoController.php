@@ -8,6 +8,7 @@ use App\Repository\CategoryRepository;
 use App\Repository\VideoRepository;
 use App\Services\Filter;
 use App\Services\LikeService;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -224,7 +225,7 @@ class VideoController extends AbstractController
             } else {
                 $likeService->likeVideo($video, $user);
             }
-        } catch (\Exception) {
+        } catch (Exception) {
             return new JsonResponse(
                 ['error' => "Une erreur s'est produite."],
                 500

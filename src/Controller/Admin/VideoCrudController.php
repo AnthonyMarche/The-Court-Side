@@ -120,18 +120,15 @@ class VideoCrudController extends AbstractCrudController
         ];
     }
 
-    public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
+    public function createEntity(string $entityFqcn)
     {
-        if (!$entityInstance instanceof Video) {
-            return;
-        }
+        $video =  new $entityFqcn();
 
         /** @var User $user */
         $user = $this->getUser();
-        $entityInstance->setUser($user);
+        $video->setUser($user);
 
-        $entityManager->persist($entityInstance);
-        $entityManager->flush();
+        return $video;
     }
 
     public function deleteEntity(EntityManagerInterface $entityManager, $entityInstance): void
