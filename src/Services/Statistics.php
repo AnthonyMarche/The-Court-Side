@@ -84,6 +84,8 @@ class Statistics
     {
         $lastTwelveMonth = [];
 
+        // Create array with month name and order them
+        // Initialize to 0 for month without data
         $currentMonth = new DateTime('first day of this month');
         for ($i = 0; $i < 12; $i++) {
             $monthName = $currentMonth->format('M');
@@ -96,6 +98,7 @@ class Statistics
         $keys = array_keys($arrayData[1]);
         $dataKey = $keys[1];
 
+        // insert data foreach month
         foreach ($arrayData as $data) {
             $monthNumber = $data['month'];
             $monthName = (new DateTime())->setDate(date('Y'), $monthNumber, 1)->format('M');

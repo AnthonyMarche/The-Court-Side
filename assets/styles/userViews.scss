@@ -28,6 +28,11 @@
     padding: 20px 50px;
 }
 
+.form-control:disabled, .form-control[readonly] {
+    background-color: #8e8e8e;
+    border-color: #8e8e8e;
+}
+
 #change_password_newPassword div ul li {
     color: #dc3545;
 }
