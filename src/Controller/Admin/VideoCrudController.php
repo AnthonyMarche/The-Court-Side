@@ -29,15 +29,11 @@ class VideoCrudController extends AbstractCrudController
     {
         return $crud
             ->overrideTemplate('crud/new', 'admin/new.html.twig')
-            ->setEntityLabelInSingular(new TranslatableMessage('entity.video', ['parameter' => 'value'], 'admin'))
-            ->setEntityLabelInPlural(new TranslatableMessage('entity.videos', ['parameter' => 'value'], 'admin'))
+            ->setEntityLabelInSingular(new TranslatableMessage('entity.video', [], 'admin'))
+            ->setEntityLabelInPlural(new TranslatableMessage('entity.videos', [], 'admin'))
             ->setPageTitle(
                 'index',
-                new TranslatableMessage(
-                    'entity.listOfVideos',
-                    ['parameter' => 'value'],
-                    'admin'
-                )
+                new TranslatableMessage('entity.listOfVideos', [], 'admin')
             )
             ->setSearchFields(['title', 'description', 'category.name'])
             ->setDefaultSort(['createdAt' => 'DESC']);
@@ -48,72 +44,48 @@ class VideoCrudController extends AbstractCrudController
         return [
             TextField::new(
                 'title',
-                new TranslatableMessage(
-                    'entity.title',
-                    ['parameter' => 'value'],
-                    'admin'
-                )
+                new TranslatableMessage('entity.title', [], 'admin')
             ),
 
             TextareaField::new(
                 'description',
-                new TranslatableMessage(
-                    'entity.description',
-                    ['parameter' => 'value'],
-                    'admin'
-                )
+                new TranslatableMessage('entity.description', [], 'admin')
             )
                 ->setMaxLength(115),
 
             BooleanField::new(
                 'isPrivate',
-                new TranslatableMessage(
-                    'entity.visibility',
-                    ['parameter' => 'value'],
-                    'admin'
-                )
+                new TranslatableMessage('entity.visibility', [], 'admin')
             ),
 
             AssociationField::new(
                 'category',
-                new TranslatableMessage(
-                    'entity.category',
-                    ['parameter' => 'value'],
-                    'admin'
-                )
+                new TranslatableMessage('entity.category', [], 'admin')
             ),
 
             AssociationField::new(
                 'tag',
-                new TranslatableMessage(
-                    'entity.tag',
-                    ['parameter' => 'value'],
-                    'admin'
-                )
+                new TranslatableMessage('entity.tag', [], 'admin')
             )
                 ->onlyOnForms(),
 
-            ImageField::new('url', new TranslatableMessage('entity.file', ['parameter' => 'value'], 'admin'))
+            ImageField::new('url', new TranslatableMessage('entity.file', [], 'admin'))
                 ->onlyWhenCreating()
                 ->setBasePath(self::PATH_VIDEO)
                 ->setUploadDir('public/uploads/videos')
                 ->setUploadedFileNamePattern(self::PATH_VIDEO . '/[slug]-[timestamp].[extension]')
-                ->setHelp(new TranslatableMessage('file.extensions', ['parameter' => 'value'], 'admin')),
+                ->setHelp(new TranslatableMessage('file.extensions', [], 'admin')),
 
-            ImageField::new('teaser', new TranslatableMessage('entity.teaser', ['parameter' => 'value'], 'admin'))
+            ImageField::new('teaser', new TranslatableMessage('entity.teaser', [], 'admin'))
                 ->onlyOnForms()
                 ->setBasePath(self::PATH_TEASER)
                 ->setUploadDir('public/uploads/teasers')
                 ->setUploadedFileNamePattern(self::PATH_TEASER . '/teaser-[slug]-[timestamp].[extension]')
-                ->setHelp(new TranslatableMessage('file.extensions', ['parameter' => 'value'], 'admin')),
+                ->setHelp(new TranslatableMessage('file.extensions', [], 'admin')),
 
             DateTimeField::new(
                 'createdAt',
-                new TranslatableMessage(
-                    'entity.createdAt',
-                    ['parameter' => 'value'],
-                    'admin'
-                )
+                new TranslatableMessage('entity.createdAt', [], 'admin')
             )
                 ->onlyOnIndex()
                 ->setFormat('dd/MM/YYYY'),

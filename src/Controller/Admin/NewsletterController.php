@@ -40,14 +40,7 @@ class NewsletterController extends AbstractController
                     ]));
                 $mailer->send($email);
             }
-            $this->addFlash(
-                'success',
-                new TranslatableMessage(
-                    'newsletter.flash',
-                    ['parameter' => 'value'],
-                    'admin'
-                )
-            );
+            $this->addFlash('success', new TranslatableMessage('newsletter.flash', [], 'admin'));
         }
 
         return $this->render('admin/newsletter/index.html.twig', [

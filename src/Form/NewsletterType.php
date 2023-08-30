@@ -15,17 +15,9 @@ class NewsletterType extends AbstractType
     {
         $builder
             ->add('title', TextType::class, [
-                'label' => new TranslatableMessage(
-                    'newsletter.title',
-                    ['parameter' => 'value'],
-                    'admin'
-                ),
+                'label' => new TranslatableMessage('newsletter.title', [], 'admin'),
                 'attr' => [
-                    'placeholder' => new TranslatableMessage(
-                        'newsletter.title-placeholder',
-                        ['parameter' => 'value'],
-                        'admin'
-                    ),
+                    'placeholder' => new TranslatableMessage('newsletter.title-placeholder', [], 'admin'),
                 ]
             ])
             ->add('content', CKEditorType::class, [
@@ -35,11 +27,7 @@ class NewsletterType extends AbstractType
                 'attr' => [
                     'rows' => '12',
                 ],
-                'label' => new TranslatableMessage(
-                    'newsletter.content',
-                    ['parameter' => 'value'],
-                    'admin'
-                )
+                'label' => new TranslatableMessage('newsletter.content', [], 'admin')
             ]);
     }
 

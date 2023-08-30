@@ -19,17 +19,9 @@ class TeaserType extends AbstractType
     {
         $builder
             ->add('video', FileType::class, [
-                'label' => new TranslatableMessage(
-                    'teaser.video',
-                    ['parameter' => 'value'],
-                    'admin'
-                ),
+                'label' => new TranslatableMessage('teaser.video', [], 'admin'),
                 'required' => true,
-                'help' => new TranslatableMessage(
-                    'teaser.extension',
-                    ['parameter' => 'value'],
-                    'admin'
-                ),
+                'help' => new TranslatableMessage('teaser.extension', [], 'admin'),
                 'constraints' => [
                     new File([
                         'mimeTypes' => ['video/mp4', 'video/webm', 'video/ogg', 'video/wmv']
@@ -38,18 +30,10 @@ class TeaserType extends AbstractType
                 ],
             ])
             ->add('secondStart', IntegerType::class, [
-                'label' => new TranslatableMessage(
-                    'teaser.start',
-                    ['parameter' => 'value'],
-                    'admin'
-                ),
+                'label' => new TranslatableMessage('teaser.start', [], 'admin'),
                 'required' => false,
                 'empty_data' => '0',
-                'help' => new TranslatableMessage(
-                    'teaser.start-help',
-                    ['parameter' => 'value'],
-                    'admin'
-                ),
+                'help' => new TranslatableMessage('teaser.start-help', [], 'admin'),
                 'attr' => [
                     'placeholder' => '0',
                     'class' => "d-flex flex-column"
@@ -58,18 +42,10 @@ class TeaserType extends AbstractType
                 'constraints' => [new PositiveOrZero()],
             ])
             ->add('duration', IntegerType::class, [
-                'label' => new TranslatableMessage(
-                    'teaser.duration',
-                    ['parameter' => 'value'],
-                    'admin'
-                ),
+                'label' => new TranslatableMessage('teaser.duration', [], 'admin'),
                 'required' => false,
                 'empty_data' => '10',
-                'help' => new TranslatableMessage(
-                    'teaser.duration-help',
-                    ['parameter' => 'value'],
-                    'admin'
-                ),
+                'help' => new TranslatableMessage('teaser.duration-help', [], 'admin'),
                 'attr' => [
                     'placeholder' => '10',
                     'class' => "d-flex flex-column"
