@@ -38,15 +38,11 @@ class UserCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setEntityLabelInSingular(new TranslatableMessage('entity.user', ['parameter' => 'value'], 'admin'))
-            ->setEntityLabelInPlural(new TranslatableMessage('entity.users', ['parameter' => 'value'], 'admin'))
+            ->setEntityLabelInSingular(new TranslatableMessage('entity.user', [], 'admin'))
+            ->setEntityLabelInPlural(new TranslatableMessage('entity.users', [], 'admin'))
             ->setPageTitle(
                 'index',
-                new TranslatableMessage(
-                    'entity.listOfUsers',
-                    ['parameter' => 'value'],
-                    'admin'
-                )
+                new TranslatableMessage('entity.listOfUsers', [], 'admin')
             )
             ->setEntityPermission('ROLE_ADMIN');
     }
@@ -58,21 +54,13 @@ class UserCrudController extends AbstractCrudController
                 ->hideOnForm(),
             TextField::new(
                 'username',
-                new TranslatableMessage(
-                    'entity.username',
-                    ['parameter' => 'value'],
-                    'admin'
-                )
+                new TranslatableMessage('entity.username', [], 'admin')
             ),
             EmailField::new('email', 'Email')
                 ->setDisabled(),
             ChoiceField::new(
                 'roles',
-                new TranslatableMessage(
-                    'entity.role',
-                    ['parameter' => 'value'],
-                    'admin'
-                )
+                new TranslatableMessage('entity.role', [], 'admin')
             )
                 ->setChoices([
                     'Admin' => 'ROLE_MEDIA_MANAGER',
@@ -81,11 +69,7 @@ class UserCrudController extends AbstractCrudController
                 ->allowMultipleChoices(),
             DateTimeField::new(
                 'createdAt',
-                new TranslatableMessage(
-                    'entity.createdAt',
-                    ['parameter' => 'value'],
-                    'admin'
-                )
+                new TranslatableMessage('entity.createdAt', [], 'admin')
             )
                 ->setFormat('dd/MM/YYYY')
                 ->onlyOnIndex(),

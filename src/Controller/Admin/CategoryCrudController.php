@@ -19,15 +19,11 @@ class CategoryCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setEntityLabelInSingular(new TranslatableMessage('entity.category', ['parameter' => 'value'], 'admin'))
-            ->setEntityLabelInPlural(new TranslatableMessage('entity.categories', ['parameter' => 'value'], 'admin'))
+            ->setEntityLabelInSingular(new TranslatableMessage('entity.category', [], 'admin'))
+            ->setEntityLabelInPlural(new TranslatableMessage('entity.categories', [], 'admin'))
             ->setPageTitle(
                 'index',
-                new TranslatableMessage(
-                    'entity.listOfCategories',
-                    ['parameter' => 'value'],
-                    'admin'
-                )
+                new TranslatableMessage('entity.listOfCategories', [], 'admin')
             )
             ->setDefaultSort(['createdAt' => 'DESC']);
     }
@@ -35,15 +31,11 @@ class CategoryCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            TextField::new('name', new TranslatableMessage('entity.name', ['parameter' => 'value'], 'admin')),
+            TextField::new('name', new TranslatableMessage('entity.name', [], 'admin')),
 
             DateTimeField::new(
                 'createdAt',
-                new TranslatableMessage(
-                    'entity.createdAt',
-                    ['parameter' => 'value'],
-                    'admin'
-                )
+                new TranslatableMessage('entity.createdAt', [], 'admin')
             )
                 ->setFormat('dd/MM/YYYY')
                 ->onlyOnIndex(),

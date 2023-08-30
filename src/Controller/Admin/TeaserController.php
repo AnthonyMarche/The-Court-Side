@@ -56,14 +56,7 @@ class TeaserController extends AbstractController
             }
 
             // If file created, flash message then redirect to view teaser page
-            $this->addFlash(
-                'success',
-                new TranslatableMessage(
-                    'teaser.flash',
-                    ['parameter' => 'value'],
-                    'admin'
-                )
-            );
+            $this->addFlash('success', new TranslatableMessage('teaser.flash', [], 'admin'));
 
             return $this->viewNewTeaser($teaser, $name);
         }
