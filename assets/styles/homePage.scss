@@ -23,9 +23,7 @@
 }
 
 .home-section-line {
-    height: 1px;
-    background: var(--mainFont-color);
-    border-radius: 10px;
+    border-top: 1px solid var(--mainFont-color);
 }
 
 .home-video-link:hover {
@@ -124,7 +122,7 @@
 .see-more-button:hover {
     background-color: var(--element-color);
     border-color: var(--element-color);
-    color: var(--mainBg-color);
+    color: var(--mainFont-color);
 }
 
 .video-private-message {
