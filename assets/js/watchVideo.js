@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-if (document.getElementsByClassName('.js-like')) {
+if (document.querySelector('.like-heart')) {
     const likeButton = document.querySelector('.like-heart')
     const errorContainer = document.querySelector('.errors-container');
 
@@ -30,4 +30,3 @@ if (document.getElementsByClassName('.js-like')) {
             })
     })
 }
-

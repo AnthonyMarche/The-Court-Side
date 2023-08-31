@@ -30,7 +30,6 @@ if (document.querySelector('.update-videos')) {
 
     // Function to apply the selected filter
     async function applyFilter(event) {
-        event.preventDefault();
         const selectedFilter = event.currentTarget;
 
         const filterName = selectedFilter.getAttribute('data-filter');
